@@ -60,13 +60,13 @@
   --font-texto: "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   /* ---------- Geometría de marca (02.6) ----------
-     La barra del logo se inclina 15° HACIA LA DERECHA: subiendo, la línea
-     se corre a la derecha ("/"). Para repeating-linear-gradient eso es
-     105deg — la perpendicular. 75deg da la trama espejada ("\\"), que
-     invierte la lectura de "movimiento hacia adelante" del Brandbook. */
-  --trama-angulo:   15deg;    /* para skewX / transform */
-  --trama-gradiente: 105deg;  /* para repeating-linear-gradient */
-  --trama-paso:     78px;
+     Todo lo de marca se inclina 15° HACIA LA DERECHA: subiendo, la línea
+     se corre a la derecha ("/"). Para skewX eso es -15deg; para
+     repeating-linear-gradient es 105deg, la perpendicular. 75deg da la
+     versión espejada ("\\"), que invierte la lectura de "movimiento
+     hacia adelante" del Brandbook. */
+  --trama-angulo:    15deg;   /* skewX / transform */
+  --trama-gradiente: 105deg;  /* repeating-linear-gradient */
 
   --r-xl: 32px;
   --r-lg: 26px;
@@ -129,15 +129,33 @@
 }
 
 /* Trama de marca: diagonales a 15° sobre el fondo vivo */
-.sf-trama {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  opacity: .14;
-  /* dos pasos superpuestos: el fino marca el ritmo, el ancho respira */
-  background:
-    repeating-linear-gradient(var(--trama-gradiente),
-      rgba(0, 39, 81, .55) 0 1px, transparent 1px var(--trama-paso)),
-    repeating-linear-gradient(var(--trama-gradiente),
-      rgba(0, 39, 81, .55) 0 1px, transparent 1px calc(var(--trama-paso) / 3));
+/* =====================================================================
+   El remate de barras
+   NO es una textura que se repite. Un repeating-linear-gradient a 105deg
+   cubriendo el fondo se lee como papel tapiz: la línea siempre igual,
+   siempre al mismo paso, sin jerarquía. El remate de marca es una pieza
+   COMPUESTA: cada barra arranca gruesa en la base, se corta, y sigue
+   fina hacia arriba. Verdes en distintas intensidades, un par en Azul 01
+   y las últimas dos en rojo de Cultura.
+
+   Tres decisiones por barra: alto de la base gruesa, dónde cae el corte,
+   y hasta dónde sigue la línea fina. El corte crece con el grosor de la
+   base, así que las barras pesadas cortan más tarde y las livianas
+   antes. De ahí sale el ritmo.
+
+   El SVG (28 polígonos, viewBox 0 0 460 440) está en el child theme como
+   partial e se inyecta por el hook astra_body_top. Acá va sólo su
+   ubicación. Al 30% y anclado a la esquina: más grande o más opaco
+   cruza el texto a media página, que es el problema que tenía la trama.
+   ===================================================================== */
+.sf-barras {
+  position: fixed; right: -18px; bottom: -26px;
+  z-index: -1; pointer-events: none;
+  width: min(34vw, 340px); height: auto;
+  opacity: .3;
+}
+@media (max-width: 760px) {
+  .sf-barras { width: min(56vw, 240px); opacity: .24; }
 }
 
 /* La barra del logo como marcador. Va SIEMPRE pegada al título y del

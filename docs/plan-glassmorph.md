@@ -72,11 +72,18 @@ La identidad se construye sobre diagonales a **15°**, derivadas del paralelogra
 
 **El signo del ángulo importa.** La barra del logo se inclina hacia la **derecha**: subiendo, la línea se corre a la derecha (`/`). Para `repeating-linear-gradient` eso es **105deg**, la perpendicular. `75deg` produce la trama **espejada** (`\`), que invierte esa lectura de movimiento hacia adelante. Es un carácter de diferencia en el CSS y cambia el sentido de toda la página.
 
+**El remate no es una textura.** La primera versión de este plan proponía dos `repeating-linear-gradient(105deg, …)` cubriendo todo el fondo. Se lee como papel tapiz: la línea siempre igual, siempre al mismo paso, sin jerarquía. El remate real de la marca es una **pieza compuesta** anclada abajo a la derecha: catorce barras a 15° donde cada una **arranca gruesa en la base, se corta, y sigue fina hacia arriba**. Verdes en distintas intensidades, un par en Azul 01, y las dos últimas en rojo de Cultura.
+
+Cada barra tiene tres decisiones: alto de la base gruesa, dónde cae el corte, y hasta dónde sigue la línea fina. El corte crece con el grosor de la base, así que las pesadas cortan más tarde y las livianas antes. De ahí sale el ritmo que un patrón no puede dar.
+
+Es un SVG de 28 polígonos —pesa menos que una imagen y se re-tiñe con los mismos tokens— inyectado por `astra_body_top`, al 30% de opacidad y anclado a la esquina. Más grande o más opaco cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
+
 Traducción a web:
 
-- dos `repeating-linear-gradient(105deg, …)` superpuestos como capa de fondo al 14% — el paso fino marca el ritmo, el ancho respira;
+- el **remate de barras** (`.sf-barras`) en la esquina inferior derecha;
 - la barra del logo como marcador, **siempre pegada al título y del tamaño del título**, nunca como filete del bloque entero. Las medidas van en `em`, así toma el cuerpo del texto que encabeza sin ajustes: `<h2><i class="sf-barra"></i>Título</h2>`. Reemplaza a los puntos redondos genéricos como indicador de estado y severidad;
-- el barrido de luz del hero (`transform: skewX(-15deg)`), el mismo que ya usa Freedom y que venía con el ángulo correcto.
+- el barrido de luz del hero y de los botones (`transform: skewX(-15deg)`), el mismo que ya usa Freedom y que venía con el ángulo correcto;
+- los listones del footer y el degradé, los dos a 105°.
 
 ### 1.5 Botones
 
@@ -246,7 +253,7 @@ Plugin propio, subido por ZIP, que escanea el `_elementor_data` de las 510 y rep
 1. Child theme `capitalcultural-sf` sobre el `astra-child` oficial, con encolado declarando `astra-theme-css` como dependencia: tokens → componentes → plantillas.
 2. Incorporar `docs/design-tokens.css` y autoalojar Geologica y Encode Sans.
 3. **Global Colors cargados en los dos lados** — la paleta de Astra y la de Elementor — con *Disable Default Colors* y *Disable Default Fonts* activados. Más `theme.json` con esa misma paleta y la escala tipográfica. Es lo que evita que el sitio se desalinee de nuevo en tres meses.
-4. Capas de fondo (`.sf-ambient` + `.sf-trama`) inyectadas por el hook `astra_body_top`.
+4. Capas de fondo (`.sf-ambient` + `.sf-barras`) inyectadas por el hook `astra_body_top`.
 5. Estilos base: tipografía, links, foco visible, `skip-link`.
 
 **Entregable:** ZIP instalable del child theme, con el sitio ya en paleta correcta aunque sin componentes nuevos.
