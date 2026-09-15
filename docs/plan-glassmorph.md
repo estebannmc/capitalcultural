@@ -15,7 +15,7 @@
 |---|---|
 | Plataforma | **WordPress con Astra 4.13.1** (Brainstorm Force), en subcarpeta `/capitalcultural/`. Confirmado desde el admin. Astra es un tema, no un page builder: el mejor escenario posible |
 | Composer | **Elementor Free.** Sin Theme Builder, que es de Pro: header, footer, archivos y entradas los sigue renderizando Astra. Elementor sólo manda dentro de las páginas armadas con él |
-| Incógnita abierta | **Cuántas páginas Elementor hay** y cuántas tienen colores puestos a mano por widget. Es lo único que todavía mueve el número |
+| Escala | **510 páginas**, no todas publicadas ni visibles. Es la variable que domina el presupuesto |
 | Marca aplicable | Capital Cultural es un **tópico de nivel 01/A** del sistema SF: logo síntesis `SF` + palabra clave y color propio (Brandbook 04.1, pág. 48–51) |
 | Color del tópico | **Rojo `#e63312`** — verificado por muestreo de píxeles sobre el lockup `SF / CULTURA` de la pág. 51 |
 
@@ -126,7 +126,7 @@ Son **tres capas de estilo peleando por el mismo píxel**: Astra, Elementor y el
 
 **Los Global Colors van dos veces.** Los cuatro colores se cargan en la Global Color Palette de Astra **y** en Site Settings → Global Colors de Elementor. Además hay que activar *Disable Default Colors* y *Disable Default Fonts* en Elementor → Settings, para que deje de imponer los suyos sobre el tema.
 
-**El costo real son los estilos por widget.** Cada color elegido a mano dentro de un widget queda guardado en el `_elementor_data` de esa página y **le gana a cualquier global**. No hay atajo: se auditan página por página desde el editor. Eso es lo que mueve la estimación.
+**El costo real son los estilos por widget.** Cada color elegido a mano dentro de un widget queda guardado en el `_elementor_data` de esa página y **le gana a cualquier global**. Con 510 páginas eso deja de ser una tarea y pasa a ser el proyecto entero — ver §2.ter.
 
 **Al publicar:** *Regenerate CSS & Data* desde Elementor → Tools, que se hace desde el admin y no necesita servidor.
 
@@ -141,20 +141,75 @@ Queda por confirmar si hay **Astra Pro**, y sobre todo **cuántas páginas Eleme
 
 ---
 
+## 2.ter El problema de escala: 510 páginas
+
+La versión anterior de este plan decía «se auditan página por página desde el editor». Con 510 páginas esa frase deja de ser una tarea y pasa a ser el proyecto entero.
+
+### Costo de auditar a mano
+
+Días hábiles de 6,5 horas productivas, sólo de abrir el editor y mirar — sin arreglar nada:
+
+| Min. por página | 510 pág. | 250 pág. | 80 pág. | 40 pág. |
+|---|---|---|---|---|
+| 5 min | **6,5 d** | 3,2 d | 1,0 d | 0,5 d |
+| 10 min | **13,1 d** | 6,4 d | 2,1 d | 1,0 d |
+| 20 min | **26,2 d** | 12,8 d | 4,1 d | 2,1 d |
+
+### La alternativa
+
+| Enfoque | Costo |
+|---|---|
+| Abrir las 510 a mano, 10 min c/u | 13,1 días |
+| Escaneo por script + top 40 a mano | 4,6 días |
+| **Ahorro** | **8,5 días** |
+
+Y el escaneo **no crece** con la cantidad de páginas; la auditoría manual sí.
+
+### La herramienta, sin tocar el servidor
+
+Un plugin chico, subido por *Plugins → Añadir nuevo → Subir*, que recorre el `_elementor_data` de los 510 posts y reporta cuáles traen colores **literales** en vez de referencias a globals. La distinción es exacta y verificable: un widget atado a un global guarda `"__globals__"`, uno pinchado a mano guarda el hex crudo. Con ese listado, el reemplazo por lote es una corrida más.
+
+**Plan B si sistemas no permite instalar un plugin propio.** Es un sitio de gobierno y puede pasar. Entonces se trabaja a mano sólo el top por tráfico y la cola larga hereda de los globals, asumiendo que algunas páginas viejas queden con colores de la paleta anterior hasta que alguien las toque. **Hay que decidirlo antes de presupuestar**, porque mueve el total unos 8 días.
+
+### El triage no es burocracia
+
+Cada página que se saca del universo son minutos que no se pagan. El orden es:
+
+1. descartar por **estado** — borrador, papelera, privada;
+2. descartar **huérfanas** — sin enlaces entrantes ni visitas;
+3. **priorizar por tráfico** — en sitios de contenido el 80% suele concentrarse en el 5–10% de las URLs, o sea entre 26 y 51 páginas de las 510.
+
+### Lo que falta para cerrar el número
+
+Tres cortes del universo, todos visibles desde el listado de páginas más Analytics:
+
+1. cuántas de las 510 están **publicadas**;
+2. cuántas de esas usan **Elementor**;
+3. cuántas tuvieron **visitas en los últimos 12 meses**.
+
+Con esos tres números el rango se cierra a una semana de amplitud.
+
+---
+
 ## 3. Fases
 
-### Fase 1 · Relevamiento y setup — *2 a 3 días*
-1. Inventario desde el admin: el stack ya lo sabemos. Falta el **censo de páginas Elementor** y cuántas tienen estilos por widget, más si hay Astra Pro, los plugins (especialmente el de agenda/eventos), tipos de contenido y taxonomías, plantillas en uso.
+### Fase 1 · Relevamiento y triage — *3 a 4 días*
+1. **Reducir las 510 a un universo manejable**, por el orden de §2.ter: estado, huérfanas, tráfico. Más el inventario de plugins, tipos de contenido y taxonomías, plantillas en uso, y si hay Astra Pro.
 2. Exportar el árbol de URLs y quedarse con el top 50 por tráfico (Analytics/Search Console) — define qué plantillas se rediseñan primero.
 3. Baseline: Lighthouse móvil, axe DevTools y capturas del estado actual. Sin esto no hay forma de demostrar la mejora.
 4. Entorno de prueba. Sin acceso al servidor, la opción realista es un **staging local** (LocalWP / Studio) con una copia del sitio exportada por plugin de migración, más el uso de `?preview_theme=` en producción para la validación final. **[R]**
 5. Extraer del Brandbook los SVG del lockup, el escudo y el set de iconos (02.5).
 
-**Entregables:** planilla de inventario con el censo de páginas Elementor, baseline de métricas, repo con el staging y los assets.
+**Entregables:** planilla de triage con el universo reducido, baseline de métricas, repo con el staging y los assets.
 
-*Duración: 3–4 días.*
+### Fase 2 · Herramienta de auditoría — *2 a 3 días*
+Plugin propio, subido por ZIP, que escanea el `_elementor_data` de las 510 y reporta colores literales contra referencias a globals. Incluye el reemplazo por lote.
 
-### Fase 2 · Fundaciones del child theme — *3 a 4 días*
+**Es la fase que define si el proyecto son 30 días o 40.**
+
+**Entregable:** el plugin, más el informe de qué páginas tienen color pinchado a mano.
+
+### Fase 3 · Fundaciones del child theme — *4 a 5 días*
 1. Child theme `capitalcultural-sf` sobre el `astra-child` oficial, con encolado declarando `astra-theme-css` como dependencia: tokens → componentes → plantillas.
 2. Incorporar `docs/design-tokens.css` y autoalojar Geologica y Encode Sans.
 3. **Global Colors cargados en los dos lados** — la paleta de Astra y la de Elementor — con *Disable Default Colors* y *Disable Default Fonts* activados. Más `theme.json` con esa misma paleta y la escala tipográfica. Es lo que evita que el sitio se desalinee de nuevo en tres meses.
@@ -163,28 +218,28 @@ Queda por confirmar si hay **Astra Pro**, y sobre todo **cuántas páginas Eleme
 
 **Entregable:** ZIP instalable del child theme, con el sitio ya en paleta correcta aunque sin componentes nuevos.
 
-### Fase 3 · Biblioteca de componentes — *5 a 7 días*
+### Fase 4 · Biblioteca de componentes — *5 a 7 días*
 Header glass sticky · menú mobile (el patrón `.glass-bar::before` de Freedom, que existe justamente para que el menú desplegable pueda esmerilar el contenido) · hero con barrido a 15° · tarjeta de evento/agenda · tarjeta de nota · filtros y chips · paginación · formulario de convocatorias · footer con marca completa.
 
 Cada componente se entrega con estado *hover*, *focus-visible*, vacío y de carga. Se documentan en una página oculta del propio WP que funcione como styleguide viva.
 
 **Entregable:** biblioteca completa + styleguide.
 
-### Fase 4 · Plantillas Astra — *5 a 7 días*
+### Fase 5 · Plantillas Astra — *5 a 7 días*
 Home · archivo de agenda con filtros · evento individual · categoría/tag · nota individual · convocatorias · resultados de búsqueda · 404.
 
 Orden: primero las que concentran tráfico según la Fase 1.
 
 **Entregable:** todo lo que renderiza Astra, retematizado en staging.
 
-### Fase 5 · Páginas Elementor — *3 a 6 días*
-Limpiar los estilos por widget para que hereden de los globals, y rearmar lo que haya quedado atado a la paleta vieja. Incluye `/feriadellibro/` si entra en el alcance.
+### Fase 6 · Páginas Elementor — *4 a 7 días*
+Reemplazo por lote de los colores literales que encontró el escaneo, más las páginas del top trabajadas a mano. Incluye `/feriadellibro/` si entra en el alcance.
 
-**Es la fase de duración más incierta**, y la fija el censo de la Fase 1.
+**La duración la fija el triage de la Fase 1**, no la cantidad total.
 
 **Entregable:** sitio completo retematizado en staging.
 
-### Fase 6 · Accesibilidad, performance y QA — *3 a 4 días*
+### Fase 7 · Accesibilidad, performance y QA — *3 a 4 días*
 1. Auditoría AA: contraste, navegación por teclado, landmarks, `alt`, foco en el menú mobile.
 2. Verificar los tres modos degradados del vidrio (sin `backdrop-filter`, transparencia reducida, movimiento reducido).
 3. Lighthouse móvil contra el baseline. CLS es el riesgo típico con fuentes autoalojadas y blur.
@@ -193,12 +248,12 @@ Limpiar los estilos por widget para que hereden de los globals, y rearmar lo que
 
 **Entregable:** informe antes/después con métricas.
 
-### Fase 7 · Publicación — *1 a 2 días*
+### Fase 8 · Publicación — *1 a 2 días*
 Ventana de bajo tráfico, backup por plugin, subida del ZIP, activación, *Regenerate CSS & Data* de Elementor, verificación de las 50 URLs del inventario, 48 h de monitoreo.
 
-**Total estimado: 24 a 34 días hábiles.**
+**Total estimado: 27 a 39 días hábiles**, con la herramienta de auditoría incluida. Sin ella, auditando a mano, son unos 8 días más.
 
-Cuando el page builder era una hipótesis calculé +40% pensando en Elementor Pro con Theme Builder. Con Free el golpe es menor pero real: se suma la auditoría de páginas y la doble carga de globals. El rango se cierra apenas sepamos cuántas páginas usan Elementor — si son menos de diez, queda cerca del piso.
+Historial del número, porque cambió tres veces con información nueva: 19–27 cuando el page builder era hipótesis; 24–34 al confirmarse Elementor Free; 27–39 al aparecer las 510 páginas. Cada salto vino de un dato, no de recalibrar.
 
 ---
 
@@ -206,7 +261,7 @@ Cuando el page builder era una hipótesis calculé +40% pensando en Elementor Pr
 
 | Riesgo | Impacto | Mitigación |
 |---|---|---|
-| Estilos por widget en Elementor | Alto — todo color puesto a mano le gana a los globals | Auditoría página por página en la Fase 5. Es el principal motor de incertidumbre del presupuesto |
+| 510 páginas con estilos por widget | Alto — a mano son 13 días sólo de mirar | Triage en la Fase 1 y herramienta de escaneo en la Fase 2. Si sistemas no deja instalar el plugin, el costo vuelve |
 | El CSS inline de Astra gana | Medio — aparecen colores viejos en lugares sueltos | Encolar con `astra-theme-css` como dependencia y usar el filtro `astra_dynamic_theme_css`; verificar plantilla por plantilla |
 | Sin acceso al servidor | Medio | Todo por ZIP desde el admin; staging local; `?preview_theme=` para validar en producción |
 | `backdrop-filter` en Android de gama baja | Medio | Presupuesto de ~8 blurs simultáneos, `glass-soft` en grillas, prueba en dispositivo real |
@@ -218,11 +273,12 @@ Cuando el page builder era una hipótesis calculé +40% pensando en Elementor Pr
 
 ## 5. Decisiones pendientes
 
-1. **¿Cuántas páginas Elementor hay?** Es lo único que todavía mueve el número. Se ve filtrando por «Elementor» en el listado de páginas.
-2. **Alcance de `/feriadellibro/`** y demás subsitios: ¿entran en esta tanda o quedan para una segunda?
-3. **Modo oscuro:** el Brandbook no lo contempla. Sugiero no hacerlo ahora. Si se hace, el rojo tiene que aclararse a `#ff7f63` sobre fondo azul profundo — `#e63312` ahí da 4.30 y no llega.
-4. **Fotografía:** el vidrio necesita imágenes debajo para lucir, y con tres colores el peso visual recae más en la fotografía. ¿Hay banco de fotos de eventos con derechos resueltos?
-5. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
+1. **Los tres cortes de las 510** (§2.ter): publicadas, con Elementor, y con visitas en 12 meses.
+2. **¿Se puede subir un plugin propio?** Define si la auditoría son 4,6 días o 13. Hay que preguntarle a sistemas antes de presupuestar.
+3. **Alcance de `/feriadellibro/`** y demás subsitios: ¿entran en esta tanda o quedan para una segunda?
+4. **Modo oscuro:** el Brandbook no lo contempla. Sugiero no hacerlo ahora. Si se hace, el rojo tiene que aclararse a `#ff7f63` sobre fondo azul profundo — `#e63312` ahí da 4.30 y no llega.
+5. **Fotografía:** el vidrio necesita imágenes debajo para lucir, y con tres colores el peso visual recae más en la fotografía. ¿Hay banco de fotos de eventos con derechos resueltos?
+6. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
 
 ---
 
