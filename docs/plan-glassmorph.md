@@ -111,16 +111,13 @@ En el primario la barra va en rojo sobre el relleno Azul 01: replica literalment
 
 ### 1.6 La lámina de luz (footer)
 
-El footer recrea la lámina de la página 90 del Brandbook — el haz verde entrando por barras sobre Azul 01 — **en CSS y SVG, sin imagen**.
+El footer recrea la lámina de la página 90 del Brandbook — el haz verde sobre Azul 01 — **en CSS y SVG, sin imagen**. Tres piezas, ninguna con gradientes repetidos:
 
-**Se construye con la misma regla que el remate de esquina**: un polígono por barra, borde derecho continuo, y una diagonal corta a un tercio del alto que funde el tramo grueso con el fino. La primera versión usaba listones de `repeating-linear-gradient` y arrastraba exactamente el mismo problema que la trama: la línea siempre igual, siempre al mismo paso.
+1. **El foco verde** sobre la base Azul 01. Su centro va **fuera del lienzo** (`74% 118%`): adentro se le ve el círculo, y las barras encima quedarían verde sobre verde y desaparecen.
+2. **El mismo remate de ocho barras** que va en la esquina de la página, reusado con `<use href="#sf-barras">`. No hay un segundo juego: **una sola pieza para toda la identidad**. Acá son la luz sobre el Azul 01 — más chicas y alineadas al mismo margen que el contenido, con un `filter` de realce que les devuelve presencia sobre el fondo oscuro sin tocar la geometría.
+3. **El bloque de texto apoyado encima** con `.glass--luz`, un vidrio oscuro translúcido que esmerila la luz y las barras que pasan por detrás. Es el caso de uso que justifica todo el sistema: vidrio sobre algo que vale la pena esmerilar.
 
-La diferencia con el remate es qué representan las barras: **acá son la luz**, no sombras que cortan un resplandor. Trece barras —verdes, blancas a baja opacidad y una roja— sobre el foco verde y la base Azul 01, varias corriendo más alto que el lienzo para que se recorten, como en la lámina original. Geometría en `docs/barras-luz.svg`.
-
-Dos detalles que no son decorativos:
-
-- **El centro del foco va fuera del lienzo** (`92% 100%`). Adentro se le ve el círculo y delata el degradado.
-- **El velo oscuro va encima de las barras, no debajo.** Toda la tipografía vive en el tercio oscuro y la luz ocupa la derecha. Sin él queda texto blanco sobre verde, que es 2.36 y lo prohíbe la regla de §1.2 — me pasó en el primer render.
+**Es el vidrio el que carga con el contraste del texto**, así que el velo oscuro quedó liviano — sólo protege a la marca, que sí se apoya directo sobre la lámina. En una versión anterior el velo tenía que hacer todo el trabajo y se comía la mitad de la pieza.
 
 ---
 
@@ -320,6 +317,5 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 
 - `docs/design-tokens.css` — tokens de marca + material GlassMorph, listos para encolar
 - `docs/barras.svg` — el remate de barras de esquina, partial para el child theme
-- `docs/barras-luz.svg` — las barras de la lámina del footer
 - `docs/plan-glassmorph.md` — este documento
 - Los dos PDFs normativos en la raíz

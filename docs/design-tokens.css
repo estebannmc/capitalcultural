@@ -188,47 +188,51 @@
 
 /* =====================================================================
    Luz de marca: la lámina del Brandbook (pág. 90).
-   MISMA REGLA que el remate de esquina: un polígono por barra, borde
-   derecho continuo, y una diagonal corta a un tercio del alto que funde
-   el tramo grueso con el fino. La primera versión usaba listones de
-   repeating-linear-gradient y tenía el mismo problema que la trama:
-   la línea siempre igual, siempre al mismo paso.
+   Tres piezas, ninguna con gradientes repetidos:
 
-   Diferencia con el remate: acá las barras SON la luz sobre el Azul 01,
-   no sombras que cortan un resplandor. Varias corren más alto que el
-   lienzo y se recortan, como en la página 90. Trece barras: verdes,
-   blancas a baja opacidad, y una roja.
-
-   Geometría en docs/barras-luz.svg (13 polígonos, viewBox 0 0 820 440).
-
-   El centro del foco va FUERA del lienzo (92% 100%): adentro se le ve
-   el círculo. Y el velo va ENCIMA de las barras, no debajo: sin él el
-   texto queda blanco sobre verde, que es 2.36 y lo prohíbe §1.2.
+   1· el foco verde sobre la base Azul 01. Su centro va FUERA del lienzo
+      (74% 118%): adentro se le ve el círculo, y encima las barras
+      quedarían verde sobre verde y desaparecen.
+   2· EL MISMO remate de ocho barras que va en la esquina de la página,
+      reusado con <use href="#sf-barras">. No hay un segundo juego de
+      barras: una sola pieza para toda la identidad. Acá son la luz sobre
+      el Azul 01, más chicas y alineadas al mismo margen que el
+      contenido. El filter de realce les devuelve presencia sobre el
+      fondo oscuro sin tocar la geometría.
+   3· el bloque de texto apoyado encima con .glass--luz, que esmerila la
+      luz y las barras que pasan por detrás. Es el vidrio el que carga
+      con el contraste del texto, así que el velo quedó liviano — sólo
+      protege a la marca, que sí se apoya directo sobre la lámina.
    ===================================================================== */
 .sf-luz {
+  --luz-pad: clamp(22px, 4vw, 44px);
   position: relative; isolation: isolate; overflow: hidden;
   color: var(--sf-blanco);
+  padding: var(--luz-pad);
   background:
-    radial-gradient(86% 128% at 92% 100%,
-      rgba(255, 255, 255, .42) 0%, #00c08b 20%, rgba(0, 192, 139, .58) 40%,
-      rgba(0, 90, 110, .26) 60%, transparent 82%),
+    radial-gradient(92% 130% at 74% 118%,
+      rgba(255, 255, 255, .34) 0%, #00c08b 22%, rgba(0, 192, 139, .5) 42%,
+      rgba(0, 90, 110, .22) 62%, transparent 84%),
     linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
 }
 .sf-luz__barras {
-  position: absolute; right: 0; bottom: 0;
-  height: 126%; width: auto; z-index: 0; pointer-events: none;
+  position: absolute;
+  right: var(--luz-pad); bottom: var(--luz-pad);
+  height: clamp(112px, 16vw, 178px); width: auto;
+  z-index: 0; pointer-events: none;
+  filter: brightness(1.25) saturate(1.1);
 }
 .sf-luz::before {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(100deg,
-    rgba(0, 18, 38, .94) 0%, rgba(0, 18, 38, .86) 26%,
-    rgba(0, 18, 38, .5) 44%, rgba(0, 18, 38, .1) 60%, transparent 74%);
+    rgba(0, 18, 38, .72) 0%, rgba(0, 18, 38, .4) 38%,
+    rgba(0, 18, 38, .12) 56%, transparent 70%);
 }
 .sf-luz::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   opacity: .08; mix-blend-mode: overlay; background-image: var(--noise);
 }
-.sf-luz > *:not(.sf-luz__barras) { position: relative; z-index: 2; }
+.sf-luz__panel { position: relative; z-index: 2; }
 
 /* Barrido de luz del hero: mismo ángulo que la barra del logo. */
 .sf-sweep { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
@@ -303,6 +307,24 @@
 /* Tintes de marca para tarjetas destacadas. El texto encima va en azul-01. */
 .glass--verde  { --glass-fill: linear-gradient(160deg, rgba(0, 192, 139, .90), rgba(0, 192, 139, .62)); color: var(--sf-azul-01); }
 .glass--topico { --glass-fill: linear-gradient(160deg, rgba(230, 51, 18, .82), rgba(230, 51, 18, .55)); color: var(--sf-blanco); }
+
+/* Vidrio oscuro translúcido: para apoyarse SOBRE la lámina y dejar que la
+   luz y las barras se esmerilen a través. Más transparente que
+   .glass--dark, que es un relleno y no un vidrio. */
+.glass--luz {
+  --glass-fill: linear-gradient(160deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .055));
+  --glass-blur: blur(22px) saturate(180%);
+  --glass-shadow:
+    0 18px 40px -18px rgba(0, 10, 24, .75),
+    inset 0 1px 0 rgba(255, 255, 255, .3),
+    inset 0 -1px 0 rgba(0, 0, 0, .28);
+  color: var(--sf-blanco);
+}
+.glass--luz::before {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, .72), rgba(255, 255, 255, .1) 40%,
+    rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, .3));
+}
 
 /* Superficie translúcida sin blur: listas, chips, inputs.
    Evita decenas de backdrop-filter simultáneos en la grilla de agenda. */
