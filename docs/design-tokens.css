@@ -141,9 +141,14 @@
    NO es una textura que se repite. Un repeating-linear-gradient a 105deg
    cubriendo el fondo se lee como papel tapiz: la línea siempre igual,
    siempre al mismo paso, sin jerarquía. El remate de marca es una pieza
-   COMPUESTA: ocho barras, siete verdes y la última en rojo de Cultura,
-   TODAS A LA MISMA OPACIDAD — la jerarquía la dan el ancho y el alto, no
-   el tono.
+   COMPUESTA: ocho barras, siete verdes y la última en rojo de Cultura.
+
+   DISTRIBUCIÓN UNIFORME, y no sólo por estética: mismo paso (34), mismo
+   ancho de base (16), misma inclinación y misma opacidad hacen que la
+   separación se mantenga en 18 A CUALQUIER ALTURA. Si los anchos
+   variaran, las barras se abrirían o se juntarían hacia arriba. Lo único
+   que cambia es el ALTO, que crece parejo de 150 a 420, y por eso los
+   finales suben en línea recta hacia el borde derecho.
 
    Cada barra es UN SOLO POLÍGONO de seis vértices, no dos piezas con un
    espacio entre medio:
@@ -161,12 +166,14 @@
        lo que pide la marca. Quedó en unos 30 de los 440 del alto.
      · DÓNDE ARRANCA — a un tercio del alto, no a la mitad. Al medio el
        tramo grueso manda demasiado y la pieza se apelmaza abajo.
-     · LARGO DE LA PUNTA — el tramo fino corre PARALELO y sólo converge
-       en los últimos 52. Si converge desde el escalón, las ocho barras
-       se leen como briznas de pasto en vez de líneas.
+     · LARGO DE LA PUNTA — el hilo corre PARALELO y sólo converge en los
+       últimos 46. Si converge desde el escalón, las ocho barras se leen
+       como briznas de pasto en vez de líneas.
+     · ANCHO DEL HILO — 2 sobre una base de 16: casi un hilo. Más grueso
+       y el escalón deja de leerse como un cambio de registro.
 
    La geometría está en docs/barras.svg (8 polígonos, viewBox
-   0 0 410 440). Va como partial del child theme, inyectada por el hook
+   0 0 395 440). Va como partial del child theme, inyectada por el hook
    astra_body_top; los fill usan var(--sf-verde-01) y var(--sf-rojo), así
    que se re-tiñe con los mismos tokens. Acá va sólo su ubicación: al 30%
    y anclada a la esquina, porque más grande o más opaca cruza el texto a

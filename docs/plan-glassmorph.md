@@ -82,9 +82,12 @@ Tres cosas son fáciles de arruinar, y las tres están anotadas en los tokens co
 
 - **Largo de la diagonal** — larga, la barra se lee como una hoja que se afila; corta, como una línea gruesa que se afina de golpe, que es lo que pide la marca. Quedó en unos 30 de los 440 del alto.
 - **Dónde arranca** — a un tercio del alto, no a la mitad: al medio el tramo grueso manda demasiado y la pieza se apelmaza abajo.
-- **Largo de la punta** — el tramo fino corre paralelo y sólo converge en los últimos 52. Si converge desde el escalón, las ocho barras se leen como briznas de pasto en vez de líneas.
+- **Largo de la punta** — el hilo corre paralelo y sólo converge en los últimos 46. Si converge desde el escalón, las ocho barras se leen como briznas de pasto en vez de líneas.
+- **Ancho del hilo** — 2 sobre una base de 16, casi un hilo. Más grueso y el escalón deja de leerse como un cambio de registro.
 
-**Ocho barras, sin líneas intermedias: siete verdes y una roja, todas a la misma opacidad** — la jerarquía la dan el ancho y el alto, no el tono. La geometría está en `docs/barras.svg`: 8 polígonos, viewBox `0 0 410 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
+**La distribución es uniforme, y no sólo por estética.** Mismo paso, mismo ancho de base, misma inclinación y misma opacidad hacen que la separación entre barras se mantenga en 18 **a cualquier altura**; si los anchos variaran, las barras se abrirían o se juntarían hacia arriba. Lo único que cambia es el alto, que crece parejo de 150 a 420, y por eso los finales **suben en línea recta hacia el borde derecho**.
+
+Son ocho: siete verdes y una roja. La geometría está en `docs/barras.svg`: 8 polígonos, viewBox `0 0 395 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
 
 Traducción a web:
 
