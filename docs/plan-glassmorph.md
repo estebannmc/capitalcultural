@@ -74,9 +74,11 @@ La identidad se construye sobre diagonales a **15°**, derivadas del paralelogra
 
 **El remate no es una textura.** La primera versión de este plan proponía dos `repeating-linear-gradient(105deg, …)` cubriendo todo el fondo. Se lee como papel tapiz: la línea siempre igual, siempre al mismo paso, sin jerarquía. El remate real de la marca es una **pieza compuesta** anclada abajo a la derecha: catorce barras a 15° donde cada una **arranca gruesa en la base, se corta, y sigue fina hacia arriba**. Verdes en distintas intensidades, un par en Azul 01, y las dos últimas en rojo de Cultura.
 
-Cada barra tiene tres decisiones: alto de la base gruesa, dónde cae el corte, y hasta dónde sigue la línea fina. El corte crece con el grosor de la base, así que las pesadas cortan más tarde y las livianas antes. De ahí sale el ritmo que un patrón no puede dar.
+**Cada barra es un solo polígono**, no dos piezas con un espacio en el medio. El **borde derecho es continuo** de la base al tope y el escalón come únicamente del lado izquierdo, así que el tramo fino queda alineado a la derecha de la misma línea. Esa continuidad es lo que la hace leer como una línea que se afina, y no como dos barras apiladas — la primera versión las dibujó como dos segmentos separados y se notaba.
 
-Es un SVG de 28 polígonos —pesa menos que una imagen y se re-tiñe con los mismos tokens— inyectado por `astra_body_top`, al 30% de opacidad y anclado a la esquina. Más grande o más opaco cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
+Las tres variables son el ancho de la base, la altura del escalón (cerca de la mitad del alto) y el ancho del tramo fino. Entre medio van cuatro hairlines sin escalón, que abren el ritmo.
+
+La geometría está en `docs/barras.svg`: 14 polígonos, viewBox `0 0 470 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
 
 Traducción a web:
 
@@ -331,5 +333,6 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 ## 6. Archivos de este repo
 
 - `docs/design-tokens.css` — tokens de marca + material GlassMorph, listos para encolar
+- `docs/barras.svg` — el remate de barras, partial para el child theme
 - `docs/plan-glassmorph.md` — este documento
 - Los dos PDFs normativos en la raíz
