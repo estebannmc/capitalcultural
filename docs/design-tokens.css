@@ -190,41 +190,48 @@
 .sf-sangria { margin-left: .72em; }
 
 /* =====================================================================
-   Luz de marca: la lámina del Brandbook (pág. 90) reconstruida en CSS.
-   Cinco capas sobre un solo elemento, sin imagen: pesa cero, escala a
-   cualquier ancho y se re-tiñe cambiando dos valores.
-   El velo va PRIMERO y garantiza el contraste: toda la tipografía vive
-   en el tercio oscuro y la luz ocupa la derecha. Sin él queda texto
-   blanco sobre verde, que es 2.36 y está prohibido por §1.2.
+   Luz de marca: la lámina del Brandbook (pág. 90).
+   MISMA REGLA que el remate de esquina: un polígono por barra, borde
+   derecho continuo, y una diagonal corta a un tercio del alto que funde
+   el tramo grueso con el fino. La primera versión usaba listones de
+   repeating-linear-gradient y tenía el mismo problema que la trama:
+   la línea siempre igual, siempre al mismo paso.
+
+   Diferencia con el remate: acá las barras SON la luz sobre el Azul 01,
+   no sombras que cortan un resplandor. Varias corren más alto que el
+   lienzo y se recortan, como en la página 90. Trece barras: verdes,
+   blancas a baja opacidad, y una roja.
+
+   Geometría en docs/barras-luz.svg (13 polígonos, viewBox 0 0 820 440).
+
+   El centro del foco va FUERA del lienzo (92% 100%): adentro se le ve
+   el círculo. Y el velo va ENCIMA de las barras, no debajo: sin él el
+   texto queda blanco sobre verde, que es 2.36 y lo prohíbe §1.2.
    ===================================================================== */
 .sf-luz {
   position: relative; isolation: isolate; overflow: hidden;
   color: var(--sf-blanco);
   background:
-    /* 1· velo que protege el texto */
-    linear-gradient(100deg,
-      rgba(0, 18, 38, .94) 0%, rgba(0, 18, 38, .88) 30%,
-      rgba(0, 18, 38, .55) 48%, rgba(0, 18, 38, .12) 64%, transparent 78%),
-    /* 2· filo brillante de cada listón */
-    repeating-linear-gradient(var(--trama-gradiente),
-      transparent 0 2px, rgba(255, 255, 255, .13) 2px 4px, transparent 4px 74px),
-    /* 3· los listones, con filo suave */
-    repeating-linear-gradient(var(--trama-gradiente),
-      rgba(0, 16, 34, .58) 0 22px,
-      rgba(0, 16, 34, .28) 22px 34px,
-      rgba(0, 16, 34, 0) 40px 52px,
-      rgba(0, 16, 34, .3) 60px 74px),
-    /* 4· el foco: núcleo blanco sobre Verde 01 */
-    radial-gradient(74% 108% at 88% 78%,
-      rgba(255, 255, 255, .62) 0%, #00c08b 18%, rgba(0, 192, 139, .7) 36%,
-      rgba(0, 120, 120, .36) 54%, rgba(0, 60, 90, .16) 70%, transparent 84%),
-    /* 5· base Azul 01 */
+    radial-gradient(86% 128% at 92% 100%,
+      rgba(255, 255, 255, .42) 0%, #00c08b 20%, rgba(0, 192, 139, .58) 40%,
+      rgba(0, 90, 110, .26) 60%, transparent 82%),
     linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
 }
+.sf-luz__barras {
+  position: absolute; right: 0; bottom: 0;
+  height: 126%; width: auto; z-index: 0; pointer-events: none;
+}
+.sf-luz::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg,
+    rgba(0, 18, 38, .94) 0%, rgba(0, 18, 38, .86) 26%,
+    rgba(0, 18, 38, .5) 44%, rgba(0, 18, 38, .1) 60%, transparent 74%);
+}
 .sf-luz::after {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   opacity: .08; mix-blend-mode: overlay; background-image: var(--noise);
 }
+.sf-luz > *:not(.sf-luz__barras) { position: relative; z-index: 2; }
 
 /* Barrido de luz del hero: mismo ángulo que la barra del logo. */
 .sf-sweep { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }

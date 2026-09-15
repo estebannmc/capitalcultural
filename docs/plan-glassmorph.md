@@ -111,30 +111,16 @@ En el primario la barra va en rojo sobre el relleno Azul 01: replica literalment
 
 ### 1.6 La lámina de luz (footer)
 
-El footer recrea la lámina de la página 90 del Brandbook — el haz verde entrando por listones sobre Azul 01 — **en CSS puro, sin imagen**: pesa cero, escala a cualquier ancho y se re-tiñe cambiando dos valores. Son cinco capas de `background` sobre un solo elemento (`.sf-luz`), de arriba hacia abajo:
+El footer recrea la lámina de la página 90 del Brandbook — el haz verde entrando por barras sobre Azul 01 — **en CSS y SVG, sin imagen**.
 
-1. un velo oscuro en degradé hacia la derecha;
-2. el filo brillante de cada listón;
-3. los listones a 105°, con borde suave;
-4. el foco de luz: núcleo blanco sobre Verde 01;
-5. la base Azul 01.
+**Se construye con la misma regla que el remate de esquina**: un polígono por barra, borde derecho continuo, y una diagonal corta a un tercio del alto que funde el tramo grueso con el fino. La primera versión usaba listones de `repeating-linear-gradient` y arrastraba exactamente el mismo problema que la trama: la línea siempre igual, siempre al mismo paso.
 
-**El velo no es decorativo, es el que hace legible el footer.** Toda la tipografía vive en el tercio oscuro y la luz ocupa la derecha. Sin él queda texto blanco sobre verde, que es 2.36 y lo prohíbe la regla de §1.2 — me pasó en el primer render y se ve feo además de ilegible.
+La diferencia con el remate es qué representan las barras: **acá son la luz**, no sombras que cortan un resplandor. Trece barras —verdes, blancas a baja opacidad y una roja— sobre el foco verde y la base Azul 01, varias corriendo más alto que el lienzo para que se recorten, como en la lámina original. Geometría en `docs/barras-luz.svg`.
 
-### 1.5 Material GlassMorph
+Dos detalles que no son decorativos:
 
-Se porta el sistema ya probado en `tiendaFreedom` y `rifa-silvana` **con los mismos nombres de token** — `--glass-fill`, `--glass-blur`, `--glass-shadow`, `--noise`, `--ease-out` — y las mismas clases: `.glass`, `.glass--thin`, `.glass--thick`, `.glass--dark`, `.glass-soft`, `.glass-bar`, más el fondo vivo `.ambient` con blobs a la deriva.
-
-Cambios respecto de Freedom/Rifa:
-
-1. Las sombras se tiñen con Azul 01 en vez de gris frío.
-2. Los blobs del fondo quedan en verde-01 y rojo sobre el gris del sistema, sin azules vibrantes.
-3. Los tintes se reducen a tres: `.glass--dark` (Azul 01), `.glass--verde` y `.glass--topico`.
-4. Se mantienen **intactos** los tres bloques de accesibilidad: `@supports not (backdrop-filter)`, `prefers-reduced-transparency` y `prefers-reduced-motion`.
-
-El archivo está listo en **`docs/design-tokens.css`** — es el primer stylesheet que encola el child theme.
-
-**Presupuesto de rendimiento:** `backdrop-filter` es caro. Regla: como máximo ~8 elementos con blur real visibles a la vez. La grilla de agenda usa `glass-soft` (translúcido sin blur); el blur real queda para header, hero, modales y tarjetas destacadas. Es exactamente el criterio que ya está comentado en `globals.css` de Freedom.
+- **El centro del foco va fuera del lienzo** (`92% 100%`). Adentro se le ve el círculo y delata el degradado.
+- **El velo oscuro va encima de las barras, no debajo.** Toda la tipografía vive en el tercio oscuro y la luz ocupa la derecha. Sin él queda texto blanco sobre verde, que es 2.36 y lo prohíbe la regla de §1.2 — me pasó en el primer render.
 
 ---
 
@@ -333,6 +319,7 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 ## 6. Archivos de este repo
 
 - `docs/design-tokens.css` — tokens de marca + material GlassMorph, listos para encolar
-- `docs/barras.svg` — el remate de barras, partial para el child theme
+- `docs/barras.svg` — el remate de barras de esquina, partial para el child theme
+- `docs/barras-luz.svg` — las barras de la lámina del footer
 - `docs/plan-glassmorph.md` — este documento
 - Los dos PDFs normativos en la raíz
