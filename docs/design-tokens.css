@@ -61,12 +61,15 @@
 
   /* ---------- Geometría de marca (02.6) ----------
      Todo lo de marca se inclina 15° HACIA LA DERECHA: subiendo, la línea
-     se corre a la derecha ("/"). Para skewX eso es -15deg; para
-     repeating-linear-gradient es 105deg, la perpendicular. 75deg da la
-     versión espejada ("\\"), que invierte la lectura de "movimiento
-     hacia adelante" del Brandbook. */
-  --trama-angulo:    15deg;   /* skewX / transform */
-  --trama-gradiente: 105deg;  /* repeating-linear-gradient */
+     se corre a la derecha ("/"). En transform eso es skewX(-15deg); en un
+     gradiente lineal, 105deg — la perpendicular. 90deg daría vertical, y
+     75deg la versión espejada, que invierte la lectura de "movimiento
+     hacia adelante" del Brandbook.
+
+     Las barras y la lámina ya no usan gradientes repetidos, así que el
+     único consumidor del ángulo es skewX. El degradé lleva sus 105deg
+     escritos en --sf-degrade. */
+  --trama-angulo: 15deg;   /* skewX / transform */
 
   --r-xl: 32px;
   --r-lg: 26px;
