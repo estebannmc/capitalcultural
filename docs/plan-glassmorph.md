@@ -78,7 +78,29 @@ Traducción a web:
 - la barra del logo como marcador, **siempre pegada al título y del tamaño del título**, nunca como filete del bloque entero. Las medidas van en `em`, así toma el cuerpo del texto que encabeza sin ajustes: `<h2><i class="sf-barra"></i>Título</h2>`. Reemplaza a los puntos redondos genéricos como indicador de estado y severidad;
 - el barrido de luz del hero (`transform: skewX(-15deg)`), el mismo que ya usa Freedom y que venía con el ángulo correcto.
 
-### 1.5 La lámina de luz (footer)
+### 1.5 Botones
+
+Radio **10px** — más cerrado que los 24px de los paneles, porque un botón es un objeto y un panel es una superficie. Alto mínimo **44px** por objetivo táctil. La barra del logo entra como marcador y el barrido de hover corre a 15°.
+
+| Variante | Combinación | Contraste | Veredicto |
+|---|---|---|---|
+| Primario | blanco / Azul 01 | 14.90 | AAA |
+| Línea | Azul 01 / fondo | 13.54 | AAA |
+| Verde | Azul 01 / Verde 01 | 6.33 | AA |
+| Desactivado | Gris 75 / Gris 20 | 4.50 | AA |
+| Tópico | blanco / rojo | 4.33 | **sólo texto grande** |
+| — | Azul 01 / rojo | 3.44 | **sólo texto grande** |
+| — | blanco / Verde 01 | 2.36 | **nunca** |
+
+**El rojo es la restricción que manda en el sistema.** No existe botón rojo en tamaño normal que sea accesible sin salirse del color de marca. La salida no es achicar el problema sino ubicarlo: el rojo es el **CTA grande de un hero**, uno por pantalla, y en todo el resto vive como la barra dentro de un botón azul. Por eso `.sf-btn--topico` viene forzado a 19px y no existe en tamaño normal.
+
+En el primario la barra va en rojo sobre el relleno Azul 01: replica literalmente el lockup SF/CULTURA.
+
+**Foco:** un anillo, no un cambio de relleno — `box-shadow: 0 0 0 2px halo, 0 0 0 5px rojo`. El anillo rojo contra el fondo claro da 3.94, por encima del 3:1 de WCAG 1.4.11. En el botón verde el halo se invierte a Azul 01, porque el halo blanco sobre verde da 2.36 y no separa. **Desactivado** no usa `opacity`, que hunde el contraste justo cuando menos conviene.
+
+**Que Elementor los respete:** el sistema se entrega dos veces — como clases del child theme para lo que renderiza Astra, y cargado en *Site Settings → Theme Style → Buttons* para que los botones de Elementor hereden. Encima va un override de `.elementor-button` como red de seguridad.
+
+### 1.6 La lámina de luz (footer)
 
 El footer recrea la lámina de la página 90 del Brandbook — el haz verde entrando por listones sobre Azul 01 — **en CSS puro, sin imagen**: pesa cero, escala a cualquier ancho y se re-tiñe cambiando dos valores. Son cinco capas de `background` sobre un solo elemento (`.sf-luz`), de arriba hacia abajo:
 
@@ -169,32 +191,45 @@ Y el escaneo **no crece** con la cantidad de páginas; la auditoría manual sí.
 
 Un plugin chico, subido por *Plugins → Añadir nuevo → Subir*, que recorre el `_elementor_data` de los 510 posts y reporta cuáles traen colores **literales** en vez de referencias a globals. La distinción es exacta y verificable: un widget atado a un global guarda `"__globals__"`, uno pinchado a mano guarda el hex crudo. Con ese listado, el reemplazo por lote es una corrida más.
 
-**Plan B si sistemas no permite instalar un plugin propio.** Es un sitio de gobierno y puede pasar. Entonces se trabaja a mano sólo el top por tráfico y la cola larga hereda de los globals, asumiendo que algunas páginas viejas queden con colores de la paleta anterior hasta que alguien las toque. **Hay que decidirlo antes de presupuestar**, porque mueve el total unos 8 días.
+**Confirmado:** se pueden subir plugins por ZIP, así que este camino va y el escenario de +8 días sale de la mesa.
 
-### El triage no es burocracia
+### La forma real de la cola — corrección
 
-Cada página que se saca del universo son minutos que no se pagan. El orden es:
+En la versión anterior escribí que «el 80% del tráfico suele concentrarse en el 5–10% de las URLs» y lo usé para justificar trabajar sólo el top 40. **Con los datos reales eso es falso para este sitio.**
 
-1. descartar por **estado** — borrador, papelera, privada;
-2. descartar **huérfanas** — sin enlaces entrantes ni visitas;
-3. **priorizar por tráfico** — en sitios de contenido el 80% suele concentrarse en el 5–10% de las URLs, o sea entre 26 y 51 páginas de las 510.
+Ajustando una Zipf a las 25 páginas más visitadas de 2026 el exponente da **−0,79**; ajustando sólo la cola (ranks 6–25) da **−0,92**. Las dos describen una cola **gorda**:
 
-### Lo que falta para cerrar el número
+| Corte | Ajuste 25 puntos | Ajuste sólo cola |
+|---|---|---|
+| top 25 | 38,7% | 45,4% |
+| top 40 | **45,8%** | **53,0%** |
+| top 60 | 52,6% | 59,9% |
+| top 100 | 62,1% | 68,8% |
 
-Tres cortes del universo, todos visibles desde el listado de páginas más Analytics:
+Para llegar al 80% habría que tocar más de 200 páginas, no 40. Trabajar sólo el top 40 dejaría cerca de la mitad del tráfico en páginas sin revisar.
 
-1. cuántas de las 510 están **publicadas**;
-2. cuántas de esas usan **Elementor**;
-3. cuántas tuvieron **visitas en los últimos 12 meses**.
+Sigue siendo una proyección — las colas reales caen más rápido que cualquier ajuste sobre la cabeza — pero la dirección invierte la recomendación anterior: **el reemplazo por lote tiene que cubrir las 510, no sólo el top.** Con el plugin habilitado eso no cuesta más.
 
-Con esos tres números el rango se cierra a una semana de amplitud.
+El sitio entero proyecta unos **12.000 a 14.000 visitantes al año**, así que no es un problema de escala de tráfico sino de prolijidad: que no queden páginas huérfanas con la paleta vieja.
+
+### Qué plantillas priorizar, según los datos
+
+De las 25 más visitadas:
+
+- **13 son fichas de espacio cultural** — museos, mercados, bibliotecas, el Anfiteatro, la Manzana Jesuítica, el Molino — y juntan el **42% del tráfico del top 25**. Es, por lejos, la plantilla más valiosa después de Inicio.
+- **4 son Feria del Libro** (incluida Prensa), con el **20%**. Esto contesta una pregunta que estaba abierta: `/feriadellibro/` entra en el alcance.
+- **4 son ciclos o festivales**: Noche de los Museos, Festival Diseña, Somos Música, Aniversario del Mercado.
+
+### El triage sigue valiendo
+
+Cada página que se saca del universo son minutos que no se pagan. El orden es: descartar por **estado** (borrador, papelera, privada), después **huérfanas** (sin enlaces ni visitas), después priorizar por tráfico. Con publicaciones que van de 2019 a 2026 hay candidatas claras a archivar, como las ediciones viejas de la Feria.
 
 ---
 
 ## 3. Fases
 
 ### Fase 1 · Relevamiento y triage — *3 a 4 días*
-1. **Reducir las 510 a un universo manejable**, por el orden de §2.ter: estado, huérfanas, tráfico. Más el inventario de plugins, tipos de contenido y taxonomías, plantillas en uso, y si hay Astra Pro.
+1. **Reducir las 510 a un universo manejable**, por el orden de §2.ter: estado, huérfanas, tráfico. La analítica del top 25 ya está; falta el corte por estado. Más el inventario de plugins, tipos de contenido y taxonomías, plantillas en uso, y si hay Astra Pro.
 2. Exportar el árbol de URLs y quedarse con el top 50 por tráfico (Analytics/Search Console) — define qué plantillas se rediseñan primero.
 3. Baseline: Lighthouse móvil, axe DevTools y capturas del estado actual. Sin esto no hay forma de demostrar la mejora.
 4. Entorno de prueba. Sin acceso al servidor, la opción realista es un **staging local** (LocalWP / Studio) con una copia del sitio exportada por plugin de migración, más el uso de `?preview_theme=` en producción para la validación final. **[R]**
@@ -203,9 +238,7 @@ Con esos tres números el rango se cierra a una semana de amplitud.
 **Entregables:** planilla de triage con el universo reducido, baseline de métricas, repo con el staging y los assets.
 
 ### Fase 2 · Herramienta de auditoría — *2 a 3 días*
-Plugin propio, subido por ZIP, que escanea el `_elementor_data` de las 510 y reporta colores literales contra referencias a globals. Incluye el reemplazo por lote.
-
-**Es la fase que define si el proyecto son 30 días o 40.**
+Plugin propio, subido por ZIP, que escanea el `_elementor_data` de las 510 y reporta colores literales contra referencias a globals. Incluye el reemplazo por lote **sobre todas las páginas**, no sólo el top — por lo de la cola gorda.
 
 **Entregable:** el plugin, más el informe de qué páginas tienen color pinchado a mano.
 
@@ -226,9 +259,7 @@ Cada componente se entrega con estado *hover*, *focus-visible*, vacío y de carg
 **Entregable:** biblioteca completa + styleguide.
 
 ### Fase 5 · Plantillas Astra — *5 a 7 días*
-Home · archivo de agenda con filtros · evento individual · categoría/tag · nota individual · convocatorias · resultados de búsqueda · 404.
-
-Orden: primero las que concentran tráfico según la Fase 1.
+En el orden que marca la analítica: **Inicio**, **ficha de espacio cultural** (13 del top 25, 42% del tráfico), **Feria del Libro** (4 del top 25, 20%), **ciclo o festival**, y después archivo de agenda con filtros, nota individual, convocatorias, búsqueda y 404.
 
 **Entregable:** todo lo que renderiza Astra, retematizado en staging.
 
@@ -251,9 +282,18 @@ Reemplazo por lote de los colores literales que encontró el escaneo, más las p
 ### Fase 8 · Publicación — *1 a 2 días*
 Ventana de bajo tráfico, backup por plugin, subida del ZIP, activación, *Regenerate CSS & Data* de Elementor, verificación de las 50 URLs del inventario, 48 h de monitoreo.
 
-**Total estimado: 27 a 39 días hábiles**, con la herramienta de auditoría incluida. Sin ella, auditando a mano, son unos 8 días más.
+**Total estimado: 28 a 36 días hábiles.**
 
-Historial del número, porque cambió tres veces con información nueva: 19–27 cuando el page builder era hipótesis; 24–34 al confirmarse Elementor Free; 27–39 al aparecer las 510 páginas. Cada salto vino de un dato, no de recalibrar.
+Historial del número, porque cambió cuatro veces y siempre por dato nuevo, no por recalibrar:
+
+| Momento | Rango | Qué lo movió |
+|---|---|---|
+| Page builder como hipótesis | 19–27 | — |
+| Se confirma Elementor Free | 24–34 | Theme Builder es de Pro: Astra cubre más de lo que pensaba |
+| Aparecen las 510 páginas | 27–39 | La auditoría manual deja de escalar |
+| Plugin habilitado + analítica | **28–36** | Techo baja (no hay plan B), piso sube (el lote cubre las 510) |
+
+La variación que queda es la normal de plantillas y QA, no la del recuento de páginas.
 
 ---
 
@@ -261,7 +301,7 @@ Historial del número, porque cambió tres veces con información nueva: 19–27
 
 | Riesgo | Impacto | Mitigación |
 |---|---|---|
-| 510 páginas con estilos por widget | Alto — a mano son 13 días sólo de mirar | Triage en la Fase 1 y herramienta de escaneo en la Fase 2. Si sistemas no deja instalar el plugin, el costo vuelve |
+| 510 páginas con estilos por widget | Medio — a mano serían 13 días sólo de mirar | Baja de alto a medio: se pueden subir plugins, así que el escaneo y el reemplazo por lote lo resuelven en 4,6 días |
 | El CSS inline de Astra gana | Medio — aparecen colores viejos en lugares sueltos | Encolar con `astra-theme-css` como dependencia y usar el filtro `astra_dynamic_theme_css`; verificar plantilla por plantilla |
 | Sin acceso al servidor | Medio | Todo por ZIP desde el admin; staging local; `?preview_theme=` para validar en producción |
 | `backdrop-filter` en Android de gama baja | Medio | Presupuesto de ~8 blurs simultáneos, `glass-soft` en grillas, prueba en dispositivo real |
@@ -273,12 +313,11 @@ Historial del número, porque cambió tres veces con información nueva: 19–27
 
 ## 5. Decisiones pendientes
 
-1. **Los tres cortes de las 510** (§2.ter): publicadas, con Elementor, y con visitas en 12 meses.
-2. **¿Se puede subir un plugin propio?** Define si la auditoría son 4,6 días o 13. Hay que preguntarle a sistemas antes de presupuestar.
-3. **Alcance de `/feriadellibro/`** y demás subsitios: ¿entran en esta tanda o quedan para una segunda?
-4. **Modo oscuro:** el Brandbook no lo contempla. Sugiero no hacerlo ahora. Si se hace, el rojo tiene que aclararse a `#ff7f63` sobre fondo azul profundo — `#e63312` ahí da 4.30 y no llega.
-5. **Fotografía:** el vidrio necesita imágenes debajo para lucir, y con tres colores el peso visual recae más en la fotografía. ¿Hay banco de fotos de eventos con derechos resueltos?
-6. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
+1. **Cuántas de las 510 están publicadas** y cuántas quedaron huérfanas. El top 25 por tráfico ya lo tenemos.
+2. **¿Cuántas ediciones de Feria se conservan?** La XXXII está en el top 4, así que la Feria entra; la pregunta es si las anteriores se rediseñan o se archivan.
+3. **Modo oscuro:** el Brandbook no lo contempla. Sugiero no hacerlo ahora. Si se hace, el rojo tiene que aclararse a `#ff7f63` sobre fondo azul profundo — `#e63312` ahí da 4.30 y no llega.
+4. **Fotografía:** el vidrio necesita imágenes debajo para lucir, y con tres colores el peso visual recae más en la fotografía. ¿Hay banco de fotos de eventos con derechos resueltos?
+5. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
 
 ---
 
