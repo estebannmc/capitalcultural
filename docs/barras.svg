@@ -1,16 +1,8 @@
-<svg class="sf-barras" viewBox="0 0 470 440" aria-hidden="true" focusable="false">
-    <polygon points="14.0,440.0 21.0,440.0 61.7,288.0 58.7,288.0 36.2,372.0 32.2,372.0" fill="var(--verde-01)" opacity="0.45"/>
-    <polygon points="38.0,440.0 51.0,440.0 107.8,228.0 103.8,228.0 72.5,345.0 63.5,345.0" fill="var(--verde-01)" opacity="0.90"/>
-    <polygon points="62.0,440.0 65.0,440.0 112.7,262.0 109.7,262.0" fill="var(--verde-01)" opacity="0.35"/>
-    <polygon points="82.0,440.0 100.0,440.0 178.2,148.0 173.2,148.0 129.8,310.0 116.8,310.0" fill="var(--verde-01)" opacity="1.00"/>
-    <polygon points="112.0,440.0 116.0,440.0 179.2,204.0 175.2,204.0" fill="var(--verde-01)" opacity="0.40"/>
-    <polygon points="134.0,440.0 156.0,440.0 248.2,96.0 242.2,96.0 191.3,286.0 175.3,286.0" fill="var(--verde-01)" opacity="1.00"/>
-    <polygon points="164.0,440.0 169.0,440.0 223.7,236.0 218.7,236.0" fill="var(--verde-01)" opacity="0.50"/>
-    <polygon points="184.0,440.0 199.0,440.0 281.5,132.0 276.5,132.0 231.0,302.0 221.0,302.0" fill="var(--verde-01)" opacity="0.92"/>
-    <polygon points="208.0,440.0 232.0,440.0 337.6,46.0 330.6,46.0 272.2,264.0 255.2,264.0" fill="var(--verde-01)" opacity="1.00"/>
-    <polygon points="240.0,440.0 244.0,440.0 312.6,184.0 308.6,184.0" fill="var(--verde-01)" opacity="0.35"/>
-    <polygon points="262.0,440.0 279.0,440.0 375.5,80.0 370.5,80.0 317.1,279.0 305.1,279.0" fill="var(--verde-01)" opacity="0.95"/>
-    <polygon points="287.0,440.0 291.0,440.0 348.9,224.0 344.9,224.0" fill="var(--verde-01)" opacity="0.45"/>
-    <polygon points="305.0,440.0 318.0,440.0 407.0,108.0 403.0,108.0 353.7,292.0 344.7,292.0" fill="var(--rojo)" opacity="0.90"/>
-    <polygon points="326.0,440.0 347.0,440.0 457.9,26.0 451.9,26.0 390.6,255.0 375.6,255.0" fill="var(--rojo)" opacity="1.00"/>
+<svg class="sf-barras" viewBox="0 0 480 440" aria-hidden="true" focusable="false">
+    <polygon points="20.0,440.0 32.0,440.0 82.9,250.0 78.9,250.0 61.8,314.0 46.8,340.0" fill="var(--verde-01)" opacity="0.48"/>
+    <polygon points="78.0,440.0 96.0,440.0 166.7,176.0 161.7,176.0 137.1,268.0 115.5,300.0" fill="var(--verde-01)" opacity="0.70"/>
+    <polygon points="142.0,440.0 167.0,440.0 255.4,110.0 249.4,110.0 217.8,228.0 188.9,265.0" fill="var(--verde-01)" opacity="0.90"/>
+    <polygon points="210.0,440.0 229.0,440.0 306.2,152.0 301.2,152.0 273.3,256.0 250.7,288.0" fill="var(--verde-01)" opacity="0.58"/>
+    <polygon points="268.0,440.0 297.0,440.0 396.7,68.0 389.7,68.0 354.3,200.0 321.1,242.0" fill="var(--verde-01)" opacity="1.00"/>
+    <polygon points="330.0,440.0 353.0,440.0 463.9,26.0 457.9,26.0 415.6,184.0 388.9,220.0" fill="var(--rojo)" opacity="1.00"/>
 </svg>

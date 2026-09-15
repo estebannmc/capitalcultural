@@ -74,11 +74,11 @@ La identidad se construye sobre diagonales a **15°**, derivadas del paralelogra
 
 **El remate no es una textura.** La primera versión de este plan proponía dos `repeating-linear-gradient(105deg, …)` cubriendo todo el fondo. Se lee como papel tapiz: la línea siempre igual, siempre al mismo paso, sin jerarquía. El remate real de la marca es una **pieza compuesta** anclada abajo a la derecha: catorce barras a 15° donde cada una **arranca gruesa en la base, se corta, y sigue fina hacia arriba**. Verdes en distintas intensidades, un par en Azul 01, y las dos últimas en rojo de Cultura.
 
-**Cada barra es un solo polígono**, no dos piezas con un espacio en el medio. El **borde derecho es continuo** de la base al tope y el escalón come únicamente del lado izquierdo, así que el tramo fino queda alineado a la derecha de la misma línea. Esa continuidad es lo que la hace leer como una línea que se afina, y no como dos barras apiladas — la primera versión las dibujó como dos segmentos separados y se notaba.
+**Cada barra es un solo polígono**, no dos piezas con un espacio en el medio. El **borde derecho es continuo** de la base al tope; el izquierdo sube por el tramo grueso y ahí **se inclina** hasta fundirse con el borde del tramo fino. Esa diagonal es el escalón: no un corte recto, sino el merge entre los dos anchos, y deja el tramo fino alineado a la derecha de la misma línea.
 
-Las tres variables son el ancho de la base, la altura del escalón (cerca de la mitad del alto) y el ancho del tramo fino. Entre medio van cuatro hairlines sin escalón, que abren el ritmo.
+El largo de la diagonal es la variable delicada: larga, la barra se lee como una hoja que se afila; corta, como una línea gruesa que se afina de golpe, que es lo que pide la marca. Quedó en unos 30 de los 440 del alto.
 
-La geometría está en `docs/barras.svg`: 14 polígonos, viewBox `0 0 470 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
+**Seis barras, sin líneas intermedias.** La geometría está en `docs/barras.svg`: 6 polígonos, viewBox `0 0 480 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
 
 Traducción a web:
 
