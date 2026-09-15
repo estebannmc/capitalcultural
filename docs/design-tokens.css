@@ -25,6 +25,13 @@
 
   --topico: var(--sf-rojo);
 
+  /* Degradé de transición: verde → azul institucional. Corre a 105deg,
+     la misma diagonal que la trama, para que lean como un solo gesto.
+     Es fondo y grafismo. Si lleva texto: sólo blanco y sólo sobre el
+     tramo azul — el extremo verde no da contraste (blanco/verde = 2.36). */
+  --sf-degrade: linear-gradient(105deg,
+    #00c08b 0%, #009e87 38%, #00527a 72%, #002751 100%);
+
   /* ---------- Roles semánticos ----------
      Contrastes medidos:
        azul-01 / blanco     14.90  AAA   texto libre
@@ -133,15 +140,58 @@
       rgba(0, 39, 81, .55) 0 1px, transparent 1px calc(var(--trama-paso) / 3));
 }
 
-/* La barra del logo, reusada como marcador de sección, viñeta y
-   estado. Es la trama operando como código visual. */
+/* La barra del logo como marcador. Va SIEMPRE pegada al título y del
+   tamaño del título — nunca como filete del bloque entero. Las medidas
+   van en em, así toma el cuerpo del texto que encabeza sin ajustes.
+   Uso: <h2><i class="sf-barra"></i>Título</h2> */
 .sf-barra {
-  display: inline-block; width: 6px; height: 1.2em; flex: none;
+  display: inline-block;
+  width: .24em; height: .78em; margin-right: .48em;
   background: var(--topico);
   transform: skewX(calc(-1 * var(--trama-angulo)));
 }
 .sf-barra--verde { background: var(--sf-verde-01); }
 .sf-barra--azul  { background: var(--sf-azul-01); }
+.sf-barra--gris  { background: var(--sf-gris-75); }
+/* el párrafo se alinea con el título, no con la barra */
+.sf-sangria { margin-left: .72em; }
+
+/* =====================================================================
+   Luz de marca: la lámina del Brandbook (pág. 90) reconstruida en CSS.
+   Cinco capas sobre un solo elemento, sin imagen: pesa cero, escala a
+   cualquier ancho y se re-tiñe cambiando dos valores.
+   El velo va PRIMERO y garantiza el contraste: toda la tipografía vive
+   en el tercio oscuro y la luz ocupa la derecha. Sin él queda texto
+   blanco sobre verde, que es 2.36 y está prohibido por §1.2.
+   ===================================================================== */
+.sf-luz {
+  position: relative; isolation: isolate; overflow: hidden;
+  color: var(--sf-blanco);
+  background:
+    /* 1· velo que protege el texto */
+    linear-gradient(100deg,
+      rgba(0, 18, 38, .94) 0%, rgba(0, 18, 38, .88) 30%,
+      rgba(0, 18, 38, .55) 48%, rgba(0, 18, 38, .12) 64%, transparent 78%),
+    /* 2· filo brillante de cada listón */
+    repeating-linear-gradient(var(--trama-gradiente),
+      transparent 0 2px, rgba(255, 255, 255, .13) 2px 4px, transparent 4px 74px),
+    /* 3· los listones, con filo suave */
+    repeating-linear-gradient(var(--trama-gradiente),
+      rgba(0, 16, 34, .58) 0 22px,
+      rgba(0, 16, 34, .28) 22px 34px,
+      rgba(0, 16, 34, 0) 40px 52px,
+      rgba(0, 16, 34, .3) 60px 74px),
+    /* 4· el foco: núcleo blanco sobre Verde 01 */
+    radial-gradient(74% 108% at 88% 78%,
+      rgba(255, 255, 255, .62) 0%, #00c08b 18%, rgba(0, 192, 139, .7) 36%,
+      rgba(0, 120, 120, .36) 54%, rgba(0, 60, 90, .16) 70%, transparent 84%),
+    /* 5· base Azul 01 */
+    linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
+}
+.sf-luz::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .08; mix-blend-mode: overlay; background-image: var(--noise);
+}
 
 /* Barrido de luz del hero: mismo ángulo que la barra del logo. */
 .sf-sweep { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
