@@ -315,3 +315,116 @@
 @media (prefers-reduced-motion: reduce) {
   .sf-ambient__blob, .sf-sweep::before { animation: none; }
 }
+
+
+/* =====================================================================
+   Botones
+   Radio 10px: más cerrado que los 24px de los paneles, porque un botón
+   es un objeto y un panel es una superficie. Alto mínimo 44px (objetivo
+   táctil). La barra del logo entra como marcador y el barrido de hover
+   corre a 15°.
+
+   Contrastes medidos — esto manda sobre cualquier preferencia:
+     blanco  / azul-01   14.90  AAA
+     azul-01 / verde-01   6.33  AA
+     azul-01 / fondo     13.54  AAA
+     blanco  / rojo       4.33  AA SÓLO EN TEXTO GRANDE
+     azul-01 / rojo       3.44  AA SÓLO EN TEXTO GRANDE
+     blanco  / verde-01   2.36  FALLA — nunca
+     gris-75 / gris-20    4.50  AA   (desactivado)
+   No existe botón rojo en tamaño normal que sea accesible sin salirse
+   del color de marca. El rojo es el CTA grande de un hero, uno por
+   pantalla; en el resto vive como la barra dentro de un botón azul.
+   ===================================================================== */
+.sf-btn {
+  --btn-halo: var(--sf-blanco);
+  display: inline-flex; align-items: center; justify-content: center; gap: .55em;
+  min-height: 44px; padding: 0 20px; border: 0; border-radius: 10px;
+  font: 600 15px/1 var(--font-texto); letter-spacing: .01em; text-decoration: none;
+  position: relative; overflow: hidden; isolation: isolate; cursor: pointer;
+  transition: background .2s ease, box-shadow .2s var(--ease-out), transform .12s var(--ease-out);
+}
+.sf-btn .sf-barra { height: 1.05em; width: .26em; margin-right: 0; }
+.sf-btn:active { transform: translateY(1px); }
+/* El foco es un anillo, no un cambio de relleno. Anillo rojo contra el
+   fondo claro = 3.94, por encima del 3:1 de WCAG 1.4.11. */
+.sf-btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--btn-halo), 0 0 0 5px var(--sf-rojo);
+}
+/* barrido de luz en el ángulo de marca */
+.sf-btn::after {
+  content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.3), transparent);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  transition: left .6s var(--ease-out);
+}
+@media (hover: hover) { .sf-btn:hover::after { left: 135%; } }
+
+/* primario — la barra en rojo replica el lockup SF/CULTURA */
+.sf-btn--primario { background: var(--sf-azul-01); color: var(--sf-blanco);
+  box-shadow: 0 8px 20px -10px rgba(0, 39, 81, .55); }
+.sf-btn--primario .sf-barra { background: var(--sf-rojo); }
+@media (hover: hover) { .sf-btn--primario:hover { background: #00325f; } }
+
+/* verde — texto SIEMPRE azul-01, jamás blanco */
+.sf-btn--verde { --btn-halo: var(--sf-azul-01);
+  background: var(--sf-verde-01); color: var(--sf-azul-01); }
+.sf-btn--verde .sf-barra { background: var(--sf-azul-01); }
+@media (hover: hover) { .sf-btn--verde:hover { background: #00d69a; } }
+
+.sf-btn--linea { background: transparent; color: var(--fg);
+  box-shadow: inset 0 0 0 1.5px var(--fg); }
+.sf-btn--linea .sf-barra { background: var(--topico); }
+@media (hover: hover) { .sf-btn--linea:hover { background: rgba(0, 39, 81, .06); } }
+
+/* vidrio — para flotar sobre foto o sobre el hero */
+.sf-btn--vidrio { color: var(--fg);
+  background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.56));
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+  backdrop-filter: blur(14px) saturate(170%);
+  box-shadow: 0 8px 20px -10px rgba(0,39,81,.4), inset 0 1px 0 #fff; }
+.sf-btn--vidrio .sf-barra { background: var(--topico); }
+
+/* tópico — forzado a tamaño grande: en normal no es accesible */
+.sf-btn--topico { background: var(--sf-rojo); color: var(--sf-blanco);
+  min-height: 54px; padding: 0 28px; font-size: 19px;
+  box-shadow: 0 10px 24px -10px rgba(230, 51, 18, .6); }
+.sf-btn--topico .sf-barra { background: var(--sf-blanco); }
+
+.sf-btn--texto { background: transparent; color: var(--fg); padding: 0 4px; min-height: 36px;
+  text-decoration: underline; text-decoration-color: var(--link-underline);
+  text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.sf-btn--texto::after { display: none; }
+
+.sf-btn--sm { min-height: 36px; padding: 0 14px; font-size: 13.5px; border-radius: 8px; }
+.sf-btn--lg { min-height: 54px; padding: 0 28px; font-size: 19px; border-radius: 12px; }
+.sf-btn--bloque { width: 100%; }
+
+/* desactivado — sin opacity, que hunde el contraste justo cuando menos conviene */
+.sf-btn[disabled], .sf-btn--off {
+  background: var(--sf-gris-20); color: var(--sf-gris-75);
+  cursor: not-allowed; box-shadow: none; pointer-events: none;
+}
+.sf-btn[disabled] .sf-barra, .sf-btn--off .sf-barra { background: var(--sf-gris-75); }
+
+.sf-btn__spin { width: 1em; height: 1em; border-radius: 50%; flex: none;
+  border: 2px solid currentColor; border-top-color: transparent;
+  animation: sf-spin .7s linear infinite; }
+@keyframes sf-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .sf-btn::after { display: none; }
+  .sf-btn__spin { animation-duration: 2s; }
+}
+
+/* Que Elementor los respete: además de estas clases hay que cargar el
+   estilo en Site Settings -> Theme Style -> Buttons, y dejar este
+   override como red de seguridad para los botones pinchados a mano. */
+.elementor-button,
+.elementor-button-wrapper .elementor-button {
+  border-radius: 10px;
+  font-family: var(--font-texto);
+  font-weight: 600;
+  min-height: 44px;
+}
