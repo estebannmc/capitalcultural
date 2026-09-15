@@ -9,47 +9,57 @@
 :root {
   color-scheme: light;
 
-  /* ---------- Paleta base (02.4) ---------- */
-  --sf-azul-01:   #002751;  /* PANTONE 540  · color dominante */
-  --sf-azul-02:   #1639f1;  /* PANTONE 286  · acento vibrante */
+  /* ---------- Sistema cromático cerrado ----------
+     De la ficha 02.4 se usan SOLO estos. Azul 02, Verde 02, celeste,
+     naranja y amarillo quedan fuera del sistema para este sitio y no se
+     declaran acá a propósito: lo que no existe como token no se usa. */
+  --sf-azul-01:   #002751;  /* PANTONE 540  · dominante */
   --sf-verde-01:  #00c08b;  /* PANTONE 3405 · superficie */
-  --sf-verde-02:  #00fe9b;  /* superficie / highlight */
-  --sf-blanco:    #ffffff;
+  --sf-rojo:      #e63312;  /* tópico CULTURA (04.1, nivel 01/A) */
 
   /* ---------- Neutros ---------- */
+  --sf-blanco:    #ffffff;
   --sf-gris-20:   #dadad9;
   --sf-gris-75:   #606060;
   --sf-negro:     #1d1d1b;
 
-  /* ---------- Colores de acento ---------- */
-  --sf-celeste:   #57b8e9;
-  --sf-naranja:   #fca100;  /* tópico Turismo */
-  --sf-rojo:      #e63312;  /* tópico CULTURA */
-  --sf-amarillo:  #f2e61a;
-
-  /* Color del tópico de esta submarca (Brandbook 04.1, nivel 01/A) */
   --topico: var(--sf-rojo);
 
   /* ---------- Roles semánticos ----------
-     Regla de contraste (medida sobre blanco):
-       texto  → azul-01 14.9 · negro 16.9 · gris-75 6.3 · azul-02 7.3
-       NUNCA  → verde-01 2.4 · verde-02 1.3 · naranja 2.1 · celeste 2.2 · amarillo 1.3
-       rojo   → 4.3 : sólo ≥24px o ≥19px bold, o como fondo con texto blanco grande
-     Los verdes y los acentos son colores de FONDO. Encima va azul-01. */
+     Contrastes medidos:
+       azul-01 / blanco     14.90  AAA   texto libre
+       negro   / blanco     16.88  AAA   texto libre
+       azul-01 / gris-20    10.65  AAA
+       azul-01 / verde-01    6.33  AA    texto sobre verde: SIEMPRE azul-01
+       gris-75 / blanco      6.29  AA    texto secundario
+       blanco  / rojo        4.33  AA-large  sólo ≥24px (o ≥19px bold)
+       azul-01 / rojo        3.44  AA-large
+       blanco  / verde-01    2.36  FALLA  nunca texto blanco sobre verde
+       verde-01/ blanco      2.36  FALLA  el verde nunca es texto
+     El verde es color de FONDO. El rojo no alcanza AA en ningún combo:
+     titulares grandes, filetes y barras, nunca texto corrido.
+     Sin azul-02 en el sistema, los links se distinguen por SUBRAYADO,
+     no por tono; el subrayado va en rojo porque es grafismo, no texto. */
   --fg:           var(--sf-azul-01);
   --fg-muted:     var(--sf-gris-75);
   --fg-on-color:  var(--sf-azul-01);
-  --bg:           #f4f7fa;
-  --link:         var(--sf-azul-02);
+  --bg:           #f4f4f3;   /* tinte del gris-20, no un gris inventado */
+  --link:         var(--sf-azul-01);
+  --link-underline: var(--sf-rojo);
   --border:       rgba(0, 39, 81, .12);
 
   /* ---------- Tipografía (02.1 / 02.2) ---------- */
   --font-marca: "Geologica", "Arial Narrow", system-ui, sans-serif; /* sólo signos de identidad */
   --font-texto: "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  /* ---------- Geometría de marca (02.6) ---------- */
-  --trama-angulo: 15deg;   /* la diagonal del logo SF */
-  --trama-paso:   88px;
+  /* ---------- Geometría de marca (02.6) ----------
+     La barra del logo se inclina 15° HACIA LA DERECHA: subiendo, la línea
+     se corre a la derecha ("/"). Para repeating-linear-gradient eso es
+     105deg — la perpendicular. 75deg da la trama espejada ("\\"), que
+     invierte la lectura de "movimiento hacia adelante" del Brandbook. */
+  --trama-angulo:   15deg;    /* para skewX / transform */
+  --trama-gradiente: 105deg;  /* para repeating-linear-gradient */
+  --trama-paso:     78px;
 
   --r-xl: 32px;
   --r-lg: 26px;
@@ -79,7 +89,7 @@
 .sf-ambient {
   position: fixed; inset: 0; z-index: -1;
   overflow: hidden; pointer-events: none;
-  background: linear-gradient(180deg, #f7fafc 0%, #eaf1f6 100%);
+  background: linear-gradient(180deg, #f4f4f3 0%, #e7e7e6 100%);
 }
 .sf-ambient__blob {
   position: absolute; width: 90vmax; height: 90vmax;
@@ -87,12 +97,12 @@
 }
 .sf-ambient__blob--verde {
   top: -40vmax; left: -40vmax;
-  background: radial-gradient(closest-side, rgba(0, 192, 139, .34), rgba(0, 192, 139, 0));
+  background: radial-gradient(closest-side, rgba(0, 192, 139, .38), rgba(0, 192, 139, 0));
   animation: sf-drift-a 32s ease-in-out infinite alternate;
 }
 .sf-ambient__blob--azul {
   top: -22vmax; right: -50vmax;
-  background: radial-gradient(closest-side, rgba(22, 57, 241, .24), rgba(22, 57, 241, 0));
+  background: radial-gradient(closest-side, rgba(0, 39, 81, .14), rgba(0, 39, 81, 0));
   animation: sf-drift-b 38s ease-in-out infinite alternate;
 }
 .sf-ambient__blob--topico {
@@ -102,7 +112,7 @@
 }
 .sf-ambient__blob--verde-2 {
   bottom: -40vmax; right: -40vmax;
-  background: radial-gradient(closest-side, rgba(0, 254, 155, .26), rgba(0, 254, 155, 0));
+  background: radial-gradient(closest-side, rgba(0, 192, 139, .28), rgba(0, 192, 139, 0));
   animation: sf-drift-a 42s ease-in-out infinite alternate-reverse;
 }
 .sf-ambient::after {
@@ -114,12 +124,32 @@
 /* Trama de marca: diagonales a 15° sobre el fondo vivo */
 .sf-trama {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  opacity: .12;
-  background: repeating-linear-gradient(
-    calc(90deg - var(--trama-angulo)),
-    rgba(0, 39, 81, .55) 0 1px,
-    transparent 1px var(--trama-paso)
-  );
+  opacity: .14;
+  /* dos pasos superpuestos: el fino marca el ritmo, el ancho respira */
+  background:
+    repeating-linear-gradient(var(--trama-gradiente),
+      rgba(0, 39, 81, .55) 0 1px, transparent 1px var(--trama-paso)),
+    repeating-linear-gradient(var(--trama-gradiente),
+      rgba(0, 39, 81, .55) 0 1px, transparent 1px calc(var(--trama-paso) / 3));
+}
+
+/* La barra del logo, reusada como marcador de sección, viñeta y
+   estado. Es la trama operando como código visual. */
+.sf-barra {
+  display: inline-block; width: 6px; height: 1.2em; flex: none;
+  background: var(--topico);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+}
+.sf-barra--verde { background: var(--sf-verde-01); }
+.sf-barra--azul  { background: var(--sf-azul-01); }
+
+/* Barrido de luz del hero: mismo ángulo que la barra del logo. */
+.sf-sweep { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
+.sf-sweep::before {
+  content: ""; position: absolute; top: 0; left: -70%; width: 42%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .30), transparent);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  animation: sf-sweep 7.5s var(--ease-out) infinite;
 }
 
 @keyframes sf-drift-a { to { transform: translate3d(16vw, 12vh, 0) scale(1.08); } }
@@ -184,7 +214,7 @@
     rgba(255, 255, 255, .30));
 }
 /* Tintes de marca para tarjetas destacadas. El texto encima va en azul-01. */
-.glass--verde  { --glass-fill: linear-gradient(160deg, rgba(0, 254, 155, .80), rgba(0, 192, 139, .52)); }
+.glass--verde  { --glass-fill: linear-gradient(160deg, rgba(0, 192, 139, .90), rgba(0, 192, 139, .62)); color: var(--sf-azul-01); }
 .glass--topico { --glass-fill: linear-gradient(160deg, rgba(230, 51, 18, .82), rgba(230, 51, 18, .55)); color: var(--sf-blanco); }
 
 /* Superficie translúcida sin blur: listas, chips, inputs.
@@ -233,5 +263,5 @@
   .glass-soft { background: var(--sf-blanco); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sf-ambient__blob { animation: none; }
+  .sf-ambient__blob, .sf-sweep::before { animation: none; }
 }
