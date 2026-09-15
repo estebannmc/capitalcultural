@@ -76,9 +76,9 @@ La identidad se construye sobre diagonales a **15°**, derivadas del paralelogra
 
 **Cada barra es un solo polígono**, no dos piezas con un espacio en el medio. El **borde derecho es continuo** de la base al tope; el izquierdo sube por el tramo grueso y ahí **se inclina** hasta fundirse con el borde del tramo fino. Esa diagonal es el escalón: no un corte recto, sino el merge entre los dos anchos, y deja el tramo fino alineado a la derecha de la misma línea.
 
-El largo de la diagonal es la variable delicada: larga, la barra se lee como una hoja que se afila; corta, como una línea gruesa que se afina de golpe, que es lo que pide la marca. Quedó en unos 30 de los 440 del alto.
+Dos parámetros gobiernan la diagonal. Su **largo**: larga, la barra se lee como una hoja que se afila; corta, como una línea gruesa que se afina de golpe, que es lo que pide la marca — quedó en unos 30 de los 440 del alto. Y **dónde arranca**: a un tercio del alto, no a la mitad, porque al medio el tramo grueso manda demasiado y la pieza se apelmaza abajo.
 
-**Seis barras, sin líneas intermedias.** La geometría está en `docs/barras.svg`: 6 polígonos, viewBox `0 0 480 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
+**Ocho barras, sin líneas intermedias: siete verdes y una roja.** La geometría está en `docs/barras.svg`: 8 polígonos, viewBox `0 0 500 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
 
 Traducción a web:
 

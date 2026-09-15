@@ -143,19 +143,21 @@
    base, así que las barras pesadas cortan más tarde y las livianas
    antes. De ahí sale el ritmo.
 
-   SEIS barras, cada una UN SOLO POLÍGONO. El borde DERECHO es continuo
+   OCHO barras —siete verdes y una roja—, cada una UN SOLO POLÍGONO.
+   El borde DERECHO es continuo
    de la base al tope; el izquierdo sube por el tramo grueso y ahí SE
    INCLINA hasta fundirse con el borde del tramo fino. Esa diagonal es
    el escalón: no un corte recto, sino el merge entre los dos anchos, y
    deja el tramo fino alineado a la derecha de la misma línea.
 
-   El largo de la diagonal es la variable delicada: larga, la barra se
-   lee como una hoja que se afila; corta, como una línea gruesa que se
-   afina de golpe, que es lo que pide la marca. Quedó en unos 30 de los
-   440 del alto.
+   Dos parámetros gobiernan la diagonal. Su LARGO: larga, la barra se lee
+   como una hoja que se afila; corta, como una línea gruesa que se afina
+   de golpe, que es lo que pide la marca — quedó en unos 30 de los 440
+   del alto. Y DÓNDE ARRANCA: a un tercio del alto, no a la mitad. Al
+   medio el tramo grueso manda demasiado y la pieza se apelmaza abajo.
 
-   La geometría está en docs/barras.svg (6 polígonos, viewBox
-   0 0 480 440). Va como partial del child theme, inyectada por el hook
+   La geometría está en docs/barras.svg (8 polígonos, viewBox
+   0 0 500 440). Va como partial del child theme, inyectada por el hook
    astra_body_top; los fill usan var(--sf-verde-01) y var(--sf-rojo),
    así que se re-tiñe con los mismos tokens. Acá va sólo su ubicación:
    al 30% y anclado a la esquina, porque más grande o más opaco cruza el
