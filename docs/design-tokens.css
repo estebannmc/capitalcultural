@@ -7,6 +7,11 @@
    ===================================================================== */
 
 :root {
+  /* Tema único. El Brandbook no contempla modo oscuro y el sitio no va a
+     tenerlo, así que esta hoja no trae ningún bloque de
+     prefers-color-scheme ni stamps de data-theme: es una decisión, no un
+     olvido. Todos los colores viven acá. Además evita el problema de que
+     el rojo de Cultura no llega a AA sobre fondo azul profundo. */
   color-scheme: light;
 
   /* ---------- Sistema cromático cerrado ----------
@@ -136,25 +141,32 @@
    NO es una textura que se repite. Un repeating-linear-gradient a 105deg
    cubriendo el fondo se lee como papel tapiz: la línea siempre igual,
    siempre al mismo paso, sin jerarquía. El remate de marca es una pieza
-   COMPUESTA: ocho barras, siete verdes en distintas intensidades y la
-   última en rojo de Cultura.
+   COMPUESTA: ocho barras, siete verdes y la última en rojo de Cultura,
+   TODAS A LA MISMA OPACIDAD — la jerarquía la dan el ancho y el alto, no
+   el tono.
 
-   Cada barra es UN SOLO POLÍGONO, no dos piezas con un espacio entre
-   medio. El borde DERECHO corre continuo de la base al tope; el
-   izquierdo sube por el tramo grueso y ahí SE INCLINA hasta fundirse
-   con el borde del tramo fino. Esa diagonal es el escalón: no un corte
-   recto, sino el merge entre los dos anchos, y es lo que deja el tramo
-   fino alineado a la derecha de la misma línea.
+   Cada barra es UN SOLO POLÍGONO de seis vértices, no dos piezas con un
+   espacio entre medio:
+     · el borde DERECHO corre continuo de la base hasta el vértice;
+     · el IZQUIERDO sube por el tramo grueso hasta hc1 y ahí SE INCLINA
+       hasta hc2, donde se funde con el borde del tramo fino. Esa
+       diagonal es el escalón: no un corte recto, sino el merge entre los
+       dos anchos, y es lo que deja el fino alineado a la derecha de la
+       misma línea;
+     · arriba CIERRA EN PUNTA, no en corte plano.
 
-   Dos parámetros la gobiernan, y los dos son fáciles de arruinar:
-     · LARGO — larga, la barra se lee como una hoja que se afila; corta,
-       como una línea gruesa que se afina de golpe, que es lo que pide la
-       marca. Quedó en unos 30 de los 440 del alto.
+   Tres cosas que son fáciles de arruinar, con su porqué:
+     · LARGO DE LA DIAGONAL — larga, la barra se lee como una hoja que se
+       afila; corta, como una línea gruesa que se afina de golpe, que es
+       lo que pide la marca. Quedó en unos 30 de los 440 del alto.
      · DÓNDE ARRANCA — a un tercio del alto, no a la mitad. Al medio el
        tramo grueso manda demasiado y la pieza se apelmaza abajo.
+     · LARGO DE LA PUNTA — el tramo fino corre PARALELO y sólo converge
+       en los últimos 52. Si converge desde el escalón, las ocho barras
+       se leen como briznas de pasto en vez de líneas.
 
    La geometría está en docs/barras.svg (8 polígonos, viewBox
-   0 0 500 440). Va como partial del child theme, inyectada por el hook
+   0 0 410 440). Va como partial del child theme, inyectada por el hook
    astra_body_top; los fill usan var(--sf-verde-01) y var(--sf-rojo), así
    que se re-tiñe con los mismos tokens. Acá va sólo su ubicación: al 30%
    y anclada a la esquina, porque más grande o más opaca cruza el texto a

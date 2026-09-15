@@ -76,9 +76,15 @@ La identidad se construye sobre diagonales a **15°**, derivadas del paralelogra
 
 **Cada barra es un solo polígono**, no dos piezas con un espacio en el medio. El **borde derecho es continuo** de la base al tope; el izquierdo sube por el tramo grueso y ahí **se inclina** hasta fundirse con el borde del tramo fino. Esa diagonal es el escalón: no un corte recto, sino el merge entre los dos anchos, y deja el tramo fino alineado a la derecha de la misma línea.
 
-Dos parámetros gobiernan la diagonal. Su **largo**: larga, la barra se lee como una hoja que se afila; corta, como una línea gruesa que se afina de golpe, que es lo que pide la marca — quedó en unos 30 de los 440 del alto. Y **dónde arranca**: a un tercio del alto, no a la mitad, porque al medio el tramo grueso manda demasiado y la pieza se apelmaza abajo.
+Arriba **cierra en punta**, no en corte plano.
 
-**Ocho barras, sin líneas intermedias: siete verdes y una roja.** La geometría está en `docs/barras.svg`: 8 polígonos, viewBox `0 0 500 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
+Tres cosas son fáciles de arruinar, y las tres están anotadas en los tokens con su porqué:
+
+- **Largo de la diagonal** — larga, la barra se lee como una hoja que se afila; corta, como una línea gruesa que se afina de golpe, que es lo que pide la marca. Quedó en unos 30 de los 440 del alto.
+- **Dónde arranca** — a un tercio del alto, no a la mitad: al medio el tramo grueso manda demasiado y la pieza se apelmaza abajo.
+- **Largo de la punta** — el tramo fino corre paralelo y sólo converge en los últimos 52. Si converge desde el escalón, las ocho barras se leen como briznas de pasto en vez de líneas.
+
+**Ocho barras, sin líneas intermedias: siete verdes y una roja, todas a la misma opacidad** — la jerarquía la dan el ancho y el alto, no el tono. La geometría está en `docs/barras.svg`: 8 polígonos, viewBox `0 0 410 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
 
 Traducción a web:
 
@@ -307,7 +313,7 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 
 1. **Cuántas de las 510 están publicadas** y cuántas quedaron huérfanas. El top 25 por tráfico ya lo tenemos.
 2. **¿Cuántas ediciones de Feria se conservan?** La XXXII está en el top 4, así que la Feria entra; la pregunta es si las anteriores se rediseñan o se archivan.
-3. **Modo oscuro:** el Brandbook no lo contempla. Sugiero no hacerlo ahora. Si se hace, el rojo tiene que aclararse a `#ff7f63` sobre fondo azul profundo — `#e63312` ahí da 4.30 y no llega.
+3. ~~**Modo oscuro**~~ — **decidido: no.** El sitio va en tema claro únicamente. El child theme no lleva bloques de `prefers-color-scheme` ni stamps de `data-theme`, y de paso evita el problema de que el rojo de Cultura da 4.30 sobre fondo azul profundo y no llega a AA.
 4. **Fotografía:** el vidrio necesita imágenes debajo para lucir, y con tres colores el peso visual recae más en la fotografía. ¿Hay banco de fotos de eventos con derechos resueltos?
 5. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
 
