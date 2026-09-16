@@ -96,7 +96,17 @@ Traducción a web:
 - el barrido de luz del hero y de los botones (`transform: skewX(-15deg)`), el mismo que ya usa Freedom y que venía con el ángulo correcto;
 - los listones del footer y el degradé, los dos a 105°.
 
-### 1.5 Botones
+### 1.5 El lockup y sus esquinas
+
+Verificado contra las páginas 12, 28 y 51 del Brandbook: **el bloque redondea sólo sus dos esquinas extremas opuestas** — arriba a la izquierda y abajo a la derecha. Las que caen sobre la diagonal quedan **en punta**. El radio es ~13% del alto del bloque.
+
+En la **marca completa** (SF + escudo) el redondeo salta a los extremos del conjunto: arriba-izquierda del bloque SF y abajo-derecha del panel del escudo. Los cuatro cortes de la diagonal interna van en punta.
+
+En CSS el `skew` se aplica al mismo elemento que el `border-radius`, así que la curva se inclina junto con la forma, como en el original. La construcción está en `docs/design-tokens.css` como `.sf-lockup`, para cuando no convenga cargar el SVG; el SVG oficial del lockup y del escudo sale del Brandbook.
+
+En el lockup de tópico la palabra va en **Encode Sans Bold con tracking casi nulo** (`.005em`), no espaciada, y la barra del tópico no lleva redondeo: es un corte limpio.
+
+### 1.6 Botones
 
 Radio **10px** — más cerrado que los 24px de los paneles, porque un botón es un objeto y un panel es una superficie. Alto mínimo **44px** por objetivo táctil. La barra del logo entra como marcador y el barrido de hover corre a 15°.
 
@@ -118,7 +128,7 @@ En el primario la barra va en rojo sobre el relleno Azul 01: replica literalment
 
 **Que Elementor los respete:** el sistema se entrega dos veces — como clases del child theme para lo que renderiza Astra, y cargado en *Site Settings → Theme Style → Buttons* para que los botones de Elementor hereden. Encima va un override de `.elementor-button` como red de seguridad.
 
-### 1.6 La lámina de luz (footer)
+### 1.7 La lámina de luz (footer)
 
 El footer recrea la lámina de la página 90 del Brandbook — el haz verde sobre Azul 01 — **en CSS y SVG, sin imagen**. Tres piezas, ninguna con gradientes repetidos:
 
@@ -218,8 +228,17 @@ El sitio entero proyecta unos **12.000 a 14.000 visitantes al año**, así que n
 De las 25 más visitadas:
 
 - **13 son fichas de espacio cultural** — museos, mercados, bibliotecas, el Anfiteatro, la Manzana Jesuítica, el Molino — y juntan el **42% del tráfico del top 25**. Es, por lejos, la plantilla más valiosa después de Inicio.
-- **4 son Feria del Libro** (incluida Prensa), con el **20%**. Esto contesta una pregunta que estaba abierta: `/feriadellibro/` entra en el alcance.
 - **4 son ciclos o festivales**: Noche de los Museos, Festival Diseña, Somos Música, Aniversario del Mercado.
+- **4 son Feria del Libro** (incluida Prensa), con el **20%** — pero son un caso aparte, ver abajo.
+
+### La Feria no es una plantilla
+
+**Cada edición se rediseña de cero.** De las anteriores sólo se aloja el **PDF de programación** para consulta. Eso cambia dos cosas:
+
+1. **No hay plantilla de Feria que mantener.** Lo que se construye es un **archivo de programaciones en PDF**: un listado por edición con su descarga, título, año y peso del archivo. Es un componente chico y reusable, muy distinto de rediseñar páginas.
+2. **La edición vigente lleva sólo una pasada de marca.** Está viva y concentra el 20% del top 25, así que no puede quedar con la paleta anterior — pero no tiene sentido invertir en una plantilla reusable de algo que se rehace el año que viene.
+
+Y para el triage: **las ediciones anteriores de Feria son candidatas directas a archivar**, reemplazadas por su PDF. De las 510 eso saca un bloque conocido sin discusión.
 
 ### El triage sigue valiendo
 
@@ -315,9 +334,9 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 ## 5. Decisiones pendientes
 
 1. **Cuántas de las 510 están publicadas** y cuántas quedaron huérfanas. El top 25 por tráfico ya lo tenemos.
-2. **¿Cuántas ediciones de Feria se conservan?** La XXXII está en el top 4, así que la Feria entra; la pregunta es si las anteriores se rediseñan o se archivan.
+2. ~~**¿Cuántas ediciones de Feria se conservan?**~~ — **resuelto: ninguna.** Ver §2.quater.
 3. ~~**Modo oscuro**~~ — **decidido: no.** El sitio va en tema claro únicamente. El child theme no lleva bloques de `prefers-color-scheme` ni stamps de `data-theme`, y de paso evita el problema de que el rojo de Cultura da 4.30 sobre fondo azul profundo y no llega a AA.
-4. **Fotografía:** el vidrio necesita imágenes debajo para lucir, y con tres colores el peso visual recae más en la fotografía. ¿Hay banco de fotos de eventos con derechos resueltos?
+4. ~~**Fotografía**~~ — **resuelto: hay banco propio.** Los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar. Queda por definir dirección de arte: relaciones de aspecto por plantilla, tratamiento (¿fotos a sangre o dentro del vidrio?) y el flujo de conversión a WebP, que sin acceso al servidor tiene que resolverse con un plugin.
 5. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
 
 ---

@@ -506,3 +506,50 @@
   font-weight: 600;
   min-height: 44px;
 }
+
+
+/* =====================================================================
+   Lockup SF
+   Regla de esquinas, verificada contra las páginas 12, 28 y 51 del
+   Brandbook: el bloque redondea SÓLO sus dos esquinas EXTREMAS OPUESTAS
+   —arriba a la izquierda y abajo a la derecha—; las que caen sobre la
+   diagonal quedan EN PUNTA. El radio es ~13% del alto del bloque.
+
+   En la marca completa (SF + escudo) el redondeo salta a los extremos
+   del CONJUNTO: arriba-izquierda del bloque SF y abajo-derecha del panel
+   del escudo. Los cuatro cortes de la diagonal interna van en punta.
+
+   El skew se aplica al mismo elemento que el border-radius, así que la
+   curva se inclina junto con la forma, como en el original.
+
+   El SVG oficial del lockup y del escudo sale del Brandbook; esto es la
+   construcción CSS para cuando no conviene cargar el SVG.
+   ===================================================================== */
+.sf-lockup {
+  --lk-h: 40px;
+  display: inline-flex; align-items: stretch; height: var(--lk-h); flex: none;
+}
+.sf-lockup__sf {
+  display: grid; place-items: center;
+  background: var(--sf-azul-01); color: var(--sf-blanco);
+  font: 800 calc(var(--lk-h) * .525)/1 var(--font-marca);
+  letter-spacing: .02em; padding: 0 calc(var(--lk-h) * .4);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  border-radius: calc(var(--lk-h) * .13) 0 calc(var(--lk-h) * .13) 0;
+}
+.sf-lockup__sf > span { transform: skewX(var(--trama-angulo)); }
+/* la barra del tópico: sin redondeo, es un corte limpio */
+.sf-lockup__bar {
+  width: calc(var(--lk-h) * .1); background: var(--topico);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  margin-inline: calc(var(--lk-h) * .13);
+}
+.sf-lockup__word {
+  display: grid; place-items: center;
+  font: 700 calc(var(--lk-h) * .45)/1 var(--font-texto);
+  letter-spacing: .005em; color: var(--fg);
+}
+
+/* Marca completa: el redondeo pasa a los extremos del conjunto */
+.sf-marca__sf  { border-radius: calc(var(--lk-h) * .13) 0 0 0; }
+.sf-marca__esc { border-radius: 0 0 calc(var(--lk-h) * .13) 0; }
