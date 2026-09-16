@@ -272,19 +272,19 @@ Plugin propio, subido por ZIP, que escanea el `_elementor_data` de las 510 y rep
 **Entregable:** ZIP instalable del child theme, con el sitio ya en paleta correcta aunque sin componentes nuevos.
 
 ### Fase 4 · Biblioteca de componentes — *5 a 7 días*
-Header glass sticky · menú mobile (el patrón `.glass-bar::before` de Freedom, que existe justamente para que el menú desplegable pueda esmerilar el contenido) · hero con barrido a 15° · tarjeta de evento/agenda · tarjeta de nota · filtros y chips · paginación · formulario de convocatorias · footer con marca completa.
+Header glass sticky · menú mobile (el patrón `.glass-bar::before` de Freedom, que existe justamente para que el menú desplegable pueda esmerilar el contenido) · hero con barrido a 15° · tarjeta de evento/agenda · tarjeta de nota · **galería de fotos** (ahora que hay banco propio) · **ítem de descarga de PDF** (para el archivo de programaciones de Feria) · filtros y chips · paginación · formulario de convocatorias · footer con la lámina de luz y marca completa.
 
 Cada componente se entrega con estado *hover*, *focus-visible*, vacío y de carga. Se documentan en una página oculta del propio WP que funcione como styleguide viva.
 
 **Entregable:** biblioteca completa + styleguide.
 
 ### Fase 5 · Plantillas Astra — *5 a 7 días*
-En el orden que marca la analítica: **Inicio**, **ficha de espacio cultural** (13 del top 25, 42% del tráfico), **Feria del Libro** (4 del top 25, 20%), **ciclo o festival**, y después archivo de agenda con filtros, nota individual, convocatorias, búsqueda y 404.
+En el orden que marca la analítica: **Inicio**, **ficha de espacio cultural** (13 del top 25, 42% del tráfico), **ciclo o festival**, y después archivo de agenda con filtros, nota individual, convocatorias, búsqueda y 404. Más el **archivo de programaciones en PDF** de la Feria.
 
 **Entregable:** todo lo que renderiza Astra, retematizado en staging.
 
 ### Fase 6 · Páginas Elementor — *4 a 7 días*
-Reemplazo por lote de los colores literales que encontró el escaneo, más las páginas del top trabajadas a mano. Incluye `/feriadellibro/` si entra en el alcance.
+Reemplazo por lote de los colores literales que encontró el escaneo, más las páginas del top trabajadas a mano, incluida una pasada de marca sobre la Feria vigente.
 
 **La duración la fija el triage de la Fase 1**, no la cantidad total.
 
