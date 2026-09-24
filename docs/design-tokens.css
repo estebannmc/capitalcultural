@@ -1,0 +1,555 @@
+/* =====================================================================
+   Capital Cultural · Santa Fe
+   Tokens de marca (Brandbook V1.0 · Febrero 2026 + Paleta cromática 02.4)
+   + material GlassMorph (mismos nombres de token que Freedom y Rifa)
+
+   Se carga como primer stylesheet del child theme, antes de theme.css.
+   ===================================================================== */
+
+:root {
+  /* Tema único. El Brandbook no contempla modo oscuro y el sitio no va a
+     tenerlo, así que esta hoja no trae ningún bloque de
+     prefers-color-scheme ni stamps de data-theme: es una decisión, no un
+     olvido. Todos los colores viven acá. Además evita el problema de que
+     el rojo de Cultura no llega a AA sobre fondo azul profundo. */
+  color-scheme: light;
+
+  /* ---------- Sistema cromático cerrado ----------
+     De la ficha 02.4 se usan SOLO estos. Azul 02, Verde 02, celeste,
+     naranja y amarillo quedan fuera del sistema para este sitio y no se
+     declaran acá a propósito: lo que no existe como token no se usa. */
+  --sf-azul-01:   #002751;  /* PANTONE 540  · dominante */
+  --sf-verde-01:  #00c08b;  /* PANTONE 3405 · superficie */
+  --sf-rojo:      #e63312;  /* tópico CULTURA (04.1, nivel 01/A) */
+
+  /* ---------- Neutros ---------- */
+  --sf-blanco:    #ffffff;
+  --sf-gris-20:   #dadad9;
+  --sf-gris-75:   #606060;
+  --sf-negro:     #1d1d1b;
+
+  --topico: var(--sf-rojo);
+
+  /* Degradé de transición: verde → azul institucional. Corre a 105deg,
+     la misma diagonal que la trama, para que lean como un solo gesto.
+     Es fondo y grafismo. Si lleva texto: sólo blanco y sólo sobre el
+     tramo azul — el extremo verde no da contraste (blanco/verde = 2.36). */
+  --sf-degrade: linear-gradient(105deg,
+    #00c08b 0%, #009e87 38%, #00527a 72%, #002751 100%);
+
+  /* ---------- Roles semánticos ----------
+     Contrastes medidos:
+       azul-01 / blanco     14.90  AAA   texto libre
+       negro   / blanco     16.88  AAA   texto libre
+       azul-01 / gris-20    10.65  AAA
+       azul-01 / verde-01    6.33  AA    texto sobre verde: SIEMPRE azul-01
+       gris-75 / blanco      6.29  AA    texto secundario
+       blanco  / rojo        4.33  AA-large  sólo ≥24px (o ≥19px bold)
+       azul-01 / rojo        3.44  AA-large
+       blanco  / verde-01    2.36  FALLA  nunca texto blanco sobre verde
+       verde-01/ blanco      2.36  FALLA  el verde nunca es texto
+     El verde es color de FONDO. El rojo no alcanza AA en ningún combo:
+     titulares grandes, filetes y barras, nunca texto corrido.
+     Sin azul-02 en el sistema, los links se distinguen por SUBRAYADO,
+     no por tono; el subrayado va en rojo porque es grafismo, no texto. */
+  --fg:           var(--sf-azul-01);
+  --fg-muted:     var(--sf-gris-75);
+  --fg-on-color:  var(--sf-azul-01);
+  --bg:           #f4f4f3;   /* tinte del gris-20, no un gris inventado */
+  --link:         var(--sf-azul-01);
+  --link-underline: var(--sf-rojo);
+  --border:       rgba(0, 39, 81, .12);
+
+  /* ---------- Tipografía (02.1 / 02.2) ---------- */
+  --font-marca: "Geologica", "Arial Narrow", system-ui, sans-serif; /* sólo signos de identidad */
+  --font-texto: "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* ---------- Geometría de marca (02.6) ----------
+     Todo lo de marca se inclina 15° HACIA LA DERECHA: subiendo, la línea
+     se corre a la derecha ("/"). En transform eso es skewX(-15deg); en un
+     gradiente lineal, 105deg — la perpendicular. 90deg daría vertical, y
+     75deg la versión espejada, que invierte la lectura de "movimiento
+     hacia adelante" del Brandbook.
+
+     Las barras y la lámina ya no usan gradientes repetidos, así que el
+     único consumidor del ángulo es skewX. El degradé lleva sus 105deg
+     escritos en --sf-degrade. */
+  --trama-angulo: 15deg;   /* skewX / transform */
+
+  --r-xl: 32px;
+  --r-lg: 26px;
+  --r-md: 18px;
+  --r-sm: 14px;
+
+  --spring:   cubic-bezier(.34, 1.56, .64, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+
+  /* ---------- Material: liquid glass ----------
+     Mismos nombres que freedom-app/src/app/globals.css y rifa-silvana/styles.css.
+     Sólo cambian las sombras, teñidas con azul-01 en lugar de gris frío. */
+  --glass-fill: linear-gradient(160deg, rgba(255, 255, 255, .68), rgba(255, 255, 255, .40));
+  --glass-blur: blur(20px) saturate(170%);
+  --glass-shadow:
+    0 1px 1px rgba(0, 39, 81, .04),
+    0 16px 36px -14px rgba(0, 39, 81, .26),
+    inset 0 1px 0 rgba(255, 255, 255, .9),
+    inset 0 -1px 0 rgba(0, 39, 81, .06);
+
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =====================================================================
+   Fondo vivo: manchas de marca que el vidrio esmerila
+   ===================================================================== */
+.sf-ambient {
+  position: fixed; inset: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+  background: linear-gradient(180deg, #f4f4f3 0%, #e7e7e6 100%);
+}
+.sf-ambient__blob {
+  position: absolute; width: 90vmax; height: 90vmax;
+  border-radius: 50%; will-change: transform;
+}
+.sf-ambient__blob--verde {
+  top: -40vmax; left: -40vmax;
+  background: radial-gradient(closest-side, rgba(0, 192, 139, .38), rgba(0, 192, 139, 0));
+  animation: sf-drift-a 32s ease-in-out infinite alternate;
+}
+.sf-ambient__blob--azul {
+  top: -22vmax; right: -50vmax;
+  background: radial-gradient(closest-side, rgba(0, 39, 81, .14), rgba(0, 39, 81, 0));
+  animation: sf-drift-b 38s ease-in-out infinite alternate;
+}
+.sf-ambient__blob--topico {
+  bottom: -44vmax; left: -36vmax;
+  background: radial-gradient(closest-side, rgba(230, 51, 18, .20), rgba(230, 51, 18, 0));
+  animation: sf-drift-b 34s ease-in-out infinite alternate-reverse;
+}
+.sf-ambient__blob--verde-2 {
+  bottom: -40vmax; right: -40vmax;
+  background: radial-gradient(closest-side, rgba(0, 192, 139, .28), rgba(0, 192, 139, 0));
+  animation: sf-drift-a 42s ease-in-out infinite alternate-reverse;
+}
+.sf-ambient::after {
+  content: ""; position: absolute; inset: 0;
+  opacity: .06; mix-blend-mode: multiply;
+  background-image: var(--noise);
+}
+
+/* =====================================================================
+   El remate de barras
+   NO es una textura que se repite. Un repeating-linear-gradient a 105deg
+   cubriendo el fondo se lee como papel tapiz: la línea siempre igual,
+   siempre al mismo paso, sin jerarquía. El remate de marca es una pieza
+   COMPUESTA: ocho barras, siete verdes y la última en rojo de Cultura.
+
+   DISTRIBUCIÓN UNIFORME, y no sólo por estética: mismo paso (34), mismo
+   ancho de base (16), misma inclinación y misma opacidad hacen que la
+   separación se mantenga en 18 A CUALQUIER ALTURA. Si los anchos
+   variaran, las barras se abrirían o se juntarían hacia arriba. Lo único
+   que cambia es el ALTO, que crece parejo de 150 a 420, y por eso los
+   finales suben en línea recta hacia el borde derecho.
+
+   Cada barra es UN SOLO POLÍGONO de seis vértices, no dos piezas con un
+   espacio entre medio:
+     · el borde DERECHO corre continuo de la base hasta el vértice;
+     · el IZQUIERDO sube por el tramo grueso hasta hc1 y ahí SE INCLINA
+       hasta hc2, donde se funde con el borde del tramo fino. Esa
+       diagonal es el escalón: no un corte recto, sino el merge entre los
+       dos anchos, y es lo que deja el fino alineado a la derecha de la
+       misma línea;
+     · arriba CIERRA EN PUNTA, no en corte plano.
+
+   Tres cosas que son fáciles de arruinar, con su porqué:
+     · LARGO DE LA DIAGONAL — larga, la barra se lee como una hoja que se
+       afila; corta, como una línea gruesa que se afina de golpe, que es
+       lo que pide la marca. Quedó en unos 30 de los 440 del alto.
+     · DÓNDE ARRANCA — a un tercio del alto, no a la mitad. Al medio el
+       tramo grueso manda demasiado y la pieza se apelmaza abajo.
+     · LARGO DE LA PUNTA — el hilo corre PARALELO y sólo converge en los
+       últimos 46. Si converge desde el escalón, las ocho barras se leen
+       como briznas de pasto en vez de líneas.
+     · ANCHO DEL HILO — 2 sobre una base de 16: casi un hilo. Más grueso
+       y el escalón deja de leerse como un cambio de registro.
+
+   La geometría está en docs/barras.svg (8 polígonos, viewBox
+   0 0 395 440). Va como partial del child theme, inyectada por el hook
+   astra_body_top; los fill usan var(--sf-verde-01) y var(--sf-rojo), así
+   que se re-tiñe con los mismos tokens. Acá va sólo su ubicación: al 30%
+   y anclada a la esquina, porque más grande o más opaca cruza el texto a
+   media página — que es justo el problema que tenía la trama.
+   ===================================================================== */
+.sf-barras {
+  position: fixed; right: -18px; bottom: -26px;
+  z-index: -1; pointer-events: none;
+  width: min(34vw, 340px); height: auto;
+  opacity: .3;
+}
+@media (max-width: 760px) {
+  .sf-barras { width: min(56vw, 240px); opacity: .24; }
+}
+
+/* La barra del logo como marcador. Va SIEMPRE pegada al título y del
+   tamaño del título — nunca como filete del bloque entero. Las medidas
+   van en em, así toma el cuerpo del texto que encabeza sin ajustes.
+   Uso: <h2><i class="sf-barra"></i>Título</h2> */
+.sf-barra {
+  display: inline-block;
+  width: .24em; height: .78em; margin-right: .48em;
+  background: var(--topico);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+}
+.sf-barra--verde { background: var(--sf-verde-01); }
+.sf-barra--azul  { background: var(--sf-azul-01); }
+.sf-barra--gris  { background: var(--sf-gris-75); }
+/* el párrafo se alinea con el título, no con la barra */
+.sf-sangria { margin-left: .72em; }
+
+/* =====================================================================
+   Luz de marca: la lámina del Brandbook (pág. 90).
+   Tres piezas, ninguna con gradientes repetidos:
+
+   1· el foco verde sobre la base Azul 01. Su centro va FUERA del lienzo
+      (74% 118%): adentro se le ve el círculo, y encima las barras
+      quedarían verde sobre verde y desaparecen.
+   2· EL MISMO remate de ocho barras que va en la esquina de la página,
+      reusado con <use href="#sf-barras">. No hay un segundo juego de
+      barras: una sola pieza para toda la identidad. Acá son la luz sobre
+      el Azul 01, más chicas y alineadas al mismo margen que el
+      contenido. El filter de realce les devuelve presencia sobre el
+      fondo oscuro sin tocar la geometría.
+   3· el bloque de texto apoyado encima con .glass--luz, que esmerila la
+      luz y las barras que pasan por detrás. Es el vidrio el que carga
+      con el contraste del texto, así que el velo quedó liviano — sólo
+      protege a la marca, que sí se apoya directo sobre la lámina.
+   ===================================================================== */
+.sf-luz {
+  --luz-pad: clamp(22px, 4vw, 44px);
+  position: relative; isolation: isolate; overflow: hidden;
+  color: var(--sf-blanco);
+  padding: var(--luz-pad);
+  background:
+    radial-gradient(92% 130% at 74% 118%,
+      rgba(255, 255, 255, .34) 0%, #00c08b 22%, rgba(0, 192, 139, .5) 42%,
+      rgba(0, 90, 110, .22) 62%, transparent 84%),
+    linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
+}
+.sf-luz__barras {
+  position: absolute;
+  right: var(--luz-pad); bottom: var(--luz-pad);
+  height: clamp(112px, 16vw, 178px); width: auto;
+  z-index: 0; pointer-events: none;
+  filter: brightness(1.25) saturate(1.1);
+}
+.sf-luz::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg,
+    rgba(0, 18, 38, .72) 0%, rgba(0, 18, 38, .4) 38%,
+    rgba(0, 18, 38, .12) 56%, transparent 70%);
+}
+.sf-luz::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  opacity: .08; mix-blend-mode: overlay; background-image: var(--noise);
+}
+.sf-luz__panel { position: relative; z-index: 2; }
+
+/* Barrido de luz del hero: mismo ángulo que la barra del logo. */
+.sf-sweep { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
+.sf-sweep::before {
+  content: ""; position: absolute; top: 0; left: -70%; width: 42%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .30), transparent);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  animation: sf-sweep 7.5s var(--ease-out) infinite;
+}
+
+@keyframes sf-drift-a { to { transform: translate3d(16vw, 12vh, 0) scale(1.08); } }
+@keyframes sf-drift-b { to { transform: translate3d(-14vw, 16vh, 0) scale(.94); } }
+@keyframes sf-sweep   { 0%, 55% { left: -70%; } 100% { left: 130%; } }
+
+/* =====================================================================
+   Material: vidrio
+   ===================================================================== */
+.glass {
+  position: relative; isolation: isolate;
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--r-lg);
+}
+/* borde especular: luz arriba-izquierda, rebote abajo-derecha */
+.glass::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  border-radius: inherit; padding: 1px; pointer-events: none;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, .95),
+    rgba(255, 255, 255, .20) 36%,
+    rgba(255, 255, 255, 0) 62%,
+    rgba(255, 255, 255, .60));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+/* grano anti-banding */
+.glass::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; pointer-events: none;
+  opacity: .05; mix-blend-mode: overlay;
+  background-image: var(--noise);
+}
+
+.glass--thin {
+  --glass-fill: linear-gradient(160deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .30));
+  --glass-blur: blur(14px) saturate(160%);
+}
+.glass--thick {
+  --glass-fill: linear-gradient(165deg, rgba(255, 255, 255, .84), rgba(255, 255, 255, .62));
+  --glass-blur: blur(28px) saturate(180%);
+}
+/* Vidrio sobre azul-01: hero, footer, overlays de foto */
+.glass--dark {
+  --glass-fill: linear-gradient(160deg, rgba(255, 255, 255, .20), rgba(255, 255, 255, .06));
+  --glass-blur: blur(16px) saturate(180%);
+  --glass-shadow:
+    0 10px 26px -12px rgba(0, 12, 26, .6),
+    inset 0 1px 0 rgba(255, 255, 255, .35),
+    inset 0 -1px 0 rgba(0, 12, 26, .25);
+  color: var(--sf-blanco);
+}
+.glass--dark::before {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, .70),
+    rgba(255, 255, 255, .08) 40%,
+    rgba(255, 255, 255, 0) 62%,
+    rgba(255, 255, 255, .30));
+}
+/* Tintes de marca para tarjetas destacadas. El texto encima va en azul-01. */
+.glass--verde  { --glass-fill: linear-gradient(160deg, rgba(0, 192, 139, .90), rgba(0, 192, 139, .62)); color: var(--sf-azul-01); }
+.glass--topico { --glass-fill: linear-gradient(160deg, rgba(230, 51, 18, .82), rgba(230, 51, 18, .55)); color: var(--sf-blanco); }
+
+/* Vidrio oscuro translúcido: para apoyarse SOBRE la lámina y dejar que la
+   luz y las barras se esmerilen a través. Más transparente que
+   .glass--dark, que es un relleno y no un vidrio. */
+.glass--luz {
+  --glass-fill: linear-gradient(160deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .055));
+  --glass-blur: blur(22px) saturate(180%);
+  --glass-shadow:
+    0 18px 40px -18px rgba(0, 10, 24, .75),
+    inset 0 1px 0 rgba(255, 255, 255, .3),
+    inset 0 -1px 0 rgba(0, 0, 0, .28);
+  color: var(--sf-blanco);
+}
+.glass--luz::before {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, .72), rgba(255, 255, 255, .1) 40%,
+    rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, .3));
+}
+
+/* Superficie translúcida sin blur: listas, chips, inputs.
+   Evita decenas de backdrop-filter simultáneos en la grilla de agenda. */
+.glass-soft {
+  background: linear-gradient(160deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+  box-shadow:
+    0 6px 18px -12px rgba(0, 39, 81, .32),
+    inset 0 1px 0 rgba(255, 255, 255, .95);
+}
+
+/* Header sticky. El vidrio va en un pseudo-elemento para que el header no
+   sea "backdrop root" y el menú mobile que cuelga debajo pueda esmerilar. */
+.glass-bar { isolation: isolate; }
+.glass-bar::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: rgba(255, 255, 255, .64);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    inset 0 -1px 0 rgba(0, 39, 81, .10),
+    0 10px 30px -20px rgba(0, 39, 81, .45);
+}
+
+/* =====================================================================
+   Accesibilidad y fallbacks (idénticos a Freedom / Rifa)
+   ===================================================================== */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass       { --glass-fill: linear-gradient(160deg, rgba(255, 255, 255, .95), rgba(244, 247, 250, .92)); }
+  .glass--dark { --glass-fill: rgba(0, 39, 81, .88); }
+  .glass-bar::before { background: rgba(255, 255, 255, .95); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .glass--thin, .glass--thick {
+    --glass-fill: var(--sf-blanco);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .glass--dark   { --glass-fill: var(--sf-azul-01); }
+  .glass--verde  { --glass-fill: var(--sf-verde-01); }
+  .glass--topico { --glass-fill: var(--sf-rojo); }
+  .glass::after, .sf-ambient::after { display: none; }
+  .glass-bar::before {
+    background: var(--sf-blanco);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .glass-soft { background: var(--sf-blanco); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-ambient__blob, .sf-sweep::before { animation: none; }
+}
+
+
+/* =====================================================================
+   Botones
+   Radio 10px: más cerrado que los 24px de los paneles, porque un botón
+   es un objeto y un panel es una superficie. Alto mínimo 44px (objetivo
+   táctil). La barra del logo entra como marcador y el barrido de hover
+   corre a 15°.
+
+   Contrastes medidos — esto manda sobre cualquier preferencia:
+     blanco  / azul-01   14.90  AAA
+     azul-01 / verde-01   6.33  AA
+     azul-01 / fondo     13.54  AAA
+     blanco  / rojo       4.33  AA SÓLO EN TEXTO GRANDE
+     azul-01 / rojo       3.44  AA SÓLO EN TEXTO GRANDE
+     blanco  / verde-01   2.36  FALLA — nunca
+     gris-75 / gris-20    4.50  AA   (desactivado)
+   No existe botón rojo en tamaño normal que sea accesible sin salirse
+   del color de marca. El rojo es el CTA grande de un hero, uno por
+   pantalla; en el resto vive como la barra dentro de un botón azul.
+   ===================================================================== */
+.sf-btn {
+  --btn-halo: var(--sf-blanco);
+  display: inline-flex; align-items: center; justify-content: center; gap: .55em;
+  min-height: 44px; padding: 0 20px; border: 0; border-radius: 10px;
+  font: 600 15px/1 var(--font-texto); letter-spacing: .01em; text-decoration: none;
+  position: relative; overflow: hidden; isolation: isolate; cursor: pointer;
+  transition: background .2s ease, box-shadow .2s var(--ease-out), transform .12s var(--ease-out);
+}
+.sf-btn .sf-barra { height: 1.05em; width: .26em; margin-right: 0; }
+.sf-btn:active { transform: translateY(1px); }
+/* El foco es un anillo, no un cambio de relleno. Anillo rojo contra el
+   fondo claro = 3.94, por encima del 3:1 de WCAG 1.4.11. */
+.sf-btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--btn-halo), 0 0 0 5px var(--sf-rojo);
+}
+/* barrido de luz en el ángulo de marca */
+.sf-btn::after {
+  content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.3), transparent);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  transition: left .6s var(--ease-out);
+}
+@media (hover: hover) { .sf-btn:hover::after { left: 135%; } }
+
+/* primario — la barra en rojo replica el lockup SF/CULTURA */
+.sf-btn--primario { background: var(--sf-azul-01); color: var(--sf-blanco);
+  box-shadow: 0 8px 20px -10px rgba(0, 39, 81, .55); }
+.sf-btn--primario .sf-barra { background: var(--sf-rojo); }
+@media (hover: hover) { .sf-btn--primario:hover { background: #00325f; } }
+
+/* verde — texto SIEMPRE azul-01, jamás blanco */
+.sf-btn--verde { --btn-halo: var(--sf-azul-01);
+  background: var(--sf-verde-01); color: var(--sf-azul-01); }
+.sf-btn--verde .sf-barra { background: var(--sf-azul-01); }
+@media (hover: hover) { .sf-btn--verde:hover { background: #00d69a; } }
+
+.sf-btn--linea { background: transparent; color: var(--fg);
+  box-shadow: inset 0 0 0 1.5px var(--fg); }
+.sf-btn--linea .sf-barra { background: var(--topico); }
+@media (hover: hover) { .sf-btn--linea:hover { background: rgba(0, 39, 81, .06); } }
+
+/* vidrio — para flotar sobre foto o sobre el hero */
+.sf-btn--vidrio { color: var(--fg);
+  background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.56));
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+  backdrop-filter: blur(14px) saturate(170%);
+  box-shadow: 0 8px 20px -10px rgba(0,39,81,.4), inset 0 1px 0 #fff; }
+.sf-btn--vidrio .sf-barra { background: var(--topico); }
+
+/* tópico — forzado a tamaño grande: en normal no es accesible */
+.sf-btn--topico { background: var(--sf-rojo); color: var(--sf-blanco);
+  min-height: 54px; padding: 0 28px; font-size: 19px;
+  box-shadow: 0 10px 24px -10px rgba(230, 51, 18, .6); }
+.sf-btn--topico .sf-barra { background: var(--sf-blanco); }
+
+.sf-btn--texto { background: transparent; color: var(--fg); padding: 0 4px; min-height: 36px;
+  text-decoration: underline; text-decoration-color: var(--link-underline);
+  text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.sf-btn--texto::after { display: none; }
+
+.sf-btn--sm { min-height: 36px; padding: 0 14px; font-size: 13.5px; border-radius: 8px; }
+.sf-btn--lg { min-height: 54px; padding: 0 28px; font-size: 19px; border-radius: 12px; }
+.sf-btn--bloque { width: 100%; }
+
+/* desactivado — sin opacity, que hunde el contraste justo cuando menos conviene */
+.sf-btn[disabled], .sf-btn--off {
+  background: var(--sf-gris-20); color: var(--sf-gris-75);
+  cursor: not-allowed; box-shadow: none; pointer-events: none;
+}
+.sf-btn[disabled] .sf-barra, .sf-btn--off .sf-barra { background: var(--sf-gris-75); }
+
+.sf-btn__spin { width: 1em; height: 1em; border-radius: 50%; flex: none;
+  border: 2px solid currentColor; border-top-color: transparent;
+  animation: sf-spin .7s linear infinite; }
+@keyframes sf-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .sf-btn::after { display: none; }
+  .sf-btn__spin { animation-duration: 2s; }
+}
+
+/* Que Elementor los respete: además de estas clases hay que cargar el
+   estilo en Site Settings -> Theme Style -> Buttons, y dejar este
+   override como red de seguridad para los botones pinchados a mano. */
+.elementor-button,
+.elementor-button-wrapper .elementor-button {
+  border-radius: 10px;
+  font-family: var(--font-texto);
+  font-weight: 600;
+  min-height: 44px;
+}
+
+
+/* =====================================================================
+   Lockup SF
+   Regla de esquinas, verificada contra las páginas 12, 28 y 51 del
+   Brandbook: el bloque redondea SÓLO sus dos esquinas EXTREMAS OPUESTAS
+   —arriba a la izquierda y abajo a la derecha—; las que caen sobre la
+   diagonal quedan EN PUNTA. El radio es ~13% del alto del bloque.
+
+   En la marca completa (SF + escudo) el redondeo salta a los extremos
+   del CONJUNTO: arriba-izquierda del bloque SF y abajo-derecha del panel
+   del escudo. Los cuatro cortes de la diagonal interna van en punta.
+
+   El skew se aplica al mismo elemento que el border-radius, así que la
+   curva se inclina junto con la forma, como en el original.
+
+   El SVG oficial del lockup y del escudo sale del Brandbook; esto es la
+   construcción CSS para cuando no conviene cargar el SVG.
+   ===================================================================== */
+.sf-lockup {
+  --lk-h: 40px;
+  display: inline-flex; align-items: stretch; height: var(--lk-h); flex: none;
+}
+.sf-lockup__sf {
+  display: grid; place-items: center;
+  background: var(--sf-azul-01); color: var(--sf-blanco);
+  font: 800 calc(var(--lk-h) * .525)/1 var(--font-marca);
+  letter-spacing: .02em; padding: 0 calc(var(--lk-h) * .4);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  border-radius: calc(var(--lk-h) * .13) 0 calc(var(--lk-h) * .13) 0;
+}
+.sf-lockup__sf > span { transform: skewX(var(--trama-angulo)); }
+/* la barra del tópico: sin redondeo, es un corte limpio */
+.sf-lockup__bar {
+  width: calc(var(--lk-h) * .1); background: var(--topico);
+  transform: skewX(calc(-1 * var(--trama-angulo)));
+  margin-inline: calc(var(--lk-h) * .13);
+}
+.sf-lockup__word {
+  display: grid; place-items: center;
+  font: 700 calc(var(--lk-h) * .45)/1 var(--font-texto);
+  letter-spacing: .005em; color: var(--fg);
+}
+
+/* Marca completa: el redondeo pasa a los extremos del conjunto */
+.sf-marca__sf  { border-radius: calc(var(--lk-h) * .13) 0 0 0; }
+.sf-marca__esc { border-radius: 0 0 calc(var(--lk-h) * .13) 0; }

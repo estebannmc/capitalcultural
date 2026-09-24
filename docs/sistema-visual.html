@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  body{margin:0;font:14px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#fafaf9}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Capital Cultural GlassMorph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@200;400;500;600;700&family=Geologica:wght@600;800&display=swap">
+<style>
+/* =====================================================================
+   Capital Cultural · plan de actualización
+   Paleta cerrada: Azul 01, Verde 01, rojo de submarca y neutros.
+   Trama a 15° inclinada "/". Degradé verde → azul como transición.
+   ===================================================================== */
+:root{
+  /* Tema único. El Brandbook no contempla modo oscuro y el sitio no va
+     a tenerlo, así que no hay bloques de prefers-color-scheme ni stamps:
+     es una decisión, no un olvido. Todos los colores viven acá. */
+  color-scheme:light;
+
+  --azul-01:#002751;
+  --verde-01:#00c08b;
+  --rojo:#e63312;
+  --blanco:#ffffff; --gris-20:#dadad9; --gris-75:#606060; --negro:#1d1d1b;
+
+  --ground:#f4f4f3;
+  --ground-2:#e7e7e6;
+  --ink:#002751;
+  --ink-2:#4d5a63;
+  --ink-3:#8a9298;
+  --rule:rgba(0,39,81,.15);
+  --topico:#e63312;
+  --verde-ui:#00c08b;  /* alias del verde para UI */
+
+  /* El degradé de transición corre por la diagonal de marca. */
+  --degrade:linear-gradient(105deg,#00c08b 0%,#009e87 38%,#00527a 72%,#002751 100%);
+
+  --glass-fill:linear-gradient(160deg,rgba(255,255,255,.74),rgba(255,255,255,.46));
+  --glass-blur:blur(20px) saturate(170%);
+  --glass-shadow:
+    0 1px 1px rgba(0,39,81,.04),
+    0 18px 40px -16px rgba(0,39,81,.28),
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(0,39,81,.06);
+  --spec:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.2) 36%,rgba(255,255,255,0) 62%,rgba(255,255,255,.6));
+  --soft-fill:linear-gradient(160deg,rgba(255,255,255,.72),rgba(255,255,255,.48));
+  --soft-shadow:0 6px 18px -12px rgba(0,39,81,.3),inset 0 1px 0 rgba(255,255,255,.9);
+
+  --amb-verde:rgba(0,192,139,.38);
+  --amb-rojo:rgba(230,51,18,.16);
+  --amb-azul:rgba(0,39,81,.14);
+
+  --ang:15deg;              /* la diagonal del paralelogramo SF */
+  --trama-grad:105deg;      /* perpendicular a una línea "/" de 15° */
+
+  --ease:cubic-bezier(.16,1,.3,1);
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --sans:"Encode Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --marca:"Geologica","Arial Narrow",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font:400 16px/1.62 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+code{font:600 .92em/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:-.01em}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;
+  text-decoration-color:var(--topico);font-weight:500}
+a:hover{text-decoration-thickness:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--topico);outline-offset:3px;border-radius:4px}
+
+/* ---------- La barra del logo ----------
+   Va siempre pegada al título y del tamaño del título, nunca como filete
+   del bloque entero. Medidas en em: toma el cuerpo del texto que encabeza. */
+.bar{display:inline-block;width:.24em;height:.78em;margin-right:.48em;
+  background:var(--topico);transform:skewX(calc(-1 * var(--ang)))}
+.bar--verde{background:var(--verde-ui)}
+.bar--azul{background:var(--azul-01)}
+.bar--gris{background:var(--ink-3)}
+/* el párrafo se alinea con el título, no con la barra */
+.indent{margin-left:.72em}
+
+/* ---------- fondo vivo + trama ---------- */
+.ambient{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;
+  background:linear-gradient(180deg,var(--ground) 0%,var(--ground-2) 100%)}
+.blob{position:absolute;width:92vmax;height:92vmax;border-radius:50%;will-change:transform}
+.blob.b1{top:-44vmax;left:-40vmax;background:radial-gradient(closest-side,var(--amb-verde),transparent);animation:driftA 34s ease-in-out infinite alternate}
+.blob.b2{top:-26vmax;right:-50vmax;background:radial-gradient(closest-side,var(--amb-azul),transparent);animation:driftB 40s ease-in-out infinite alternate}
+.blob.b3{bottom:-46vmax;left:-34vmax;background:radial-gradient(closest-side,var(--amb-rojo),transparent);animation:driftB 36s ease-in-out infinite alternate-reverse}
+.blob.b4{bottom:-44vmax;right:-40vmax;background:radial-gradient(closest-side,var(--amb-verde),transparent);animation:driftA 44s ease-in-out infinite alternate-reverse}
+.ambient::after{content:"";position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;background-image:var(--noise)}
+/* ---------- Barras de esquina ----------
+   El remate de marca: cada barra arranca gruesa en la base, se corta, y
+   sigue fina hacia arriba. Verdes en distintas intensidades, un par en
+   Azul 01, y las últimas en rojo de Cultura. Va anclado abajo a la
+   derecha: es una pieza compuesta, no una textura que se repite. */
+.barras{position:fixed;right:-18px;bottom:-26px;z-index:-1;pointer-events:none;
+  width:min(34vw,340px);height:auto;opacity:.3}
+@media (max-width:760px){.barras{width:min(56vw,240px);opacity:.24}}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.barras-demo{display:block;width:100%;max-width:340px;margin-inline:auto}
+@keyframes driftA{to{transform:translate3d(15vw,11vh,0) scale(1.08)}}
+@keyframes driftB{to{transform:translate3d(-13vw,15vh,0) scale(.94)}}
+
+/* ---------- material vidrio ---------- */
+.glass{position:relative;isolation:isolate;border-radius:24px;
+  background:var(--glass-fill);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-shadow)}
+.glass::before{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;padding:1px;pointer-events:none;
+  background:var(--spec);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude}
+.glass::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+  opacity:.05;mix-blend-mode:overlay;background-image:var(--noise)}
+.glass--thin{--glass-fill:linear-gradient(160deg,rgba(255,255,255,.58),rgba(255,255,255,.3));--glass-blur:blur(14px) saturate(160%)}
+.glass--thick{--glass-fill:linear-gradient(165deg,rgba(255,255,255,.9),rgba(255,255,255,.68));--glass-blur:blur(28px) saturate(180%)}
+.glass--azul{--glass-fill:linear-gradient(160deg,rgba(0,39,81,.88),rgba(0,39,81,.68));color:#fff}
+.glass--verde{--glass-fill:linear-gradient(160deg,rgba(0,192,139,.9),rgba(0,192,139,.62));color:#002751}
+.glass--rojo{--glass-fill:linear-gradient(160deg,rgba(230,51,18,.9),rgba(230,51,18,.66));color:#fff}
+.glass-soft{background:var(--soft-fill);box-shadow:var(--soft-shadow)}
+/* vidrio oscuro translúcido: para apoyarse SOBRE la lámina y dejar que la
+   luz y las barras se esmerilen a través. Más transparente que .glass--azul,
+   que es un relleno y no un vidrio. */
+.glass--luz{
+  --glass-fill:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.055));
+  --glass-blur:blur(22px) saturate(180%);
+  --glass-shadow:
+    0 18px 40px -18px rgba(0,10,24,.75),
+    inset 0 1px 0 rgba(255,255,255,.3),
+    inset 0 -1px 0 rgba(0,0,0,.28);
+  color:#fff}
+.glass--luz::before{background:linear-gradient(135deg,
+  rgba(255,255,255,.72),rgba(255,255,255,.1) 40%,
+  rgba(255,255,255,0) 62%,rgba(255,255,255,.3))}
+
+/* =====================================================================
+   Luz de marca: la lámina del Brandbook (pág. 90).
+   Misma regla que el remate de esquina — un polígono por barra, borde
+   derecho continuo, diagonal corta a un tercio del alto. Acá las barras
+   SON la luz sobre el Azul 01, no sombras que cortan un resplandor, y
+   varias corren más alto que el lienzo y se recortan, como en la pág. 90.
+   El centro del foco va fuera del lienzo para que no se vea su círculo.
+   ===================================================================== */
+.luz{position:relative;isolation:isolate;overflow:hidden;color:#fff;
+  background:
+    radial-gradient(92% 130% at 74% 118%,
+      rgba(255,255,255,.34) 0%, #00c08b 22%, rgba(0,192,139,.5) 42%,
+      rgba(0,90,110,.22) 62%, transparent 84%),
+    linear-gradient(130deg,#002751 0%,#001d3a 58%,#001630 100%)}
+/* Alineadas al mismo margen que el contenido, no sangradas al borde. */
+.luz__barras{position:absolute;
+  right:var(--luz-pad);bottom:var(--luz-pad);
+  height:clamp(112px,16vw,178px);width:auto;
+  z-index:0;pointer-events:none;
+  /* sobre el Azul 01 los verdes bajos se apagan; el realce los devuelve
+     sin tocar la pieza, que es la misma que la de la esquina */
+  filter:brightness(1.25) saturate(1.1)}
+/* El velo ya no tiene que cargar solo con el contraste: ahora el texto va
+   sobre vidrio. Queda más liviano, para la marca que sí se apoya directo. */
+.luz::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,
+    rgba(0,18,38,.72) 0%, rgba(0,18,38,.4) 38%,
+    rgba(0,18,38,.12) 56%, transparent 70%)}
+.luz::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  opacity:.08;mix-blend-mode:overlay;background-image:var(--noise)}
+
+
+/* ---------- estructura ---------- */
+.page{max-width:1080px;margin-inline:auto;padding-inline:20px;padding-block:0 40px}
+
+/* ---------- lockup SF / CULTURA ----------
+   El bloque redondea SÓLO sus dos esquinas extremas opuestas —arriba a
+   la izquierda y abajo a la derecha—; las que caen sobre la diagonal
+   quedan en punta. El radio es ~13% del alto del bloque, y como el
+   skew se aplica al mismo elemento, la curva se inclina con la forma. */
+.lockup{--lk-h:40px;display:inline-flex;align-items:stretch;height:var(--lk-h);flex:none}
+.lockup__sf{display:grid;place-items:center;background:var(--azul-01);color:#fff;
+  font:800 21px/1 var(--marca);letter-spacing:.02em;padding:0 16px;
+  transform:skewX(calc(-1 * var(--ang)));
+  border-radius:calc(var(--lk-h) * .13) 0 calc(var(--lk-h) * .13) 0}
+.lockup__sf span{transform:skewX(var(--ang))}
+.lockup__bar{width:calc(var(--lk-h) * .1);background:var(--rojo);
+  transform:skewX(calc(-1 * var(--ang)));margin-inline:calc(var(--lk-h) * .13)}
+.lockup__word{display:grid;place-items:center;font:700 18px/1 var(--sans);
+  letter-spacing:.005em;color:var(--ink)}
+
+header.masthead{padding-block:40px 30px}
+.masthead__top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between}
+.masthead__meta{font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+h1{font:200 clamp(38px,7vw,68px)/1.02 var(--sans);letter-spacing:-.025em;margin-top:28px;max-width:16ch}
+h1 b{font-weight:700;display:block}
+.lede{margin-top:20px;max-width:62ch;font-size:clamp(17px,2.1vw,19px);color:var(--ink-2);font-weight:200;line-height:1.55}
+.filete{height:5px;margin-top:26px;background:var(--degrade);border-radius:99px}
+
+section{margin-top:56px;scroll-margin-top:24px}
+.sec-head{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;margin-bottom:22px;
+  padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.sec-num{font:600 13px/1 var(--marca);color:var(--ink-3);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.sec-head h2{font:600 clamp(21px,3vw,27px)/1.15 var(--sans);letter-spacing:-.015em}
+.sec-head .note{margin-left:auto;font-size:13px;color:var(--ink-3)}
+
+.pad{padding:26px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
+.g2f{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:620px){.g2f{grid-template-columns:1fr}}
+.card h3{font:600 16px/1.3 var(--sans);margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:14px;color:var(--ink-2);line-height:1.52}
+
+.facts{display:grid;gap:1px;background:var(--rule);border-radius:20px;overflow:hidden;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+/* El fondo de .facts es la línea divisoria: cualquier celda vacía de la
+   grilla la pinta como un bloque gris. Con 5 fichas en 4 columnas pasaba.
+   La última ocupa la fila entera y el hueco desaparece a cualquier ancho. */
+.fact{background:var(--ground);padding:20px 22px}
+.fact:last-child{grid-column:1/-1}
+.fact dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.fact dd{margin:0;font-size:15px;line-height:1.45}
+.fact dd b{font-weight:600}
+
+.sw-group h3{font:600 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin:24px 0 12px}
+.sw{border-radius:18px;overflow:hidden}
+.sw__chip{height:96px;display:flex;align-items:flex-end;padding:11px 13px;
+  font:600 12px/1 var(--sans);letter-spacing:.07em}
+.sw__body{padding:12px 14px 14px;font-size:12.5px;line-height:1.5;font-variant-numeric:tabular-nums}
+.sw__name{font-weight:600;font-size:13.5px;letter-spacing:-.01em;display:block;margin-bottom:3px}
+.sw__hex{color:var(--ink-2)}
+.sw__pms{color:var(--ink-3);display:block;font-size:11.5px;letter-spacing:.04em;margin-top:2px}
+.outside{margin-top:22px;padding:16px 20px;border-radius:16px;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.outside b{color:var(--ink);font-weight:600}
+
+.ratios{display:grid;gap:7px}
+.ratio{display:grid;grid-template-columns:132px 1fr 56px 108px;align-items:center;gap:13px;
+  padding:9px 14px;border-radius:13px;font-size:13.5px}
+.ratio__sample{font-weight:600;padding:6px 11px;border-radius:8px;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra{height:7px;border-radius:99px;background:var(--rule);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:99px;background:currentColor}
+.ratio__n{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+.tag{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.tag::before{content:"";width:.3em;height:.95em;flex:none;transform:skewX(calc(-1 * var(--ang)));background:currentColor}
+.t-ok{color:var(--verde-ui)} .t-mid{color:var(--ink-3)} .t-no{color:var(--topico)}
+.t-ok span,.t-mid span,.t-no span{color:var(--ink-2)}
+.c-ok{color:var(--verde-ui)} .c-mid{color:var(--ink-3)} .c-no{color:var(--topico)}
+.callout{margin-top:18px;padding:17px 21px;border-radius:0 16px 16px 0;
+  border-left:5px solid var(--topico);font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.callout b{color:var(--ink);font-weight:600}
+.callout--verde{border-left-color:var(--verde-ui)}
+
+.typespec{padding:24px}
+.typespec__sample{font-size:clamp(34px,6vw,54px);line-height:1.05;letter-spacing:-.02em}
+.typespec__meta{margin-top:14px;padding-top:13px;border-top:1px solid var(--rule);
+  font-size:13.5px;color:var(--ink-2);display:flex;gap:9px;flex-wrap:wrap;align-items:baseline}
+.typespec__meta b{color:var(--ink);font-weight:600}
+.pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;
+  border-radius:99px;background:var(--rule);color:var(--ink-2);font-weight:600}
+
+.trama-spec{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+@media (max-width:760px){.trama-spec{grid-template-columns:1fr}}
+.trama-fig{padding:18px;display:grid;place-items:center}
+.trama-fig svg{width:100%;height:auto;max-width:100%}
+.trama-uses{padding:24px;display:grid;gap:18px;align-content:start}
+.use h3{font:600 14.5px/1.3 var(--sans);margin-bottom:3px}
+.use p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+
+.demo{position:relative;border-radius:26px;overflow:hidden;padding:26px;min-height:200px;
+  background:
+    radial-gradient(58% 55% at 14% 20%,rgba(0,192,139,.98),transparent 68%),
+    radial-gradient(52% 52% at 86% 22%,rgba(230,51,18,.82),transparent 70%),
+    linear-gradient(140deg,#00c08b 0%,#002751 58%,#001a36 100%)}
+.demo__grid{position:relative;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.tile{padding:16px;border-radius:18px;min-height:98px;display:flex;flex-direction:column;justify-content:space-between}
+.tile code{font-size:11.5px;opacity:.82}
+.tile b{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
+
+/* =====================================================================
+   Botones
+   Radio 10px: más cerrado que los paneles de vidrio (24px), porque un
+   botón es un objeto y un panel es una superficie. Alto mínimo 44px por
+   objetivo táctil. La barra del logo entra como marcador interno y el
+   barrido de hover corre a 15°.
+   ===================================================================== */
+.btn{
+  --btn-halo:#fff;
+  display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+  min-height:44px;padding:0 20px;border:0;border-radius:10px;
+  font:600 15px/1 var(--sans);letter-spacing:.01em;text-decoration:none;
+  position:relative;overflow:hidden;isolation:isolate;cursor:pointer;
+  transition:background .2s ease,box-shadow .2s var(--ease),transform .12s var(--ease)}
+.btn .bar{height:1.05em;width:.26em;margin-right:0}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:0;box-shadow:0 0 0 2px var(--btn-halo),0 0 0 5px var(--rojo)}
+/* barrido de luz en el ángulo de marca */
+.btn::after{content:"";position:absolute;top:0;left:-75%;width:38%;height:100%;pointer-events:none;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.3),transparent);
+  transform:skewX(calc(-1 * var(--ang)));transition:left .6s var(--ease)}
+@media (hover:hover){.btn:hover::after{left:135%}}
+
+/* primario · blanco sobre Azul 01 = 14.90 AAA.
+   La barra va en rojo: replica literalmente el lockup SF/CULTURA. */
+.btn--primario{background:var(--azul-01);color:#fff;
+  box-shadow:0 8px 20px -10px rgba(0,39,81,.55)}
+.btn--primario .bar{background:var(--rojo)}
+@media (hover:hover){.btn--primario:hover{background:#00325f;box-shadow:0 12px 26px -10px rgba(0,39,81,.6)}}
+
+/* verde · Azul 01 sobre Verde 01 = 6.33 AA. NUNCA blanco (2.36). */
+.btn--verde{--btn-halo:var(--azul-01);background:var(--verde-01);color:var(--azul-01)}
+.btn--verde .bar{background:var(--azul-01)}
+@media (hover:hover){.btn--verde:hover{background:#00d69a}}
+
+/* línea · secundario. Azul 01 sobre fondo = 13.54 AAA, borde 13.54. */
+.btn--linea{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn--linea .bar{background:var(--topico)}
+@media (hover:hover){.btn--linea:hover{background:rgba(0,39,81,.06)}}
+
+/* vidrio · para flotar sobre foto o sobre el hero */
+.btn--vidrio{color:var(--ink);
+  background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.56));
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);
+  box-shadow:0 8px 20px -10px rgba(0,39,81,.4),inset 0 1px 0 #fff}
+.btn--vidrio .bar{background:var(--topico)}
+@media (hover:hover){.btn--vidrio:hover{background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,255,255,.74))}}
+
+/* tópico · blanco sobre rojo = 4.33: AA sólo en texto grande.
+   Por eso viene forzado a tamaño lg y no existe en md ni sm. */
+.btn--topico{background:var(--rojo);color:#fff;
+  min-height:54px;padding:0 28px;font-size:19px;
+  box-shadow:0 10px 24px -10px rgba(230,51,18,.6)}
+.btn--topico .bar{background:#fff}
+@media (hover:hover){.btn--topico:hover{background:#ff3d18}}
+
+/* texto · el link con subrayado rojo, en forma de control */
+.btn--texto{background:transparent;color:var(--ink);padding:0 4px;min-height:36px;
+  text-decoration:underline;text-decoration-color:var(--topico);
+  text-decoration-thickness:2px;text-underline-offset:4px}
+.btn--texto::after{display:none}
+@media (hover:hover){.btn--texto:hover{text-decoration-thickness:3px}}
+
+.btn--sm{min-height:36px;padding:0 14px;font-size:13.5px;border-radius:8px}
+.btn--lg{min-height:54px;padding:0 28px;font-size:19px;border-radius:12px}
+.btn--bloque{width:100%}
+/* desactivado · Gris 75 sobre Gris 20 = 4.50 AA. Sin opacity, que hunde el contraste. */
+.btn[disabled],.btn--off{background:var(--gris-20);color:var(--gris-75);cursor:not-allowed;
+  box-shadow:none;pointer-events:none}
+.btn[disabled] .bar,.btn--off .bar{background:var(--gris-75)}
+.btn--cargando{pointer-events:none}
+.btn__spin{width:1em;height:1em;border-radius:50%;flex:none;
+  border:2px solid currentColor;border-top-color:transparent;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* En oscuro, Azul 01 como relleno desaparece contra el fondo:
+   el primario pasa a Verde 01 con texto Azul 01, que sigue dando 6.33. */
+@media (prefers-reduced-motion:reduce){.btn::after{display:none}.btn__spin{animation-duration:2s}}
+
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn-cell{display:grid;gap:10px;justify-items:start;padding:18px;border-radius:16px}
+.btn-cell__k{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.btn-cell__n{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;line-height:1.45}
+.btn-cell__n b{color:var(--ink);font-weight:600}
+.sobre-foto{padding:24px;border-radius:18px;
+  background:radial-gradient(60% 70% at 20% 20%,rgba(0,192,139,.95),transparent 70%),
+    linear-gradient(140deg,#00c08b,#002751 70%)}
+
+/* ---------- escala: tiles y comparación ---------- */
+.tiles{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.tile-n{padding:22px 24px;border-radius:18px}
+.tile-n__k{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.tile-n__v{font:600 clamp(30px,5vw,42px)/1 var(--sans);letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:7px}
+.tile-n__u{font-size:15px;font-weight:500;color:var(--ink-2);letter-spacing:0}
+.tile-n__d{margin-top:10px;font-size:13px;color:var(--ink-2);line-height:1.45}
+
+.cmp{display:grid;gap:14px;margin-top:4px}
+.cmp__row{display:grid;grid-template-columns:minmax(150px,auto) 1fr;gap:16px;align-items:center}
+.cmp__lab{font-size:13.5px;font-weight:500;line-height:1.35}
+.cmp__track{position:relative;height:38px;display:flex;align-items:center}
+.cmp__fill{height:26px;border-radius:0 5px 5px 0;display:flex;align-items:center;
+  justify-content:flex-end;padding-right:11px;color:#fff;font-weight:600;font-size:13px;
+  font-variant-numeric:tabular-nums;white-space:nowrap;min-width:84px}
+.cmp__fill--caro{background:var(--rojo)}
+.cmp__fill--barato{background:var(--verde-01)}
+.cmp__fill--barato{color:var(--azul-01)}
+.cmp__foot{font-size:12.5px;color:var(--ink-3);margin-top:2px}
+
+/* ranking de tráfico: una serie, barra por página, etiqueta directa */
+.rank{display:grid;gap:6px;margin-top:4px}
+.rank__r{display:grid;grid-template-columns:minmax(120px,230px) 1fr;gap:14px;align-items:center;
+  padding:3px 0;font-size:13px}
+.rank__n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank__t{display:flex;align-items:center;gap:9px}
+.rank__b{height:17px;border-radius:0 4px 4px 0;background:var(--verde-01);flex:none;min-width:3px}
+.rank__b--home{background:var(--azul-01)}
+.rank__b--esp{background:var(--verde-01)}
+.rank__b--fer{background:var(--topico)}
+.rank__b--cic{background:#5c7f99}
+.rank__b--otr{background:var(--gris-20)}
+.rank__leg{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;padding-top:14px;
+  border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-2)}
+.rank__leg span{display:flex;align-items:center;gap:7px}
+.rank__k{width:.3em;height:.95em;flex:none;transform:skewX(calc(-1 * var(--ang)))}
+.rank__v{font-variant-numeric:tabular-nums;font-weight:600;font-size:12.5px;color:var(--ink-2)}
+.rank__cap{font-size:12.5px;color:var(--ink-3);margin-top:12px}
+@media (max-width:560px){.rank__r{grid-template-columns:1fr;gap:3px}}
+
+.costos{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.costos th,.costos td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--rule)}
+.costos th:first-child,.costos td:first-child{text-align:left}
+.costos thead th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.costos tbody tr:last-child td{border-bottom:0}
+.costos .hot{color:var(--topico);font-weight:600}
+.tabla-wrap{overflow-x:auto}
+
+.phases{display:grid;gap:12px}
+.phase{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;padding:20px 22px;border-radius:18px}
+.phase__n{font:600 11.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.phase h3{font:600 17px/1.25 var(--sans);letter-spacing:-.01em;margin-bottom:6px}
+.phase p{font-size:14px;color:var(--ink-2);line-height:1.5;max-width:64ch}
+.phase__d{font-size:12.5px;font-weight:600;color:var(--ink-2);white-space:nowrap;
+  font-variant-numeric:tabular-nums;padding-top:24px}
+.total{margin-top:14px;padding:22px 26px;border-radius:18px;display:flex;
+  justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+  background:var(--degrade);color:#fff}
+.total span{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.total b{font:600 clamp(22px,4vw,30px)/1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+
+.risk{padding:19px 21px;border-radius:17px;display:grid;gap:9px}
+.risk__top{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.risk h3{font:600 15px/1.3 var(--sans);letter-spacing:-.01em}
+.risk p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.risk__lvl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-left:auto}
+
+.q{padding:18px 21px;border-radius:17px}
+.q h3{font:600 15px/1.4 var(--sans);margin-bottom:4px}
+.q p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+
+/* ---------- footer: la lámina de luz ---------- */
+.foot{--luz-pad:clamp(22px,4vw,44px);
+  position:relative;margin-top:60px;border-radius:26px;
+  padding:var(--luz-pad);min-height:340px;
+  display:flex;align-items:flex-end}
+.foot__card{position:relative;z-index:2;
+  padding:clamp(22px,3vw,32px);border-radius:22px;
+  max-width:min(100%,600px);display:grid;gap:24px}
+.foot__spec{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.9)}
+.foot__spec b{color:#fff;font-weight:600}
+.foot h3{font:600 17px/1.3 var(--sans);color:#fff;margin-bottom:9px;letter-spacing:-.01em}
+.foot h3 .bar{background:#fff}
+.foot__bottom{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap;
+  padding-top:22px;border-top:1px solid rgba(255,255,255,.18)}
+/* marca completa: SF + escudo, como en la pág. 90 */
+.marca{display:inline-flex;align-items:center;gap:14px;flex:none}
+/* En la marca completa el redondeo salta a los extremos del CONJUNTO:
+   arriba-izquierda del bloque SF y abajo-derecha del panel del escudo.
+   Los cuatro cortes de la diagonal interna van en punta. */
+.marca__lock{--lk-h:56px;display:flex;align-items:stretch;height:var(--lk-h)}
+.marca__sf{display:grid;place-items:center;background:var(--azul-01);color:#fff;
+  font:800 27px/1 var(--marca);padding:0 18px;transform:skewX(calc(-1 * var(--ang)));
+  border-radius:calc(var(--lk-h) * .13) 0 0 0}
+.marca__sf span{transform:skewX(var(--ang))}
+.marca__esc{display:grid;place-items:center;background:#fff;width:54px;
+  transform:skewX(calc(-1 * var(--ang)));
+  border-radius:0 0 calc(var(--lk-h) * .13) 0}
+.marca__esc svg{transform:skewX(var(--ang))}
+.marca__txt{font:600 15px/1.25 var(--sans);color:#fff;letter-spacing:-.005em}
+.marca__txt span{display:block;font-weight:400;color:rgba(255,255,255,.8)}
+.foot__meta{font-size:12.5px;line-height:1.7;color:rgba(255,255,255,.72)}
+.foot__meta code{color:rgba(255,255,255,.9)}
+
+@media (max-width:620px){
+  .ratio{grid-template-columns:110px 1fr 50px;row-gap:9px}
+  .ratio .tag{grid-column:1/-1}
+  .phase{grid-template-columns:1fr;row-gap:6px}
+  .phase__d{padding-top:0}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .glass{--glass-fill:linear-gradient(160deg,rgba(255,255,255,.95),rgba(244,244,243,.92))}
+}
+@media (prefers-reduced-transparency:reduce){
+  .glass,.glass--thin,.glass--thick{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .glass::after,.ambient::after{display:none}
+}
+@media (prefers-reduced-motion:reduce){.blob{animation:none}}
+</style>
+
+<div class="ambient" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="blob b3"></div><div class="blob b4"></div>
+</div>
+<svg class="defs" aria-hidden="true"><defs>
+  <g id="sf-barras">
+    <polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="var(--verde-01)"/>
+    <polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="var(--verde-01)"/>
+    <polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="var(--verde-01)"/>
+    <polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="var(--verde-01)"/>
+    <polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="var(--verde-01)"/>
+    <polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="var(--verde-01)"/>
+    <polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="var(--verde-01)"/>
+    <polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="var(--rojo)"/>
+  </g>
+</defs></svg>
+<svg class="barras" viewBox="0 0 395 440" aria-hidden="true"><use href="#sf-barras"/></svg>
+
+<div class="page">
+
+<header class="masthead">
+  <div class="masthead__top">
+    <div class="lockup" role="img" aria-label="SF Cultura">
+      <div class="lockup__sf"><span>SF</span></div>
+      <div class="lockup__bar"></div>
+      <div class="lockup__word">CULTURA</div>
+    </div>
+    <div class="masthead__meta">Astra 4.13.1 + Elementor Free · Tópico nivel 01/A</div>
+  </div>
+  <h1>Capital Cultural<b>sobre vidrio</b></h1>
+  <p class="lede">Plan de retematizado de <a href="https://www.santafeciudad.gov.ar/capitalcultural/">santafeciudad.gov.ar/capitalcultural</a> con la identidad SF 2026 y el mismo material GlassMorph que ya corre en Freedom y en la rifa. Child theme de WordPress, entregado por ZIP desde el admin: no hay acceso al servidor.</p>
+  <div class="filete" aria-hidden="true"></div>
+</header>
+
+<section id="premisas">
+  <div class="sec-head">
+    <span class="sec-num">00.1</span>
+    <h2><i class="bar"></i>Punto de partida</h2>
+    <span class="note">Stack confirmado desde el admin</span>
+  </div>
+  <dl class="facts">
+    <div class="fact"><dt>Tema</dt><dd><b>Astra 4.13.1</b>, de Brainstorm Force. Es un tema, no un constructor: el child theme funciona como está planteado.</dd></div>
+    <div class="fact"><dt>Composer</dt><dd><b>Elementor Free.</b> Sin Theme Builder — eso es de Pro. Header, footer, archivos y entradas los sigue renderizando Astra.</dd></div>
+    <div class="fact"><dt>Restricción</dt><dd>Sin acceso al servidor: <b>todo por ZIP</b> desde el panel. Sin build, sin WP-CLI, sin SSH.</dd></div>
+    <div class="fact"><dt>Escala</dt><dd><b>510 páginas</b>, no todas publicadas ni visibles. Es la variable que domina el presupuesto.</dd></div>
+    <div class="fact"><dt>Fotografía</dt><dd><b>Banco propio.</b> Con tres colores el peso visual recae en la foto — y es lo que le da al vidrio algo que esmerilar.</dd></div>
+  </dl>
+</section>
+
+<section id="paleta">
+  <div class="sec-head">
+    <span class="sec-num">02.4</span>
+    <h2><i class="bar"></i>Paleta</h2>
+    <span class="note">Subconjunto cerrado de la ficha cromática</span>
+  </div>
+
+  <div class="sw-group">
+    <h3>Los tres colores de marca</h3>
+    <div class="grid g3">
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#002751;color:#fff">DOMINANTE</div><div class="sw__body"><span class="sw__name">Santa Fe Azul 01</span><span class="sw__hex">#002751 · 0 39 81</span><span class="sw__pms">PANTONE 540</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#00c08b;color:#002751">SUPERFICIE</div><div class="sw__body"><span class="sw__name">Santa Fe Verde 01</span><span class="sw__hex">#00c08b · 0 192 139</span><span class="sw__pms">PANTONE 3405</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#e63312;color:#fff">SUBMARCA</div><div class="sw__body"><span class="sw__name">Rojo Cultura</span><span class="sw__hex">#e63312 · 230 51 18</span><span class="sw__pms">El color del tópico</span></div></div>
+    </div>
+  </div>
+
+  <div class="sw-group">
+    <h3>El degradé de transición</h3>
+    <div class="sw glass-soft">
+      <div class="sw__chip" style="background:linear-gradient(105deg,#00c08b 0%,#009e87 38%,#00527a 72%,#002751 100%);color:#fff;height:120px">VERDE 01 → AZUL 01</div>
+      <div class="sw__body" style="display:flex;gap:18px;flex-wrap:wrap"><span><span class="sw__name">Degradé institucional</span><span class="sw__hex">Corre a 105°, sobre la diagonal de marca</span></span><span style="color:var(--ink-3);max-width:46ch">Comunica la transición. Es fondo y grafismo: si lleva texto, sólo blanco y sólo sobre el tramo azul, porque el extremo verde no da contraste.</span></div>
+    </div>
+  </div>
+
+  <div class="sw-group">
+    <h3>Neutros</h3>
+    <div class="grid g3">
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#ffffff;color:#002751;box-shadow:inset 0 0 0 1px rgba(0,39,81,.12)">BASE</div><div class="sw__body"><span class="sw__name">Blanco</span><span class="sw__hex">#ffffff · 255 255 255</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#dadad9;color:#1d1d1b">K 20</div><div class="sw__body"><span class="sw__name">Gris claro</span><span class="sw__hex">#dadad9 · 218 218 217</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#606060;color:#fff">K 75</div><div class="sw__body"><span class="sw__name">Gris medio</span><span class="sw__hex">#606060 · 96 96 96</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#1d1d1b;color:#fff">K 100</div><div class="sw__body"><span class="sw__name">Negro</span><span class="sw__hex">#1d1d1b · 29 29 27</span></div></div>
+    </div>
+  </div>
+
+  <p class="outside glass-soft"><b>Fuera de sistema para este sitio:</b> Azul 02 (#1639f1), Verde 02 (#00fe9b), celeste (#57b8e9), naranja (#fca100) y amarillo (#f2e61a). Existen en el Brandbook, pero no entran acá. Se listan por nombre y no por color para que queden documentados sin volver a aparecer en pantalla — y ni el <code>theme.json</code> ni los Global Colors de Elementor los van a ofrecer.</p>
+</section>
+
+<section id="contraste">
+  <div class="sec-head">
+    <span class="sec-num">02.4b</span>
+    <h2><i class="bar"></i>Qué se puede usar como texto</h2>
+    <span class="note">WCAG 2.1, medido</span>
+  </div>
+  <div class="glass pad">
+    <div class="ratios">
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#1d1d1b">Negro / blanco</span><span class="barra c-ok"><i style="width:100%"></i></span><span class="ratio__n">16.88</span><span class="tag t-ok"><span>AAA · texto libre</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#002751">Azul 01 / blanco</span><span class="barra c-ok"><i style="width:100%"></i></span><span class="ratio__n">14.90</span><span class="tag t-ok"><span>AAA · texto libre</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#002751;color:#fff">Blanco / Azul 01</span><span class="barra c-ok"><i style="width:100%"></i></span><span class="ratio__n">14.90</span><span class="tag t-ok"><span>AAA · texto libre</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#dadad9;color:#002751">Azul 01 / gris 20</span><span class="barra c-ok"><i style="width:100%"></i></span><span class="ratio__n">10.65</span><span class="tag t-ok"><span>AAA · texto libre</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#00c08b;color:#002751">Azul 01 / Verde 01</span><span class="barra c-ok"><i style="width:60%"></i></span><span class="ratio__n">6.33</span><span class="tag t-ok"><span>AA · texto libre</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#606060">Gris 75 / blanco</span><span class="barra c-ok"><i style="width:60%"></i></span><span class="ratio__n">6.29</span><span class="tag t-ok"><span>AA · secundario</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#e63312;color:#fff">Blanco / rojo</span><span class="barra c-mid"><i style="width:41%"></i></span><span class="ratio__n">4.33</span><span class="tag t-mid"><span>Sólo ≥24px</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#e63312">Rojo / blanco</span><span class="barra c-mid"><i style="width:41%"></i></span><span class="ratio__n">4.33</span><span class="tag t-mid"><span>Sólo ≥24px</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#e63312;color:#002751">Azul 01 / rojo</span><span class="barra c-mid"><i style="width:33%"></i></span><span class="ratio__n">3.44</span><span class="tag t-mid"><span>Sólo ≥24px</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#00c08b;color:#fff">Blanco / Verde 01</span><span class="barra c-no"><i style="width:22%"></i></span><span class="ratio__n">2.36</span><span class="tag t-no"><span>Nunca</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#00c08b">Verde 01 / blanco</span><span class="barra c-no"><i style="width:22%"></i></span><span class="ratio__n">2.36</span><span class="tag t-no"><span>Nunca</span></span></div>
+    </div>
+    <p class="callout"><b>Tres reglas salen de la tabla.</b> El verde es color de <b>fondo</b>: el texto que va encima siempre es Azul 01, nunca blanco. El rojo no alcanza AA en ningún combo, así que vive en titulares grandes, filetes y barras — nunca en texto corrido. Y como Azul 02 quedó fuera del sistema, <b>los links se distinguen por subrayado</b>, no por color; el subrayado va en rojo, que ahí funciona porque es un grafismo y no texto.</p>
+    <p class="callout callout--verde">Esto no es preferencia estética. Al ser un sitio de gobierno le aplica la <b>Ley 26.653</b> y la ODA 1.0 de ONTI, que toman WCAG AA como piso obligatorio.</p>
+  </div>
+</section>
+
+<section id="trama">
+  <div class="sec-head">
+    <span class="sec-num">02.6</span>
+    <h2><i class="bar"></i>Trama de marca</h2>
+    <span class="note">15°, siempre inclinada a la derecha</span>
+  </div>
+  <div class="trama-spec">
+    <div class="trama-fig glass">
+      <svg viewBox="0 0 560 280" role="img" aria-label="La trama de marca: líneas a 15 grados derivadas del paralelogramo del logo SF y de la barra de la submarca">
+        <defs><clipPath id="fig"><rect x="0" y="0" width="560" height="280" rx="14"></rect></clipPath></defs>
+        <g clip-path="url(#fig)">
+          <rect x="0" y="0" width="560" height="280" fill="var(--verde-ui)" opacity="0.14"></rect>
+          <g stroke="var(--azul-01)" stroke-opacity="0.26" stroke-width="1">
+            <line x1="-60" y1="280" x2="15" y2="0"></line>
+            <line x1="10" y1="280" x2="85" y2="0"></line>
+            <line x1="80" y1="280" x2="155" y2="0"></line>
+            <line x1="150" y1="280" x2="225" y2="0"></line>
+            <line x1="220" y1="280" x2="295" y2="0"></line>
+            <line x1="290" y1="280" x2="365" y2="0"></line>
+            <line x1="360" y1="280" x2="435" y2="0"></line>
+            <line x1="430" y1="280" x2="505" y2="0"></line>
+            <line x1="500" y1="280" x2="575" y2="0"></line>
+          </g>
+          <path d="M 150 212 L 193 52 L 368 52 L 325 212 Z" fill="var(--azul-01)"></path>
+          <text x="216" y="152" font-family="Geologica, sans-serif" font-weight="800" font-size="74" fill="#ffffff">SF</text>
+          <path d="M 340 212 L 383 52 L 401 52 L 358 212 Z" fill="var(--topico)"></path>
+          <line x1="325" y1="212" x2="325" y2="34" stroke="var(--topico)" stroke-width="1.5" stroke-dasharray="5 5"></line>
+          <line x1="325" y1="212" x2="373" y2="34" stroke="var(--topico)" stroke-width="1.5"></line>
+          <path d="M 325 92 A 120 120 0 0 1 337 93" fill="none" stroke="var(--topico)" stroke-width="1.5"></path>
+          <text x="345" y="26" font-family="Encode Sans, sans-serif" font-weight="700" font-size="20" fill="var(--topico)">15°</text>
+        </g>
+      </svg>
+    </div>
+    <div class="trama-uses glass">
+      <div class="use"><h3><i class="bar bar--verde"></i>El remate de esquina</h3><p class="indent"><b>Ocho barras</b> a 15° ancladas abajo a la derecha — siete verdes y una roja, todas del mismo ancho de base, la misma opacidad y el <b>mismo paso</b>. Sólo cambia el alto, que crece parejo hacia la derecha. Cada una es gruesa en la base, se afina a <b>casi un hilo</b> tras la diagonal, y cierra en punta.</p></div>
+      <div class="use"><h3><i class="bar bar--verde"></i>El redondeo del lockup</h3><p class="indent">El bloque redondea <b>sólo sus dos esquinas extremas opuestas</b> — arriba-izquierda y abajo-derecha. Las que caen sobre la diagonal van en punta. En la marca completa el redondeo salta a los extremos del conjunto: la esquina del bloque SF y la del panel del escudo.</p></div>
+      <div class="use"><h3><i class="bar bar--verde"></i>La barra, pegada al título</h3><p class="indent">Siempre delante del título y del cuerpo del título — medida en <code>em</code>, así toma el tamaño sola. Nunca como filete del bloque entero.</p></div>
+      <div class="use"><h3><i class="bar bar--verde"></i>La luz del footer</h3><p class="indent">Listones a 105° cortando un foco verde sobre Azul 01. Es la lámina del Brandbook reconstruida en CSS, sin imagen.</p></div>
+      <div class="use"><h3><i class="bar bar--verde"></i>El degradé de transición</h3><p class="indent">Verde 01 → Azul 01, corriendo a 105°: la perpendicular de una línea de 15° inclinada a la derecha. A 75° saldría espejado.</p></div>
+    </div>
+  </div>
+  <div class="grid trama-spec" style="margin-top:16px">
+    <div class="glass pad" style="display:grid;place-items:center">
+      <svg class="barras-demo" viewBox="0 0 395 440" role="img" aria-label="El remate de barras: ocho barras a 15 grados uniformemente distribuidas, gruesas en la base y afinadas a casi un hilo, con los finales subiendo hacia el borde derecho, siete verdes y la última en rojo"><use href="#sf-barras"/></svg>
+    </div>
+    <div class="glass pad card">
+      <h3><i class="bar bar--azul"></i>Una sola línea que se afina</h3>
+      <p style="margin-bottom:12px">La versión anterior de esta página usaba <code>repeating-linear-gradient</code> a 105° cubriendo todo el fondo. Se leía como papel tapiz: la línea siempre igual, siempre al mismo paso, sin jerarquía. El remate real de la marca no es eso.</p>
+      <p style="margin-bottom:12px">Cada barra es <b>un solo polígono</b>, no dos piezas con un espacio en el medio. El <b>borde derecho es continuo</b> de la base al tope; el izquierdo sube por el tramo grueso y ahí <b>se inclina</b> hasta fundirse con el borde del tramo fino. Esa diagonal es el escalón: no un corte recto, sino el merge entre los dos anchos.</p>
+      <p style="margin-bottom:12px">Dos parámetros la gobiernan. El <b>largo</b> de la diagonal: larga, la barra se lee como una hoja que se afila; corta, como una línea gruesa que se afina de golpe — que es lo que pide la marca. Y <b>dónde arranca</b>: a un tercio del alto, no a la mitad. Puesta al medio el tramo grueso manda demasiado y la pieza se apelmaza abajo.</p>
+      <p style="margin-bottom:12px">Arriba <b>cierra en punta</b>. El hilo corre paralelo y sólo converge en los últimos 46 de los 440: si converge desde el escalón, las barras se leen como briznas de pasto en vez de líneas.</p>
+      <p style="margin-bottom:12px">La <b>distribución es uniforme</b> y eso no es sólo estética. Mismo paso, mismo ancho de base y misma inclinación hacen que la separación entre barras se mantenga en 18 <b>a cualquier altura</b>: si los anchos variaran, las barras se abrirían o se juntarían hacia arriba. Lo único que cambia es el alto, que crece parejo de 150 a 420, así que los finales <b>suben en línea recta hacia el borde derecho</b>.</p>
+      <p>Ocho polígonos, anclados a la esquina inferior derecha al 30% de opacidad: una primera prueba al 50% y más grandes cruzaba el texto a media página, que es justo el problema que tenía la trama repetida.</p>
+    </div>
+  </div>
+
+  <p class="callout"><b>Por qué importa el signo del ángulo.</b> El Brandbook dice que la trama propone «acción, dinamismo, transformación y movimiento permanente». Esa lectura depende de la dirección: inclinada a la derecha empuja hacia adelante, espejada frena. Vale igual para las barras, el degradé y los listones del footer: todo corre a 15° a la derecha, que en <code>repeating-linear-gradient</code> es 105°, no 75°.</p>
+</section>
+
+<section id="tipografia">
+  <div class="sec-head">
+    <span class="sec-num">02.1</span>
+    <h2><i class="bar"></i>Paleta tipográfica</h2>
+    <span class="note">Autoalojadas, sin llamada a Google</span>
+  </div>
+  <div class="grid g2">
+    <div class="typespec glass">
+      <div class="typespec__sample" style="font-family:var(--marca);font-weight:800">Geologica</div>
+      <div class="typespec__meta"><span class="pill">Marca</span><b>Sólo signos de identidad.</b> El lockup SF/CULTURA y poco más. El Brandbook es explícito: no se usa para titulares ni texto.</div>
+    </div>
+    <div class="typespec glass">
+      <div class="typespec__sample" style="font-weight:200">Encode Sans</div>
+      <div class="typespec__meta"><span class="pill">Comunicación</span><b>Todo lo demás.</b> Titulares, bajadas, texto corrido, interfaz. Thin a Black — esta página usa cuatro de sus pesos.</div>
+    </div>
+  </div>
+</section>
+
+<section id="material">
+  <div class="sec-head">
+    <span class="sec-num">03.</span>
+    <h2><i class="bar"></i>El material</h2>
+    <span class="note">Mismos tokens que Freedom y Rifa</span>
+  </div>
+  <div class="demo">
+    <div class="demo__grid">
+      <div class="tile glass"><b>Base</b><code>.glass</code></div>
+      <div class="tile glass glass--thin"><b>Fino</b><code>.glass--thin</code></div>
+      <div class="tile glass glass--thick"><b>Grueso</b><code>.glass--thick</code></div>
+      <div class="tile glass glass--azul"><b>Azul 01</b><code>.glass--azul</code></div>
+      <div class="tile glass glass--verde"><b>Verde 01</b><code>.glass--verde</code></div>
+      <div class="tile glass glass--rojo"><b>Tópico</b><code>.glass--rojo</code></div>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="glass pad card">
+      <h3><i class="bar bar--azul"></i>Qué se porta tal cual</h3>
+      <p>Los nombres de token — <code>--glass-fill</code>, <code>--glass-blur</code>, <code>--glass-shadow</code>, <code>--noise</code>, <code>--ease-out</code> — y las clases <code>.glass</code>, <code>.glass-soft</code>, <code>.glass-bar</code>, más el fondo vivo de manchas. También los tres bloques de degradado accesible: sin <code>backdrop-filter</code>, transparencia reducida y movimiento reducido.</p>
+    </div>
+    <div class="glass pad card">
+      <h3><i class="bar bar--azul"></i>Qué cambia para Santa Fe</h3>
+      <p>Las sombras se tiñen con Azul 01 en vez de gris frío. Las manchas del fondo quedan en verde y rojo sobre gris de sistema. Los tintes se reducen a tres. Y el vidrio se apoya sobre la trama, que es la que le da algo que esmerilar.</p>
+    </div>
+  </div>
+  <p class="callout callout--verde"><b>Presupuesto de rendimiento:</b> <code>backdrop-filter</code> es caro. Máximo ~8 elementos con blur real visibles a la vez. La grilla de agenda usa <code>glass-soft</code>, que es translúcido sin blur; el blur real queda para header, hero, modales y tarjetas destacadas. Es el criterio que ya está comentado en el <code>globals.css</code> de Freedom.</p>
+</section>
+
+<section id="botones">
+  <div class="sec-head">
+    <span class="sec-num">03.b</span>
+    <h2><i class="bar"></i>Botones</h2>
+    <span class="note">Cada variante con su contraste medido</span>
+  </div>
+
+  <div class="glass pad">
+    <p style="font-size:14px;color:var(--ink-2);max-width:66ch;margin-bottom:22px">Radio <b style="color:var(--ink)">10px</b>, más cerrado que los 24px de los paneles de vidrio: un botón es un objeto, un panel es una superficie. Alto mínimo <b style="color:var(--ink)">44px</b> por objetivo táctil. La barra del logo entra como marcador y el barrido de hover corre a 15°, igual que todo lo demás.</p>
+    <div class="grid g2f">
+      <div class="btn-cell glass-soft">
+        <span class="btn-cell__k">Primario</span>
+        <button class="btn btn--primario"><i class="bar"></i>Ver la agenda</button>
+        <span class="btn-cell__n">Blanco sobre Azul 01 · <b>14.90</b> AAA<br>La barra va en rojo: es el lockup SF/CULTURA.</span>
+      </div>
+      <div class="btn-cell glass-soft">
+        <span class="btn-cell__k">Verde</span>
+        <button class="btn btn--verde"><i class="bar"></i>Inscribirme</button>
+        <span class="btn-cell__n">Azul 01 sobre Verde 01 · <b>6.33</b> AA<br><b>Nunca blanco encima</b> — daría 2.36.</span>
+      </div>
+      <div class="btn-cell glass-soft">
+        <span class="btn-cell__k">Línea · secundario</span>
+        <button class="btn btn--linea"><i class="bar"></i>Descargar bases</button>
+        <span class="btn-cell__n">Azul 01 sobre fondo · <b>13.54</b> AAA<br>Borde de 1.5px, mismo contraste.</span>
+      </div>
+      <div class="btn-cell glass-soft">
+        <span class="btn-cell__k">Texto</span>
+        <a class="btn btn--texto" href="#botones">Ver todas las convocatorias</a>
+        <span class="btn-cell__n">El link con subrayado rojo, en forma de control.<br>Sin relleno, para acciones terciarias.</span>
+      </div>
+    </div>
+
+    <div class="grid g2f" style="margin-top:16px">
+      <div class="btn-cell sobre-foto">
+        <span class="btn-cell__k" style="color:rgba(255,255,255,.8)">Vidrio · sobre foto</span>
+        <button class="btn btn--vidrio"><i class="bar"></i>Cómo llegar</button>
+        <span class="btn-cell__n" style="color:rgba(255,255,255,.88)">Para flotar sobre imagen o sobre el hero. El vidrio se apoya en lo que tiene debajo, por eso el texto va en Azul 01 y no en blanco.</span>
+      </div>
+      <div class="btn-cell glass-soft">
+        <span class="btn-cell__k">Tópico · sólo grande</span>
+        <button class="btn btn--topico"><i class="bar"></i>Comprar entrada</button>
+        <span class="btn-cell__n">Blanco sobre rojo · <b>4.33</b><br>Eso es <b>AA sólo en texto grande</b>. Por eso esta variante viene forzada a 19px y <b>no existe en tamaño normal</b>.</span>
+      </div>
+    </div>
+
+    <p class="callout"><b>El rojo es la restricción que manda en el sistema de botones.</b> Blanco sobre rojo da 4.33 y Azul 01 sobre rojo da 3.44: ninguno llega a los 4.5 que pide AA para texto normal. No hay forma de tener un botón rojo chico que sea accesible sin salirse del color de marca. La salida no es achicar el problema sino ubicarlo: <b>el rojo es el CTA grande de un hero</b>, uno por pantalla, y en todo el resto vive como la barra dentro de un botón azul.</p>
+  </div>
+
+  <div class="glass pad" style="margin-top:16px">
+    <h3 style="font:600 16px/1.3 var(--sans);margin-bottom:18px"><i class="bar bar--azul"></i>Estados y tamaños</h3>
+    <div class="btn-row" style="margin-bottom:18px">
+      <button class="btn btn--primario btn--sm">Pequeño 36px</button>
+      <button class="btn btn--primario">Normal 44px</button>
+      <button class="btn btn--primario btn--lg">Grande 54px</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn--primario">Normal</button>
+      <button class="btn btn--primario btn--cargando"><span class="btn__spin"></span>Enviando</button>
+      <button class="btn btn--off">Desactivado</button>
+      <button class="btn btn--linea">Probá el foco con Tab</button>
+    </div>
+    <p class="callout callout--verde" style="margin-top:20px"><b>El foco es un anillo rojo con halo interno</b>, no un cambio de color de relleno: <code>box-shadow: 0 0 0 2px halo, 0 0 0 5px rojo</code>. El anillo contra el fondo claro da 3.94, por encima del 3:1 que pide WCAG 1.4.11. En el botón verde el halo se invierte a Azul 01, porque el halo blanco sobre verde da 2.36 y no separa. <b>Desactivado</b> usa Gris 75 sobre Gris 20 = 4.50, sin <code>opacity</code>, que hunde el contraste justo cuando menos conviene.</p>
+  </div>
+
+  <div class="glass pad card" style="margin-top:16px">
+    <h3><i class="bar bar--azul"></i>Que Elementor los respete</h3>
+    <p>Elementor trae su propio widget de botón con sus propios estilos, así que el sistema se entrega dos veces: como clases del child theme para lo que renderiza Astra, y cargado en <b>Site Settings → Theme Style → Buttons</b> para que los botones de Elementor hereden. Encima de eso va un override de <code>.elementor-button</code> en el child theme, que es la red de seguridad para los botones que alguien ya pinchó a mano.</p>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="sec-head">
+    <span class="sec-num">04.</span>
+    <h2><i class="bar"></i>Astra + Elementor Free</h2>
+    <span class="note">Tres capas de estilo peleando por el mismo píxel</span>
+  </div>
+  <div class="grid g2">
+    <div class="glass pad card">
+      <h3><i class="bar bar--azul"></i>Lo que Elementor Free no toca</h3>
+      <p><b>Theme Builder es de Pro.</b> Sin él, header, footer, archivos de agenda, entradas y búsqueda los sigue renderizando <b>Astra</b>. O sea: la mayor parte del sitio se rediseña por child theme, como estaba planeado. Elementor sólo manda dentro de las páginas que alguien armó con él.</p>
+    </div>
+    <div class="glass pad card">
+      <h3><i class="bar bar--azul"></i>Los Global Colors, en los dos lados</h3>
+      <p>Hay que cargar los cuatro colores <b>dos veces</b>: en la Global Color Palette de Astra y en Site Settings → Global Colors de Elementor. Y activar <b>Disable Default Colors</b> y <b>Disable Default Fonts</b> en Elementor → Settings, para que deje de imponer los suyos sobre el tema.</p>
+    </div>
+    <div class="glass pad card">
+      <h3><i class="bar bar--azul"></i>El orden de carga de Astra</h3>
+      <p>Astra arma CSS dinámico desde el Customizer y lo mete <b>inline</b> con <code>wp_add_inline_style()</code> sobre el handle <code>astra-theme-css</code>. La hoja del child theme va encolada <b>con ese handle como dependencia</b>; lo que necesite ganar sí o sí se inyecta por el filtro <code>astra_dynamic_theme_css</code>.</p>
+    </div>
+    <div class="glass pad card">
+      <h3><i class="bar bar--azul"></i>El costo real: los estilos por widget</h3>
+      <p>Cada color que alguien eligió a mano en un widget queda guardado en <code>_elementor_data</code> de esa página y <b>le gana a cualquier global</b>. No hay atajo: se auditan página por página desde el editor. Eso es lo que mueve la estimación, y depende de cuántas páginas Elementor haya.</p>
+    </div>
+  </div>
+</section>
+
+<section id="escala">
+  <div class="sec-head">
+    <span class="sec-num">04.b</span>
+    <h2><i class="bar"></i>510 páginas</h2>
+    <span class="note">El número que rompe el plan anterior</span>
+  </div>
+
+  <div class="tiles">
+    <div class="tile-n glass">
+      <div class="tile-n__k">Páginas en el sitio</div>
+      <div class="tile-n__v">510</div>
+      <div class="tile-n__d">Publicadas entre 2019 y 2026. No todas visibles: hay candidatas claras a archivar.</div>
+    </div>
+    <div class="tile-n glass">
+      <div class="tile-n__k">Auditarlas a mano</div>
+      <div class="tile-n__v">13,1<span class="tile-n__u">días</span></div>
+      <div class="tile-n__d">A 10 minutos por página, sólo de abrir el editor y mirar. Sin arreglar nada.</div>
+    </div>
+    <div class="tile-n glass">
+      <div class="tile-n__k">Con herramienta propia</div>
+      <div class="tile-n__v">4,6<span class="tile-n__u">días</span></div>
+      <div class="tile-n__d">Escaneo automático de las 510, más las ~40 páginas que importan trabajadas a mano.</div>
+    </div>
+  </div>
+
+  <div class="glass pad" style="margin-top:16px">
+    <h3 style="font:600 16px/1.3 var(--sans);margin-bottom:6px"><i class="bar bar--azul"></i>La auditoría página por página no escala</h3>
+    <p style="font-size:14px;color:var(--ink-2);margin-bottom:20px;max-width:64ch" class="indent">El plan anterior decía «se auditan página por página desde el editor». Con 510 eso deja de ser una tarea y pasa a ser el proyecto entero. Comparado en días hábiles de 6,5 horas:</p>
+    <div class="cmp">
+      <div class="cmp__row">
+        <span class="cmp__lab">Abrir las 510 a mano<br><span class="cmp__foot">10 min por página</span></span>
+        <span class="cmp__track"><span class="cmp__fill cmp__fill--caro" style="width:100%">13,1 días</span></span>
+      </div>
+      <div class="cmp__row">
+        <span class="cmp__lab">Escaneo + top 40 a mano<br><span class="cmp__foot">plugin propio, 20 min por página trabajada</span></span>
+        <span class="cmp__track"><span class="cmp__fill cmp__fill--barato" style="width:35.1%">4,6 días</span></span>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-3);margin-top:14px">Ahorro: <b style="color:var(--ink)">8,5 días</b>. Y el escaneo no crece con la cantidad de páginas; la auditoría manual sí.</p>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="glass pad card">
+      <h3><i class="bar bar--verde"></i>La herramienta, confirmada</h3>
+      <p>Se pueden subir plugins por ZIP, así que esto va. Un plugin chico, por <b>Plugins → Añadir nuevo → Subir</b>, recorre el <code>_elementor_data</code> de los 510 posts y reporta cuáles traen colores <b>literales</b> en vez de referencias a globals. La distinción es exacta y verificable: un widget atado a un global guarda <code>"__globals__"</code>, uno pinchado a mano guarda el hex crudo. Con ese listado, el reemplazo por lote es una corrida más — y ahora sabemos que tiene que cubrir las 510.</p>
+    </div>
+    <div class="glass pad card">
+      <h3><i class="bar bar--verde"></i>Qué plantillas priorizar</h3>
+      <p style="margin-bottom:12px">El top 25 lo dice solo. <b>Trece de las veinticinco son fichas de espacio cultural</b> y juntan el <b>42% del tráfico del top 25</b>: museos, mercados, bibliotecas, el Anfiteatro, la Manzana Jesuítica, el Molino. Es, por lejos, la plantilla más valiosa después de Inicio. Y cuatro son ciclos: Noche de los Museos, Festival Diseña, Somos Música, Aniversario del Mercado.</p>
+      <p><b>Feria del Libro es el caso aparte.</b> Son cuatro del top 25 con el 20% del tráfico, pero <b>cada edición se rediseña de cero</b>: no hay plantilla que mantener. De las ediciones anteriores sólo se aloja el PDF de programación para consulta. Así que lo que se construye no es una plantilla de Feria sino un <b>archivo de PDFs</b>, y la edición vigente lleva una pasada de marca y nada más.</p>
+    </div>
+  </div>
+
+  <div class="glass pad" style="margin-top:16px">
+    <h3 style="font:600 16px/1.3 var(--sans);margin-bottom:6px"><i class="bar bar--azul"></i>Las 25 páginas más visitadas del año</h3>
+    <p style="font-size:14px;color:var(--ink-2);max-width:64ch;margin-bottom:18px" class="indent">Visitantes únicos, enero a diciembre 2026, según Page Insights.</p>
+    <div class="rank">
+      <div class="rank__r"><span class="rank__n">Inicio</span><span class="rank__t"><span class="rank__b rank__b--home" style="width:100.0%"></span><span class="rank__v">1.090</span></span></div>
+      <div class="rank__r"><span class="rank__n">Museo de la Constitución Nacional</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:44.9%"></span><span class="rank__v">489</span></span></div>
+      <div class="rank__r"><span class="rank__n">+ Feria</span><span class="rank__t"><span class="rank__b rank__b--fer" style="width:40.4%"></span><span class="rank__v">440</span></span></div>
+      <div class="rank__r"><span class="rank__n">XXXII Feria del Libro</span><span class="rank__t"><span class="rank__b rank__b--fer" style="width:29.9%"></span><span class="rank__v">326</span></span></div>
+      <div class="rank__r"><span class="rank__n">Mercado Progreso</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:26.5%"></span><span class="rank__v">289</span></span></div>
+      <div class="rank__r"><span class="rank__n">Red de Bibliotecas Populares</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:23.1%"></span><span class="rank__v">252</span></span></div>
+      <div class="rank__r"><span class="rank__n">Noche de los Museos</span><span class="rank__t"><span class="rank__b rank__b--cic" style="width:22.1%"></span><span class="rank__v">241</span></span></div>
+      <div class="rank__r"><span class="rank__n">Participantes</span><span class="rank__t"><span class="rank__b rank__b--fer" style="width:21.4%"></span><span class="rank__v">233</span></span></div>
+      <div class="rank__r"><span class="rank__n">Museo Sor Josefa Díaz</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:19.4%"></span><span class="rank__v">212</span></span></div>
+      <div class="rank__r"><span class="rank__n">Museos y Salas</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:17.3%"></span><span class="rank__v">189</span></span></div>
+      <div class="rank__r"><span class="rank__n">Festival Diseña</span><span class="rank__t"><span class="rank__b rank__b--cic" style="width:15.5%"></span><span class="rank__v">169</span></span></div>
+      <div class="rank__r"><span class="rank__n">Somos Música</span><span class="rank__t"><span class="rank__b rank__b--cic" style="width:15.5%"></span><span class="rank__v">169</span></span></div>
+      <div class="rank__r"><span class="rank__n">Aniversario Mercado Progreso</span><span class="rank__t"><span class="rank__b rank__b--cic" style="width:12.8%"></span><span class="rank__v">140</span></span></div>
+      <div class="rank__r"><span class="rank__n">Anfiteatro Juan de Garay</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:12.8%"></span><span class="rank__v">139</span></span></div>
+      <div class="rank__r"><span class="rank__n">Manzana Jesuítica</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:12.7%"></span><span class="rank__v">138</span></span></div>
+      <div class="rank__r"><span class="rank__n">Centro Cultural Municipal</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:11.8%"></span><span class="rank__v">129</span></span></div>
+      <div class="rank__r"><span class="rank__n">Prensa</span><span class="rank__t"><span class="rank__b rank__b--fer" style="width:9.2%"></span><span class="rank__v">100</span></span></div>
+      <div class="rank__r"><span class="rank__n">Escuela Simón de Iriondo</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:9.1%"></span><span class="rank__v">99</span></span></div>
+      <div class="rank__r"><span class="rank__n">Preguntas Frecuentes</span><span class="rank__t"><span class="rank__b rank__b--otr" style="width:9.1%"></span><span class="rank__v">99</span></span></div>
+      <div class="rank__r"><span class="rank__n">Huellas de mi Ciudad</span><span class="rank__t"><span class="rank__b rank__b--otr" style="width:8.8%"></span><span class="rank__v">96</span></span></div>
+      <div class="rank__r"><span class="rank__n">Sala CEC</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:8.0%"></span><span class="rank__v">87</span></span></div>
+      <div class="rank__r"><span class="rank__n">Caminos Culturales</span><span class="rank__t"><span class="rank__b rank__b--otr" style="width:7.5%"></span><span class="rank__v">82</span></span></div>
+      <div class="rank__r"><span class="rank__n">Hospital Alassia</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:7.5%"></span><span class="rank__v">82</span></span></div>
+      <div class="rank__r"><span class="rank__n">Molino Marconetti</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:7.4%"></span><span class="rank__v">81</span></span></div>
+      <div class="rank__r"><span class="rank__n">Taller de cerámica La Guardia</span><span class="rank__t"><span class="rank__b rank__b--esp" style="width:7.2%"></span><span class="rank__v">79</span></span></div>
+    </div>
+    <div class="rank__leg">
+      <span><i class="rank__k rank__b--esp"></i>Ficha de espacio cultural · 13</span>
+      <span><i class="rank__k rank__b--fer"></i>Feria del Libro · 4</span>
+      <span><i class="rank__k rank__b--cic"></i>Ciclo o festival · 4</span>
+      <span><i class="rank__k rank__b--otr"></i>Otras · 3</span>
+      <span><i class="rank__k rank__b--home"></i>Inicio</span>
+    </div>
+    <p class="rank__cap">5.450 visitantes entre las 25. La vigesimoquinta recibe 79 al año: una visita cada 4,6 días.</p>
+  </div>
+
+  <p class="callout"><b>Corrijo algo que afirmé.</b> Dije que «el 80% del tráfico suele concentrarse en el 5–10% de las URLs» y lo usé para justificar trabajar sólo el top 40. Con estos 25 puntos el exponente de la Zipf da <b>−0,79</b>, y ajustando sólo la cola (ranks 6 a 25) da −0,92. Las dos describen una cola <b>gorda</b>, no fina.</p>
+
+  <div class="tabla-wrap">
+    <table class="costos" style="margin-top:16px">
+      <caption class="sr-only">Porcentaje del tráfico total que cubre cada corte, según dos ajustes</caption>
+      <thead><tr><th>Corte</th><th>Ajuste 25 puntos</th><th>Ajuste sólo cola</th></tr></thead>
+      <tbody>
+        <tr><td>top 25 páginas</td><td>38,7%</td><td>45,4%</td></tr>
+        <tr><td>top 40 páginas</td><td class="hot">45,8%</td><td class="hot">53,0%</td></tr>
+        <tr><td>top 60 páginas</td><td>52,6%</td><td>59,9%</td></tr>
+        <tr><td>top 100 páginas</td><td>62,1%</td><td>68,8%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="callout"><b>Qué significa.</b> Para llegar al 80% del tráfico habría que tocar más de 200 páginas, no 40. Trabajar sólo el top 40 y dejar que el resto herede dejaría cerca de la mitad del tráfico en páginas sin revisar. Sigue siendo una proyección — las colas reales caen más rápido que cualquier ajuste — pero la dirección invierte mi recomendación anterior: <b>el reemplazo por lote tiene que cubrir las 510, no sólo el top</b>. Con el plugin habilitado eso no cuesta más. El sitio entero proyecta unos <b>12.000 a 14.000 visitantes al año</b>, así que no es un problema de escala de tráfico sino de prolijidad: no quedan páginas huérfanas con la paleta vieja.</p>
+
+  <div class="glass pad" style="margin-top:16px">
+    <h3 style="font:600 16px/1.3 var(--sans);margin-bottom:16px"><i class="bar bar--azul"></i>Costo de auditar a mano, según cuántas queden</h3>
+    <div class="tabla-wrap">
+      <table class="costos">
+        <caption class="sr-only">Días hábiles de auditoría manual según minutos por página y cantidad de páginas</caption>
+        <thead><tr><th>Min. por página</th><th>510 pág.</th><th>250 pág.</th><th>80 pág.</th><th>40 pág.</th></tr></thead>
+        <tbody>
+          <tr><td>5 min</td><td class="hot">6,5 d</td><td>3,2 d</td><td>1,0 d</td><td>0,5 d</td></tr>
+          <tr><td>10 min</td><td class="hot">13,1 d</td><td>6,4 d</td><td>2,1 d</td><td>1,0 d</td></tr>
+          <tr><td>20 min</td><td class="hot">26,2 d</td><td>12,8 d</td><td>4,1 d</td><td>2,1 d</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--ink-2);margin-top:14px;max-width:70ch">Por eso el triage de la fase 1 no es burocracia: <b style="color:var(--ink)">cada página que se saca del universo son minutos que no se pagan</b>. El orden es descartar por estado (borrador, papelera, privada), después por huérfanas (sin enlaces ni visitas), después priorizar por tráfico.</p>
+  </div>
+
+  <p class="callout callout--verde"><b>Lo que quedó cerrado.</b> Se pueden subir plugins, así que el escenario de +8 días sale de la mesa. El techo del presupuesto baja y el piso sube un poco, porque el lote ahora cubre las 510 en vez del top 40: <b>el total pasa a 28–36 días hábiles</b>. La variación que queda es la normal de plantillas y QA, no la del recuento de páginas.</p>
+</section>
+
+<section id="fases">
+  <div class="sec-head">
+    <span class="sec-num">05.</span>
+    <h2><i class="bar"></i>Fases</h2>
+    <span class="note">Secuencia, no paralelizable</span>
+  </div>
+  <div class="phases">
+    <div class="phase glass"><div><div class="phase__n">Fase 1</div><h3><i class="bar"></i>Relevamiento y triage</h3><p class="indent">Reducir las 510 a un universo manejable: descartar por estado, después huérfanas, después priorizar por tráfico. Plugins, tipos de contenido y plantillas. Baseline de Lighthouse y axe. Staging local con copia exportada. Extracción de los SVG del lockup, el escudo y los iconos.</p></div><div class="phase__d">3–4 días</div></div>
+    <div class="phase glass"><div><div class="phase__n">Fase 2</div><h3><i class="bar"></i>Herramienta de auditoría</h3><p class="indent">Plugin propio, subido por ZIP, que escanea el <code>_elementor_data</code> de las 510 y reporta colores literales contra referencias a globals. Incluye el reemplazo por lote sobre todas las páginas, no sólo el top.</p></div><div class="phase__d">2–3 días</div></div>
+    <div class="phase glass"><div><div class="phase__n">Fase 3</div><h3><i class="bar"></i>Fundaciones del child theme</h3><p class="indent">Child theme sobre el <code>astra-child</code> oficial, encolado con dependencia declarada. Tipografías autoalojadas. Global Colors cargados en Astra <b>y</b> en Elementor, con los defaults de Elementor desactivados. <code>theme.json</code> restringido a los cuatro colores. Capas de fondo y trama por <code>astra_body_top</code>.</p></div><div class="phase__d">4–5 días</div></div>
+    <div class="phase glass"><div><div class="phase__n">Fase 4</div><h3><i class="bar"></i>Biblioteca de componentes</h3><p class="indent">Header glass sticky, menú mobile, hero, tarjeta de evento, tarjeta de nota, filtros, paginación, formulario de convocatorias y el footer con la lámina de luz. Cada uno con estado hover, foco, vacío y de carga, documentado en una styleguide viva dentro del propio WP.</p></div><div class="phase__d">5–7 días</div></div>
+    <div class="phase glass"><div><div class="phase__n">Fase 5</div><h3><i class="bar"></i>Plantillas Astra</h3><p class="indent">En el orden que marca la analítica: Inicio, <b>ficha de espacio cultural</b> (13 del top 25, 42% del tráfico), ciclo o festival, archivo de agenda, nota, convocatorias, búsqueda y 404. Más el <b>archivo de programaciones en PDF</b> de la Feria. La Feria vigente lleva sólo una pasada de marca, sin plantilla reusable.</p></div><div class="phase__d">5–7 días</div></div>
+    <div class="phase glass"><div><div class="phase__n">Fase 6</div><h3><i class="bar"></i>Páginas Elementor</h3><p class="indent">Reemplazo por lote de los colores literales que encontró el escaneo, más las páginas del top trabajadas a mano. <b>La duración la fija el triage de la fase 1</b>, no la cantidad total.</p></div><div class="phase__d">4–7 días</div></div>
+    <div class="phase glass"><div><div class="phase__n">Fase 7</div><h3><i class="bar"></i>Accesibilidad, performance y QA</h3><p class="indent">Auditoría AA completa, los tres modos degradados del vidrio, Lighthouse contra el baseline — CLS es el riesgo típico con fuentes autoalojadas y blur — y matriz de navegadores con Safari iOS y un Android de gama baja real.</p></div><div class="phase__d">3–4 días</div></div>
+    <div class="phase glass"><div><div class="phase__n">Fase 8</div><h3><i class="bar"></i>Publicación</h3><p class="indent">Ventana de bajo tráfico, backup por plugin, subida del ZIP, <b>Regenerate CSS &amp; Data</b> de Elementor, verificación de las 50 URLs del inventario, 48 h de monitoreo.</p></div><div class="phase__d">1–2 días</div></div>
+  </div>
+  <div class="total">
+    <span>Total estimado</span>
+    <b>28 a 36 días hábiles</b>
+    <span style="flex-basis:100%;letter-spacing:0;text-transform:none;font-size:13.5px">Cerrado: plugin habilitado, 510 páginas, lote sobre todas. Queda la variación normal de plantillas y QA.</span>
+  </div>
+</section>
+
+<section id="riesgos">
+  <div class="sec-head">
+    <span class="sec-num">06.</span>
+    <h2><i class="bar"></i>Riesgos</h2>
+  </div>
+  <div class="grid g2">
+    <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--gris"></i>510 páginas con estilos por widget</h3><span class="risk__lvl">Medio</span></div><p class="indent">Todo color elegido a mano le gana a los globals, y a 510 páginas la auditoría manual son 13 días. Baja de alto a medio porque se pueden subir plugins: el escaneo y el reemplazo por lote lo resuelven en 4,6.</p></div>
+    <div class="risk glass"><div class="risk__top"><h3><i class="bar"></i>El rojo no da AA en ningún combo</h3><span class="risk__lvl">Alto</span></div><p class="indent">Es el color identitario de la submarca y su mejor contraste es 4.33, con blanco. Queda restringido a texto grande y grafismos. Con la paleta reducida se nota más, porque ya no hay Azul 02 para descargarle trabajo.</p></div>
+    <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--gris"></i>Sin acceso al servidor</h3><span class="risk__lvl">Medio</span></div><p class="indent">Todo entra por ZIP desde el admin. Staging local para desarrollar y <code>?preview_theme=</code> para validar en producción antes de activar.</p></div>
+    <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--gris"></i>El CSS inline de Astra gana</h3><span class="risk__lvl">Medio</span></div><p class="indent">Si el child theme se encola sin declarar <code>astra-theme-css</code> como dependencia, pierde contra el inline del Customizer y aparecen colores viejos en lugares sueltos.</p></div>
+    <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--gris"></i>Blur en Android de gama baja</h3><span class="risk__lvl">Medio</span></div><p class="indent">El presupuesto de ~8 blurs y <code>glass-soft</code> en las grillas lo contienen, pero hay que probarlo en un teléfono real, no en el emulador.</p></div>
+    <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--verde"></i>Se desalinea otra vez</h3><span class="risk__lvl">Bajo</span></div><p class="indent">Pasa siempre. Lo contienen los Global Colors restringidos en los dos lados, el <code>theme.json</code> y la styleguide viva de la fase 3.</p></div>
+  </div>
+</section>
+
+<section id="decisiones">
+  <div class="sec-head">
+    <span class="sec-num">07.</span>
+    <h2><i class="bar"></i>Lo que falta definir</h2>
+  </div>
+  <div class="grid g2">
+    <div class="q glass-soft"><h3><i class="bar bar--gris"></i>Las 485 páginas restantes</h3><p class="indent">Es lo único que queda abierto: cuántas de las 510 están publicadas y cuántas huérfanas. Con las ediciones viejas de Feria fuera del alcance, el universo baja bastante.</p></div>
+    <div class="q glass-soft"><h3><i class="bar bar--verde"></i>Feria: resuelto</h3><p class="indent">Cada edición se rediseña de cero. De las anteriores sólo se aloja <b>el PDF de programación</b> para consulta. No hay plantilla de Feria que mantener — hay un <b>archivo de PDFs</b> que construir.</p></div>
+    <div class="q glass-soft"><h3><i class="bar bar--verde"></i>Fotografía: resuelto</h3><p class="indent">Hay banco propio, así que los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar.</p></div>
+    <div class="q glass-soft"><h3><i class="bar bar--verde"></i>Modo oscuro: decidido que no</h3><p class="indent">El Brandbook no lo contempla y el sitio va en tema claro únicamente. Saca los bloques de <code>prefers-color-scheme</code> del tema y evita el problema de que el rojo no llega a AA sobre fondo azul profundo.</p></div>
+  </div>
+</section>
+
+<footer class="foot luz">
+  <svg class="luz__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><use href="#sf-barras"/></svg>
+  <div class="foot__card glass glass--luz">
+    <div class="foot__spec">
+    <h3><i class="bar"></i>La lámina, en CSS</h3>
+    <p>Es <b>el mismo remate de ocho barras</b> que está en la esquina de la página, reusado con <code>&lt;use&gt;</code>: más chico y alineado al mismo margen que este bloque. Acá las barras <b>son la luz</b> sobre el Azul 01, no sombras que cortan un resplandor. <b>Sin imagen</b> — pesa cero y se re-tiñe con los mismos tokens. Y el bloque se apoya encima con <code>.glass--luz</code>, así que el vidrio esmerila la luz y las barras que pasan por detrás.</p>
+    </div>
+    <div class="foot__bottom">
+    <div class="marca">
+      <div class="marca__lock">
+        <div class="marca__sf"><span>SF</span></div>
+        <div class="marca__esc">
+          <svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true">
+            <circle cx="13" cy="14" r="9.5" fill="none" stroke="#002751" stroke-width="1.6"></circle>
+            <path d="M13 4.5V1M13 27v3M3.5 14H0M26 14h-3.5M6.2 7.2 3.8 4.8M19.8 7.2l2.4-2.4M6.2 20.8l-2.4 2.4M19.8 20.8l2.4 2.4" stroke="#002751" stroke-width="1.4" stroke-linecap="round"></path>
+            <rect x="9.5" y="11" width="7" height="7.5" fill="#002751"></rect>
+          </svg>
+        </div>
+      </div>
+      <div class="marca__txt">Municipalidad<span>de Santa Fe</span></div>
+    </div>
+    <div class="foot__meta">
+      El escudo va del SVG del Brandbook — este es un marcador<br>
+      Fuentes: Brandbook SF V1.0 · Febrero 2026 y ficha 02.4<br>
+      Tokens en <code>docs/design-tokens.css</code>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+</body>
+</html>
