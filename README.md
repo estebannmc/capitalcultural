@@ -32,10 +32,14 @@ Decisiones tomadas:
 | `docs/plan-glassmorph.md` | El plan completo: 8 fases, 28–36 días hábiles, riesgos y decisiones |
 | `docs/design-tokens.css` | Tokens de marca y material GlassMorph, listos para encolar en el child theme |
 | `docs/barras.svg` | El remate de ocho barras, partial para el child theme |
+| `docs/sistema-visual.html` | El sistema visual completo, navegable. Abrilo en cualquier navegador |
+| `docs/sistema-visual.pdf` | Lo mismo en PDF, 11 páginas, para compartir o imprimir |
 | `SF_Brandbook_V2_*.pdf` | Manual de marca (67 páginas normativas) |
 | `SF_paleta_cromática.pdf` | Ficha cromática 02.4 |
 
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
+
+Para ver el sistema visual con los componentes funcionando —vidrio, botones con sus estados, el remate de barras, la lámina del footer— abrí `docs/sistema-visual.html`. El PDF sirve para compartir, pero se exporta sin `backdrop-filter` ni grano porque Chromium los rasteriza y el archivo pasa de 4 a 46 MB.
 
 ## Cómo se entrega
 
