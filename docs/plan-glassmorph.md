@@ -190,9 +190,42 @@ Cero ocurrencias de «evento», «calendario» o «cartelera». El menú es **pl
 
 - **Encode Sans ya está cargada**, por Astra y por Elementor. La tipografía de marca ya está en el sitio. (También carga **Alegreya Sans**, que no es de marca y habría que sacar.)
 - **Las publicaciones en PDF ya son un patrón existente** y no sólo de Feria: Museos y Salas lista 14 PDFs por año y número. El componente de descarga sirve para todo el sitio, no para un caso.
-- **Museos y Salas es un hub** con 9 espacios bajo `/museos-y-salas/<slug>/`: CEC, Fotogalería Municipal, Manzana Jesuítica, Museo de la Ciudad, Museo de la Constitución Nacional, Museo César López Claro, Museo del Teatro, Sala Ariel Ramírez, Sala Mercado Editorial.
+- **Museos y Salas es un hub** con 10 espacios bajo `/museos-y-salas/<slug>/`: CEC, Fotogalería Municipal, Manzana Jesuítica y Colegio Inmaculada, Museo de la Ciudad, Museo de la Constitución Nacional, Museo Municipal César López Claro, Museo Municipal de Artes Visuales Sor Josefa Díaz y Clucellas, Museo del Teatro, Sala Ariel Ramírez, Sala Mercado Editorial.
 - El logo en uso es el **anterior** (`legado1recursoLogoCult_1@2x-8.png`).
 - Elementor **4.3.3**, WordPress **6.9.9**, Astra **4.13.1**. Elementor Free confirmado: no hay plugin `elementor-pro`.
+
+---
+
+## 2.quinquies Alcance, decidido
+
+> **El rediseño conserva la estructura por espacios. No se agrega agenda.**
+
+La agenda de la ciudad ya existe y vive en **otro dominio**
+(`agenda.santafeciudad.gov.ar`), que es el que la mantiene actualizada.
+Duplicarla acá sería mantener dos calendarios en desacuerdo, y el que
+perdería sería el nuestro: Capital Cultural no tiene quién le cargue
+eventos todos los días.
+
+Así que el sitio sigue siendo lo que ya es —**un directorio de destinos
+culturales**— y el rediseño lo hace mejor en eso, en vez de convertirlo
+en otra cosa:
+
+| Decisión | Qué implica |
+|---|---|
+| El menú plano de 17 entradas se agrupa, no se recorta | Espacios · Ciclos y programas · Institucional. Las 17 siguen alcanzables; dejan de competir entre sí en una sola fila. |
+| La cabecera muestra cuatro destinos y un disparador «Todos los destinos» | Es el patrón que el sitio ya tiene (`cc-menu-toggle` / `cc-menu-panel`); se le da forma, no se lo reemplaza. |
+| El home destaca **muestras vigentes**, no fechas | Una muestra dura meses. Una agenda se vence sola en una semana, y entonces el home miente. |
+| Hay un enlace saliente a la agenda, visible y rotulado | En el pie y en la ficha de espacio. Se declara que está en otro dominio en lugar de aparentar que es local. |
+| La ficha de espacio no lleva «agenda del espacio» | Lleva datos prácticos (horario, dirección, entrada, accesibilidad), las muestras en curso y galería. |
+
+**Lo que esto saca del presupuesto:** no hay tipo de contenido «evento»,
+ni vistas de calendario, ni filtros por fecha, ni sincronización con el
+dominio de la agenda. El trabajo es de plantillas y sistema visual.
+
+**Lo que esto mete:** el hub de Museos y Salas y la ficha de espacio
+pasan a ser las dos plantillas críticas del sitio, porque son el
+recorrido principal. Ya estaban priorizadas por tráfico (§2.ter); la
+decisión de alcance lo confirma.
 
 ---
 
@@ -379,10 +412,11 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 ## 5. Decisiones pendientes
 
 1. **Cuántas de las 510 están publicadas** y cuántas quedaron huérfanas. El top 25 por tráfico ya lo tenemos.
-2. ~~**¿Cuántas ediciones de Feria se conservan?**~~ — **resuelto: ninguna.** Ver §2.quater.
-3. ~~**Modo oscuro**~~ — **decidido: no.** El sitio va en tema claro únicamente. El child theme no lleva bloques de `prefers-color-scheme` ni stamps de `data-theme`, y de paso evita el problema de que el rojo de Cultura da 4.30 sobre fondo azul profundo y no llega a AA.
-4. ~~**Fotografía**~~ — **resuelto: hay banco propio.** Los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar. Queda por definir dirección de arte: relaciones de aspecto por plantilla, tratamiento (¿fotos a sangre o dentro del vidrio?) y el flujo de conversión a WebP, que sin acceso al servidor tiene que resolverse con un plugin.
-5. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
+2. ~~**¿Se suma una agenda?**~~ — **decidido: no.** Ya existe en `agenda.santafeciudad.gov.ar`. Se conserva la estructura por espacios y se enlaza hacia afuera. Ver §2.quinquies.
+3. ~~**¿Cuántas ediciones de Feria se conservan?**~~ — **resuelto: ninguna.** Ver §2.quater.
+4. ~~**Modo oscuro**~~ — **decidido: no.** El sitio va en tema claro únicamente. El child theme no lleva bloques de `prefers-color-scheme` ni stamps de `data-theme`, y de paso evita el problema de que el rojo de Cultura da 4.30 sobre fondo azul profundo y no llega a AA.
+5. ~~**Fotografía**~~ — **resuelto: hay banco propio.** Los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar. Queda por definir dirección de arte: relaciones de aspecto por plantilla, tratamiento (¿fotos a sangre o dentro del vidrio?) y el flujo de conversión a WebP, que sin acceso al servidor tiene que resolverse con un plugin.
+6. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
 
 ---
 
