@@ -43,6 +43,31 @@ Para ver el sistema visual con los componentes funcionando —vidrio, botones co
 
 El PDF se genera capturando cada página con el render real del navegador, no dejando que Chromium pagine solo. Eso conserva el `backdrop-filter`, los degradés y el grano, y permite cortar las páginas donde no parten ninguna tarjeta ni dejan un título huérfano al pie. **La contra: el texto es imagen, no es seleccionable ni buscable.** Para leer y copiar, el HTML.
 
+## El prototipo en Figma
+
+El rediseño está dibujado en Figma, sobre contenido **real** del sitio —no
+*lorem ipsum* ni secciones inventadas— tomado del relevamiento del HTML
+publicado.
+
+<https://www.figma.com/design/zpRpd7PIrH1inGQ4w6BcsT/>
+
+| Pantalla | Qué resuelve |
+|---|---|
+| `01 · Sistema` | Paleta, tipografía, botones con sus estados, el remate de barras y el material de vidrio |
+| `02 · Inicio` | Muestra destacada, propuestas vigentes, los 17 destinos agrupados y las publicaciones en PDF |
+| `03 · Ficha de espacio cultural` | La plantilla de `/museos-y-salas/<slug>/`: datos prácticos, muestras y galería |
+| `04 · Museos y Salas` | El hub con los 10 espacios municipales |
+| `05 · Inicio mobile` | El mismo home a 390 px |
+
+Dos cosas que el prototipo decide y conviene no perder de vista:
+
+- **No hay agenda.** Ya existe en `agenda.santafeciudad.gov.ar` y se enlaza
+  hacia afuera, rotulada. El sitio sigue siendo un directorio de destinos.
+- **Los datos prácticos de la ficha son de relleno.** Horarios, dirección y
+  accesibilidad del Museo de la Constitución Nacional están puestos para
+  dimensionar la plantilla; hay que reemplazarlos por los reales antes de
+  usarla como referencia de contenido.
+
 ## Cómo se entrega
 
 Sin acceso al servidor no hay build, ni WP-CLI, ni SSH. El child theme se construye localmente y se sube como **ZIP** desde *Apariencia → Temas → Añadir nuevo*. El CSS va compilado y las tipografías autoalojadas.
