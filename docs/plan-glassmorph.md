@@ -151,15 +151,60 @@ Capital Cultural es **nivel 01/A** del sistema: logo síntesis + tópico + color
 
 ---
 
+## 2.0 Relevamiento del sitio real — correcciones al plan
+
+Hasta acá el plan se escribió sin poder ver el sitio: el dominio estaba bloqueado por la política de red del entorno. Con el HTML de **Inicio** y **Museos y Salas** a la vista, **cinco premisas del plan eran falsas**. Quedan corregidas abajo; el resto del documento ya refleja lo corregido.
+
+### 1. Astra NO renderiza el header ni el footer
+
+Está instalado **`header-footer-elementor`** (HFE). El `<body>` trae `ehf-header ehf-footer page-template-elementor_header_footer ast-page-builder-template`. Header y footer son **bloques HTML de Elementor** con clases propias (`cc-header`, `cc-menu`, `footer-cc`).
+
+Esto invalida el argumento con el que dimensioné el proyecto: *«sin Theme Builder, Astra cubre la mayor parte del sitio»*. **No la cubre.** El child theme sigue siendo necesario para tokens y base, pero header, footer y el grueso del contenido se tocan en Elementor.
+
+### 2. El contenido no usa widgets de Elementor
+
+De los seis widgets de la home: **cuatro `html` y dos `shortcode`**. Nada de widgets con sus paneles de color.
+
+Eso rompe la estrategia de la Fase 2 tal como estaba escrita. El escaneo de `_elementor_data` sigue sirviendo —el HTML crudo se guarda ahí dentro— pero **no hay "ajustes de color de widget" que reemplazar por globals**: los colores están en HTML y CSS escritos a mano. El reemplazo por lote pasa a ser sobre cadenas de color dentro de bloques HTML, que es más delicado y necesita revisión humana por página tocada.
+
+### 3. Hay dos plugins a medida, sin documentar
+
+- **`capital-cultural-programacion-v330`** — el slider de «Propuestas activas» (clases `ccp-*`), con su propio `frontend.css` y `frontend.js`.
+- **`capital-cultural-slider`** — otro slider (`cc-slider`), con `slider.css` y `slider.js`.
+
+Son superficie nueva que el plan no contemplaba. Hay que leer su CSS antes de estimar: si traen colores fijos, se tocan ahí y no desde el tema. El sufijo `v330` sugiere versionado a mano, así que conviene averiguar quién los mantiene.
+
+### 4. Los Global Colors ya están puenteados — pero a medias
+
+Astra ya tiene `astglobalcolor0 = #002751` (Azul 01) y `astglobalcolor1 = #00c08b` (Verde 01), y Elementor los lee como `--e-global-color-astglobalcolor*`. **Esa parte de la Fase 3 ya está hecha.**
+
+Lo que falta: los slots 2, 3, 5, 7 y 8 siguen con los grises de Astra (`#1e293b`, `#334155`, `#F0F5FA`, `#D1D5DB`, `#111111`) en vez de los neutros SF. Y el **rojo de Cultura `#e63312` no aparece ni una vez en todo el HTML**: el color del tópico hoy no se usa.
+
+### 5. No hay agenda, y el sitio se organiza por destino
+
+Cero ocurrencias de «evento», «calendario» o «cartelera». El menú es **plano, de 17 entradas**, y son lugares y programas: + Feria, Festival Diseña, Noche de los Museos, Feria del Libro, Anfiteatro del Sur, Estación Belgrano, Mercado Progreso, Teatro Municipal (externo), Centro Cultural Muttis, Museos y Salas, Somos Música, Elenco y Organismos, Red de bibliotecas santafesinas, Huellas de mi Ciudad, Caminos Culturales, Convocatorias vigentes.
+
+**No es un sitio de agenda sino un directorio de espacios y programas.** Cualquier propuesta de agenda unificada es *alcance nuevo*, no rediseño — y hay que presupuestarla aparte.
+
+### Lo que sí confirma el relevamiento
+
+- **Encode Sans ya está cargada**, por Astra y por Elementor. La tipografía de marca ya está en el sitio. (También carga **Alegreya Sans**, que no es de marca y habría que sacar.)
+- **Las publicaciones en PDF ya son un patrón existente** y no sólo de Feria: Museos y Salas lista 14 PDFs por año y número. El componente de descarga sirve para todo el sitio, no para un caso.
+- **Museos y Salas es un hub** con 9 espacios bajo `/museos-y-salas/<slug>/`: CEC, Fotogalería Municipal, Manzana Jesuítica, Museo de la Ciudad, Museo de la Constitución Nacional, Museo César López Claro, Museo del Teatro, Sala Ariel Ramírez, Sala Mercado Editorial.
+- El logo en uso es el **anterior** (`legado1recursoLogoCult_1@2x-8.png`).
+- Elementor **4.3.3**, WordPress **6.9.9**, Astra **4.13.1**. Elementor Free confirmado: no hay plugin `elementor-pro`.
+
+---
+
 ## 2.bis Trabajar sobre Astra + Elementor Free
 
 Son **tres capas de estilo peleando por el mismo píxel**: Astra, Elementor y el child theme.
 
-**Lo que Elementor Free no toca.** Theme Builder es de Pro. Sin él, header, footer, archivos de agenda, entradas y búsqueda los sigue renderizando **Astra**. La mayor parte del sitio se rediseña por child theme, como estaba planeado; Elementor sólo manda dentro de las páginas que alguien armó con él.
+**~~Lo que Elementor Free no toca.~~ Corregido en §2.0:** el sitio tiene `header-footer-elementor`, así que header y footer los arma Elementor igual, sin necesidad de Pro. Astra aporta la base y los tokens; el child theme sigue siendo necesario, pero **no cubre la mayor parte del sitio** como decía esta versión del plan.
 
 **Los Global Colors van dos veces.** Los cuatro colores se cargan en la Global Color Palette de Astra **y** en Site Settings → Global Colors de Elementor. Además hay que activar *Disable Default Colors* y *Disable Default Fonts* en Elementor → Settings, para que deje de imponer los suyos sobre el tema.
 
-**El costo real son los estilos por widget.** Cada color elegido a mano dentro de un widget queda guardado en el `_elementor_data` de esa página y **le gana a cualquier global**. Con 510 páginas eso deja de ser una tarea y pasa a ser el proyecto entero — ver §2.ter.
+**El costo real son los colores escritos a mano.** El relevamiento (§2.0) muestra que no son ajustes de widget sino **HTML y CSS crudos dentro de bloques `html`**, más el CSS de los dos plugins a medida. Siguen guardados en el `_elementor_data` de cada página y le ganan a cualquier global, pero el reemplazo es sobre cadenas de color en HTML, más delicado y con revisión humana por página tocada — ver §2.ter.
 
 **Al publicar:** *Regenerate CSS & Data* desde Elementor → Tools, que se hace desde el admin y no necesita servidor.
 
