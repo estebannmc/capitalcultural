@@ -80,3 +80,15 @@ Dos cosas hay que cargarlas a mano en el panel, y si no se hacen el tema pelea e
 
 1. La **Global Color Palette de Astra** con los cuatro colores.
 2. Los **Global Colors de Elementor** (*Site Settings*), más *Disable Default Colors* y *Disable Default Fonts* en **Elementor → Settings**.
+
+## Herramientas para Claude Code
+
+El repo trae configuradas tres herramientas para trabajar con Claude Code. Las skills de [agent-skills](https://github.com/addyosmani/agent-skills) viven en `.claude/skills/` y no requieren instalación; las otras dos se instalan una vez por máquina:
+
+```bash
+pip install graphifyy==0.9.84
+claude plugin install ponytail@ponytail --scope project
+```
+
+- **graphify** arma un grafo del código en `graphify-out/` (no se versiona). Los hooks de `.claude/settings.json` lo llaman en cada lectura y búsqueda, así que tiene que estar en el `PATH`. Para generarlo o actualizarlo: `graphify update .`
+- **ponytail** queda habilitado para el proyecto desde `.claude/settings.json`.
