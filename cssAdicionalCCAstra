@@ -1,0 +1,626 @@
+/* ==========================================================================
+   CAPITAL CULTURAL - CSS 
+   ========================================================================== */
+
+/* ==========================================================================
+   01. IMPORT FUENTE
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+   02. TIPOGRAFIA GLOBAL
+   ========================================================================== */
+
+html,
+body {
+  font-family: 'Encode Sans', sans-serif !important;
+}
+
+/* Forzar fuente en elementos comunes */
+body,
+p,
+a,
+span,
+li,
+ul,
+ol,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+button,
+textarea {
+  font-family: 'Encode Sans', sans-serif !important;
+}
+
+/* ==========================================================================
+   03. FOOTER
+   ========================================================================== */
+
+.footer-cc {
+  width: 100%;
+  background: #002751;
+  color: #ffffff;
+  padding: 50px 20px 20px;
+  font-family: 'Encode Sans', sans-serif;
+}
+
+/* Contenedor principal */
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* Columna izquierda */
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Marca */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-brand img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+}
+
+.footer-brand h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Contacto */
+.footer-contacto h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.footer-contacto p {
+  margin: 4px 0;
+}
+
+/* Columna derecha */
+.footer-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* Links */
+.footer-links h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.footer-links p {
+  margin: 0;
+  line-height: 20px;
+}
+
+/* Textos generales del footer */
+.footer-cc p,
+.footer-cc a,
+.footer-cc a:visited,
+.footer-cc a:active {
+  line-height: 20px;
+  color: #ffffff !important;
+}
+
+/* Hover footer */
+.footer-cc a:hover {
+  color: #00c08b !important;
+}
+
+/* Linea inferior */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 30px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+/* Tablet footer */
+@media (max-width: 1024px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer-right {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile footer */
+@media (max-width: 600px) {
+  .footer-right {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+
+/* ==========================================================================
+   04. TITULO DE PAGINA Y BREADCRUMB
+   ========================================================================== */
+
+.cc-title-wrapper {
+  max-width: 1100px;
+  margin: 30px auto 20px;
+  padding: 0 20px;
+}
+
+.cc-page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #002751;
+}
+
+.cc-breadcrumb {
+  max-width: 1100px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.cc-breadcrumb a {
+  color: #002751;
+  text-decoration: none;
+}
+
+.cc-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.cc-breadcrumb .sep {
+  margin: 0 6px;
+  color: #9ca3af;
+}
+
+.cc-breadcrumb span {
+  color: #6b7280;
+}
+
+/* ==========================================================================
+   05. MENU - BLOQUE ORIGINAL
+   ========================================================================== */
+
+/* Contenedor */
+.cc-menu {
+  position: relative;
+  z-index: 9999;
+}
+
+/* Boton */
+.cc-menu-toggle {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  width: 40px;
+  height: 40px;
+  background: #002751;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  z-index: 10001;
+}
+
+.cc-menu-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+  transition: 0.3s ease;
+}
+
+/* Animacion a X */
+.cc-menu.active .cc-menu-toggle span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.cc-menu.active .cc-menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.cc-menu.active .cc-menu-toggle span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Panel full screen */
+.cc-menu-panel {
+  position: fixed;
+  inset: 0;
+  background: #002751;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-100%);
+  transition: 0.4s ease;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Activo */
+.cc-menu.active .cc-menu-panel {
+  transform: translateY(0);
+}
+
+/* Contenido centrado */
+.cc-menu-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Items */
+.cc-menu-panel li {
+  padding: 8px 0;
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Links */
+.cc-menu-panel a {
+  font-size: 15px;
+  line-height: 1.2;
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  transition: 0.2s;
+}
+
+.cc-menu-panel a:hover {
+  color: #00c08b;
+}
+
+/* Ultimo sin borde */
+.cc-menu-panel li:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   06. TITULO Y BREADCRUMB - REPETICION ORIGINAL
+   ========================================================================== */
+
+.cc-page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #002751;
+  font-family: 'Encode Sans', sans-serif !important;
+}
+
+.cc-breadcrumb {
+  max-width: 1100px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  font-size: 13px;
+  color: #6b7280;
+  font-family: 'Encode Sans', sans-serif !important;
+}
+
+.cc-breadcrumb a,
+.cc-breadcrumb span,
+.cc-breadcrumb .sep {
+  font-family: 'Encode Sans', sans-serif !important;
+}
+
+/* ==========================================================================
+   07. HEADER
+   ========================================================================== */
+
+.cc-header {
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  position: relative;
+  z-index: 9999;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.cc-header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.cc-header-logo img {
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   08. MENU - BLOQUE ORIGINAL REPETIDO
+   ========================================================================== */
+
+/* Contenedor */
+.cc-menu {
+  position: relative;
+  z-index: 9999;
+}
+
+/* Boton */
+.cc-menu-toggle {
+  width: 42px;
+  height: 42px;
+  background: #002751;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px;
+  transition: 0.25s ease;
+  box-shadow: none;
+}
+
+.cc-menu-toggle:hover {
+  background: #00c08b;
+}
+
+/* Lineas */
+.cc-menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  transition: 0.3s ease;
+}
+
+/* Animacion X */
+.cc-menu.active .cc-menu-toggle span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.cc-menu.active .cc-menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.cc-menu.active .cc-menu-toggle span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   09. PANEL FULLSCREEN
+   ========================================================================== */
+
+.cc-menu-panel {
+  position: fixed;
+  inset: 0;
+  background: #002751;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-100%);
+  transition: 0.4s ease;
+  padding: 40px 20px;
+  overflow-y: auto;
+  z-index: 9998;
+}
+
+/* Activo */
+.cc-menu.active .cc-menu-panel {
+  transform: translateY(0);
+}
+
+/* Lista */
+.cc-menu-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Item */
+.cc-menu-panel li {
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Ultimo */
+.cc-menu-panel li:last-child {
+  border-bottom: none;
+}
+
+/* Links */
+.cc-menu-panel a {
+  color: #ffffff !important;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: 0.2s ease;
+  display: block;
+}
+
+.cc-menu-panel a:hover {
+  color: #00c08b !important;
+}
+
+/* ==========================================================================
+   10. MOBILE HEADER / MENU
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .cc-header {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .cc-header-logo img {
+    width: 165px;
+    height: auto;
+  }
+
+  .cc-menu-toggle {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .cc-menu-panel {
+    padding: 100px 25px 40px;
+  }
+
+  .cc-menu-panel ul {
+    max-width: 100%;
+  }
+
+  .cc-menu-panel a {
+    font-size: 14px;
+  }
+}
+
+/* ==========================================================================
+   11. QUITAR BORDE, SOMBRA Y HOVER EN IMAGENES / LINKS
+   ========================================================================== */
+
+img,
+a img,
+.elementor img,
+.elementor a img {
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+a:hover img,
+.elementor a:hover img {
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
+/* ==========================================================================
+   13. BOTONES GRID - ORIGINAL CON CORRECCION DE HOVER
+   ========================================================================== */
+
+/* Botones grid */
+.cb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+/* Boton */
+.cb-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  padding: 0 10px;
+  text-decoration: none;
+  background: #002751;
+  color: #ffffff !important;
+  border: 1px solid #002751;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: background .4s cubic-bezier(.22, 1, .36, 1), color .3s ease, border-color .3s ease;
+}
+
+/* Texto del boton */
+.cb-btn span {
+  font-weight: 700;
+  font-size: 17px;
+  color: #ffffff !important;
+  text-align: center;
+  line-height: 1.2;
+  position: relative;
+  z-index: 2;
+  transition:
+    transform .45s cubic-bezier(.22, 1, .36, 1),
+    color .3s ease;
+}
+
+/* Barra del hover */
+.cb-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: var(--cb-bar-left, 20px);
+  width: 4px;
+  height: 32px;
+  background: #e63312;
+  transform:
+    translateY(-50%)
+    rotate(15deg)
+    scaleY(0);
+  opacity: 0;
+  transition:
+    transform .6s cubic-bezier(.19, 1, .22, 1),
+    opacity .3s ease;
+}
+
+/* Hover corregido:
+   - evita que Astra/Elementor pinte el texto verde por herencia;
+   - mantiene el boton blanco en hover;
+   - conserva la barra roja antes del texto. */
+.cb-btn:hover,
+.cb-btn:focus-visible {
+  background: #ffffff;
+  color: #002751 !important;
+  border-color: #ffffff;
+}
+
+.cb-btn:hover span,
+.cb-btn:focus-visible span {
+  color: #002751 !important;
+  transform: translateX(12px);
+}
+
+.cb-btn:hover::before,
+.cb-btn:focus-visible::before {
+  transform:
+    translateY(-50%)
+    rotate(15deg)
+    scaleY(1);
+  opacity: 1;
+}
