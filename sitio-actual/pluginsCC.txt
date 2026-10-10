@@ -1,0 +1,92 @@
+Plugins utilizados en Capital Cultural - WordPress
+
+Breadcrumb NavXT (es necesario?)
+Desactivar | Settings | Rollback
+Adds a breadcrumb navigation showing the visitor's path to their current location. For details on how to use this plugin visit Breadcrumb NavXT.
+
+Versión 7.5.2 | Por John Havlik | Ver detalles
+
+Capital Cultural Slider (Slider en Página principal)
+Desactivar | Rollback
+Slider principal administrable para Capital Cultural. Usar shortcode [capital_slider].
+
+Versión 2.1.8 | Por Esteban
+
+Capital Cultural – Programación de Museos
+Desactivar | Rollback
+Gestión centralizada de muestras, actividades, talleres y cursos de los museos y espacios culturales de la ciudad de Santa Fe.
+
+Versión 3.3.0 | Por Esteban Maximiliano Córdoba
+
+Contact Form 7 (es necesario?)
+Ajustes | Desactivar | Rollback
+Simplemente otro plugin de formularios de contacto. Sencillo pero adaptable.
+
+Versión 6.1.6 | Por Rock Lobster Inc. | Ver detalles
+
+Elementor
+Ajustes | Desactivar | Rollback | Obtener Elementor Pro
+El maquetador de sitios web Elementor lo tiene todo: maquetador de páginas de arrastrar y soltar, editor atómico, diseño preciso al píxel, sistemas de estilos globales y reutilizables, edición adaptable a dispositivos móviles y mucho más. ¡Empezá ahora!
+
+Versión 4.3.4 | Por Elementor.com | Ver detalles | Documentos y preguntas frecuentes | Video tutoriales
+
+ImageMagick Engine
+Settings | Desactivar | Rollback
+Improve the quality of re-sized images by replacing standard GD library with ImageMagick
+
+Versión 2.0.0 | Por Orangelab | Ver detalles
+
+LiteSpeed Cache
+Desactivar | Rollback | Ajustes
+Caché de páginas de alto rendimiento y optimización de sitio de LiteSpeed
+
+Versión 7.9.1 | Por LiteSpeed Technologies | Ver detalles
+
+Post Type Switcher (es necesario?)
+Desactivar | Rollback
+A simple way to change a post's type in WordPress
+
+Versión 4.0.1 | Por Triple J Software, Inc. | Ver detalles
+
+ReCaptcha v2 for Contact Form 7
+Desactivar | Rollback
+
+Redux Framework (es necesario?)
+Desactivar | Rollback
+¡Construye mejores sitios rápidamente con WordPress!
+
+Versión 4.5.15 | Por Team Redux | Ver detalles | ¿Qué es esto?
+
+Ultimate Addons for Elementor (UAE) (es necesario?)
+Ajustes | Desactivar | Rollback | Pasate a Pro
+Ultimate Addons es un potente plugin que te permite crear encabezados y pies de página personalizados con Elementor y mostrarlos en las ubicaciones seleccionadas. También podés crear bloques personalizados de Elementor y colocarlos en cualquier lugar de tu sitio web con un shortcode.
+
+Versión 2.9.4 | Por Brainstorm Force | Ver detalles | 
+
+Wordfence Security
+Desactivar | Rollback
+Wordfence Security - Antivirus, cortafuegos y exploración de malware
+
+Versión 9.0.1 | Por Wordfence | Ver detalles
+
+WP Rollback
+Desactivar | Rollback
+Rollback (or forward) any WordPress.org plugin, theme or block like a boss.
+
+Versión 3.1.2 | Por WP Rollback | Ver detalles | Documentation | Support | Go Pro!
+
+WP Statistics
+Get Premium | Settings | Docs | Desactivar | Rollback
+Get website traffic insights with GDPR/CCPA compliant, privacy-friendly analytics. Includes visitor data, stunning graphs, and no data sharing.
+
+Versión 14.16.13 | Por VeronaLabs | Ver detalles | Visit WordPress.org page | Rate this plugin
+
+WPCode Lite
+Obtener WPCode Pro | Fragmentos de código | Desactivar | Rollback
+Añade fácilmente fragmentos de código en WordPress. Inserta scripts en la cabecera y el pie de página, añade fragmentos de código PHP con lógica condicional, inserta píxeles de anuncios, contenido personalizado y mucho más.
+
+Yoast SEO
+Obtené la vesión Premium | Preguntas frecuentes | Ajustes | Desactivar | Rollback
+La primera verdadera solución SEO todo en uno para WordPress, incluyendo análisis de contenido de páginas, mapas del sitio en XML y mucho más.
+
+Versión 28.5 | Por Equipo Yoast | Ver detalles

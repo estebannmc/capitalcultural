@@ -34,8 +34,12 @@ Decisiones tomadas:
 | `docs/barras.svg` | El remate de ocho barras, partial para el child theme |
 | `docs/sistema-visual.html` | El sistema visual completo, navegable. Abrilo en cualquier navegador |
 | `docs/sistema-visual.pdf` | Lo mismo en PDF, 11 páginas, para compartir o imprimir |
-| `SF_Brandbook_V2_*.pdf` | Manual de marca (67 páginas normativas) |
-| `SF_paleta_cromática.pdf` | Ficha cromática 02.4 |
+| `marca/SF_Brandbook_V2_*.pdf` | Manual de marca (67 páginas normativas) |
+| `marca/SF_paleta_cromática.pdf` | Ficha cromática 02.4 |
+| `sitio-actual/cssAdicionalCCAstra.css` | El CSS adicional que hoy está cargado en Astra (*Personalizar → CSS adicional*) |
+| `sitio-actual/botonesCC.js` | Script que posiciona la barra de los botones `.cb-btn` según el texto |
+| `sitio-actual/pluginsCC.txt` | Plugins instalados en el WordPress, con versión; los marcados *¿es necesario?* están en revisión |
+| `sitio-actual/paginasUtilCC.docx` | Listado de páginas del sitio |
 
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
 
@@ -76,3 +80,15 @@ Dos cosas hay que cargarlas a mano en el panel, y si no se hacen el tema pelea e
 
 1. La **Global Color Palette de Astra** con los cuatro colores.
 2. Los **Global Colors de Elementor** (*Site Settings*), más *Disable Default Colors* y *Disable Default Fonts* en **Elementor → Settings**.
+
+## Herramientas para Claude Code
+
+El repo trae configuradas tres herramientas para trabajar con Claude Code. Las skills de [agent-skills](https://github.com/addyosmani/agent-skills) viven en `.claude/skills/` y no requieren instalación; las otras dos se instalan una vez por máquina:
+
+```bash
+pip install graphifyy==0.9.84
+claude plugin install ponytail@ponytail --scope project
+```
+
+- **graphify** arma un grafo del código en `graphify-out/` (no se versiona). Los hooks de `.claude/settings.json` lo llaman en cada lectura y búsqueda, así que tiene que estar en el `PATH`. Para generarlo o actualizarlo: `graphify update .`
+- **ponytail** queda habilitado para el proyecto desde `.claude/settings.json`.
