@@ -183,7 +183,7 @@ Lo que falta: los slots 2, 3, 5, 7 y 8 siguen con los grises de Astra (`#1e293b`
 
 ### 5. No hay agenda, y el sitio se organiza por destino
 
-Cero ocurrencias de «evento», «calendario» o «cartelera». El menú es **plano, de 17 entradas**, y son lugares y programas: + Feria, Festival Diseña, Noche de los Museos, Feria del Libro, Anfiteatro del Sur, Estación Belgrano, Mercado Progreso, Teatro Municipal (externo), Centro Cultural Muttis, Museos y Salas, Somos Música, Elenco y Organismos, Red de bibliotecas santafesinas, Huellas de mi Ciudad, Caminos Culturales, Convocatorias vigentes.
+Cero ocurrencias de «evento», «calendario» o «cartelera». El menú es **plano, de 16 entradas** (el relevamiento decía 17; `sitio-actual/header.html` da 16), y son lugares y programas: + Feria, Festival Diseña, Noche de los Museos, Feria del Libro, Anfiteatro del Sur, Estación Belgrano, Mercado Progreso, Teatro Municipal (externo), Centro Cultural Muttis, Museos y Salas, Somos Música, Elenco y Organismos, Red de bibliotecas santafesinas, Huellas de mi Ciudad, Caminos Culturales, Convocatorias vigentes.
 
 **No es un sitio de agenda sino un directorio de espacios y programas.** Cualquier propuesta de agenda unificada es *alcance nuevo*, no rediseño — y hay que presupuestarla aparte.
 
@@ -213,7 +213,7 @@ en otra cosa:
 
 | Decisión | Qué implica |
 |---|---|
-| El menú plano de 17 entradas se agrupa, no se recorta | Espacios · Ciclos y programas · Institucional. Las 17 siguen alcanzables; dejan de competir entre sí en una sola fila. |
+| El menú plano de 16 entradas se agrupa, no se recorta | Espacios · Ciclos y programas · Institucional. Las 16 siguen alcanzables; dejan de competir entre sí en una sola fila. |
 | La cabecera muestra cuatro destinos y un disparador «Todos los destinos» | Es el patrón que el sitio ya tiene (`cc-menu-toggle` / `cc-menu-panel`); se le da forma, no se lo reemplaza. |
 | El home destaca **muestras vigentes**, no fechas | Una muestra dura meses. Una agenda se vence sola en una semana, y entonces el home miente. |
 | Hay un enlace saliente a la agenda, visible y rotulado | En el pie y en la ficha de espacio. Se declara que está en otro dominio en lugar de aparentar que es local. |
@@ -232,7 +232,7 @@ decisión de alcance lo confirma.
 
 ## 2.sexies Lo que ya está cargado en el sitio — `sitio-actual/`
 
-El relevamiento de §2.0 se hizo desde el HTML publicado. Estos cuatro archivos salen del **panel**, y muestran lo que el HTML no deja ver: qué CSS se suma por fuera del tema, qué script mueve los botones, qué plugins están activos y qué páginas importan.
+El relevamiento de §2.0 se hizo desde el HTML publicado. Estos seis archivos salen del **panel**, y muestran lo que el HTML no deja ver: qué CSS se suma por fuera del tema, qué script mueve los botones, cómo están escritos el header y el footer, qué plugins están activos y qué páginas importan.
 
 ### El CSS adicional es una cuarta capa
 
@@ -257,6 +257,30 @@ La grilla de botones (`.cb-grid` / `.cb-btn`) ya hace lo que pide el sistema: re
 El script mide con `getBoundingClientRect` dónde empieza el texto de cada `.cb-btn` y ubica la barra 17px antes. Recalcula en `load`, `resize`, `fonts.ready`, el init de Elementor, a los 300 y 800 ms, y en **cada `mouseenter` del documento en fase de captura**: pasar el mouse sobre cualquier elemento de la página vuelve a medir todos los botones. Es lectura de layout constante para resolver algo que CSS hace solo.
 
 La barra se cuelga del `span` (`.cb-btn span::before`, con `right: 100%` y el margen que hoy calcula el script) y viaja con el texto sin medir nada. Si se quiere conservar el efecto actual —barra quieta, texto que se corre—, el `::before` compensa el desplazamiento con un `translateX(-12px)` en hover. El child theme lo resuelve así y el script se retira, junto con el lugar desde donde se inyecta (probablemente WPCode, ver abajo) **[R]**.
+
+### Header y footer: el markup de los bloques de UAE
+
+`header.html` y `footer.html` son el contenido de los dos bloques HTML que UAE monta como cabecera y pie. Es el markup exacto que estila el CSS adicional, y el que el rediseño tiene que reemplazar **del lado de Elementor**: el child theme no lo genera.
+
+**El header** es el logo y un botón de menú, nada más. Las 16 entradas viven en un panel a pantalla completa que se abre con el botón, también en escritorio: hoy el sitio **no muestra ningún destino** sin un clic. Es lo que corrige la decisión de §2.quinquies (cuatro destinos a la vista y «Todos los destinos»). Lo que hay que resolver al rehacerlo:
+
+1. **El panel cerrado sigue en el recorrido del teclado.** Se esconde con `transform: translateY(-100%)`, sin `visibility: hidden` ni `inert`: quien navega con Tab pasa por 16 links invisibles antes de llegar al contenido, y un lector de pantalla los lee.
+2. **El botón no dice su estado.** Siempre es «Abrir menú», sin `aria-expanded` ni `aria-controls`. Tampoco cierra con Escape ni devuelve el foco al botón.
+3. **El script depende de `DOMContentLoaded`.** Si el bloque se ejecuta después de ese evento —que es lo que pasa cuando LiteSpeed demora o combina el JS—, el listener nunca corre y **el menú no abre**. Hay que confirmar la configuración de LiteSpeed **[R]**; el reemplazo se inicializa sin esperar el evento.
+4. El logo es el **anterior** (`legado1recursoLogoCult_1@2x-8.png`, §2.0), en PNG. El lockup nuevo va en SVG.
+5. Teatro Municipal sale a otro dominio sin aviso. Se rotula como externo, igual que la agenda.
+
+Cada link envuelve el texto en un `<span>`: el mismo enganche que usa `.cb-btn`, útil para la barra a 15° delante del destino activo.
+
+**El footer** ya tiene casi todo lo que pide §2:
+
+- el enlace saliente a la **Agenda** y a **Convocatorias vigentes**, que §2.quinquies pedía — falta rotularlos como externos;
+- Instagram con el handle **`cultura.santafecapital`**, el que fija el Brandbook (pág. 51) — ya está bien;
+- la marca de la Municipalidad, pero como PNG (`logoMuniPNG-8.png`): se reemplaza por la marca completa en SVG de §1.7.
+
+Y tiene cinco detalles para corregir de paso: dos `style="color:#ffffff"` inline en los títulos, que le ganan a cualquier hoja y hay que sacar; títulos que saltan de `h2` a `h4`; el teléfono `4571609` sin característica ni enlace `tel:` (va `tel:+543424571609`); el año del © escrito a mano; y la sección de redes con YouTube `@SantaFeCapital`, que parece la cuenta general de la ciudad y no la de Cultura — confirmar si es la intención.
+
+**Cómo se entrega:** el header y el footer nuevos se escriben como HTML en este repo, en el mismo formato que estos dos archivos, y se pegan en los bloques de UAE. Así quedan versionados, y la vuelta atrás es pegar el anterior.
 
 ### Plugins activos
 
@@ -423,7 +447,7 @@ Plugin propio, subido por ZIP, que escanea el `_elementor_data` de las 510 y rep
 **Entregable:** ZIP instalable del child theme, con el sitio ya en paleta correcta aunque sin componentes nuevos.
 
 ### Fase 4 · Biblioteca de componentes — *5 a 7 días*
-Header glass sticky · menú mobile (el patrón `.glass-bar::before` de Freedom, que existe justamente para que el menú desplegable pueda esmerilar el contenido) · hero con barrido a 15° · tarjeta de evento/agenda · tarjeta de nota · **galería de fotos** (ahora que hay banco propio) · **ítem de descarga de PDF** (para el archivo de programaciones de Feria) · filtros y chips · paginación · formulario de convocatorias (probablemente sale: Convocatorias vigentes vive fuera del sitio, §2.sexies) · **grilla de botones `.cb-btn`**, evolucionada desde la actual y sin `botonesCC.js` · footer con la lámina de luz y marca completa.
+Header glass sticky, **entregado como HTML para el bloque de UAE** (sobre `sitio-actual/header.html`) · menú mobile, con el panel fuera del recorrido de teclado cuando está cerrado (el patrón `.glass-bar::before` de Freedom, que existe justamente para que el menú desplegable pueda esmerilar el contenido) · hero con barrido a 15° · tarjeta de evento/agenda · tarjeta de nota · **galería de fotos** (ahora que hay banco propio) · **ítem de descarga de PDF** (para el archivo de programaciones de Feria) · filtros y chips · paginación · formulario de convocatorias (probablemente sale: Convocatorias vigentes vive fuera del sitio, §2.sexies) · **grilla de botones `.cb-btn`**, evolucionada desde la actual y sin `botonesCC.js` · footer con la lámina de luz y marca completa.
 
 Cada componente se entrega con estado *hover*, *focus-visible*, vacío y de carga. Se documentan en una página oculta del propio WP que funcione como styleguide viva.
 
@@ -481,6 +505,7 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 | Se desactiva UAE creyendo que sobra | Alto — el sitio queda sin header ni footer | Está marcado *¿es necesario?* en la lista de plugins, pero es `header-footer-elementor` con otro nombre. Dejarlo anotado en el inventario |
 | CSS adicional y WPCode le ganan al child theme | Medio — se imprimen después del tema | Vaciarlos en la publicación, con el respaldo de `sitio-actual/`. Al limpiar los duplicados del CSS adicional, fusionar propiedad por propiedad: el bloque «muerto» del menú todavía fija el botón |
 | LiteSpeed sirve CSS viejo | Bajo pero confunde en QA | Purgar después de cada subida; revisar si combina o minifica CSS |
+| El menú no abre si LiteSpeed demora el JS | Alto — sin menú no se llega a ningún destino | El script del header espera `DOMContentLoaded`; el nuevo se inicializa sin depender del evento. Probar con la optimización de JS de LiteSpeed activa |
 | La marca se vuelve a desalinear tras el lanzamiento | Bajo pero seguro | Global Color Palette de Astra + `theme.json` restringidos a cuatro colores, más la styleguide viva de la Fase 3 |
 
 ---
@@ -503,4 +528,4 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 - `docs/barras.svg` — el remate de barras de esquina, partial para el child theme
 - `docs/plan-glassmorph.md` — este documento
 - `marca/` — los dos PDFs normativos
-- `sitio-actual/` — lo que hoy está cargado en el sitio, analizado en §2.sexies: `cssAdicionalCCAstra.css`, `botonesCC.js`, `pluginsCC.txt` y `paginasUtilCC.docx`
+- `sitio-actual/` — lo que hoy está cargado en el sitio, analizado en §2.sexies: `cssAdicionalCCAstra.css`, `botonesCC.js`, `header.html`, `footer.html`, `pluginsCC.txt` y `paginasUtilCC.docx`

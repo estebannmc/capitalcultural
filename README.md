@@ -38,6 +38,7 @@ Decisiones tomadas:
 | `marca/SF_paleta_cromática.pdf` | Ficha cromática 02.4 |
 | `sitio-actual/cssAdicionalCCAstra.css` | El CSS adicional que hoy está cargado en Astra (*Personalizar → CSS adicional*) |
 | `sitio-actual/botonesCC.js` | Script que posiciona la barra de los botones `.cb-btn` según el texto |
+| `sitio-actual/header.html` · `footer.html` | El HTML de los bloques de Ultimate Addons que arman la cabecera y el pie |
 | `sitio-actual/pluginsCC.txt` | Plugins instalados en el WordPress, con versión; los marcados *¿es necesario?* están en revisión |
 | `sitio-actual/paginasUtilCC.docx` | Listado de páginas del sitio |
 
