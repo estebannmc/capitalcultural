@@ -1,7 +1,8 @@
 # Capital Cultural · Plan de actualización visual (GlassMorph + marca SF 2026)
 
 **Sitio:** https://www.santafeciudad.gov.ar/capitalcultural/
-**Fuentes normativas:** `SF_Brandbook_V2_light_compressed-1_compressed-1.pdf` (V1.0 · Febrero 2026, 67 pág.) y `SF_paleta_cromática.pdf` (ficha 02.4)
+**Fuentes normativas:** `marca/SF_Brandbook_V2_light_compressed-1_compressed-1.pdf` (V1.0 · Febrero 2026, 67 pág.) y `marca/SF_paleta_cromática.pdf` (ficha 02.4)
+**Estado actual del sitio:** `sitio-actual/` — CSS adicional, script de botones, plugins instalados y listado de páginas (ver §2.sexies)
 **Stack confirmado:** WordPress + **Astra 4.13.1** + **Elementor Free**
 **Enfoque acordado:** retematizado por child theme, sin migrar plataforma
 **Sistema cromático:** cerrado en cuatro — Azul 01, Verde 01, rojo de submarca y neutros
@@ -172,13 +173,13 @@ Eso rompe la estrategia de la Fase 2 tal como estaba escrita. El escaneo de `_el
 - **`capital-cultural-programacion-v330`** — el slider de «Propuestas activas» (clases `ccp-*`), con su propio `frontend.css` y `frontend.js`.
 - **`capital-cultural-slider`** — otro slider (`cc-slider`), con `slider.css` y `slider.js`.
 
-Son superficie nueva que el plan no contemplaba. Hay que leer su CSS antes de estimar: si traen colores fijos, se tocan ahí y no desde el tema. El sufijo `v330` sugiere versionado a mano, así que conviene averiguar quién los mantiene.
+Son superficie nueva que el plan no contemplaba. Hay que leer su CSS antes de estimar: si traen colores fijos, se tocan ahí y no desde el tema. ~~El sufijo `v330` sugiere versionado a mano, así que conviene averiguar quién los mantiene.~~ **Resuelto:** la lista de plugins (§2.sexies) los da como propios — *Capital Cultural Slider* 2.1.8 y *Capital Cultural – Programación de Museos* 3.3.0, los dos de Esteban. Como el código es nuestro, los colores fijos se corrigen en el plugin mismo, sin sobrescribir desde el tema.
 
 ### 4. Los Global Colors ya están puenteados — pero a medias
 
 Astra ya tiene `astglobalcolor0 = #002751` (Azul 01) y `astglobalcolor1 = #00c08b` (Verde 01), y Elementor los lee como `--e-global-color-astglobalcolor*`. **Esa parte de la Fase 3 ya está hecha.**
 
-Lo que falta: los slots 2, 3, 5, 7 y 8 siguen con los grises de Astra (`#1e293b`, `#334155`, `#F0F5FA`, `#D1D5DB`, `#111111`) en vez de los neutros SF. Y el **rojo de Cultura `#e63312` no aparece ni una vez en todo el HTML**: el color del tópico hoy no se usa.
+Lo que falta: los slots 2, 3, 5, 7 y 8 siguen con los grises de Astra (`#1e293b`, `#334155`, `#F0F5FA`, `#D1D5DB`, `#111111`) en vez de los neutros SF. Y el **rojo de Cultura `#e63312` no aparece ni una vez en todo el HTML**. ~~El color del tópico hoy no se usa.~~ **Corregido en §2.sexies:** sí se usa, pero desde el CSS adicional del Customizer, como la barra de hover de los botones `.cb-btn`.
 
 ### 5. No hay agenda, y el sitio se organiza por destino
 
@@ -192,7 +193,7 @@ Cero ocurrencias de «evento», «calendario» o «cartelera». El menú es **pl
 - **Las publicaciones en PDF ya son un patrón existente** y no sólo de Feria: Museos y Salas lista 14 PDFs por año y número. El componente de descarga sirve para todo el sitio, no para un caso.
 - **Museos y Salas es un hub** con 10 espacios bajo `/museos-y-salas/<slug>/`: CEC, Fotogalería Municipal, Manzana Jesuítica y Colegio Inmaculada, Museo de la Ciudad, Museo de la Constitución Nacional, Museo Municipal César López Claro, Museo Municipal de Artes Visuales Sor Josefa Díaz y Clucellas, Museo del Teatro, Sala Ariel Ramírez, Sala Mercado Editorial.
 - El logo en uso es el **anterior** (`legado1recursoLogoCult_1@2x-8.png`).
-- Elementor **4.3.3**, WordPress **6.9.9**, Astra **4.13.1**. Elementor Free confirmado: no hay plugin `elementor-pro`.
+- Elementor **4.3.3**, WordPress **6.9.9**, Astra **4.13.1**. Elementor Free confirmado: no hay plugin `elementor-pro`. (La lista de plugins posterior ya da Elementor **4.3.4**.)
 
 ---
 
@@ -229,9 +230,81 @@ decisión de alcance lo confirma.
 
 ---
 
+## 2.sexies Lo que ya está cargado en el sitio — `sitio-actual/`
+
+El relevamiento de §2.0 se hizo desde el HTML publicado. Estos cuatro archivos salen del **panel**, y muestran lo que el HTML no deja ver: qué CSS se suma por fuera del tema, qué script mueve los botones, qué plugins están activos y qué páginas importan.
+
+### El CSS adicional es una cuarta capa
+
+`cssAdicionalCCAstra.css` son **626 líneas** cargadas en *Personalizar → CSS adicional*. A las tres capas de §2.bis —Astra, Elementor, child theme— se suma ésta, que hoy es la que estila header, menú, footer, título, breadcrumb y botones. El child theme la **absorbe y la vacía**: no conviven, porque el CSS adicional se imprime después de todo y le ganaría al tema.
+
+Lo que hay adentro, y qué implica:
+
+1. **Encode Sans por `@import` a Google Fonts, con `!important` sobre todos los elementos** —`div` y `span` incluidos—. Es exactamente la dependencia externa que §1.3 saca al autoalojar, y además bloquea Geologica: con ese `!important` sobre `span` y `div`, el lockup no puede tomar la tipografía de marca sin otro `!important` encima. Se borra al activar el child theme, no antes.
+2. **Bloques repetidos con valores distintos.** El menú está dos veces (secciones 05 y 08) y título + breadcrumb también (04 y 06); la numeración salta de 11 a 13. Gana el segundo de cada par, pero **no del todo**: el primero declara `position: fixed; top: 50px; right: 50px` en `.cc-menu-toggle` y el segundo no lo pisa, así que el botón del menú sigue fijo por el bloque que parece muerto. **Borrar "el duplicado" cambia el header.** Hay que fusionar los dos a mano, propiedad por propiedad.
+3. **Los colores de marca ya están**: Azul 01 y Verde 01 en todo, y el rojo `#e63312` en la barra de `.cb-btn` — lo que corrige §2.0.4. Los que sobran son dos grises de Tailwind en el breadcrumb: `#6b7280` (4.83 sobre blanco, pasa AA) y `#9ca3af` en el separador (2.54, sólo decorativo). Se reemplazan por los neutros SF.
+4. **Dos fallas de accesibilidad** que el rediseño tiene que cerrar:
+   - el hover de `.cc-menu-toggle` pasa el fondo a Verde 01 con las tres líneas en blanco: **2.36**, por debajo del 3:1 que WCAG 1.4.11 pide a un control. Es la regla de §1.2: sobre verde, Azul 01.
+   - `.cb-btn:focus-visible` es igual al hover: fondo blanco **con borde blanco**. Sobre fondo claro el botón enfocado se borra entero. Es el caso que el anillo de foco de §1.6 resuelve.
+5. **El footer ya tiene la estructura** de §1.7: `.footer-cc` en Azul 01, grilla de dos columnas, hover en verde (6.33, pasa). Las clases (`footer-cc`, `footer-inner`, `footer-left`, `footer-right`, `footer-bottom`) las usa el bloque HTML de Elementor, así que el child theme **las conserva** y les cambia el estilo: renombrarlas obliga a editar el bloque.
+
+### `.cb-btn` es el botón de §1.6 a medio camino
+
+La grilla de botones (`.cb-grid` / `.cb-btn`) ya hace lo que pide el sistema: relleno Azul 01, **barra roja a 15° inclinada a la derecha** (`rotate(15deg)`, el signo correcto según §1.4) y el texto que se corre al entrar el hover. Le falta lo que §1.6 agrega: el anillo de foco, el radio de 10px —hoy es recto—, el respeto a `prefers-reduced-motion` y un hover que no desaparezca sobre fondo claro. **Se evoluciona, no se reemplaza**: el markup que ya está en las páginas sigue sirviendo.
+
+### `botonesCC.js` sobra
+
+El script mide con `getBoundingClientRect` dónde empieza el texto de cada `.cb-btn` y ubica la barra 17px antes. Recalcula en `load`, `resize`, `fonts.ready`, el init de Elementor, a los 300 y 800 ms, y en **cada `mouseenter` del documento en fase de captura**: pasar el mouse sobre cualquier elemento de la página vuelve a medir todos los botones. Es lectura de layout constante para resolver algo que CSS hace solo.
+
+La barra se cuelga del `span` (`.cb-btn span::before`, con `right: 100%` y el margen que hoy calcula el script) y viaja con el texto sin medir nada. Si se quiere conservar el efecto actual —barra quieta, texto que se corre—, el `::before` compensa el desplazamiento con un `translateX(-12px)` en hover. El child theme lo resuelve así y el script se retira, junto con el lugar desde donde se inyecta (probablemente WPCode, ver abajo) **[R]**.
+
+### Plugins activos
+
+`pluginsCC.txt` cierra el inventario que pedía la Fase 1. Los marcados con *¿es necesario?* son los que el propio equipo puso en duda:
+
+| Plugin | Versión | Qué implica para el rediseño |
+|---|---|---|
+| **Ultimate Addons for Elementor (UAE)** · *¿es necesario?* | 2.9.4 | **Sí, es necesario.** Es el nombre actual de `header-footer-elementor` (§2.0.1): arma el header y el footer. Desactivarlo deja el sitio sin cabecera ni pie |
+| Elementor | 4.3.4 | Free, como estaba relevado |
+| Capital Cultural Slider | 2.1.8 | Propio. Shortcode `[capital_slider]` en el home. Se retematiza en el plugin |
+| Capital Cultural – Programación de Museos | 3.3.0 | Propio. Muestras, actividades y talleres de los museos: alimenta el hub y la ficha de espacio, las dos plantillas críticas de §2.quinquies |
+| Breadcrumb NavXT · *¿es necesario?* | 7.5.2 | Hay un `.cc-breadcrumb` armado a mano en el CSS adicional, y Yoast también genera migas. Si las migas visibles son las de `.cc-breadcrumb` o las de Yoast, NavXT sobra **[R]** |
+| Contact Form 7 + ReCaptcha v2 · *¿es necesario?* | 6.1.6 | Depende de si queda algún formulario. Convocatorias vigentes vive **fuera** del sitio (ver abajo), así que el «formulario de convocatorias» de la Fase 4 probablemente no exista **[R]** |
+| Post Type Switcher · *¿es necesario?* | 4.0.1 | Herramienta de admin, no toca el front. Neutral para el rediseño |
+| Redux Framework · *¿es necesario?* | 4.5.15 | Framework de opciones que suele instalarse como dependencia de otro plugin. Antes de sacarlo, confirmar que nadie lo requiere **[R]** |
+| LiteSpeed Cache | 7.9.1 | **Purgar la caché después de cada cambio de CSS**, o se sigue sirviendo el viejo. Si combina o minifica CSS, verificar que respete el orden de carga de §2.bis. Su optimización de imágenes genera WebP: candidato para la decisión pendiente 5 |
+| Wordfence Security | 9.0.1 | Puede frenar la subida de ZIPs o el escaneo largo del plugin de auditoría de la Fase 2. Avisar antes de correrlo |
+| WPCode Lite | — | Inserta fragmentos de código: otra capa más, fuera del tema. Inventariar sus fragmentos en la Fase 1 — es el lugar probable de `botonesCC.js` |
+| WP Statistics | 14.16.13 | Analítica propia del sitio: fuente para el corte por tráfico del triage |
+| WP Rollback | 3.1.2 | Sirve para volver atrás plugins de wordpress.org, **no** el child theme propio: para eso el respaldo es el ZIP anterior |
+| Yoast SEO | 28.5 | Sin impacto visual. Conservar títulos y metadatos al tocar plantillas |
+| ImageMagick Engine | 2.0.0 | Mejor redimensionado de imágenes. Neutral |
+
+### Las páginas que importan: 71 de 510
+
+`paginasUtilCC.docx` lista **79 entradas con 75 enlaces**: 71 páginas del sitio (Inicio incluido), 2 PDFs de Caminos Culturales y 3 destinos externos.
+
+| Sección | Páginas |
+|---|---|
+| Huellas de mi Ciudad | 18 — 14 son de *Memorias Urbanas Feministas* |
+| Museos y Salas | 11 — el hub y los 10 espacios de §2.0 |
+| Mercado Progreso | 9 |
+| Elenco y Organismos, + Feria | 5 cada una |
+| Festival Diseña, Biblioteca Muttis | 4 cada una |
+| Feria del Libro, Anfiteatro, Noche de los Museos, Caminos Culturales | 2 cada una |
+| Estación Belgrano, Somos Música, Capacitaciones 4×4, Día del Folclore, Banda Sinfónica, Bibliotecas Populares, Inicio | 1 cada una |
+
+Tres cosas salen de acá:
+
+1. **El trabajo manual tiene techo conocido.** El reemplazo por lote sigue cubriendo las 510 (§2.ter, por la cola gorda), pero lo que se revisa a mano con criterio son estas 71: a 10 minutos cada una, **1,8 días**. Las 439 restantes son las candidatas a archivar en el triage.
+2. **Aparecen páginas por año.** `teatromercado25` y `teatromercado26` son el mismo ciclo en dos ediciones: el mismo patrón que la Feria. Las ediciones viejas van al triage como archivables.
+3. **Tres destinos ya viven afuera:** la agenda (`agenda.santafeciudad.gov.ar`), el Teatro Municipal (`teatromunicipal.santafeciudad.gov.ar`) y **Convocatorias vigentes**, que está en `/secretaria-de-cultura/`, fuera de `/capitalcultural/`. Los tres se enlazan hacia afuera con rótulo, como decidió §2.quinquies para la agenda.
+
+---
+
 ## 2.bis Trabajar sobre Astra + Elementor Free
 
-Son **tres capas de estilo peleando por el mismo píxel**: Astra, Elementor y el child theme.
+Son **tres capas de estilo peleando por el mismo píxel**: Astra, Elementor y el child theme. En el sitio real hay dos más, fuera del tema: el **CSS adicional** del Customizer y los fragmentos de **WPCode** (§2.sexies). El child theme absorbe las dos.
 
 **~~Lo que Elementor Free no toca.~~ Corregido en §2.0:** el sitio tiene `header-footer-elementor`, así que header y footer los arma Elementor igual, sin necesidad de Pro. Astra aporta la base y los tokens; el child theme sigue siendo necesario, pero **no cubre la mayor parte del sitio** como decía esta versión del plan.
 
@@ -327,7 +400,7 @@ Cada página que se saca del universo son minutos que no se pagan. El orden es: 
 ## 3. Fases
 
 ### Fase 1 · Relevamiento y triage — *3 a 4 días*
-1. **Reducir las 510 a un universo manejable**, por el orden de §2.ter: estado, huérfanas, tráfico. La analítica del top 25 ya está; falta el corte por estado. Más el inventario de plugins, tipos de contenido y taxonomías, plantillas en uso, y si hay Astra Pro.
+1. **Reducir las 510 a un universo manejable**, por el orden de §2.ter: estado, huérfanas, tráfico. La analítica del top 25 ya está; falta el corte por estado. El listado de 71 páginas útiles y el inventario de plugins ya están (§2.sexies); faltan los fragmentos de WPCode, tipos de contenido y taxonomías, plantillas en uso, y si hay Astra Pro.
 2. Exportar el árbol de URLs y quedarse con el top 50 por tráfico (Analytics/Search Console) — define qué plantillas se rediseñan primero.
 3. Baseline: Lighthouse móvil, axe DevTools y capturas del estado actual. Sin esto no hay forma de demostrar la mejora.
 4. Entorno de prueba. Sin acceso al servidor, la opción realista es un **staging local** (LocalWP / Studio) con una copia del sitio exportada por plugin de migración, más el uso de `?preview_theme=` en producción para la validación final. **[R]**
@@ -350,7 +423,7 @@ Plugin propio, subido por ZIP, que escanea el `_elementor_data` de las 510 y rep
 **Entregable:** ZIP instalable del child theme, con el sitio ya en paleta correcta aunque sin componentes nuevos.
 
 ### Fase 4 · Biblioteca de componentes — *5 a 7 días*
-Header glass sticky · menú mobile (el patrón `.glass-bar::before` de Freedom, que existe justamente para que el menú desplegable pueda esmerilar el contenido) · hero con barrido a 15° · tarjeta de evento/agenda · tarjeta de nota · **galería de fotos** (ahora que hay banco propio) · **ítem de descarga de PDF** (para el archivo de programaciones de Feria) · filtros y chips · paginación · formulario de convocatorias · footer con la lámina de luz y marca completa.
+Header glass sticky · menú mobile (el patrón `.glass-bar::before` de Freedom, que existe justamente para que el menú desplegable pueda esmerilar el contenido) · hero con barrido a 15° · tarjeta de evento/agenda · tarjeta de nota · **galería de fotos** (ahora que hay banco propio) · **ítem de descarga de PDF** (para el archivo de programaciones de Feria) · filtros y chips · paginación · formulario de convocatorias (probablemente sale: Convocatorias vigentes vive fuera del sitio, §2.sexies) · **grilla de botones `.cb-btn`**, evolucionada desde la actual y sin `botonesCC.js` · footer con la lámina de luz y marca completa.
 
 Cada componente se entrega con estado *hover*, *focus-visible*, vacío y de carga. Se documentan en una página oculta del propio WP que funcione como styleguide viva.
 
@@ -378,7 +451,7 @@ Reemplazo por lote de los colores literales que encontró el escaneo, más las p
 **Entregable:** informe antes/después con métricas.
 
 ### Fase 8 · Publicación — *1 a 2 días*
-Ventana de bajo tráfico, backup por plugin, subida del ZIP, activación, *Regenerate CSS & Data* de Elementor, verificación de las 50 URLs del inventario, 48 h de monitoreo.
+Ventana de bajo tráfico, backup por plugin, subida del ZIP, activación, **vaciar el CSS adicional del Customizer** (guardado en `sitio-actual/` como respaldo) y desactivar el fragmento de `botonesCC.js`, *Regenerate CSS & Data* de Elementor, **purgar LiteSpeed Cache**, verificación de las 50 URLs del inventario, 48 h de monitoreo.
 
 **Total estimado: 28 a 36 días hábiles.**
 
@@ -405,6 +478,9 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 | `backdrop-filter` en Android de gama baja | Medio | Presupuesto de ~8 blurs simultáneos, `glass-soft` en grillas, prueba en dispositivo real |
 | El rojo no da AA en ningún combo | Alto — es el color identitario y su mejor contraste es 4.33 | Restringido a texto grande y grafismos. Con la paleta reducida pesa más, porque ya no hay Azul 02 para descargarle trabajo |
 | Plugin de agenda con markup propio | Medio | Sobrescribir plantillas del plugin desde el child theme, nunca editar el plugin |
+| Se desactiva UAE creyendo que sobra | Alto — el sitio queda sin header ni footer | Está marcado *¿es necesario?* en la lista de plugins, pero es `header-footer-elementor` con otro nombre. Dejarlo anotado en el inventario |
+| CSS adicional y WPCode le ganan al child theme | Medio — se imprimen después del tema | Vaciarlos en la publicación, con el respaldo de `sitio-actual/`. Al limpiar los duplicados del CSS adicional, fusionar propiedad por propiedad: el bloque «muerto» del menú todavía fija el botón |
+| LiteSpeed sirve CSS viejo | Bajo pero confunde en QA | Purgar después de cada subida; revisar si combina o minifica CSS |
 | La marca se vuelve a desalinear tras el lanzamiento | Bajo pero seguro | Global Color Palette de Astra + `theme.json` restringidos a cuatro colores, más la styleguide viva de la Fase 3 |
 
 ---
@@ -415,7 +491,8 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 2. ~~**¿Se suma una agenda?**~~ — **decidido: no.** Ya existe en `agenda.santafeciudad.gov.ar`. Se conserva la estructura por espacios y se enlaza hacia afuera. Ver §2.quinquies.
 3. ~~**¿Cuántas ediciones de Feria se conservan?**~~ — **resuelto: ninguna.** Ver §2.quater.
 4. ~~**Modo oscuro**~~ — **decidido: no.** El sitio va en tema claro únicamente. El child theme no lleva bloques de `prefers-color-scheme` ni stamps de `data-theme`, y de paso evita el problema de que el rojo de Cultura da 4.30 sobre fondo azul profundo y no llega a AA.
-5. ~~**Fotografía**~~ — **resuelto: hay banco propio.** Los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar. Queda por definir dirección de arte: relaciones de aspecto por plantilla, tratamiento (¿fotos a sangre o dentro del vidrio?) y el flujo de conversión a WebP, que sin acceso al servidor tiene que resolverse con un plugin.
+5. ~~**Fotografía**~~ — **resuelto: hay banco propio.** Los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar. Queda por definir dirección de arte: relaciones de aspecto por plantilla, tratamiento (¿fotos a sangre o dentro del vidrio?) y el flujo de conversión a WebP, que sin acceso al servidor tiene que resolverse con un plugin. LiteSpeed Cache, que ya está instalado, tiene optimización de imágenes con WebP: probarlo antes de sumar otro plugin.
+7. **Plugins en duda.** El equipo marcó cinco con *¿es necesario?*. UAE se queda (arma header y footer). Breadcrumb NavXT, Contact Form 7 + reCaptcha, Post Type Switcher y Redux Framework se deciden con lo relevado en §2.sexies.
 6. **Licencias tipográficas:** Geologica y Encode Sans son de Google Fonts (OFL), así que autoalojarlas está permitido. Confirmar igual con el área de comunicación.
 
 ---
@@ -425,4 +502,5 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 - `docs/design-tokens.css` — tokens de marca + material GlassMorph, listos para encolar
 - `docs/barras.svg` — el remate de barras de esquina, partial para el child theme
 - `docs/plan-glassmorph.md` — este documento
-- Los dos PDFs normativos en la raíz
+- `marca/` — los dos PDFs normativos
+- `sitio-actual/` — lo que hoy está cargado en el sitio, analizado en §2.sexies: `cssAdicionalCCAstra.css`, `botonesCC.js`, `pluginsCC.txt` y `paginasUtilCC.docx`
