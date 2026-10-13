@@ -96,9 +96,9 @@
 
   /* Logo: "slice" + ancho variable; al angostar el SVG se recorta CULTURA y quedan SF y la barra */
   .ccg-header .ccg-logo { display: block; pointer-events: auto; line-height: 0; }
-  .ccg-logo svg { display: block; width: 163px; max-width: none; height: 32px; transition: width .4s; }
+  .ccg-logo svg { display: block; width: 178px; max-width: none; height: 35px; transition: width .4s; }
   .ccg-logo-word { font: 700 21.88px "Geologica", "Arial Narrow", sans-serif; transition: opacity .3s; }
-  .ccg-header.is-scrolled .ccg-logo svg { width: 60px; }
+  .ccg-header.is-scrolled .ccg-logo svg { width: 66px; }
   .ccg-header.is-scrolled .ccg-logo-word { opacity: 0; }
 
   /* Hamburguesa, siempre visible. Doble clase para ganarle a button:hover de Astra */
@@ -182,6 +182,11 @@
     .ccg-header { padding-inline: 24px; }
     .ccg-pill { padding-left: 28px; }
     .ccg-menu { right: max(24px, (100% - 1080px) / 2); }
+    /* El resto del sitio usa el logo a 240px en escritorio (.cc-header-logo img).
+       Acá sube a 214 y no a 240: la píldora mide 60 de alto y 240 de ancho pide
+       47 de alto, que dejaría 6px de aire contra los 8 de la hamburguesa. */
+    .ccg-logo svg { width: 214px; height: 42px; }
+    .ccg-header.is-scrolled .ccg-logo svg { width: 79px; }
   }
 
   /* ───── Accesibilidad y respaldo ───── */

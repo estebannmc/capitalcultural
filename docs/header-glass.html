@@ -135,9 +135,9 @@
 
   .logo { pointer-events: auto; display: block; }
   /* "slice" + ancho variable: al angostar el SVG se recorta CULTURA y quedan SF y la barra */
-  .logo svg { display: block; width: 163px; height: 32px; transition: width .4s; }
+  .logo svg { display: block; width: 178px; height: 35px; transition: width .4s; }
   .logo-word { font: 700 21.88px "Geologica", "Arial Narrow", sans-serif; transition: opacity .3s; }
-  .is-scrolled .logo svg { width: 60px; }
+  .is-scrolled .logo svg { width: 66px; }
   .is-scrolled .logo-word { opacity: 0; }
 
   .action {
@@ -165,6 +165,9 @@
     .site-header { padding-inline: 24px; }
     .pill { padding-left: 28px; }
     .menu { right: max(24px, (100% - 1080px) / 2); }
+    /* Espejo de sitio-nuevo/header.html: si cambia uno, cambia el otro */
+    .logo svg { width: 214px; height: 42px; }
+    .is-scrolled .logo svg { width: 79px; }
   }
 
   @media (prefers-reduced-transparency: reduce) {
@@ -187,9 +190,11 @@
     display: flex;
     max-width: 1080px;
     margin: 0 auto;
-    /* cae en el hueco de la píldora entre el logo y la hamburguesa */
+    /* cae en el hueco de la píldora entre el logo y la hamburguesa;
+       sigue al ancho del logo: 20 + 178 en móvil, 28 + 214 en escritorio */
     padding: calc(env(safe-area-inset-top, 0px) + 18px) 0 0 220px;
   }
+  @media (min-width: 768px) { .probe { padding-left: 272px; } }
   main { max-width: 1080px; margin: 0 auto; padding: 48px 16px 40vh; }
   h1 { font-size: clamp(32px, 8vw, 64px); line-height: 1.05; margin: 40px 0 16px; }
   section { margin: 32px 0; padding: 24px; border-radius: 20px; background: rgba(255, 255, 255, .6); }
