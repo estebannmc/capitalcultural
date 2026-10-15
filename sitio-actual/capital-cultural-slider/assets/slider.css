@@ -170,7 +170,7 @@
   padding: 30px 32px 32px;
   overflow: hidden;
   isolation: isolate;
-  border-radius: 26px;
+  border-radius: 8px;
   color: var(--cc-blanco);
   background:
     linear-gradient(160deg, rgba(255, 255, 255, .20), rgba(255, 255, 255, .06)),
@@ -222,7 +222,7 @@
   display: inline-block;
   margin: 0 0 12px;
   padding: 5px 10px;
-  border-radius: 999px;
+  border-radius: 4px;
   background: var(--cc-verde);
   color: var(--cc-azul);
   font-size: 11px;
@@ -384,7 +384,7 @@
     width: auto;
     max-width: none;
     padding: 22px 22px 24px;
-    border-radius: 18px;
+    border-radius: 6px;
   }
   .cc-slide.active .cc-content {
     transform: translate3d(0, 0, 0);

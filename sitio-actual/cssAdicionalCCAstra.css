@@ -553,7 +553,7 @@ a:hover img,
   gap: 16px;
 }
 
-/* Boton: Azul 01 con radio de objeto, no de panel */
+/* Boton: Azul 01, esquinas apenas suavizadas */
 .cb-btn {
   position: relative;
   display: flex;
@@ -561,7 +561,7 @@ a:hover img,
   justify-content: center;
   min-height: 80px;
   padding: 0 24px;
-  border-radius: 14px;
+  border-radius: 6px;
   text-decoration: none;
   background: #002751;
   color: #ffffff !important;
