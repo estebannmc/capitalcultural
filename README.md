@@ -20,9 +20,9 @@ Aplica la identidad SF 2026 —Brandbook V1.0, febrero 2026— con el material *
 
 Decisiones tomadas:
 
-- **Paleta cerrada en cuatro**: Azul 01 `#002751`, Verde 01 `#00c08b`, el rojo de la submarca Cultura `#e63312` y los neutros. Azul 02, Verde 02, celeste, naranja y amarillo quedan fuera y no se declaran como tokens.
+- **Paleta cerrada**: Azul 01 `#002751`, celeste `#57b8e9`, la submarca Cultura en rojo `#e63312` o naranja `#fca100` y los neutros. El verde institucional se abandonó por decisión política: Verde 01, Verde 02, Azul 02 y amarillo quedan fuera y no se declaran como tokens.
 - **Tema claro únicamente.** El Brandbook no contempla modo oscuro.
-- **Todo lo de marca se inclina 15° a la derecha**: el lockup, el remate de barras, el marcador de los títulos, el barrido de los botones y el degradé verde → azul.
+- **Todo lo de marca se inclina 15° a la derecha**: el lockup, el remate de barras, el marcador de los títulos, el barrido de los botones y el degradé celeste → azul.
 - **Accesibilidad AA como piso**, no como aspiración: es un sitio de gobierno y le aplica la Ley 26.653 y la ODA 1.0 de ONTI. Los contrastes están medidos, no estimados.
 
 ## Contenido del repositorio

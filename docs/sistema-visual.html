@@ -16,8 +16,8 @@
 <style>
 /* =====================================================================
    Capital Cultural · plan de actualización
-   Paleta cerrada: Azul 01, Verde 01, rojo de submarca y neutros.
-   Trama a 15° inclinada "/". Degradé verde → azul como transición.
+   Paleta cerrada: Azul 01, celeste, rojo o naranja de submarca y neutros.
+   Trama a 15° inclinada "/". Degradé celeste → azul como transición.
    ===================================================================== */
 :root{
   /* Tema único. El Brandbook no contempla modo oscuro y el sitio no va
@@ -26,7 +26,7 @@
   color-scheme:light;
 
   --azul-01:#002751;
-  --verde-01:#00c08b;
+  --celeste:#57b8e9;
   --rojo:#e63312;
   --blanco:#ffffff; --gris-20:#dadad9; --gris-75:#606060; --negro:#1d1d1b;
 
@@ -37,10 +37,10 @@
   --ink-3:#8a9298;
   --rule:rgba(0,39,81,.15);
   --topico:#e63312;
-  --verde-ui:#00c08b;  /* alias del verde para UI */
+  --celeste-ui:#57b8e9;  /* alias del celeste para UI */
 
   /* El degradé de transición corre por la diagonal de marca. */
-  --degrade:linear-gradient(105deg,#00c08b 0%,#009e87 38%,#00527a 72%,#002751 100%);
+  --degrade:linear-gradient(105deg,#57b8e9 0%,#2f86c0 38%,#10508a 72%,#002751 100%);
 
   --glass-fill:linear-gradient(160deg,rgba(255,255,255,.74),rgba(255,255,255,.46));
   --glass-blur:blur(20px) saturate(170%);
@@ -53,7 +53,7 @@
   --soft-fill:linear-gradient(160deg,rgba(255,255,255,.72),rgba(255,255,255,.48));
   --soft-shadow:0 6px 18px -12px rgba(0,39,81,.3),inset 0 1px 0 rgba(255,255,255,.9);
 
-  --amb-verde:rgba(0,192,139,.38);
+  --amb-celeste:rgba(87,184,233,.38);
   --amb-rojo:rgba(230,51,18,.16);
   --amb-azul:rgba(0,39,81,.14);
 
@@ -82,7 +82,7 @@ a:hover{text-decoration-thickness:3px}
    del bloque entero. Medidas en em: toma el cuerpo del texto que encabeza. */
 .bar{display:inline-block;width:.24em;height:.78em;margin-right:.48em;
   background:var(--topico);transform:skewX(calc(-1 * var(--ang)))}
-.bar--verde{background:var(--verde-ui)}
+.bar--celeste{background:var(--celeste-ui)}
 .bar--azul{background:var(--azul-01)}
 .bar--gris{background:var(--ink-3)}
 /* el párrafo se alinea con el título, no con la barra */
@@ -92,14 +92,14 @@ a:hover{text-decoration-thickness:3px}
 .ambient{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;
   background:linear-gradient(180deg,var(--ground) 0%,var(--ground-2) 100%)}
 .blob{position:absolute;width:92vmax;height:92vmax;border-radius:50%;will-change:transform}
-.blob.b1{top:-44vmax;left:-40vmax;background:radial-gradient(closest-side,var(--amb-verde),transparent);animation:driftA 34s ease-in-out infinite alternate}
+.blob.b1{top:-44vmax;left:-40vmax;background:radial-gradient(closest-side,var(--amb-celeste),transparent);animation:driftA 34s ease-in-out infinite alternate}
 .blob.b2{top:-26vmax;right:-50vmax;background:radial-gradient(closest-side,var(--amb-azul),transparent);animation:driftB 40s ease-in-out infinite alternate}
 .blob.b3{bottom:-46vmax;left:-34vmax;background:radial-gradient(closest-side,var(--amb-rojo),transparent);animation:driftB 36s ease-in-out infinite alternate-reverse}
-.blob.b4{bottom:-44vmax;right:-40vmax;background:radial-gradient(closest-side,var(--amb-verde),transparent);animation:driftA 44s ease-in-out infinite alternate-reverse}
+.blob.b4{bottom:-44vmax;right:-40vmax;background:radial-gradient(closest-side,var(--amb-celeste),transparent);animation:driftA 44s ease-in-out infinite alternate-reverse}
 .ambient::after{content:"";position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;background-image:var(--noise)}
 /* ---------- Barras de esquina ----------
    El remate de marca: cada barra arranca gruesa en la base, se corta, y
-   sigue fina hacia arriba. Verdes en distintas intensidades, un par en
+   sigue fina hacia arriba. Celestes en distintas intensidades, un par en
    Azul 01, y las últimas en rojo de Cultura. Va anclado abajo a la
    derecha: es una pieza compuesta, no una textura que se repite. */
 .barras{position:fixed;right:-18px;bottom:-26px;z-index:-1;pointer-events:none;
@@ -124,7 +124,7 @@ a:hover{text-decoration-thickness:3px}
 .glass--thin{--glass-fill:linear-gradient(160deg,rgba(255,255,255,.58),rgba(255,255,255,.3));--glass-blur:blur(14px) saturate(160%)}
 .glass--thick{--glass-fill:linear-gradient(165deg,rgba(255,255,255,.9),rgba(255,255,255,.68));--glass-blur:blur(28px) saturate(180%)}
 .glass--azul{--glass-fill:linear-gradient(160deg,rgba(0,39,81,.88),rgba(0,39,81,.68));color:#fff}
-.glass--verde{--glass-fill:linear-gradient(160deg,rgba(0,192,139,.9),rgba(0,192,139,.62));color:#002751}
+.glass--celeste{--glass-fill:linear-gradient(160deg,rgba(87,184,233,.9),rgba(87,184,233,.62));color:#002751}
 .glass--rojo{--glass-fill:linear-gradient(160deg,rgba(230,51,18,.9),rgba(230,51,18,.66));color:#fff}
 .glass-soft{background:var(--soft-fill);box-shadow:var(--soft-shadow)}
 /* vidrio oscuro translúcido: para apoyarse SOBRE la lámina y dejar que la
@@ -153,7 +153,7 @@ a:hover{text-decoration-thickness:3px}
 .luz{position:relative;isolation:isolate;overflow:hidden;color:#fff;
   background:
     radial-gradient(92% 130% at 74% 118%,
-      rgba(255,255,255,.34) 0%, #00c08b 22%, rgba(0,192,139,.5) 42%,
+      rgba(255,255,255,.34) 0%, #57b8e9 22%, rgba(87,184,233,.5) 42%,
       rgba(0,90,110,.22) 62%, transparent 84%),
     linear-gradient(130deg,#002751 0%,#001d3a 58%,#001630 100%)}
 /* Alineadas al mismo margen que el contenido, no sangradas al borde. */
@@ -161,7 +161,7 @@ a:hover{text-decoration-thickness:3px}
   right:var(--luz-pad);bottom:var(--luz-pad);
   height:clamp(112px,16vw,178px);width:auto;
   z-index:0;pointer-events:none;
-  /* sobre el Azul 01 los verdes bajos se apagan; el realce los devuelve
+  /* sobre el Azul 01 los celestes bajos se apagan; el realce los devuelve
      sin tocar la pieza, que es la misma que la de la esquina */
   filter:brightness(1.25) saturate(1.1)}
 /* El velo ya no tiene que cargar solo con el contraste: ahora el texto va
@@ -251,13 +251,13 @@ section{margin-top:56px;scroll-margin-top:24px}
 .tag{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;
   letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
 .tag::before{content:"";width:.3em;height:.95em;flex:none;transform:skewX(calc(-1 * var(--ang)));background:currentColor}
-.t-ok{color:var(--verde-ui)} .t-mid{color:var(--ink-3)} .t-no{color:var(--topico)}
+.t-ok{color:var(--celeste-ui)} .t-mid{color:var(--ink-3)} .t-no{color:var(--topico)}
 .t-ok span,.t-mid span,.t-no span{color:var(--ink-2)}
-.c-ok{color:var(--verde-ui)} .c-mid{color:var(--ink-3)} .c-no{color:var(--topico)}
+.c-ok{color:var(--celeste-ui)} .c-mid{color:var(--ink-3)} .c-no{color:var(--topico)}
 .callout{margin-top:18px;padding:17px 21px;border-radius:0 16px 16px 0;
   border-left:5px solid var(--topico);font-size:14.5px;line-height:1.55;color:var(--ink-2)}
 .callout b{color:var(--ink);font-weight:600}
-.callout--verde{border-left-color:var(--verde-ui)}
+.callout--celeste{border-left-color:var(--celeste-ui)}
 
 .typespec{padding:24px}
 .typespec__sample{font-size:clamp(34px,6vw,54px);line-height:1.05;letter-spacing:-.02em}
@@ -277,9 +277,9 @@ section{margin-top:56px;scroll-margin-top:24px}
 
 .demo{position:relative;border-radius:26px;overflow:hidden;padding:26px;min-height:200px;
   background:
-    radial-gradient(58% 55% at 14% 20%,rgba(0,192,139,.98),transparent 68%),
+    radial-gradient(58% 55% at 14% 20%,rgba(87,184,233,.98),transparent 68%),
     radial-gradient(52% 52% at 86% 22%,rgba(230,51,18,.82),transparent 70%),
-    linear-gradient(140deg,#00c08b 0%,#002751 58%,#001a36 100%)}
+    linear-gradient(140deg,#57b8e9 0%,#002751 58%,#001a36 100%)}
 .demo__grid{position:relative;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
 .tile{padding:16px;border-radius:18px;min-height:98px;display:flex;flex-direction:column;justify-content:space-between}
 .tile code{font-size:11.5px;opacity:.82}
@@ -315,10 +315,10 @@ section{margin-top:56px;scroll-margin-top:24px}
 .btn--primario .bar{background:var(--rojo)}
 @media (hover:hover){.btn--primario:hover{background:#00325f;box-shadow:0 12px 26px -10px rgba(0,39,81,.6)}}
 
-/* verde · Azul 01 sobre Verde 01 = 6.33 AA. NUNCA blanco (2.36). */
-.btn--verde{--btn-halo:var(--azul-01);background:var(--verde-01);color:var(--azul-01)}
-.btn--verde .bar{background:var(--azul-01)}
-@media (hover:hover){.btn--verde:hover{background:#00d69a}}
+/* celeste · Azul 01 sobre celeste = 6.70 AA. NUNCA blanco (2.23). */
+.btn--celeste{--btn-halo:var(--azul-01);background:var(--celeste);color:var(--azul-01)}
+.btn--celeste .bar{background:var(--azul-01)}
+@media (hover:hover){.btn--celeste:hover{background:#7cc9f0}}
 
 /* línea · secundario. Azul 01 sobre fondo = 13.54 AAA, borde 13.54. */
 .btn--linea{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
@@ -361,7 +361,7 @@ section{margin-top:56px;scroll-margin-top:24px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* En oscuro, Azul 01 como relleno desaparece contra el fondo:
-   el primario pasa a Verde 01 con texto Azul 01, que sigue dando 6.33. */
+   el primario pasa a celeste con texto Azul 01, que sigue dando 6.70. */
 @media (prefers-reduced-motion:reduce){.btn::after{display:none}.btn__spin{animation-duration:2s}}
 
 .btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
@@ -370,8 +370,8 @@ section{margin-top:56px;scroll-margin-top:24px}
 .btn-cell__n{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;line-height:1.45}
 .btn-cell__n b{color:var(--ink);font-weight:600}
 .sobre-foto{padding:24px;border-radius:18px;
-  background:radial-gradient(60% 70% at 20% 20%,rgba(0,192,139,.95),transparent 70%),
-    linear-gradient(140deg,#00c08b,#002751 70%)}
+  background:radial-gradient(60% 70% at 20% 20%,rgba(87,184,233,.95),transparent 70%),
+    linear-gradient(140deg,#57b8e9,#002751 70%)}
 
 /* ---------- escala: tiles y comparación ---------- */
 .tiles{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
@@ -390,7 +390,7 @@ section{margin-top:56px;scroll-margin-top:24px}
   justify-content:flex-end;padding-right:11px;color:#fff;font-weight:600;font-size:13px;
   font-variant-numeric:tabular-nums;white-space:nowrap;min-width:84px}
 .cmp__fill--caro{background:var(--rojo)}
-.cmp__fill--barato{background:var(--verde-01)}
+.cmp__fill--barato{background:var(--celeste)}
 .cmp__fill--barato{color:var(--azul-01)}
 .cmp__foot{font-size:12.5px;color:var(--ink-3);margin-top:2px}
 
@@ -400,9 +400,9 @@ section{margin-top:56px;scroll-margin-top:24px}
   padding:3px 0;font-size:13px}
 .rank__n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rank__t{display:flex;align-items:center;gap:9px}
-.rank__b{height:17px;border-radius:0 4px 4px 0;background:var(--verde-01);flex:none;min-width:3px}
+.rank__b{height:17px;border-radius:0 4px 4px 0;background:var(--celeste);flex:none;min-width:3px}
 .rank__b--home{background:var(--azul-01)}
-.rank__b--esp{background:var(--verde-01)}
+.rank__b--esp{background:var(--celeste)}
 .rank__b--fer{background:var(--topico)}
 .rank__b--cic{background:#5c7f99}
 .rank__b--otr{background:var(--gris-20)}
@@ -500,13 +500,13 @@ section{margin-top:56px;scroll-margin-top:24px}
 </div>
 <svg class="defs" aria-hidden="true"><defs>
   <g id="sf-barras">
-    <polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="var(--verde-01)"/>
-    <polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="var(--verde-01)"/>
-    <polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="var(--verde-01)"/>
-    <polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="var(--verde-01)"/>
-    <polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="var(--verde-01)"/>
-    <polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="var(--verde-01)"/>
-    <polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="var(--verde-01)"/>
+    <polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="var(--celeste)"/>
+    <polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="var(--celeste)"/>
+    <polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="var(--celeste)"/>
+    <polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="var(--celeste)"/>
+    <polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="var(--celeste)"/>
+    <polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="var(--celeste)"/>
+    <polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="var(--celeste)"/>
     <polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="var(--rojo)"/>
   </g>
 </defs></svg>
@@ -551,19 +551,20 @@ section{margin-top:56px;scroll-margin-top:24px}
   </div>
 
   <div class="sw-group">
-    <h3>Los tres colores de marca</h3>
-    <div class="grid g3">
+    <h3>Los colores de marca</h3>
+    <div class="grid g2">
       <div class="sw glass-soft"><div class="sw__chip" style="background:#002751;color:#fff">DOMINANTE</div><div class="sw__body"><span class="sw__name">Santa Fe Azul 01</span><span class="sw__hex">#002751 · 0 39 81</span><span class="sw__pms">PANTONE 540</span></div></div>
-      <div class="sw glass-soft"><div class="sw__chip" style="background:#00c08b;color:#002751">SUPERFICIE</div><div class="sw__body"><span class="sw__name">Santa Fe Verde 01</span><span class="sw__hex">#00c08b · 0 192 139</span><span class="sw__pms">PANTONE 3405</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#57b8e9;color:#002751">SUPERFICIE</div><div class="sw__body"><span class="sw__name">Celeste</span><span class="sw__hex">#57b8e9 · 87 184 233</span><span class="sw__pms">CMYK 60 10 0 0</span></div></div>
       <div class="sw glass-soft"><div class="sw__chip" style="background:#e63312;color:#fff">SUBMARCA</div><div class="sw__body"><span class="sw__name">Rojo Cultura</span><span class="sw__hex">#e63312 · 230 51 18</span><span class="sw__pms">El color del tópico</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#fca100;color:#002751">SUBMARCA</div><div class="sw__body"><span class="sw__name">Naranja Cultura</span><span class="sw__hex">#fca100 · 252 161 0</span><span class="sw__pms">Alternativa al rojo para el tópico</span></div></div>
     </div>
   </div>
 
   <div class="sw-group">
     <h3>El degradé de transición</h3>
     <div class="sw glass-soft">
-      <div class="sw__chip" style="background:linear-gradient(105deg,#00c08b 0%,#009e87 38%,#00527a 72%,#002751 100%);color:#fff;height:120px">VERDE 01 → AZUL 01</div>
-      <div class="sw__body" style="display:flex;gap:18px;flex-wrap:wrap"><span><span class="sw__name">Degradé institucional</span><span class="sw__hex">Corre a 105°, sobre la diagonal de marca</span></span><span style="color:var(--ink-3);max-width:46ch">Comunica la transición. Es fondo y grafismo: si lleva texto, sólo blanco y sólo sobre el tramo azul, porque el extremo verde no da contraste.</span></div>
+      <div class="sw__chip" style="background:linear-gradient(105deg,#57b8e9 0%,#2f86c0 38%,#10508a 72%,#002751 100%);color:#fff;height:120px">CELESTE → AZUL 01</div>
+      <div class="sw__body" style="display:flex;gap:18px;flex-wrap:wrap"><span><span class="sw__name">Degradé institucional</span><span class="sw__hex">Corre a 105°, sobre la diagonal de marca</span></span><span style="color:var(--ink-3);max-width:46ch">Comunica la transición. Es fondo y grafismo: si lleva texto, sólo blanco y sólo sobre el tramo azul, porque el extremo celeste no da contraste.</span></div>
     </div>
   </div>
 
@@ -577,7 +578,7 @@ section{margin-top:56px;scroll-margin-top:24px}
     </div>
   </div>
 
-  <p class="outside glass-soft"><b>Fuera de sistema para este sitio:</b> Azul 02 (#1639f1), Verde 02 (#00fe9b), celeste (#57b8e9), naranja (#fca100) y amarillo (#f2e61a). Existen en el Brandbook, pero no entran acá. Se listan por nombre y no por color para que queden documentados sin volver a aparecer en pantalla — y ni el <code>theme.json</code> ni los Global Colors de Elementor los van a ofrecer.</p>
+  <p class="outside glass-soft"><b>Fuera de sistema para este sitio:</b> Azul 02 (#1639f1), Verde 01 (#00c08b), Verde 02 (#00fe9b) y amarillo (#f2e61a). Existen en el Brandbook, pero no entran acá: el verde institucional se abandonó por decisión política. Se listan por nombre y no por color para que queden documentados sin volver a aparecer en pantalla — y ni el <code>theme.json</code> ni los Global Colors de Elementor los van a ofrecer.</p>
 </section>
 
 <section id="contraste">
@@ -592,16 +593,18 @@ section{margin-top:56px;scroll-margin-top:24px}
       <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#002751">Azul 01 / blanco</span><span class="barra c-ok"><i style="width:100%"></i></span><span class="ratio__n">14.90</span><span class="tag t-ok"><span>AAA · texto libre</span></span></div>
       <div class="ratio glass-soft"><span class="ratio__sample" style="background:#002751;color:#fff">Blanco / Azul 01</span><span class="barra c-ok"><i style="width:100%"></i></span><span class="ratio__n">14.90</span><span class="tag t-ok"><span>AAA · texto libre</span></span></div>
       <div class="ratio glass-soft"><span class="ratio__sample" style="background:#dadad9;color:#002751">Azul 01 / gris 20</span><span class="barra c-ok"><i style="width:100%"></i></span><span class="ratio__n">10.65</span><span class="tag t-ok"><span>AAA · texto libre</span></span></div>
-      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#00c08b;color:#002751">Azul 01 / Verde 01</span><span class="barra c-ok"><i style="width:60%"></i></span><span class="ratio__n">6.33</span><span class="tag t-ok"><span>AA · texto libre</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#57b8e9;color:#002751">Azul 01 / celeste</span><span class="barra c-ok"><i style="width:62%"></i></span><span class="ratio__n">6.70</span><span class="tag t-ok"><span>AA · texto libre</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fca100;color:#002751">Azul 01 / naranja</span><span class="barra c-ok"><i style="width:66%"></i></span><span class="ratio__n">7.27</span><span class="tag t-ok"><span>AA · texto libre</span></span></div>
       <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#606060">Gris 75 / blanco</span><span class="barra c-ok"><i style="width:60%"></i></span><span class="ratio__n">6.29</span><span class="tag t-ok"><span>AA · secundario</span></span></div>
       <div class="ratio glass-soft"><span class="ratio__sample" style="background:#e63312;color:#fff">Blanco / rojo</span><span class="barra c-mid"><i style="width:41%"></i></span><span class="ratio__n">4.33</span><span class="tag t-mid"><span>Sólo ≥24px</span></span></div>
       <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#e63312">Rojo / blanco</span><span class="barra c-mid"><i style="width:41%"></i></span><span class="ratio__n">4.33</span><span class="tag t-mid"><span>Sólo ≥24px</span></span></div>
       <div class="ratio glass-soft"><span class="ratio__sample" style="background:#e63312;color:#002751">Azul 01 / rojo</span><span class="barra c-mid"><i style="width:33%"></i></span><span class="ratio__n">3.44</span><span class="tag t-mid"><span>Sólo ≥24px</span></span></div>
-      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#00c08b;color:#fff">Blanco / Verde 01</span><span class="barra c-no"><i style="width:22%"></i></span><span class="ratio__n">2.36</span><span class="tag t-no"><span>Nunca</span></span></div>
-      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#00c08b">Verde 01 / blanco</span><span class="barra c-no"><i style="width:22%"></i></span><span class="ratio__n">2.36</span><span class="tag t-no"><span>Nunca</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#57b8e9;color:#fff">Blanco / celeste</span><span class="barra c-no"><i style="width:21%"></i></span><span class="ratio__n">2.23</span><span class="tag t-no"><span>Nunca</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fff;color:#57b8e9">Celeste / blanco</span><span class="barra c-no"><i style="width:21%"></i></span><span class="ratio__n">2.23</span><span class="tag t-no"><span>Nunca</span></span></div>
+      <div class="ratio glass-soft"><span class="ratio__sample" style="background:#fca100;color:#fff">Blanco / naranja</span><span class="barra c-no"><i style="width:19%"></i></span><span class="ratio__n">2.05</span><span class="tag t-no"><span>Nunca</span></span></div>
     </div>
-    <p class="callout"><b>Tres reglas salen de la tabla.</b> El verde es color de <b>fondo</b>: el texto que va encima siempre es Azul 01, nunca blanco. El rojo no alcanza AA en ningún combo, así que vive en titulares grandes, filetes y barras — nunca en texto corrido. Y como Azul 02 quedó fuera del sistema, <b>los links se distinguen por subrayado</b>, no por color; el subrayado va en rojo, que ahí funciona porque es un grafismo y no texto.</p>
-    <p class="callout callout--verde">Esto no es preferencia estética. Al ser un sitio de gobierno le aplica la <b>Ley 26.653</b> y la ODA 1.0 de ONTI, que toman WCAG AA como piso obligatorio.</p>
+    <p class="callout"><b>Tres reglas salen de la tabla.</b> Celeste y naranja son color de <b>fondo</b>: el texto que va encima siempre es Azul 01, nunca blanco. El rojo no alcanza AA en ningún combo, así que vive en titulares grandes, filetes y barras — nunca en texto corrido. Y como Azul 02 quedó fuera del sistema, <b>los links se distinguen por subrayado</b>, no por color; el subrayado va en rojo, que ahí funciona porque es un grafismo y no texto.</p>
+    <p class="callout callout--celeste">Esto no es preferencia estética. Al ser un sitio de gobierno le aplica la <b>Ley 26.653</b> y la ODA 1.0 de ONTI, que toman WCAG AA como piso obligatorio.</p>
   </div>
 </section>
 
@@ -616,7 +619,7 @@ section{margin-top:56px;scroll-margin-top:24px}
       <svg viewBox="0 0 560 280" role="img" aria-label="La trama de marca: líneas a 15 grados derivadas del paralelogramo del logo SF y de la barra de la submarca">
         <defs><clipPath id="fig"><rect x="0" y="0" width="560" height="280" rx="14"></rect></clipPath></defs>
         <g clip-path="url(#fig)">
-          <rect x="0" y="0" width="560" height="280" fill="var(--verde-ui)" opacity="0.14"></rect>
+          <rect x="0" y="0" width="560" height="280" fill="var(--celeste-ui)" opacity="0.14"></rect>
           <g stroke="var(--azul-01)" stroke-opacity="0.26" stroke-width="1">
             <line x1="-60" y1="280" x2="15" y2="0"></line>
             <line x1="10" y1="280" x2="85" y2="0"></line>
@@ -639,16 +642,16 @@ section{margin-top:56px;scroll-margin-top:24px}
       </svg>
     </div>
     <div class="trama-uses glass">
-      <div class="use"><h3><i class="bar bar--verde"></i>El remate de esquina</h3><p class="indent"><b>Ocho barras</b> a 15° ancladas abajo a la derecha — siete verdes y una roja, todas del mismo ancho de base, la misma opacidad y el <b>mismo paso</b>. Sólo cambia el alto, que crece parejo hacia la derecha. Cada una es gruesa en la base, se afina a <b>casi un hilo</b> tras la diagonal, y cierra en punta.</p></div>
-      <div class="use"><h3><i class="bar bar--verde"></i>El redondeo del lockup</h3><p class="indent">El bloque redondea <b>sólo sus dos esquinas extremas opuestas</b> — arriba-izquierda y abajo-derecha. Las que caen sobre la diagonal van en punta. En la marca completa el redondeo salta a los extremos del conjunto: la esquina del bloque SF y la del panel del escudo.</p></div>
-      <div class="use"><h3><i class="bar bar--verde"></i>La barra, pegada al título</h3><p class="indent">Siempre delante del título y del cuerpo del título — medida en <code>em</code>, así toma el tamaño sola. Nunca como filete del bloque entero.</p></div>
-      <div class="use"><h3><i class="bar bar--verde"></i>La luz del footer</h3><p class="indent">Listones a 105° cortando un foco verde sobre Azul 01. Es la lámina del Brandbook reconstruida en CSS, sin imagen.</p></div>
-      <div class="use"><h3><i class="bar bar--verde"></i>El degradé de transición</h3><p class="indent">Verde 01 → Azul 01, corriendo a 105°: la perpendicular de una línea de 15° inclinada a la derecha. A 75° saldría espejado.</p></div>
+      <div class="use"><h3><i class="bar bar--celeste"></i>El remate de esquina</h3><p class="indent"><b>Ocho barras</b> a 15° ancladas abajo a la derecha — siete celestes y una roja, todas del mismo ancho de base, la misma opacidad y el <b>mismo paso</b>. Sólo cambia el alto, que crece parejo hacia la derecha. Cada una es gruesa en la base, se afina a <b>casi un hilo</b> tras la diagonal, y cierra en punta.</p></div>
+      <div class="use"><h3><i class="bar bar--celeste"></i>El redondeo del lockup</h3><p class="indent">El bloque redondea <b>sólo sus dos esquinas extremas opuestas</b> — arriba-izquierda y abajo-derecha. Las que caen sobre la diagonal van en punta. En la marca completa el redondeo salta a los extremos del conjunto: la esquina del bloque SF y la del panel del escudo.</p></div>
+      <div class="use"><h3><i class="bar bar--celeste"></i>La barra, pegada al título</h3><p class="indent">Siempre delante del título y del cuerpo del título — medida en <code>em</code>, así toma el tamaño sola. Nunca como filete del bloque entero.</p></div>
+      <div class="use"><h3><i class="bar bar--celeste"></i>La luz del footer</h3><p class="indent">Listones a 105° cortando un foco celeste sobre Azul 01. Es la lámina del Brandbook reconstruida en CSS, sin imagen.</p></div>
+      <div class="use"><h3><i class="bar bar--celeste"></i>El degradé de transición</h3><p class="indent">Celeste → Azul 01, corriendo a 105°: la perpendicular de una línea de 15° inclinada a la derecha. A 75° saldría espejado.</p></div>
     </div>
   </div>
   <div class="grid trama-spec" style="margin-top:16px">
     <div class="glass pad" style="display:grid;place-items:center">
-      <svg class="barras-demo" viewBox="0 0 395 440" role="img" aria-label="El remate de barras: ocho barras a 15 grados uniformemente distribuidas, gruesas en la base y afinadas a casi un hilo, con los finales subiendo hacia el borde derecho, siete verdes y la última en rojo"><use href="#sf-barras"/></svg>
+      <svg class="barras-demo" viewBox="0 0 395 440" role="img" aria-label="El remate de barras: ocho barras a 15 grados uniformemente distribuidas, gruesas en la base y afinadas a casi un hilo, con los finales subiendo hacia el borde derecho, siete celestes y la última en rojo"><use href="#sf-barras"/></svg>
     </div>
     <div class="glass pad card">
       <h3><i class="bar bar--azul"></i>Una sola línea que se afina</h3>
@@ -694,7 +697,7 @@ section{margin-top:56px;scroll-margin-top:24px}
       <div class="tile glass glass--thin"><b>Fino</b><code>.glass--thin</code></div>
       <div class="tile glass glass--thick"><b>Grueso</b><code>.glass--thick</code></div>
       <div class="tile glass glass--azul"><b>Azul 01</b><code>.glass--azul</code></div>
-      <div class="tile glass glass--verde"><b>Verde 01</b><code>.glass--verde</code></div>
+      <div class="tile glass glass--celeste"><b>Celeste</b><code>.glass--celeste</code></div>
       <div class="tile glass glass--rojo"><b>Tópico</b><code>.glass--rojo</code></div>
     </div>
   </div>
@@ -705,10 +708,10 @@ section{margin-top:56px;scroll-margin-top:24px}
     </div>
     <div class="glass pad card">
       <h3><i class="bar bar--azul"></i>Qué cambia para Santa Fe</h3>
-      <p>Las sombras se tiñen con Azul 01 en vez de gris frío. Las manchas del fondo quedan en verde y rojo sobre gris de sistema. Los tintes se reducen a tres. Y el vidrio se apoya sobre la trama, que es la que le da algo que esmerilar.</p>
+      <p>Las sombras se tiñen con Azul 01 en vez de gris frío. Las manchas del fondo quedan en celeste y rojo sobre gris de sistema. Los tintes se reducen a tres. Y el vidrio se apoya sobre la trama, que es la que le da algo que esmerilar.</p>
     </div>
   </div>
-  <p class="callout callout--verde"><b>Presupuesto de rendimiento:</b> <code>backdrop-filter</code> es caro. Máximo ~8 elementos con blur real visibles a la vez. La grilla de agenda usa <code>glass-soft</code>, que es translúcido sin blur; el blur real queda para header, hero, modales y tarjetas destacadas. Es el criterio que ya está comentado en el <code>globals.css</code> de Freedom.</p>
+  <p class="callout callout--celeste"><b>Presupuesto de rendimiento:</b> <code>backdrop-filter</code> es caro. Máximo ~8 elementos con blur real visibles a la vez. La grilla de agenda usa <code>glass-soft</code>, que es translúcido sin blur; el blur real queda para header, hero, modales y tarjetas destacadas. Es el criterio que ya está comentado en el <code>globals.css</code> de Freedom.</p>
 </section>
 
 <section id="botones">
@@ -727,9 +730,9 @@ section{margin-top:56px;scroll-margin-top:24px}
         <span class="btn-cell__n">Blanco sobre Azul 01 · <b>14.90</b> AAA<br>La barra va en rojo: es el lockup SF/CULTURA.</span>
       </div>
       <div class="btn-cell glass-soft">
-        <span class="btn-cell__k">Verde</span>
-        <button class="btn btn--verde"><i class="bar"></i>Inscribirme</button>
-        <span class="btn-cell__n">Azul 01 sobre Verde 01 · <b>6.33</b> AA<br><b>Nunca blanco encima</b> — daría 2.36.</span>
+        <span class="btn-cell__k">Celeste</span>
+        <button class="btn btn--celeste"><i class="bar"></i>Inscribirme</button>
+        <span class="btn-cell__n">Azul 01 sobre celeste · <b>6.70</b> AA<br><b>Nunca blanco encima</b> — daría 2.23.</span>
       </div>
       <div class="btn-cell glass-soft">
         <span class="btn-cell__k">Línea · secundario</span>
@@ -772,7 +775,7 @@ section{margin-top:56px;scroll-margin-top:24px}
       <button class="btn btn--off">Desactivado</button>
       <button class="btn btn--linea">Probá el foco con Tab</button>
     </div>
-    <p class="callout callout--verde" style="margin-top:20px"><b>El foco es un anillo rojo con halo interno</b>, no un cambio de color de relleno: <code>box-shadow: 0 0 0 2px halo, 0 0 0 5px rojo</code>. El anillo contra el fondo claro da 3.94, por encima del 3:1 que pide WCAG 1.4.11. En el botón verde el halo se invierte a Azul 01, porque el halo blanco sobre verde da 2.36 y no separa. <b>Desactivado</b> usa Gris 75 sobre Gris 20 = 4.50, sin <code>opacity</code>, que hunde el contraste justo cuando menos conviene.</p>
+    <p class="callout callout--celeste" style="margin-top:20px"><b>El foco es un anillo rojo con halo interno</b>, no un cambio de color de relleno: <code>box-shadow: 0 0 0 2px halo, 0 0 0 5px rojo</code>. El anillo contra el fondo claro da 3.94, por encima del 3:1 que pide WCAG 1.4.11. En el botón celeste el halo se invierte a Azul 01, porque el halo blanco sobre celeste da 2.23 y no separa. <b>Desactivado</b> usa Gris 75 sobre Gris 20 = 4.50, sin <code>opacity</code>, que hunde el contraste justo cuando menos conviene.</p>
   </div>
 
   <div class="glass pad card" style="margin-top:16px">
@@ -850,11 +853,11 @@ section{margin-top:56px;scroll-margin-top:24px}
 
   <div class="grid g2" style="margin-top:16px">
     <div class="glass pad card">
-      <h3><i class="bar bar--verde"></i>La herramienta, confirmada</h3>
+      <h3><i class="bar bar--celeste"></i>La herramienta, confirmada</h3>
       <p>Se pueden subir plugins por ZIP, así que esto va. Un plugin chico, por <b>Plugins → Añadir nuevo → Subir</b>, recorre el <code>_elementor_data</code> de los 510 posts y reporta cuáles traen colores <b>literales</b> en vez de referencias a globals. La distinción es exacta y verificable: un widget atado a un global guarda <code>"__globals__"</code>, uno pinchado a mano guarda el hex crudo. Con ese listado, el reemplazo por lote es una corrida más — y ahora sabemos que tiene que cubrir las 510.</p>
     </div>
     <div class="glass pad card">
-      <h3><i class="bar bar--verde"></i>Qué plantillas priorizar</h3>
+      <h3><i class="bar bar--celeste"></i>Qué plantillas priorizar</h3>
       <p style="margin-bottom:12px">El top 25 lo dice solo. <b>Trece de las veinticinco son fichas de espacio cultural</b> y juntan el <b>42% del tráfico del top 25</b>: museos, mercados, bibliotecas, el Anfiteatro, la Manzana Jesuítica, el Molino. Es, por lejos, la plantilla más valiosa después de Inicio. Y cuatro son ciclos: Noche de los Museos, Festival Diseña, Somos Música, Aniversario del Mercado.</p>
       <p><b>Feria del Libro es el caso aparte.</b> Son cuatro del top 25 con el 20% del tráfico, pero <b>cada edición se rediseña de cero</b>: no hay plantilla que mantener. De las ediciones anteriores sólo se aloja el PDF de programación para consulta. Así que lo que se construye no es una plantilla de Feria sino un <b>archivo de PDFs</b>, y la edición vigente lleva una pasada de marca y nada más.</p>
     </div>
@@ -933,7 +936,7 @@ section{margin-top:56px;scroll-margin-top:24px}
     <p style="font-size:13px;color:var(--ink-2);margin-top:14px;max-width:70ch">Por eso el triage de la fase 1 no es burocracia: <b style="color:var(--ink)">cada página que se saca del universo son minutos que no se pagan</b>. El orden es descartar por estado (borrador, papelera, privada), después por huérfanas (sin enlaces ni visitas), después priorizar por tráfico.</p>
   </div>
 
-  <p class="callout callout--verde"><b>Lo que quedó cerrado.</b> Se pueden subir plugins, así que el escenario de +8 días sale de la mesa. El techo del presupuesto baja y el piso sube un poco, porque el lote ahora cubre las 510 en vez del top 40: <b>el total pasa a 28–36 días hábiles</b>. La variación que queda es la normal de plantillas y QA, no la del recuento de páginas.</p>
+  <p class="callout callout--celeste"><b>Lo que quedó cerrado.</b> Se pueden subir plugins, así que el escenario de +8 días sale de la mesa. El techo del presupuesto baja y el piso sube un poco, porque el lote ahora cubre las 510 en vez del top 40: <b>el total pasa a 28–36 días hábiles</b>. La variación que queda es la normal de plantillas y QA, no la del recuento de páginas.</p>
 </section>
 
 <section id="fases">
@@ -970,7 +973,7 @@ section{margin-top:56px;scroll-margin-top:24px}
     <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--gris"></i>Sin acceso al servidor</h3><span class="risk__lvl">Medio</span></div><p class="indent">Todo entra por ZIP desde el admin. Staging local para desarrollar y <code>?preview_theme=</code> para validar en producción antes de activar.</p></div>
     <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--gris"></i>El CSS inline de Astra gana</h3><span class="risk__lvl">Medio</span></div><p class="indent">Si el child theme se encola sin declarar <code>astra-theme-css</code> como dependencia, pierde contra el inline del Customizer y aparecen colores viejos en lugares sueltos.</p></div>
     <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--gris"></i>Blur en Android de gama baja</h3><span class="risk__lvl">Medio</span></div><p class="indent">El presupuesto de ~8 blurs y <code>glass-soft</code> en las grillas lo contienen, pero hay que probarlo en un teléfono real, no en el emulador.</p></div>
-    <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--verde"></i>Se desalinea otra vez</h3><span class="risk__lvl">Bajo</span></div><p class="indent">Pasa siempre. Lo contienen los Global Colors restringidos en los dos lados, el <code>theme.json</code> y la styleguide viva de la fase 3.</p></div>
+    <div class="risk glass"><div class="risk__top"><h3><i class="bar bar--celeste"></i>Se desalinea otra vez</h3><span class="risk__lvl">Bajo</span></div><p class="indent">Pasa siempre. Lo contienen los Global Colors restringidos en los dos lados, el <code>theme.json</code> y la styleguide viva de la fase 3.</p></div>
   </div>
 </section>
 
@@ -981,9 +984,9 @@ section{margin-top:56px;scroll-margin-top:24px}
   </div>
   <div class="grid g2">
     <div class="q glass-soft"><h3><i class="bar bar--gris"></i>Las 485 páginas restantes</h3><p class="indent">Es lo único que queda abierto: cuántas de las 510 están publicadas y cuántas huérfanas. Con las ediciones viejas de Feria fuera del alcance, el universo baja bastante.</p></div>
-    <div class="q glass-soft"><h3><i class="bar bar--verde"></i>Feria: resuelto</h3><p class="indent">Cada edición se rediseña de cero. De las anteriores sólo se aloja <b>el PDF de programación</b> para consulta. No hay plantilla de Feria que mantener — hay un <b>archivo de PDFs</b> que construir.</p></div>
-    <div class="q glass-soft"><h3><i class="bar bar--verde"></i>Fotografía: resuelto</h3><p class="indent">Hay banco propio, así que los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar.</p></div>
-    <div class="q glass-soft"><h3><i class="bar bar--verde"></i>Modo oscuro: decidido que no</h3><p class="indent">El Brandbook no lo contempla y el sitio va en tema claro únicamente. Saca los bloques de <code>prefers-color-scheme</code> del tema y evita el problema de que el rojo no llega a AA sobre fondo azul profundo.</p></div>
+    <div class="q glass-soft"><h3><i class="bar bar--celeste"></i>Feria: resuelto</h3><p class="indent">Cada edición se rediseña de cero. De las anteriores sólo se aloja <b>el PDF de programación</b> para consulta. No hay plantilla de Feria que mantener — hay un <b>archivo de PDFs</b> que construir.</p></div>
+    <div class="q glass-soft"><h3><i class="bar bar--celeste"></i>Fotografía: resuelto</h3><p class="indent">Hay banco propio, así que los derechos no son un problema. Con tres colores el peso visual recae en la foto, y es lo que le da al vidrio algo que esmerilar.</p></div>
+    <div class="q glass-soft"><h3><i class="bar bar--celeste"></i>Modo oscuro: decidido que no</h3><p class="indent">El Brandbook no lo contempla y el sitio va en tema claro únicamente. Saca los bloques de <code>prefers-color-scheme</code> del tema y evita el problema de que el rojo no llega a AA sobre fondo azul profundo.</p></div>
   </div>
 </section>
 

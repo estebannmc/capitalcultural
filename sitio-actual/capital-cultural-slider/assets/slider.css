@@ -1,6 +1,6 @@
 .cc-slider {
   --cc-azul: #002751;
-  --cc-verde: #00c08b;
+  --cc-celeste: #57b8e9;
   --cc-rojo: #e63312;
   --cc-blanco: #ffffff;
   --cc-ease-out: cubic-bezier(.16, 1, .3, 1);
@@ -41,7 +41,7 @@
   left: 60%;
   width: 80px;
   height: 160%;
-  background: linear-gradient(180deg, rgba(0, 192, 139, .08), rgba(0, 192, 139, .18), transparent);
+  background: linear-gradient(180deg, rgba(87, 184, 233, .10), rgba(87, 184, 233, .22), transparent);
   filter: blur(20px);
   opacity: .5;
   animation-duration: 14s;
@@ -213,17 +213,17 @@
   left: 0;
   height: 4px;
   width: 0%;
-  background: var(--cc-verde);
+  background: var(--cc-celeste);
   z-index: 3;
 }
 
-/* Etiqueta: el verde es fondo y el texto encima va siempre en azul */
+/* Etiqueta: el celeste es fondo y el texto encima va siempre en azul */
 .cc-label {
   display: inline-block;
   margin: 0 0 12px;
   padding: 5px 10px;
   border-radius: 4px;
-  background: var(--cc-verde);
+  background: var(--cc-celeste);
   color: var(--cc-azul);
   font-size: 11px;
   line-height: 1.1;
@@ -320,7 +320,7 @@
 
 .cc-slider .cc-arrow:hover,
 .cc-slider .cc-arrow:focus {
-  background: var(--cc-verde);
+  background: var(--cc-celeste);
   color: var(--cc-azul);
   transform: translateY(-50%) scale(1.04);
 }
@@ -359,7 +359,7 @@
 }
 
 .cc-slider .cc-dot.active {
-  background: var(--cc-verde);
+  background: var(--cc-celeste);
 }
 
 .cc-slider .cc-dot:focus-visible {

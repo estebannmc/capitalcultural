@@ -127,7 +127,7 @@ textarea {
 
 /* Hover footer */
 .footer-cc a:hover {
-  color: #00c08b !important;
+  color: #57b8e9 !important;
 }
 
 /* Linea inferior */
@@ -305,7 +305,7 @@ textarea {
 }
 
 .cc-menu-panel a:hover {
-  color: #00c08b;
+  color: #57b8e9;
 }
 
 /* Ultimo sin borde */
@@ -396,7 +396,12 @@ textarea {
 }
 
 .cc-menu-toggle:hover {
-  background: #00c08b;
+  background: #57b8e9;
+}
+
+/* Sobre celeste las lineas van en azul: blanco no alcanza contraste */
+.cc-menu-toggle:hover span {
+  background: #002751;
 }
 
 /* Lineas */
@@ -479,7 +484,7 @@ textarea {
 }
 
 .cc-menu-panel a:hover {
-  color: #00c08b !important;
+  color: #57b8e9 !important;
 }
 
 /* ==========================================================================

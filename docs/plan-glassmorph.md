@@ -5,7 +5,7 @@
 **Estado actual del sitio:** `sitio-actual/` — CSS adicional, script de botones, plugins instalados y listado de páginas (ver §2.sexies)
 **Stack confirmado:** WordPress + **Astra 4.13.1** + **Elementor Free**
 **Enfoque acordado:** retematizado por child theme, sin migrar plataforma
-**Sistema cromático:** cerrado en cuatro — Azul 01, Verde 01, rojo de submarca y neutros
+**Sistema cromático:** cerrado — Azul 01, celeste, rojo o naranja de submarca y neutros. El verde institucional se abandonó por decisión política
 **Restricción de entrega:** hay acceso al admin de WP pero **no al servidor** → todo se instala por ZIP desde el panel, sin build, sin WP-CLI, sin SSH
 
 ---
@@ -31,14 +31,15 @@ El sitio en sí no pudo auditarse: el dominio está bloqueado desde este entorno
 | Token | Hex | RGB | Pantone | Rol |
 |---|---|---|---|---|
 | Santa Fe Azul 01 | `#002751` | 0 39 81 | 540 | Dominante, y todo el texto |
-| Santa Fe Verde 01 | `#00c08b` | 0 192 139 | 3405 | Superficie |
+| Celeste | `#57b8e9` | 87 184 233 | — (CMYK 60 10 0 0) | Superficie y acento |
 | Rojo Cultura | `#e63312` | 230 51 18 | — | Color del tópico |
+| Naranja Cultura | `#fca100` | 252 161 0 | — | Tópico, alternativa al rojo |
 
 **Neutros:** `#ffffff` · `#dadad9` · `#606060` · `#1d1d1b`
 
-**Degradé de transición:** `linear-gradient(105deg, #00c08b → #002751)`. Corre por la misma diagonal que la trama, así que degradé y trama leen como un solo gesto. Es fondo y grafismo; si lleva texto, sólo blanco y sólo sobre el tramo azul, porque el extremo verde no da contraste.
+**Degradé de transición:** `linear-gradient(105deg, #57b8e9 → #002751)`. Corre por la misma diagonal que la trama, así que degradé y trama leen como un solo gesto. Es fondo y grafismo; si lleva texto, sólo blanco y sólo sobre el tramo azul, porque el extremo celeste no da contraste.
 
-**Fuera de sistema para este sitio:** Azul 02 `#1639f1`, Verde 02 `#00fe9b`, celeste `#57b8e9`, naranja `#fca100` y amarillo `#f2e61a`. Existen en el Brandbook pero no entran acá, y `docs/design-tokens.css` directamente no los declara: lo que no existe como token no se usa por accidente.
+**Fuera de sistema para este sitio:** Azul 02 `#1639f1`, Verde 01 `#00c08b`, Verde 02 `#00fe9b` y amarillo `#f2e61a`. Existen en el Brandbook pero no entran acá, y `docs/design-tokens.css` directamente no los declara: lo que no existe como token no se usa por accidente.
 
 ### 1.2 Regla de contraste (medida, WCAG 2.1)
 
@@ -46,15 +47,17 @@ El sitio en sí no pudo auditarse: el dominio está bloqueado desde este entorno
 azul-01  / blanco    14.90  AAA       texto libre
 negro    / blanco    16.88  AAA       texto libre
 azul-01  / gris-20   10.65  AAA
-azul-01  / verde-01   6.33  AA        texto sobre verde: SIEMPRE azul-01
+azul-01  / celeste    6.70  AA        texto sobre celeste: SIEMPRE azul-01
+azul-01  / naranja    7.27  AA        texto sobre naranja: SIEMPRE azul-01
 gris-75  / blanco     6.29  AA        texto secundario
 blanco   / rojo       4.33  AA-large  sólo ≥24px (o ≥19px bold)
 azul-01  / rojo       3.44  AA-large
-blanco   / verde-01   2.36  FALLA     nunca blanco sobre verde
-verde-01 / blanco     2.36  FALLA     el verde nunca es texto
+blanco   / celeste    2.23  FALLA     nunca blanco sobre celeste
+celeste  / blanco     2.23  FALLA     el celeste nunca es texto sobre claro
+blanco   / naranja    2.05  FALLA     nunca blanco sobre naranja
 ```
 
-**Tres reglas salen de acá.** El verde es color de **fondo**, y el texto encima siempre es Azul 01, nunca blanco. El rojo **no alcanza AA en ningún combo**: titulares grandes, filetes y barras, nunca texto corrido. Y como Azul 02 quedó fuera, **los links se distinguen por subrayado**, no por tono — el subrayado va en rojo, que ahí funciona porque es grafismo y no texto.
+**Tres reglas salen de acá.** Celeste y naranja son color de **fondo**, y el texto encima siempre es Azul 01, nunca blanco. El rojo **no alcanza AA en ningún combo**: titulares grandes, filetes y barras, nunca texto corrido. Y como Azul 02 quedó fuera, **los links se distinguen por subrayado**, no por tono — el subrayado va en rojo, que ahí funciona porque es grafismo y no texto.
 
 Al reducir la paleta el rojo queda más expuesto, porque ya no hay Azul 02 para descargarle trabajo. Conviene tenerlo presente al redactar piezas.
 
@@ -73,7 +76,7 @@ La identidad se construye sobre diagonales a **15°**, derivadas del paralelogra
 
 **El signo del ángulo importa.** La barra del logo se inclina hacia la **derecha**: subiendo, la línea se corre a la derecha (`/`). Para `repeating-linear-gradient` eso es **105deg**, la perpendicular. `75deg` produce la trama **espejada** (`\`), que invierte esa lectura de movimiento hacia adelante. Es un carácter de diferencia en el CSS y cambia el sentido de toda la página.
 
-**El remate no es una textura.** La primera versión de este plan proponía dos `repeating-linear-gradient(105deg, …)` cubriendo todo el fondo. Se lee como papel tapiz: la línea siempre igual, siempre al mismo paso, sin jerarquía. El remate real de la marca es una **pieza compuesta** anclada abajo a la derecha: catorce barras a 15° donde cada una **arranca gruesa en la base, se corta, y sigue fina hacia arriba**. Verdes en distintas intensidades, un par en Azul 01, y las dos últimas en rojo de Cultura.
+**El remate no es una textura.** La primera versión de este plan proponía dos `repeating-linear-gradient(105deg, …)` cubriendo todo el fondo. Se lee como papel tapiz: la línea siempre igual, siempre al mismo paso, sin jerarquía. El remate real de la marca es una **pieza compuesta** anclada abajo a la derecha: catorce barras a 15° donde cada una **arranca gruesa en la base, se corta, y sigue fina hacia arriba**. Celestes en distintas intensidades, un par en Azul 01, y las dos últimas en rojo de Cultura.
 
 **Cada barra es un solo polígono**, no dos piezas con un espacio en el medio. El **borde derecho es continuo** de la base al tope; el izquierdo sube por el tramo grueso y ahí **se inclina** hasta fundirse con el borde del tramo fino. Esa diagonal es el escalón: no un corte recto, sino el merge entre los dos anchos, y deja el tramo fino alineado a la derecha de la misma línea.
 
@@ -88,7 +91,7 @@ Tres cosas son fáciles de arruinar, y las tres están anotadas en los tokens co
 
 **La distribución es uniforme, y no sólo por estética.** Mismo paso, mismo ancho de base, misma inclinación y misma opacidad hacen que la separación entre barras se mantenga en 18 **a cualquier altura**; si los anchos variaran, las barras se abrirían o se juntarían hacia arriba. Lo único que cambia es el alto, que crece parejo de 150 a 420, y por eso los finales **suben en línea recta hacia el borde derecho**.
 
-Son ocho: siete verdes y una roja. La geometría está en `docs/barras.svg`: 8 polígonos, viewBox `0 0 395 440`, con los `fill` en `var(--sf-verde-01)` y `var(--sf-rojo)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
+Son ocho: siete celestes y una en el tópico de Cultura. La geometría está en `docs/barras.svg`: 8 polígonos, viewBox `0 0 395 440`, con los `fill` en `var(--sf-celeste)` y `var(--topico)` para que se re-tiña con los mismos tokens. Pesa menos que una imagen. Va como partial del child theme, inyectada por `astra_body_top`, al 30% de opacidad y anclada a la esquina: más grande o más opaca cruza el texto a media página, que es exactamente el problema que tenía la trama repetida.
 
 Traducción a web:
 
@@ -115,25 +118,25 @@ Radio **10px** — más cerrado que los 24px de los paneles, porque un botón es
 |---|---|---|---|
 | Primario | blanco / Azul 01 | 14.90 | AAA |
 | Línea | Azul 01 / fondo | 13.54 | AAA |
-| Verde | Azul 01 / Verde 01 | 6.33 | AA |
+| Celeste | Azul 01 / celeste | 6.70 | AA |
 | Desactivado | Gris 75 / Gris 20 | 4.50 | AA |
 | Tópico | blanco / rojo | 4.33 | **sólo texto grande** |
 | — | Azul 01 / rojo | 3.44 | **sólo texto grande** |
-| — | blanco / Verde 01 | 2.36 | **nunca** |
+| — | blanco / celeste | 2.23 | **nunca** |
 
 **El rojo es la restricción que manda en el sistema.** No existe botón rojo en tamaño normal que sea accesible sin salirse del color de marca. La salida no es achicar el problema sino ubicarlo: el rojo es el **CTA grande de un hero**, uno por pantalla, y en todo el resto vive como la barra dentro de un botón azul. Por eso `.sf-btn--topico` viene forzado a 19px y no existe en tamaño normal.
 
 En el primario la barra va en rojo sobre el relleno Azul 01: replica literalmente el lockup SF/CULTURA.
 
-**Foco:** un anillo, no un cambio de relleno — `box-shadow: 0 0 0 2px halo, 0 0 0 5px rojo`. El anillo rojo contra el fondo claro da 3.94, por encima del 3:1 de WCAG 1.4.11. En el botón verde el halo se invierte a Azul 01, porque el halo blanco sobre verde da 2.36 y no separa. **Desactivado** no usa `opacity`, que hunde el contraste justo cuando menos conviene.
+**Foco:** un anillo, no un cambio de relleno — `box-shadow: 0 0 0 2px halo, 0 0 0 5px rojo`. El anillo rojo contra el fondo claro da 3.94, por encima del 3:1 de WCAG 1.4.11. En el botón celeste el halo se invierte a Azul 01, porque el halo blanco sobre celeste da 2.23 y no separa. **Desactivado** no usa `opacity`, que hunde el contraste justo cuando menos conviene.
 
 **Que Elementor los respete:** el sistema se entrega dos veces — como clases del child theme para lo que renderiza Astra, y cargado en *Site Settings → Theme Style → Buttons* para que los botones de Elementor hereden. Encima va un override de `.elementor-button` como red de seguridad.
 
 ### 1.7 La lámina de luz (footer)
 
-El footer recrea la lámina de la página 90 del Brandbook — el haz verde sobre Azul 01 — **en CSS y SVG, sin imagen**. Tres piezas, ninguna con gradientes repetidos:
+El footer recrea la lámina de la página 90 del Brandbook — el haz celeste sobre Azul 01 — **en CSS y SVG, sin imagen**. Tres piezas, ninguna con gradientes repetidos:
 
-1. **El foco verde** sobre la base Azul 01. Su centro va **fuera del lienzo** (`74% 118%`): adentro se le ve el círculo, y las barras encima quedarían verde sobre verde y desaparecen.
+1. **El foco celeste** sobre la base Azul 01. Su centro va **fuera del lienzo** (`74% 118%`): adentro se le ve el círculo, y las barras encima quedarían celeste sobre celeste y desaparecen.
 2. **El mismo remate de ocho barras** que va en la esquina de la página, reusado con `<use href="#sf-barras">`. No hay un segundo juego: **una sola pieza para toda la identidad**. Acá son la luz sobre el Azul 01 — más chicas y alineadas al mismo margen que el contenido, con un `filter` de realce que les devuelve presencia sobre el fondo oscuro sin tocar la geometría.
 3. **El bloque de texto apoyado encima** con `.glass--luz`, un vidrio oscuro translúcido que esmerila la luz y las barras que pasan por detrás. Es el caso de uso que justifica todo el sistema: vidrio sobre algo que vale la pena esmerilar.
 
@@ -177,7 +180,7 @@ Son superficie nueva que el plan no contemplaba. Hay que leer su CSS antes de es
 
 ### 4. Los Global Colors ya están puenteados — pero a medias
 
-Astra ya tiene `astglobalcolor0 = #002751` (Azul 01) y `astglobalcolor1 = #00c08b` (Verde 01), y Elementor los lee como `--e-global-color-astglobalcolor*`. **Esa parte de la Fase 3 ya está hecha.**
+Astra tiene `astglobalcolor0 = #002751` (Azul 01) y `astglobalcolor1 = #00c08b` (el Verde 01 que se abandonó), y Elementor los lee como `--e-global-color-astglobalcolor*`. **Pendiente:** pasar `astglobalcolor1` a `#57b8e9` (celeste) en Astra → Personalizar → Global, así todo lo que Elementor pinta con ese global cambia de una vez.
 
 Lo que falta: los slots 2, 3, 5, 7 y 8 siguen con los grises de Astra (`#1e293b`, `#334155`, `#F0F5FA`, `#D1D5DB`, `#111111`) en vez de los neutros SF. Y el **rojo de Cultura `#e63312` no aparece ni una vez en todo el HTML**. ~~El color del tópico hoy no se usa.~~ **Corregido en §2.sexies:** sí se usa, pero desde el CSS adicional del Customizer, como la barra de hover de los botones `.cb-btn`.
 
@@ -242,11 +245,11 @@ Lo que hay adentro, y qué implica:
 
 1. **Encode Sans por `@import` a Google Fonts, con `!important` sobre todos los elementos** —`div` y `span` incluidos—. Es exactamente la dependencia externa que §1.3 saca al autoalojar, y además bloquea Geologica: con ese `!important` sobre `span` y `div`, el lockup no puede tomar la tipografía de marca sin otro `!important` encima. Se borra al activar el child theme, no antes.
 2. **Bloques repetidos con valores distintos.** El menú está dos veces (secciones 05 y 08) y título + breadcrumb también (04 y 06); la numeración salta de 11 a 13. Gana el segundo de cada par, pero **no del todo**: el primero declara `position: fixed; top: 50px; right: 50px` en `.cc-menu-toggle` y el segundo no lo pisa, así que el botón del menú sigue fijo por el bloque que parece muerto. **Borrar "el duplicado" cambia el header.** Hay que fusionar los dos a mano, propiedad por propiedad.
-3. **Los colores de marca ya están**: Azul 01 y Verde 01 en todo, y el rojo `#e63312` en la barra de `.cb-btn` — lo que corrige §2.0.4. Los que sobran son dos grises de Tailwind en el breadcrumb: `#6b7280` (4.83 sobre blanco, pasa AA) y `#9ca3af` en el separador (2.54, sólo decorativo). Se reemplazan por los neutros SF.
+3. **Los colores de marca ya están**: Azul 01 y Verde 01 en todo (el verde ya pasó a celeste en el CSS adicional), y el rojo `#e63312` en la barra de `.cb-btn` — lo que corrige §2.0.4. Los que sobran son dos grises de Tailwind en el breadcrumb: `#6b7280` (4.83 sobre blanco, pasa AA) y `#9ca3af` en el separador (2.54, sólo decorativo). Se reemplazan por los neutros SF.
 4. **Dos fallas de accesibilidad** que el rediseño tiene que cerrar:
-   - el hover de `.cc-menu-toggle` pasa el fondo a Verde 01 con las tres líneas en blanco: **2.36**, por debajo del 3:1 que WCAG 1.4.11 pide a un control. Es la regla de §1.2: sobre verde, Azul 01.
+   - el hover de `.cc-menu-toggle` pasaba el fondo a Verde 01 con las tres líneas en blanco: **2.36**, por debajo del 3:1 que WCAG 1.4.11 pide a un control. Ya corregido: el fondo pasa a celeste y las líneas a Azul 01 (6.70).
    - `.cb-btn:focus-visible` es igual al hover: fondo blanco **con borde blanco**. Sobre fondo claro el botón enfocado se borra entero. Es el caso que el anillo de foco de §1.6 resuelve.
-5. **El footer ya tiene la estructura** de §1.7: `.footer-cc` en Azul 01, grilla de dos columnas, hover en verde (6.33, pasa). Las clases (`footer-cc`, `footer-inner`, `footer-left`, `footer-right`, `footer-bottom`) las usa el bloque HTML de Elementor, así que el child theme **las conserva** y les cambia el estilo: renombrarlas obliga a editar el bloque.
+5. **El footer ya tiene la estructura** de §1.7: `.footer-cc` en Azul 01, grilla de dos columnas, hover en celeste (6.70 sobre Azul 01, pasa). Las clases (`footer-cc`, `footer-inner`, `footer-left`, `footer-right`, `footer-bottom`) las usa el bloque HTML de Elementor, así que el child theme **las conserva** y les cambia el estilo: renombrarlas obliga a editar el bloque.
 
 ### `.cb-btn` es el botón de §1.6 a medio camino
 
