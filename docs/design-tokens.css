@@ -15,12 +15,14 @@
   color-scheme: light;
 
   /* ---------- Sistema cromático cerrado ----------
-     De la ficha 02.4 se usan SOLO estos. Azul 02, Verde 02, celeste,
-     naranja y amarillo quedan fuera del sistema para este sitio y no se
-     declaran acá a propósito: lo que no existe como token no se usa. */
+     De la ficha 02.4 se usan SOLO estos. Por decisión institucional el
+     sitio deja el verde: Verde 01, Verde 02, Azul 02 y amarillo quedan
+     fuera y no se declaran acá a propósito: lo que no existe como token
+     no se usa. */
   --sf-azul-01:   #002751;  /* PANTONE 540  · dominante */
-  --sf-verde-01:  #00c08b;  /* PANTONE 3405 · superficie */
+  --sf-celeste:   #57b8e9;  /* acento · superficie */
   --sf-rojo:      #e63312;  /* tópico CULTURA (04.1, nivel 01/A) */
+  --sf-naranja:   #fca100;  /* tópico CULTURA, alternativa al rojo */
 
   /* ---------- Neutros ---------- */
   --sf-blanco:    #ffffff;
@@ -28,27 +30,31 @@
   --sf-gris-75:   #606060;
   --sf-negro:     #1d1d1b;
 
+  /* Cultura puede ir en rojo o en naranja: se cambia acá, en un solo lugar */
   --topico: var(--sf-rojo);
 
-  /* Degradé de transición: verde → azul institucional. Corre a 105deg,
+  /* Degradé de transición: celeste → azul institucional. Corre a 105deg,
      la misma diagonal que la trama, para que lean como un solo gesto.
      Es fondo y grafismo. Si lleva texto: sólo blanco y sólo sobre el
-     tramo azul — el extremo verde no da contraste (blanco/verde = 2.36). */
+     tramo azul — el extremo celeste no da contraste (blanco/celeste = 2.23). */
   --sf-degrade: linear-gradient(105deg,
-    #00c08b 0%, #009e87 38%, #00527a 72%, #002751 100%);
+    #57b8e9 0%, #2f86c0 38%, #10508a 72%, #002751 100%);
 
   /* ---------- Roles semánticos ----------
      Contrastes medidos:
        azul-01 / blanco     14.90  AAA   texto libre
        negro   / blanco     16.88  AAA   texto libre
        azul-01 / gris-20    10.65  AAA
-       azul-01 / verde-01    6.33  AA    texto sobre verde: SIEMPRE azul-01
+       azul-01 / celeste     6.70  AA    texto sobre celeste: SIEMPRE azul-01
+       azul-01 / naranja     7.27  AA    texto sobre naranja: SIEMPRE azul-01
        gris-75 / blanco      6.29  AA    texto secundario
        blanco  / rojo        4.33  AA-large  sólo ≥24px (o ≥19px bold)
        azul-01 / rojo        3.44  AA-large
-       blanco  / verde-01    2.36  FALLA  nunca texto blanco sobre verde
-       verde-01/ blanco      2.36  FALLA  el verde nunca es texto
-     El verde es color de FONDO. El rojo no alcanza AA en ningún combo:
+       blanco  / celeste     2.23  FALLA  nunca texto blanco sobre celeste
+       celeste / blanco      2.23  FALLA  el celeste nunca es texto sobre claro
+       blanco  / naranja     2.05  FALLA  nunca texto blanco sobre naranja
+     Celeste y naranja son color de FONDO (sobre Azul 01 el celeste sí
+     puede ser texto: 6.70). El rojo no alcanza AA en ningún combo:
      titulares grandes, filetes y barras, nunca texto corrido.
      Sin azul-02 en el sistema, los links se distinguen por SUBRAYADO,
      no por tono; el subrayado va en rojo porque es grafismo, no texto. */
@@ -110,9 +116,9 @@
   position: absolute; width: 90vmax; height: 90vmax;
   border-radius: 50%; will-change: transform;
 }
-.sf-ambient__blob--verde {
+.sf-ambient__blob--celeste {
   top: -40vmax; left: -40vmax;
-  background: radial-gradient(closest-side, rgba(0, 192, 139, .38), rgba(0, 192, 139, 0));
+  background: radial-gradient(closest-side, rgba(87, 184, 233, .38), rgba(87, 184, 233, 0));
   animation: sf-drift-a 32s ease-in-out infinite alternate;
 }
 .sf-ambient__blob--azul {
@@ -125,9 +131,9 @@
   background: radial-gradient(closest-side, rgba(230, 51, 18, .20), rgba(230, 51, 18, 0));
   animation: sf-drift-b 34s ease-in-out infinite alternate-reverse;
 }
-.sf-ambient__blob--verde-2 {
+.sf-ambient__blob--celeste-2 {
   bottom: -40vmax; right: -40vmax;
-  background: radial-gradient(closest-side, rgba(0, 192, 139, .28), rgba(0, 192, 139, 0));
+  background: radial-gradient(closest-side, rgba(87, 184, 233, .28), rgba(87, 184, 233, 0));
   animation: sf-drift-a 42s ease-in-out infinite alternate-reverse;
 }
 .sf-ambient::after {
@@ -141,7 +147,7 @@
    NO es una textura que se repite. Un repeating-linear-gradient a 105deg
    cubriendo el fondo se lee como papel tapiz: la línea siempre igual,
    siempre al mismo paso, sin jerarquía. El remate de marca es una pieza
-   COMPUESTA: ocho barras, siete verdes y la última en rojo de Cultura.
+   COMPUESTA: ocho barras, siete celestes y la última en el tópico de Cultura.
 
    DISTRIBUCIÓN UNIFORME, y no sólo por estética: mismo paso (34), mismo
    ancho de base (16), misma inclinación y misma opacidad hacen que la
@@ -174,7 +180,7 @@
 
    La geometría está en docs/barras.svg (8 polígonos, viewBox
    0 0 395 440). Va como partial del child theme, inyectada por el hook
-   astra_body_top; los fill usan var(--sf-verde-01) y var(--sf-rojo), así
+   astra_body_top; los fill usan var(--sf-celeste) y var(--topico), así
    que se re-tiñe con los mismos tokens. Acá va sólo su ubicación: al 30%
    y anclada a la esquina, porque más grande o más opaca cruza el texto a
    media página — que es justo el problema que tenía la trama.
@@ -199,7 +205,7 @@
   background: var(--topico);
   transform: skewX(calc(-1 * var(--trama-angulo)));
 }
-.sf-barra--verde { background: var(--sf-verde-01); }
+.sf-barra--celeste { background: var(--sf-celeste); }
 .sf-barra--azul  { background: var(--sf-azul-01); }
 .sf-barra--gris  { background: var(--sf-gris-75); }
 /* el párrafo se alinea con el título, no con la barra */
@@ -209,9 +215,9 @@
    Luz de marca: la lámina del Brandbook (pág. 90).
    Tres piezas, ninguna con gradientes repetidos:
 
-   1· el foco verde sobre la base Azul 01. Su centro va FUERA del lienzo
+   1· el foco celeste sobre la base Azul 01. Su centro va FUERA del lienzo
       (74% 118%): adentro se le ve el círculo, y encima las barras
-      quedarían verde sobre verde y desaparecen.
+      quedarían celeste sobre celeste y desaparecen.
    2· EL MISMO remate de ocho barras que va en la esquina de la página,
       reusado con <use href="#sf-barras">. No hay un segundo juego de
       barras: una sola pieza para toda la identidad. Acá son la luz sobre
@@ -230,8 +236,8 @@
   padding: var(--luz-pad);
   background:
     radial-gradient(92% 130% at 74% 118%,
-      rgba(255, 255, 255, .34) 0%, #00c08b 22%, rgba(0, 192, 139, .5) 42%,
-      rgba(0, 90, 110, .22) 62%, transparent 84%),
+      rgba(255, 255, 255, .34) 0%, #57b8e9 22%, rgba(87, 184, 233, .5) 42%,
+      rgba(16, 80, 138, .22) 62%, transparent 84%),
     linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
 }
 .sf-luz__barras {
@@ -324,7 +330,7 @@
     rgba(255, 255, 255, .30));
 }
 /* Tintes de marca para tarjetas destacadas. El texto encima va en azul-01. */
-.glass--verde  { --glass-fill: linear-gradient(160deg, rgba(0, 192, 139, .90), rgba(0, 192, 139, .62)); color: var(--sf-azul-01); }
+.glass--celeste { --glass-fill: linear-gradient(160deg, rgba(87, 184, 233, .90), rgba(87, 184, 233, .62)); color: var(--sf-azul-01); }
 .glass--topico { --glass-fill: linear-gradient(160deg, rgba(230, 51, 18, .82), rgba(230, 51, 18, .55)); color: var(--sf-blanco); }
 
 /* Vidrio oscuro translúcido: para apoyarse SOBRE la lámina y dejar que la
@@ -381,7 +387,7 @@
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
   .glass--dark   { --glass-fill: var(--sf-azul-01); }
-  .glass--verde  { --glass-fill: var(--sf-verde-01); }
+  .glass--celeste { --glass-fill: var(--sf-celeste); }
   .glass--topico { --glass-fill: var(--sf-rojo); }
   .glass::after, .sf-ambient::after { display: none; }
   .glass-bar::before {
@@ -404,11 +410,13 @@
 
    Contrastes medidos — esto manda sobre cualquier preferencia:
      blanco  / azul-01   14.90  AAA
-     azul-01 / verde-01   6.33  AA
+     azul-01 / celeste    6.70  AA
+     azul-01 / naranja    7.27  AA
      azul-01 / fondo     13.54  AAA
      blanco  / rojo       4.33  AA SÓLO EN TEXTO GRANDE
      azul-01 / rojo       3.44  AA SÓLO EN TEXTO GRANDE
-     blanco  / verde-01   2.36  FALLA — nunca
+     blanco  / celeste    2.23  FALLA — nunca
+     blanco  / naranja    2.05  FALLA — nunca
      gris-75 / gris-20    4.50  AA   (desactivado)
    No existe botón rojo en tamaño normal que sea accesible sin salirse
    del color de marca. El rojo es el CTA grande de un hero, uno por
@@ -446,11 +454,11 @@
 .sf-btn--primario .sf-barra { background: var(--sf-rojo); }
 @media (hover: hover) { .sf-btn--primario:hover { background: #00325f; } }
 
-/* verde — texto SIEMPRE azul-01, jamás blanco */
-.sf-btn--verde { --btn-halo: var(--sf-azul-01);
-  background: var(--sf-verde-01); color: var(--sf-azul-01); }
-.sf-btn--verde .sf-barra { background: var(--sf-azul-01); }
-@media (hover: hover) { .sf-btn--verde:hover { background: #00d69a; } }
+/* celeste — texto SIEMPRE azul-01, jamás blanco */
+.sf-btn--celeste { --btn-halo: var(--sf-azul-01);
+  background: var(--sf-celeste); color: var(--sf-azul-01); }
+.sf-btn--celeste .sf-barra { background: var(--sf-azul-01); }
+@media (hover: hover) { .sf-btn--celeste:hover { background: #7cc9f0; } }
 
 .sf-btn--linea { background: transparent; color: var(--fg);
   box-shadow: inset 0 0 0 1.5px var(--fg); }

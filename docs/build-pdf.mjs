@@ -10,8 +10,8 @@ await p.emulateMedia({ media: 'screen' });
 await p.waitForTimeout(3000);
 
 // Las manchas del fondo están animadas: cada captura las tomaría en otra
-// posición y el verde variaría de página a página. Se congelan y se bajan,
-// porque a página completa el lavado verde pesa más que en pantalla.
+// posición y el celeste variaría de página a página. Se congelan y se bajan,
+// porque a página completa el lavado celeste pesa más que en pantalla.
 await p.addStyleTag({ content: `
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .blob.b1{opacity:.55} .blob.b2{opacity:.5} .blob.b3{opacity:.5} .blob.b4{opacity:.45}
