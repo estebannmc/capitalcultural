@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#002751"/>
+  <rect x="720" y="-120" width="120" height="1140" transform="rotate(15 780 450)" fill="#00C08B" opacity="0.25"/>
+  <text x="80" y="470" font-family="Arial, sans-serif" font-size="58" fill="#ffffff">Capital Cultural</text>
+</svg>
