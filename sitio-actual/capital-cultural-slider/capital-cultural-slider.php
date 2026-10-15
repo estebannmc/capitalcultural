@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Capital Cultural Slider
  * Description: Slider principal administrable para Capital Cultural. Usar shortcode [capital_slider].
- * Version: 2.2.0
+ * Version: 2.2.1
  * Author: Esteban
  * Text Domain: capital-cultural-slider
  */
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class Capital_Cultural_Slider {
-    const VERSION = '2.2.0';
+    const VERSION = '2.2.1';
     const POST_TYPE = 'cc_slide';
     const NONCE = 'cc_slider_nonce';
     const NONCE_ACTION = 'cc_slider_save_meta';
