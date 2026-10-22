@@ -1,23 +1,6 @@
-<!--
-  Memorias Urbanas Feministas · Capital Cultural
-  /capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/  (página 16354)
-
-  Cómo se carga:
-  1. Editar la página con Elementor y borrar las dos secciones (el Text Editor y el
-     widget HTML con los trece .cb-btn).
-  2. Una sección nueva con un widget HTML adentro. Pegar ESTE ARCHIVO ENTERO.
-
-  Sólo HTML y CSS: cada tarjeta es un enlace común a su ficha, sin JS.
-  Las baldosas van en orden cronológico. Las que no tienen foto en el sitio llevan
-  el remate de barras sobre azul, igual que en su ficha.
-  No trae h1 ni fondo: el título y las migas los pone .cc-title-wrapper.
--->
 <style>
-  /* El widget no suma márgenes propios */
   .elementor-widget-wrap:has(> .elementor-widget-html #mf),
   .elementor-widget-html:has(#mf) > .elementor-widget-container { padding: 0; margin: 0; }
-  /* La plantilla de Redux pone el contenido en un .ast-container flex: sin esto, la
-     página se encoge al ancho de su contenido en lugar de ocupar el contenedor */
   .ast-container > .elementor:has(#mf) { flex: 1 1 100%; min-width: 0; }
 
   #mf {
@@ -68,7 +51,6 @@
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
   }
 
-  /* ───── Tarjeta: toda es el enlace a la ficha ───── */
   #mf .mf-card {
     position: relative; isolation: isolate;
     display: flex; flex-direction: column; height: 100%;
@@ -106,10 +88,8 @@
       box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
     }
   }
-  /* Foco: anillo rojo sobre halo blanco */
   #mf .mf-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
 
-  /* ───── Mobile: dos columnas ───── */
   @media (max-width: 640px) {
     #mf .mf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     #mf .mf-card { border-radius: 14px; }
@@ -119,7 +99,6 @@
     #mf .mf-baldosa__serie { font-size: .66rem; }
   }
 
-  /* ───── Accesibilidad ───── */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     #mf .mf-card { background: rgba(255, 255, 255, .95); }
   }

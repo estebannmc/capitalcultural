@@ -1,25 +1,6 @@
-<!--
-  Marcas de la Memoria · Capital Cultural
-  /capitalcultural/huellas-de-mi-ciudad/marcas-de-la-memoria/  (página 20730)
-
-  Cómo se carga:
-  1. Editar la página con Elementor y borrar las dos secciones (el Text Editor y la
-     sección de tres columnas con el botón a José "Pepe" Serra).
-  2. Una sección nueva con un widget HTML adentro. Pegar ESTE ARCHIVO ENTERO.
-
-  La ficha de José "Pepe" Serra (página 20751) queda acá adentro, con su texto, su
-  foto y el audio, bajo el ancla #jose-pepe-serra. La página vieja sigue publicada:
-  ver el README para pasarla a borrador o redirigirla.
-
-  Sólo HTML y CSS; el audio es el reproductor nativo del navegador.
-  No trae h1 ni fondo: el título y las migas los pone .cc-title-wrapper.
--->
 <style>
-  /* El widget no suma márgenes propios */
   .elementor-widget-wrap:has(> .elementor-widget-html #mm),
   .elementor-widget-html:has(#mm) > .elementor-widget-container { padding: 0; margin: 0; }
-  /* La plantilla de Redux pone el contenido en un .ast-container flex: sin esto, la
-     página se encoge al ancho de su contenido en lugar de ocupar el contenedor */
   .ast-container > .elementor:has(#mm) { flex: 1 1 100%; min-width: 0; }
 
   #mm {
@@ -63,7 +44,6 @@
 
   #mm .mm-intro { display: grid; gap: 1rem; max-width: 74ch; font-size: 1.05rem; }
 
-  /* ───── Marca: José "Pepe" Serra ───── */
   #mm .mm-marcas { margin-top: clamp(40px, 6vw, 72px); }
   #mm .mm-marca {
     display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -98,7 +78,6 @@
     #mm .mm-marca__media { order: -1; }
   }
 
-  /* ───── Accesibilidad ───── */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     #mm .mm-marca { background: rgba(255, 255, 255, .95); }
   }

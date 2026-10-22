@@ -1,21 +1,6 @@
-<!--
-  Huellas de mi Ciudad · Capital Cultural
-  /capitalcultural/huellas-de-mi-ciudad/  (página 16345)
-
-  Cómo se carga:
-  1. Editar la página con Elementor y borrar las dos secciones (el Text Editor y el
-     widget HTML con los tres .cb-btn).
-  2. Una sección nueva con un widget HTML adentro. Pegar ESTE ARCHIVO ENTERO.
-
-  Sólo HTML y CSS. No trae h1 ni fondo: el título y las migas los pone
-  .cc-title-wrapper, y el fondo es el global del CSS adicional (sitio-nuevo/fondo-global.css).
--->
 <style>
-  /* El widget no suma márgenes propios */
   .elementor-widget-wrap:has(> .elementor-widget-html #hm),
   .elementor-widget-html:has(#hm) > .elementor-widget-container { padding: 0; margin: 0; }
-  /* La plantilla de Redux pone el contenido en un .ast-container flex: sin esto, la
-     página se encoge al ancho de su contenido en lugar de ocupar el contenedor */
   .ast-container > .elementor:has(#hm) { flex: 1 1 100%; min-width: 0; }
 
   #hm {
@@ -63,7 +48,6 @@
   }
   #hm .hm-texto { display: grid; gap: 1rem; font-size: 1.05rem; }
 
-  /* ───── Los tres recorridos ───── */
   #hm .hm-recorridos { display: grid; gap: .9rem; }
   #hm .hm-fila {
     position: relative; isolation: isolate;
@@ -102,7 +86,6 @@
     #hm .hm-fila__flecha { display: none; }
   }
 
-  /* ───── Accesibilidad ───── */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     #hm .hm-fila { background: rgba(255, 255, 255, .95); }
   }
