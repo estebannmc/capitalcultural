@@ -43,7 +43,7 @@
 <main class="doc">
   <h1>Fichas de Memorias Urbanas Feministas</h1>
   <div class="doc-intro">
-    <p>El código de cada una de las 13 baldosas, listo para pegar. Lleva el texto de la ficha publicada, sus fotos y el botón al PDF. 6 fichas tienen fotos; las otras 7 llevan el remate de barras sobre azul, igual que su tarjeta en el listado.</p>
+    <p>El código de cada una de las 13 baldosas, listo para pegar. Lleva el texto de la ficha publicada, sus fotos y el botón al PDF. 6 fichas tienen fotos; las otras 7 van sólo con el texto, a una columna.</p>
     <ol>
       <li>Antes de pegar, cambiá la <strong>plantilla</strong> de las 13 páginas a <strong>Elementor ancho completo</strong> (<em>Elementor Full Width</em>), la misma que usan las fichas de Patrimonio. Hoy tienen la plantilla de ancho completo de Redux, que ensancha la ficha y cambia la proporción entre el texto y la foto. Se hace de una vez: en <em>Páginas</em>, tildá las 13, <em>Acciones en lote → Editar</em>, y en <em>Plantilla</em> elegí la de Elementor.</li>
       <li>Editá la ficha con Elementor y borrá la sección que tiene hoy (imagen o carrusel, Text Editor y botón «Leer más»).</li>
@@ -222,19 +222,8 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
@@ -473,19 +462,8 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
@@ -737,19 +715,8 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
@@ -997,19 +964,8 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
@@ -1257,19 +1213,8 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
@@ -1507,23 +1452,12 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
-  &lt;div class="pf-cabecera"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
     &lt;div class="pf-texto"&gt;
       &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
       &lt;p class="pf-periodo"&gt;1874 – 1936&lt;/p&gt;
@@ -1534,11 +1468,6 @@
       &lt;div class="pf-acciones"&gt;
         &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-explotacion.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pf-baldosa" aria-hidden="true"&gt;
-      &lt;span class="pf-baldosa__serie"&gt;Baldosa de la memoria&lt;/span&gt;
-      &lt;span class="pf-baldosa__periodo"&gt;1874 – 1936&lt;/span&gt;
-      &lt;svg class="pf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"&gt;&lt;polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/&gt;&lt;polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/&gt;&lt;polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/&gt;&lt;polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/&gt;&lt;polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/&gt;&lt;polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/&gt;&lt;polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/&gt;&lt;polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/&gt;&lt;/svg&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -1697,19 +1626,8 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
@@ -1959,23 +1877,12 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
-  &lt;div class="pf-cabecera"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
     &lt;div class="pf-texto"&gt;
       &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
       &lt;p class="pf-periodo"&gt;Década de 1940&lt;/p&gt;
@@ -1985,11 +1892,6 @@
       &lt;div class="pf-acciones"&gt;
         &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/10/unidadesbasicas.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pf-baldosa" aria-hidden="true"&gt;
-      &lt;span class="pf-baldosa__serie"&gt;Baldosa de la memoria&lt;/span&gt;
-      &lt;span class="pf-baldosa__periodo"&gt;Década de 1940&lt;/span&gt;
-      &lt;svg class="pf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"&gt;&lt;polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/&gt;&lt;polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/&gt;&lt;polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/&gt;&lt;polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/&gt;&lt;polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/&gt;&lt;polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/&gt;&lt;polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/&gt;&lt;polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/&gt;&lt;/svg&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2148,23 +2050,12 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
-  &lt;div class="pf-cabecera"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
     &lt;div class="pf-texto"&gt;
       &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
       &lt;p class="pf-periodo"&gt;Década de 1970&lt;/p&gt;
@@ -2174,11 +2065,6 @@
       &lt;div class="pf-acciones"&gt;
         &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/10/Pdf_mujeres.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pf-baldosa" aria-hidden="true"&gt;
-      &lt;span class="pf-baldosa__serie"&gt;Baldosa de la memoria&lt;/span&gt;
-      &lt;span class="pf-baldosa__periodo"&gt;Década de 1970&lt;/span&gt;
-      &lt;svg class="pf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"&gt;&lt;polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/&gt;&lt;polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/&gt;&lt;polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/&gt;&lt;polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/&gt;&lt;polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/&gt;&lt;polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/&gt;&lt;polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/&gt;&lt;polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/&gt;&lt;/svg&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2337,23 +2223,12 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
-  &lt;div class="pf-cabecera"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
     &lt;div class="pf-texto"&gt;
       &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
       &lt;p class="pf-periodo"&gt;Década de 1980&lt;/p&gt;
@@ -2363,11 +2238,6 @@
       &lt;div class="pf-acciones"&gt;
         &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/movimientomujeres.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pf-baldosa" aria-hidden="true"&gt;
-      &lt;span class="pf-baldosa__serie"&gt;Baldosa de la memoria&lt;/span&gt;
-      &lt;span class="pf-baldosa__periodo"&gt;Década de 1980&lt;/span&gt;
-      &lt;svg class="pf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"&gt;&lt;polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/&gt;&lt;polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/&gt;&lt;polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/&gt;&lt;polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/&gt;&lt;polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/&gt;&lt;polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/&gt;&lt;polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/&gt;&lt;polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/&gt;&lt;/svg&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2526,23 +2396,12 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
-  &lt;div class="pf-cabecera"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
     &lt;div class="pf-texto"&gt;
       &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
       &lt;p class="pf-periodo"&gt;1984 – 2010&lt;/p&gt;
@@ -2552,11 +2411,6 @@
       &lt;div class="pf-acciones"&gt;
         &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/02/sociabilidadLe%CC%81sbica.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pf-baldosa" aria-hidden="true"&gt;
-      &lt;span class="pf-baldosa__serie"&gt;Baldosa de la memoria&lt;/span&gt;
-      &lt;span class="pf-baldosa__periodo"&gt;1984 – 2010&lt;/span&gt;
-      &lt;svg class="pf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"&gt;&lt;polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/&gt;&lt;polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/&gt;&lt;polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/&gt;&lt;polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/&gt;&lt;polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/&gt;&lt;polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/&gt;&lt;polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/&gt;&lt;polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/&gt;&lt;/svg&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2715,23 +2569,12 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
-  &lt;div class="pf-cabecera"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
     &lt;div class="pf-texto"&gt;
       &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
       &lt;p class="pf-periodo"&gt;1997&lt;/p&gt;
@@ -2741,11 +2584,6 @@
       &lt;div class="pf-acciones"&gt;
         &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/02/Pdf_mujeresdesocupadas.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pf-baldosa" aria-hidden="true"&gt;
-      &lt;span class="pf-baldosa__serie"&gt;Baldosa de la memoria&lt;/span&gt;
-      &lt;span class="pf-baldosa__periodo"&gt;1997&lt;/span&gt;
-      &lt;svg class="pf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"&gt;&lt;polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/&gt;&lt;polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/&gt;&lt;polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/&gt;&lt;polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/&gt;&lt;polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/&gt;&lt;polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/&gt;&lt;polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/&gt;&lt;polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/&gt;&lt;/svg&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2904,23 +2742,12 @@
     background: rgba(0, 39, 81, .07); color: var(--azul);
     font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   }
-  #pf .pf-baldosa {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4 / 3; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
-    background:
-      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
-      linear-gradient(130deg, var(--azul), #001630);
-    color: #fff;
-    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45);
-  }
-  #pf .pf-baldosa__serie { position: relative; z-index: 1; display: block; font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
-  #pf .pf-baldosa__periodo { position: relative; z-index: 1; display: block; margin-top: .4rem; font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
-  #pf .pf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 70%; }
-  @media (max-width: 860px) { #pf .pf-baldosa { aspect-ratio: 16 / 8; } }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
 &lt;/style&gt;
 
 &lt;div id="pf"&gt;
-  &lt;div class="pf-cabecera"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
     &lt;div class="pf-texto"&gt;
       &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
       &lt;p class="pf-periodo"&gt;Siglos XIX y XX&lt;/p&gt;
@@ -2930,11 +2757,6 @@
       &lt;div class="pf-acciones"&gt;
         &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2024/04/Guardianasdelamemoria.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="pf-baldosa" aria-hidden="true"&gt;
-      &lt;span class="pf-baldosa__serie"&gt;Baldosa de la memoria&lt;/span&gt;
-      &lt;span class="pf-baldosa__periodo"&gt;Siglos XIX y XX&lt;/span&gt;
-      &lt;svg class="pf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"&gt;&lt;polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/&gt;&lt;polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/&gt;&lt;polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/&gt;&lt;polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/&gt;&lt;polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/&gt;&lt;polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/&gt;&lt;polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/&gt;&lt;polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/&gt;&lt;/svg&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
