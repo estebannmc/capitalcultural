@@ -1,0 +1,297 @@
+<!--
+  Patrimonio Artístico · Capital Cultural
+  /capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/  (página 18656)
+
+  Cómo se carga:
+  1. Editar la página con Elementor y borrar los 42 Call to Action (son de Elementor
+     Pro y hoy no se ven).
+  2. Una sección nueva con un widget HTML adentro. Pegar ESTE ARCHIVO ENTERO.
+
+  Sólo HTML y CSS: cada tarjeta es un enlace común a su ficha, sin JS.
+  No trae h1 ni fondo: el título y las migas los pone .cc-title-wrapper, y el fondo
+  es el global del CSS adicional (sitio-nuevo/fondo-global.css).
+  Las fotos de las esculturas son los cuadrados de 600 que se subieron para los Call
+  to Action; las de los murales, una foto de cada uno. Todas están en el servidor.
+-->
+<style>
+  /* El widget no suma márgenes propios */
+  .elementor-widget-wrap:has(> .elementor-widget-html #pa),
+  .elementor-widget-html:has(#pa) > .elementor-widget-container { padding: 0; margin: 0; }
+  /* La plantilla de Redux pone el contenido en un .ast-container flex: sin esto, la
+     página se encoge al ancho de su contenido en lugar de ocupar el contenedor */
+  .ast-container > .elementor:has(#pa) { flex: 1 1 100%; min-width: 0; }
+
+  #pa {
+    --azul: #002751;
+    --rojo: #e63312;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(32px, 5vw, 64px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #pa *, #pa *::before, #pa *::after { box-sizing: border-box; }
+  #pa :is(h2, p, ul) { margin: 0; padding: 0; }
+  #pa ul { list-style: none; }
+
+  #pa .pa-grupo + .pa-grupo { margin-top: clamp(40px, 6vw, 72px); }
+  #pa .pa-titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem;
+    margin-bottom: clamp(18px, 3vw, 28px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pa .pa-titulo::before {
+    content: ""; flex: none; align-self: center;
+    width: .2em; height: .78em; margin-right: .2em; /* + el gap: aire entre la barra y el texto */
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #pa .pa-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+
+  #pa .pa-grilla {
+    display: grid; gap: clamp(14px, 2vw, 22px);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  }
+
+  /* ───── Tarjeta: toda es el enlace a la ficha ───── */
+  #pa .pa-card {
+    position: relative; isolation: isolate;
+    display: flex; flex-direction: column; height: 100%;
+    overflow: hidden; border-radius: 18px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+    color: var(--azul); text-decoration: none;
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pa .pa-card:hover { color: var(--azul); }
+  #pa .pa-card img {
+    display: block; width: 100%; height: auto; max-width: none; aspect-ratio: 1;
+    object-fit: cover; border-radius: 0; background: var(--gris-20);
+  }
+  #pa .pa-card__cuerpo { display: grid; gap: .3rem; padding: .85rem 1rem 1.05rem; }
+  #pa .pa-card__titulo { font-size: 1.02rem; font-weight: 700; line-height: 1.25; }
+  #pa .pa-card__lugar { font-size: .88rem; line-height: 1.35; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pa .pa-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
+    }
+  }
+  /* Foco: anillo rojo sobre halo blanco */
+  #pa .pa-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  /* ───── Mobile: dos columnas ───── */
+  @media (max-width: 640px) {
+    #pa .pa-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pa .pa-card { border-radius: 14px; }
+    #pa .pa-card__cuerpo { padding: .7rem .75rem .85rem; }
+    #pa .pa-card__titulo { font-size: .92rem; }
+    #pa .pa-card__lugar { font-size: .8rem; }
+  }
+
+  /* ───── Accesibilidad ───── */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pa .pa-card { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pa .pa-card { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pa *, #pa *::before, #pa *::after { transition: none !important; }
+  }
+</style>
+
+<div id="pa">
+  <section class="pa-grupo" aria-labelledby="pa-esculturas">
+    <h2 class="pa-titulo" id="pa-esculturas">Esculturas, monumentos y fuentes <small>31 obras</small></h2>
+    <ul class="pa-grilla">
+      <!-- tarjetas:esculturas -->
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/alma-sin-hogar-de-jose-sedlacek/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-Plazoleta-Prefectura-Naval-alma-sin-hogar-1988-aprox.-768x434.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-Plazoleta-Prefectura-Naval-alma-sin-hogar-1988-aprox.-768x434.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-Plazoleta-Prefectura-Naval-alma-sin-hogar-1988-aprox.-1024x579.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="434">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Alma sin hogar de José Sedlacek</span><span class="pa-card__lugar">San Martín 2020</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/ana-franck-de-rosario-kerz/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-Asociacion-I.L.-Peretz-Paseo-Ana-Frank-Costanera-de-Santa-Fe-2019-576x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-Asociacion-I.L.-Peretz-Paseo-Ana-Frank-Costanera-de-Santa-Fe-2019-576x1024.jpg 576w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-Asociacion-I.L.-Peretz-Paseo-Ana-Frank-Costanera-de-Santa-Fe-2019-576x1024.jpg 576w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="576" height="1024" style="object-position: 50% 18%">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Ana Franck de Rosario Kerz</span><span class="pa-card__lugar">Av. Almirante Brown (Costanera), Siete Jefes</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/dolorosa-de-jose-sedlacek/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-muestra-Homenaje-a-Jose-Sedlacek.-Entre-lo-publico-y-lo-privado-obra-reunida-activacion-2017-1-768x432.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-muestra-Homenaje-a-Jose-Sedlacek.-Entre-lo-publico-y-lo-privado-obra-reunida-activacion-2017-1-768x432.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-muestra-Homenaje-a-Jose-Sedlacek.-Entre-lo-publico-y-lo-privado-obra-reunida-activacion-2017-1-1024x576.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="432">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Dolorosa de José Sedlacek</span><span class="pa-card__lugar">Cementerio Municipal</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/el-angel-de-federico-fabiani/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-noche-de-los-museos-cementerio-municipal-2018-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-noche-de-los-museos-cementerio-municipal-2018-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-noche-de-los-museos-cementerio-municipal-2018-1024x682.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="512">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">El ángel de Federico Fabiani</span><span class="pa-card__lugar">Cementerio Municipal</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/el-baco-de-charles-veeck/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/baco-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/baco-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/baco.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">El Baco de Charles Veeck</span><span class="pa-card__lugar">Plaza Pueyrredón</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/el-chaja-expectante-de-wenceslao-sedlacek/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_2843-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_2843-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_2843-1024x683.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="512">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">El Chajá expectante de Wenceslao Sedlacek</span><span class="pa-card__lugar">San Martín 2068</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/el-toro-de-santia-dassie/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Fotografia-de-la-obra-El-Toro.png" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Fotografia-de-la-obra-El-Toro.png 610w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Fotografia-de-la-obra-El-Toro.png 610w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="610" height="391">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">El toro de Santia Dassie</span><span class="pa-card__lugar">Av. Blas Parera 9699</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/figura-de-miguel-budini/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_2850-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_2850-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_2850-1024x683.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="512">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Figura de Miguel Budini</span><span class="pa-card__lugar">San Martín 2068</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/fuente-aurore/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/Aurore-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/Aurore-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/Aurore.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Fuente: Aurore</span><span class="pa-card__lugar">Plaza Pueyrredón</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/fuente-bano-de-venus/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/venus-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/venus-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/venus.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Fuente: Baño de Venus</span><span class="pa-card__lugar">Rivadavia 2950</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/fuente-dama-con-cantaro/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/dama-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/dama-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/dama.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Fuente: Dama con cántaro</span><span class="pa-card__lugar">Av. Presidente Perón 3000</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/fuente-de-la-cordialidad/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/cordialidad-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/cordialidad-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/cordialidad.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Fuente: De la Cordialidad</span><span class="pa-card__lugar">Ruta Nacional 168</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/fuente-ninos-cazadores/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Fuente: Niños cazadores</span><span class="pa-card__lugar">San Martín 2068</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/fuente-querubin/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/queribin-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/queribin-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/queribin.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Fuente: Querubín</span><span class="pa-card__lugar">Plaza de las Tres Culturas</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/india-de-jose-alonso/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_3172-768x1152.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_3172-768x1152.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/03/MG_3172-683x1024.jpg 683w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="1152" style="object-position: 50% 15%">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">India de José Alonso</span><span class="pa-card__lugar">San Martín 2068</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/inspiracion-de-miroslav-bardonek/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-pagina-web-miroslavbardonek-fotografia-inspiracion.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-pagina-web-miroslavbardonek-fotografia-inspiracion.jpg 305w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-pagina-web-miroslavbardonek-fotografia-inspiracion.jpg 305w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="305" height="489">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Inspiración de Miroslav Bardonek</span><span class="pa-card__lugar">San Martín 2020</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/la-madre-de-jose-sedlacek/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-archivo-digital-MMAV-muestra-Homenaje-a-Jose-Sedlacek.-Entre-lo-publico-y-lo-privado-obra-reunida-frente-del-museo-2017-768x576.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-archivo-digital-MMAV-muestra-Homenaje-a-Jose-Sedlacek.-Entre-lo-publico-y-lo-privado-obra-reunida-frente-del-museo-2017-768x576.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-archivo-digital-MMAV-muestra-Homenaje-a-Jose-Sedlacek.-Entre-lo-publico-y-lo-privado-obra-reunida-frente-del-museo-2017-1024x768.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="576">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">La Madre de José Sedlacek</span><span class="pa-card__lugar">Cementerio Municipal</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-cristobal-colon/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/colon-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/colon-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/colon.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a Cristóbal Colón</span><span class="pa-card__lugar">Plaza Colón</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-estanislao-lopez/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/brigadier-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/brigadier-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/brigadier.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a Estanislao López</span><span class="pa-card__lugar">Av. Siete Jefes 3601</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-jose-artigas/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Monumento-a-Jose-Artigas-2016-768x1152.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Monumento-a-Jose-Artigas-2016-768x1152.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Monumento-a-Jose-Artigas-2016-683x1024.jpg 683w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="1152" style="object-position: 50% 20%">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a José Artigas</span><span class="pa-card__lugar">Av. Almirante Brown (Costanera), Guadalupe</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-jose-gorostiaga/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Monumento-al-Dr.-Jose-Benjamin-Gorostiaga-por-Raquel-Minetti-576x1024.jpeg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Monumento-al-Dr.-Jose-Benjamin-Gorostiaga-por-Raquel-Minetti-576x1024.jpeg 576w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-Monumento-al-Dr.-Jose-Benjamin-Gorostiaga-por-Raquel-Minetti-576x1024.jpeg 576w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="576" height="1024" style="object-position: 50% 0%">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a José Gorostiaga</span><span class="pa-card__lugar">Av. Blas Parera, San Pantaleón</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-juan-de-garay/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-imagen-del-Monumento-a-Juan-de-Garay-768x576.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-imagen-del-Monumento-a-Juan-de-Garay-768x576.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-imagen-del-Monumento-a-Juan-de-Garay.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="576">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a Juan de Garay</span><span class="pa-card__lugar">Plaza de las Tres Culturas</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-la-madre/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/madreeee-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/madreeee-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/madreeee.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a la Madre</span><span class="pa-card__lugar">Plaza Alberdi</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-rodolfo-freyre/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/rodolf-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/rodolf-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/rodolf.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a Rodolfo Freyre</span><span class="pa-card__lugar">Calle Tucumán, Centro</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/monumento-a-san-martin/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/sanm-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/sanm-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/sanm.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Monumento a San Martín</span><span class="pa-card__lugar">Plaza San Martín</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/mujer-del-exodo-de-luis-falcini/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-fotografia-Mujer-del-exodo-Chaco-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-fotografia-Mujer-del-exodo-Chaco-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-fotografia-Mujer-del-exodo-Chaco-1024x683.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="512">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Mujer del Éxodo de Luis Falcini</span><span class="pa-card__lugar">Rivadavia 2497</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/mujer-india-de-jose-sedlacek/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-archivo-MMAV-interior-de-fasciculo-creadores-santafesinos-Sedlacek-obra-2001-768x996.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-archivo-MMAV-interior-de-fasciculo-creadores-santafesinos-Sedlacek-obra-2001-768x996.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/3-archivo-MMAV-interior-de-fasciculo-creadores-santafesinos-Sedlacek-obra-2001-790x1024.jpg 790w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="996" style="object-position: 80% 40%">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Mujer India de José Sedlacek</span><span class="pa-card__lugar">San Martín 1800</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/nina-de-jose-gerbino/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/nila-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/nila-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/nila.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Niña de José Gerbino</span><span class="pa-card__lugar">Plaza Italia</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/replica-de-alma-sin-hogar/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-imagen-de-la-inauguracion-en-la-Plaza-Alberdi-2017-768x595.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-imagen-de-la-inauguracion-en-la-Plaza-Alberdi-2017-768x595.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-imagen-de-la-inauguracion-en-la-Plaza-Alberdi-2017-1024x793.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="595">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Réplica de Alma sin hogar</span><span class="pa-card__lugar">Rivadavia y Primera Junta</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/syrene-de-provin-serres/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/syrene-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/syrene-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/syrene.jpg 600w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Syrène de Provin Serres</span><span class="pa-card__lugar">San Martín 2068</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/vera-mujica-de-santiago-hernandez/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-2-archivo-digital-MMAV-fotografia-de-emplazamiento-Vera-Mujica-y-columnas-2015-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-2-archivo-digital-MMAV-fotografia-de-emplazamiento-Vera-Mujica-y-columnas-2015-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-2-archivo-digital-MMAV-fotografia-de-emplazamiento-Vera-Mujica-y-columnas-2015-1024x682.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="512">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Vera Mújica de Santiago Hernández</span><span class="pa-card__lugar">San Martín 2020</span></span>
+      </a></li>
+      <!-- /tarjetas:esculturas -->
+    </ul>
+  </section>
+
+  <section class="pa-grupo" aria-labelledby="pa-murales">
+    <h2 class="pa-titulo" id="pa-murales">Murales de César López Claro <small>11 obras</small></h2>
+    <ul class="pa-grilla">
+      <!-- tarjetas:murales -->
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/cartoneros/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1764-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1764-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1764-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Cartoneros</span><span class="pa-card__lugar">Sede de ATE, San Luis 2854</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/diabladas/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Copia-de-IMG_20230505_100328663-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Copia-de-IMG_20230505_100328663-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Copia-de-IMG_20230505_100328663-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Diabladas</span><span class="pa-card__lugar">Casa Museo López Claro</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/festividad-a-orillas/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Copia-de-IMG_20230505_100144195-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Copia-de-IMG_20230505_100144195-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Copia-de-IMG_20230505_100144195-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Festividad a orillas del Lago Titicaca</span><span class="pa-card__lugar">Casa Museo López Claro</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/homenaje-a-diez-maestros/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231025_121302874_BURST000_COVER-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231025_121302874_BURST000_COVER-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231025_121302874_BURST000_COVER-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Homenaje a diez maestros de la pintura universal</span><span class="pa-card__lugar">Escuela de Artes Visuales Juan Mantovani</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/homenaje-a-las-artes/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1741-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1741-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1741-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Homenaje a las artes</span><span class="pa-card__lugar">Biblioteca Municipal E. Muttis</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/idolosdeamerica/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/10-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/10-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/10-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Ídolos de América</span><span class="pa-card__lugar">Casa Museo López Claro</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/la-noche-de-los-lapices/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1783-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1783-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1783-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">La noche de los lápices</span><span class="pa-card__lugar">FADU · UNL</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/lex-legum/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/img1683290955699-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/img1683290955699-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/img1683290955699-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Lex Legum</span><span class="pa-card__lugar">UTN Facultad Regional Santa Fe</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/represion/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20230425_101148381-3-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20230425_101148381-3-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20230425_101148381-3-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Represión</span><span class="pa-card__lugar">Casa Museo López Claro</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/tire-die-2/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Tire-die-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Tire-die-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/Tire-die-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Tire Dié</span></span>
+      </a></li>
+      <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/yawar-fiesta/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231026_085753657-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231026_085753657-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231026_085753657-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pa-card__cuerpo"><span class="pa-card__titulo">Yawar Fiesta</span><span class="pa-card__lugar">Casa Museo López Claro</span></span>
+      </a></li>
+      <!-- /tarjetas:murales -->
+    </ul>
+  </section>
+</div>

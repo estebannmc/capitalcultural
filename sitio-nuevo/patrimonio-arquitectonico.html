@@ -1,0 +1,241 @@
+<style>
+  .elementor-widget-wrap:has(> .elementor-widget-html #pq),
+  .elementor-widget-html:has(#pq) > .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#pq) { flex: 1 1 100%; min-width: 0; }
+
+  #pq {
+    --azul: #002751;
+    --rojo: #e63312;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(32px, 5vw, 64px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #pq *, #pq *::before, #pq *::after { box-sizing: border-box; }
+  #pq :is(h2, p, ul) { margin: 0; padding: 0; }
+  #pq ul { list-style: none; }
+
+  #pq .pq-grupo + .pq-grupo { margin-top: clamp(40px, 6vw, 72px); }
+  #pq .pq-titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem;
+    margin-bottom: clamp(18px, 3vw, 28px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pq .pq-titulo::before {
+    content: ""; flex: none; align-self: center;
+    width: .2em; height: .78em; margin-right: .2em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #pq .pq-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+
+  #pq .pq-grilla {
+    display: grid; gap: clamp(14px, 2vw, 22px);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  }
+
+  #pq .pq-card {
+    position: relative; isolation: isolate;
+    display: flex; flex-direction: column; height: 100%;
+    overflow: hidden; border-radius: 18px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+    color: var(--azul); text-decoration: none;
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pq .pq-card:hover { color: var(--azul); }
+  #pq .pq-card img {
+    display: block; width: 100%; height: auto; max-width: none; aspect-ratio: 1;
+    object-fit: cover; border-radius: 0; background: var(--gris-20);
+  }
+  #pq .pq-card__cuerpo { display: grid; gap: .3rem; padding: .85rem 1rem 1.05rem; }
+  #pq .pq-card__titulo { font-size: 1.02rem; font-weight: 700; line-height: 1.25; }
+  #pq .pq-card__lugar { font-size: .88rem; line-height: 1.35; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pq .pq-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
+    }
+  }
+  #pq .pq-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  @media (max-width: 640px) {
+    #pq .pq-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pq .pq-card { border-radius: 14px; }
+    #pq .pq-card__cuerpo { padding: .7rem .75rem .85rem; }
+    #pq .pq-card__titulo { font-size: .92rem; }
+    #pq .pq-card__lugar { font-size: .8rem; }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pq .pq-card { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pq .pq-card { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pq *, #pq *::before, #pq *::after { transition: none !important; }
+  }
+</style>
+
+<div id="pq">
+  <section class="pq-grupo" aria-labelledby="pq-edificios">
+    <h2 class="pq-titulo" id="pq-edificios">Edificios, templos y casas históricas <small>36 obras</small></h2>
+    <ul class="pq-grilla">
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/ex-estacion-ffcc-ctral-norte-estacion-belgrano/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/21-ESTAC-BELGRANO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/21-ESTAC-BELGRANO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/21-ESTAC-BELGRANO-768x473.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Ex Estación FFCC Ctral. Norte – Estación Belgrano</span><span class="pq-card__lugar">Bv. Gálvez 1150</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/mercado-progreso/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/mercado-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/mercado-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/mercado-768x370.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Mercado Progreso</span><span class="pq-card__lugar">Balcarce 1651</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/museo-municipal-de-artes-visuales-sor-josefa-diaz-clucellas/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/28-MAAV-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/28-MAAV-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/28-MAAV-768x674.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Museo Municipal de Artes Visuales Sor Josefa Díaz Clucellas</span><span class="pq-card__lugar">San Martín 2068</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/puente-colgante-ing-marcial-candioti/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/26-PUENTE-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/26-PUENTE-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/26-PUENTE-768x570.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Puente colgante “Ing. Marcial Candioti”</span><span class="pq-card__lugar">Boca de la Laguna Setúbal</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/teatro-municipal-1-de-mayo/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/14-TEATRO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/14-TEATRO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/14-TEATRO-768x501.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Teatro Municipal 1° de Mayo</span><span class="pq-card__lugar">San Martín 2022</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/alianza-francesa/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.24-400x400.jpeg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.24-400x400.jpeg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.24-768x576.jpeg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Alianza Francesa – “Ex casa del director del FFCC Francés”</span><span class="pq-card__lugar">Bv. Gálvez 2147</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/antiguos-tribunales-escuela-de-artes-visuales-juan-mantovani/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/13-MANTOVANI-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/13-MANTOVANI-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/13-MANTOVANI-300x225.jpg 300w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Antiguos Tribunales, Escuela de Artes Visuales Juan Mantovani</span><span class="pq-card__lugar">9 de Julio 1821</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/bar-tokio/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/27-BAR-TOKIO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/27-BAR-TOKIO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/27-BAR-TOKIO-768x354.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Bar Tokio</span><span class="pq-card__lugar">Rivadavia 2979</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/basilica-de-guadalupe/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/24-GUADALUPE-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/24-GUADALUPE-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/24-GUADALUPE-768x602.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Basilica de Guadalupe</span><span class="pq-card__lugar">Javier de la Rosa 623</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/basilica-nuestra-senora-del-carmen/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/18-EL-CARMEN-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/18-EL-CARMEN-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/18-EL-CARMEN-193x300.jpg 193w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Basílica Nuestra Señora del Carmen</span><span class="pq-card__lugar">La Rioja 2561</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/museo-historico-provincial-estanislao-lopez/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/03-CASA-DIEZ-DE-ANDINO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/03-CASA-DIEZ-DE-ANDINO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/03-CASA-DIEZ-DE-ANDINO-768x407.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa de Diez de Andino, Museo Histórico Provincial “Estanislao López”</span><span class="pq-card__lugar">San Martín 1490</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/casa-de-gobierno/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/02-CASA-DE-GOBIERNO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/02-CASA-DE-GOBIERNO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/02-CASA-DE-GOBIERNO-768x430.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa de Gobierno</span><span class="pq-card__lugar">3 de Febrero 2649</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/casa-de-los-aldao-y-junta-provincial-de-estudios-historicos/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/12-CASA-ALDAO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/12-CASA-ALDAO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/12-CASA-ALDAO-768x506.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa de los Aldao y Junta Provincial de Estudios Históricos</span><span class="pq-card__lugar">Monseñor Zazpe 2861</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/casa-de-los-gobernadores/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/22-CASA-GOBERNADORES-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/22-CASA-GOBERNADORES-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/22-CASA-GOBERNADORES-768x478.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa de los Gobernadores</span><span class="pq-card__lugar">Bv. Gálvez 1202</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/casa-de-sor-josefa/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/19-CASA-SOR-JOSEFA-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/19-CASA-SOR-JOSEFA-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/19-CASA-SOR-JOSEFA-768x464.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa de Sor Josefa</span><span class="pq-card__lugar">La Rioja 2302</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/casa-del-brigadier-estanislao-lopez/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/11-CASA-DEL-BRIGADIER-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/11-CASA-DEL-BRIGADIER-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/11-CASA-DEL-BRIGADIER-768x432.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa del Brigadier Estanislao López</span><span class="pq-card__lugar">General López 2792</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/casa-hume/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/20-CASA-HUME-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/20-CASA-HUME-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/20-CASA-HUME-768x499.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa Hume</span><span class="pq-card__lugar">San Luis 2900</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/casa-monasterio/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/monasterio-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/monasterio-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/monasterio-300x225.jpg 300w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Casa Monasterio</span><span class="pq-card__lugar">Bv. Gálvez 1309</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/catedral-metropolitana-y-parroquia-de-todos-los-santos/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/10-CATEDRAL-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/10-CATEDRAL-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/10-CATEDRAL-768x436.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Catedral Metropolitana y Parroquia de Todos los Santos</span><span class="pq-card__lugar">General López 2672</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/colegio-de-la-inmaculada-concepcion/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/06-COLEGIO-INMACULADA-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/06-COLEGIO-INMACULADA-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/06-COLEGIO-INMACULADA-768x406.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Colegio de la Inmaculada Concepción</span><span class="pq-card__lugar">San Martín 1540</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/correo-central/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/16-CORREO-CENTRAL-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/16-CORREO-CENTRAL-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/16-CORREO-CENTRAL-768x581.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Correo Central</span><span class="pq-card__lugar">Mendoza 2430</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/escuela-iv-centenario/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/photo_2023-03-29_10-27-34-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/photo_2023-03-29_10-27-34-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/photo_2023-03-29_10-27-34-768x1024.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Escuela IV Centenario – “Ex casa de Luciano Leiva”</span><span class="pq-card__lugar">Bv. Gálvez 1375</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/escuela-nacional-simon-de-iriondo/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/15-SIMON-DE-IRIONDO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/15-SIMON-DE-IRIONDO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/15-SIMON-DE-IRIONDO-300x224.jpg 300w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Escuela Nacional Simón de Iriondo</span><span class="pq-card__lugar">Mendoza 3051</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/estanzuela-echague/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/25-ESTANZUELA-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/25-ESTANZUELA-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/25-ESTANZUELA-768x415.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Estanzuela Echague</span><span class="pq-card__lugar">Av. General Paz, Guadalupe</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/fabrica-cultural-el-molino/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/molino-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/molino-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/molino-768x418.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Fábrica Cultural El Molino – “Ex Molino Harinero Lupotti y Franchino”</span><span class="pq-card__lugar">Bv. Gálvez 2300</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/hogar-de-ninos-atanasia-hernando-de-duran/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/17-HOGAS-DE-NINOS-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/17-HOGAS-DE-NINOS-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/17-HOGAS-DE-NINOS-300x187.jpg 300w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Hogar de Niños Atanasia Hernando de Durán</span><span class="pq-card__lugar">Primera Junta 3704</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/hospital-alassia/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.23-400x400.jpeg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.23-400x400.jpeg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.23-768x1024.jpeg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Hospital Alassia “Ex Hospital de Niños”</span><span class="pq-card__lugar">Bv. Gálvez 1557</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/iglesia-nuestra-senora-de-los-milagros/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/05-NTRA-SRA-DE-LOS-MILAGROS-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/05-NTRA-SRA-DE-LOS-MILAGROS-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/05-NTRA-SRA-DE-LOS-MILAGROS-768x528.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Iglesia Nuestra Señora de los Milagros</span><span class="pq-card__lugar">San Martín 1588</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/iglesia-nuestra-senora-del-rosario-y-convento-de-santo-domingo/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/04-NTRA-SENORA-DEL-ROSARIO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/04-NTRA-SENORA-DEL-ROSARIO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/04-NTRA-SENORA-DEL-ROSARIO-768x1015.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Iglesia Nuestra Señora del Rosario y Convento de Santo Domingo</span><span class="pq-card__lugar">9 de Julio 1491</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/instituto-san-jose/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.22-400x400.jpeg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.22-400x400.jpeg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-29-at-11.33.22-768x1024.jpeg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Instituto San José Adoratrices</span><span class="pq-card__lugar">Bv. Gálvez 1978</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/museo-de-arte-contemporaneo/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/museoUNL-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/museoUNL-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/museoUNL-768x627.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Museo de Arte Contemporáneo UNL</span><span class="pq-card__lugar">Bv. Gálvez 1578</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/museo-rosa-galisteo-de-rodriguez/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/08-ROSA-GALISTEO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/08-ROSA-GALISTEO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/08-ROSA-GALISTEO-768x507.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Museo Rosa Galisteo de Rodríguez</span><span class="pq-card__lugar">4 de Enero 1510</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/palacio-de-justicia/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/07-PALACIO-JUSTICIA-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/07-PALACIO-JUSTICIA-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/07-PALACIO-JUSTICIA-768x591.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Palacio de Justicia</span><span class="pq-card__lugar">San Jerónimo 1551</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/palacio-legislativo-provincial/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/09-LEGISLATURA-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/09-LEGISLATURA-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/09-LEGISLATURA-300x195.jpg 300w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Palacio Legislativo Provincial</span><span class="pq-card__lugar">General López 3051</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/templo-y-convento-de-san-francisco/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/01-CONVENTO-SAN-FRANCISCO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/01-CONVENTO-SAN-FRANCISCO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/01-CONVENTO-SAN-FRANCISCO-768x571.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">Templo y Convento de San Francisco</span><span class="pq-card__lugar">Amenabar 2558</span></span>
+      </a></li>
+      <li><a class="pq-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/arquitectonico/unl-rectorado-y-facultad-de-derecho/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/23-RECTORADO-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/23-RECTORADO-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/23-RECTORADO-768x526.jpg 768w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
+        <span class="pq-card__cuerpo"><span class="pq-card__titulo">UNL Rectorado y Facultad de Derecho</span><span class="pq-card__lugar">Bv. Pellegrini 2750</span></span>
+      </a></li>
+    </ul>
+  </section>
+</div>
