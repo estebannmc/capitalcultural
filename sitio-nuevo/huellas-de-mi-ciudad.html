@@ -1,0 +1,143 @@
+<!--
+  Huellas de mi Ciudad · Capital Cultural
+  /capitalcultural/huellas-de-mi-ciudad/  (página 16345)
+
+  Cómo se carga:
+  1. Editar la página con Elementor y borrar las dos secciones (el Text Editor y el
+     widget HTML con los tres .cb-btn).
+  2. Una sección nueva con un widget HTML adentro. Pegar ESTE ARCHIVO ENTERO.
+
+  Sólo HTML y CSS. No trae h1 ni fondo: el título y las migas los pone
+  .cc-title-wrapper, y el fondo es el global del CSS adicional (sitio-nuevo/fondo-global.css).
+-->
+<style>
+  /* El widget no suma márgenes propios */
+  .elementor-widget-wrap:has(> .elementor-widget-html #hm),
+  .elementor-widget-html:has(#hm) > .elementor-widget-container { padding: 0; margin: 0; }
+  /* La plantilla de Redux pone el contenido en un .ast-container flex: sin esto, la
+     página se encoge al ancho de su contenido en lugar de ocupar el contenedor */
+  .ast-container > .elementor:has(#hm) { flex: 1 1 100%; min-width: 0; }
+
+  #hm {
+    --azul: #002751;
+    --celeste: #00aaff;
+    --rojo: #e63312;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(32px, 5vw, 64px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #hm *, #hm *::before, #hm *::after { box-sizing: border-box; }
+  #hm :is(h2, h3, p, ul, figure) { margin: 0; padding: 0; }
+  #hm ul { list-style: none; }
+  #hm img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #hm :is(h2, h3) { color: inherit; font-family: inherit; text-transform: none; }
+  #hm :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #hm .hm-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #hm .hm-ceja { font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--gris-75); }
+  #hm .hm-lead {
+    display: flex; align-items: baseline; gap: .38em;
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45;
+  }
+  #hm .hm-lead .hm-barra { translate: 0 .1em; }
+  #hm .hm-titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem;
+    margin-bottom: clamp(18px, 3vw, 28px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #hm .hm-titulo .hm-barra { align-self: center; margin-right: .2em; }
+  #hm .hm-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+
+  #hm .hm-grilla {
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(28px, 5vw, 64px); align-items: center;
+  }
+  #hm .hm-texto { display: grid; gap: 1rem; font-size: 1.05rem; }
+
+  /* ───── Los tres recorridos ───── */
+  #hm .hm-recorridos { display: grid; gap: .9rem; }
+  #hm .hm-fila {
+    position: relative; isolation: isolate;
+    display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; align-items: center; gap: 1.1rem;
+    padding: .7rem 1.1rem .7rem .7rem; border-radius: 18px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+    color: var(--azul); text-decoration: none;
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #hm .hm-fila:hover { color: var(--azul); }
+  #hm .hm-fila img { width: 120px; height: 92px; object-fit: cover; border-radius: 12px; background: var(--gris-20); }
+  #hm .hm-fila__titulo { display: block; font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+  #hm .hm-fila__texto { display: block; margin-top: .25rem; font-size: .92rem; line-height: 1.4; color: var(--gris-75); }
+  #hm .hm-fila__flecha {
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px;
+    background: var(--azul); color: #fff;
+  }
+  #hm .hm-fila__flecha svg { width: 18px; height: 18px; transition: transform .3s var(--curva); }
+  @media (hover: hover) {
+    #hm .hm-fila:hover { transform: translateX(4px); }
+    #hm .hm-fila:hover .hm-fila__flecha svg { transform: translateX(3px); }
+  }
+
+  @media (max-width: 860px) {
+    #hm .hm-grilla { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 480px) {
+    #hm .hm-fila { grid-template-columns: 84px minmax(0, 1fr); gap: .85rem; }
+    #hm .hm-fila img { width: 84px; height: 72px; }
+    #hm .hm-fila__flecha { display: none; }
+  }
+
+  /* ───── Accesibilidad ───── */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #hm .hm-fila { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #hm .hm-fila { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #hm *, #hm *::before, #hm *::after { transition: none !important; }
+  }
+</style>
+
+<div id="hm">
+  <div class="hm-grilla">
+    <div class="hm-texto">
+      <p class="hm-lead"><i class="hm-barra"></i><span>La ciudad es la huella y esa huella se tiñe de diferentes tonalidades que conforman un abanico de sentidos y cruces con otras disciplinas: la historia, la arquitectura, la biografía del lugar y su gestación territorial, la sociología, la literatura impregnadas por la memoria y las experiencias vividas, otros itinerarios transitados.</span></p>
+      <p>A través de este deambular, este pasear sin prisa, recuperamos el placer del descubrimiento y de la intervención del espacio público.</p>
+      <p>No hay una sola mirada, un eje central en este viaje externo e interno sino múltiples lecturas. La ciudad se nos ofrece como un hipertexto donde cada enlace refuerza una identidad cultural, un imaginario que se construye con esa diversidad que la puebla. Voces, olores, colores, personajes, lugares que invitan al mundo ciudadano.</p>
+      <p>La ciudad es la meta, redescubrirla en esa multiplicidad de miradas y perderse en ella.</p>
+    </div>
+    <nav class="hm-recorridos" aria-label="Recorridos de Huellas de mi Ciudad">
+      <a class="hm-fila" href="/capitalcultural/huellas-de-mi-ciudad/marcas-de-la-memoria/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/03/463f068f-4b3d-42bf-b721-af87aa91b3b0-390x290.jpeg" alt="" loading="lazy" width="390" height="290">
+        <span><span class="hm-fila__titulo">Marcas de la Memoria</span><span class="hm-fila__texto">Hitos de la memoria social y política en el espacio público</span></span>
+        <span class="hm-fila__flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="hm-fila" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista-390x290.jpg" alt="" loading="lazy" width="390" height="290">
+        <span><span class="hm-fila__titulo">Memorias Urbanas Feministas</span><span class="hm-fila__texto">13 baldosas que marcan la historia de las mujeres en la ciudad</span></span>
+        <span class="hm-fila__flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="hm-fila" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-1-imagen-del-Monumento-a-Juan-de-Garay-390x290.jpg" alt="" loading="lazy" width="390" height="290">
+        <span><span class="hm-fila__titulo">Patrimonio Público</span><span class="hm-fila__texto">Mapa de 78 obras de arte y edificios históricos</span></span>
+        <span class="hm-fila__flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</div>
