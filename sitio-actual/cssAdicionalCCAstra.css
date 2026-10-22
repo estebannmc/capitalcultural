@@ -624,3 +624,23 @@ a:hover img,
     scaleY(1);
   opacity: 1;
 }
+
+/* ==========================================================================
+   14. TITULO Y BREADCRUMB - MOBILE
+   Interlineado mas cerrado cuando el titulo y las migas ocupan varias lineas.
+   body + h1 le ganan a los h1 de Astra (.entry-content h1).
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  body .cc-page-title,
+  body h1.cc-page-title {
+    line-height: 1.15;
+  }
+
+  body .cc-breadcrumb,
+  body .cc-breadcrumb a,
+  body .cc-breadcrumb span,
+  body .cc-breadcrumb .sep {
+    line-height: 1.5;
+  }
+}
