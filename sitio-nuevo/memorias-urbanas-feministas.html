@@ -42,19 +42,20 @@
   #mf .mf-titulo .mf-barra { align-self: center; margin-right: .2em; }
   #mf .mf-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
 
-  #mf .mf-intro { display: grid; gap: 1rem; max-width: 74ch; }
-  #mf .mf-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+  #mf .mf-intro { display: grid; gap: 1rem; font-size: 1.05rem; text-align: center; text-wrap: pretty; }
+  #mf .mf-intro .mf-lead { display: block; text-wrap: balance; }
+  #mf .mf-intro .mf-lead .mf-barra { margin-right: .38em; translate: 0 .08em; }
   #mf .mf-baldosas { margin-top: clamp(40px, 6vw, 72px); }
 
   #mf .mf-grilla {
-    display: grid; gap: clamp(14px, 2vw, 22px);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    display: grid; gap: clamp(12px, 1.6vw, 18px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   #mf .mf-card {
     position: relative; isolation: isolate;
     display: flex; flex-direction: column; height: 100%;
-    overflow: hidden; border-radius: 18px;
+    overflow: hidden; border-radius: 16px;
     background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
     -webkit-backdrop-filter: blur(16px) saturate(160%);
             backdrop-filter: blur(16px) saturate(160%);
@@ -70,18 +71,18 @@
     width: 100%; max-width: none; aspect-ratio: 1; object-fit: cover; background: var(--gris-20);
   }
   #mf .mf-baldosa {
-    display: block; aspect-ratio: 1; padding: 1rem 1.1rem;
+    display: block; aspect-ratio: 1; padding: .8rem .85rem;
     position: relative; overflow: hidden;
     background:
       radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
       linear-gradient(130deg, var(--azul), #001630);
     color: #fff;
   }
-  #mf .mf-baldosa__serie { position: relative; z-index: 1; display: block; max-width: 9em; font-size: .74rem; font-weight: 600; line-height: 1.35; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
+  #mf .mf-baldosa__serie { position: relative; z-index: 1; display: block; max-width: 9em; font-size: .66rem; font-weight: 600; line-height: 1.35; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
   #mf .mf-baldosa__barras { position: absolute; right: 8%; bottom: 0; width: auto; height: 72%; }
-  #mf .mf-card__cuerpo { display: grid; gap: .25rem; padding: .85rem 1rem 1.05rem; }
-  #mf .mf-card__periodo { font-size: .76rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gris-75); }
-  #mf .mf-card__titulo { font-size: 1.02rem; font-weight: 700; line-height: 1.25; }
+  #mf .mf-card__cuerpo { display: grid; gap: .2rem; padding: .7rem .8rem .85rem; }
+  #mf .mf-card__periodo { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gris-75); }
+  #mf .mf-card__titulo { font-size: .92rem; font-weight: 700; line-height: 1.25; }
   @media (hover: hover) {
     #mf .mf-card:hover {
       transform: translateY(-3px);
@@ -90,13 +91,13 @@
   }
   #mf .mf-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
 
+  @media (max-width: 1024px) { #mf .mf-grilla { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 860px) { #mf .mf-grilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
     #mf .mf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     #mf .mf-card { border-radius: 14px; }
     #mf .mf-card__cuerpo { padding: .7rem .75rem .85rem; }
-    #mf .mf-card__titulo { font-size: .92rem; }
-    #mf .mf-baldosa { padding: .7rem .75rem; }
-    #mf .mf-baldosa__serie { font-size: .66rem; }
+    #mf .mf-card__titulo { font-size: .9rem; }
   }
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -112,7 +113,8 @@
 
 <div id="mf">
   <div class="mf-intro">
-    <p class="mf-lead">Es un proyecto que aspira a crear un itinerario urbano específico, a través de baldosas de la memoria a modo de huella / marca, que visibilicen la presencia y la agencia femenina en la ciudad y su historia. Las baldosas como huellas, vuelven a darle entidad a las realizaciones de las mujeres, en ellas se materializa la memoria, la reconstrucción de sus vidas, proyectos y acciones. En tanto marcas, generan un puente entre tiempos y generaciones, recuperando del olvido esas necesarias memorias feministas</p>
+    <p class="mf-lead"><i class="mf-barra"></i><span>Es un proyecto que aspira a crear un itinerario urbano específico, a través de baldosas de la memoria a modo de huella / marca, que visibilicen la presencia y la agencia femenina en la ciudad y su historia. Las baldosas como huellas, vuelven a darle entidad a las realizaciones de las mujeres, en ellas se materializa la memoria, la reconstrucción de sus vidas, proyectos y acciones. En tanto marcas, generan un puente entre tiempos y generaciones, recuperando del olvido esas necesarias memorias feministas</span></p>
+
   </div>
 
   <section class="mf-baldosas" aria-labelledby="mf-titulo">
@@ -123,15 +125,15 @@
         <span class="mf-card__cuerpo"><span class="mf-card__periodo">Hacia 1870</span><span class="mf-card__titulo">Cautivas siglo XIX</span></span>
       </a></li>
       <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/mujeres-afrodescendientes/">
-        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-400x400.jpg 400w" sizes="(max-width: 640px) 46vw, 260px" alt="" width="400" height="400" loading="lazy">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-400x400.jpg 400w" sizes="(max-width: 640px) 46vw, (max-width: 860px) 31vw, 200px" alt="" width="400" height="400" loading="lazy">
         <span class="mf-card__cuerpo"><span class="mf-card__periodo">Siglo XIX</span><span class="mf-card__titulo">Mujeres afrodescendientes del Siglo XIX</span></span>
       </a></li>
       <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/primer-centro-feminista-1906/">
-        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista-400x400.jpg 400w" sizes="(max-width: 640px) 46vw, 260px" alt="" width="400" height="400" loading="lazy">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista-400x400.jpg 400w" sizes="(max-width: 640px) 46vw, (max-width: 860px) 31vw, 200px" alt="" width="400" height="400" loading="lazy">
         <span class="mf-card__cuerpo"><span class="mf-card__periodo">1906</span><span class="mf-card__titulo">Primer Centro Feminista 1906</span></span>
       </a></li>
       <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/primeras-parteras-diplomadas/">
-        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" width="400" height="400" loading="lazy">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, (max-width: 860px) 31vw, 200px" alt="" width="400" height="400" loading="lazy">
         <span class="mf-card__cuerpo"><span class="mf-card__periodo">1910 – 1922</span><span class="mf-card__titulo">Primeras Parteras Diplomadas</span></span>
       </a></li>
       <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/maestras-activistas-en-las-huelgas-de-1921/">
