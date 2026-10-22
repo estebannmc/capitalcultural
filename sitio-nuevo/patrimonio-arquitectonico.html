@@ -35,14 +35,14 @@
   #pq .pq-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
 
   #pq .pq-grilla {
-    display: grid; gap: clamp(14px, 2vw, 22px);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    display: grid; gap: clamp(12px, 1.6vw, 18px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   #pq .pq-card {
     position: relative; isolation: isolate;
     display: flex; flex-direction: column; height: 100%;
-    overflow: hidden; border-radius: 18px;
+    overflow: hidden; border-radius: 8px;
     background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
     -webkit-backdrop-filter: blur(16px) saturate(160%);
             backdrop-filter: blur(16px) saturate(160%);
@@ -58,9 +58,9 @@
     display: block; width: 100%; height: auto; max-width: none; aspect-ratio: 1;
     object-fit: cover; border-radius: 0; background: var(--gris-20);
   }
-  #pq .pq-card__cuerpo { display: grid; gap: .3rem; padding: .85rem 1rem 1.05rem; }
-  #pq .pq-card__titulo { font-size: 1.02rem; font-weight: 700; line-height: 1.25; }
-  #pq .pq-card__lugar { font-size: .88rem; line-height: 1.35; color: var(--gris-75); }
+  #pq .pq-card__cuerpo { display: grid; gap: .2rem; padding: .7rem .8rem .85rem; }
+  #pq .pq-card__titulo { font-size: .92rem; font-weight: 700; line-height: 1.25; }
+  #pq .pq-card__lugar { font-size: .82rem; line-height: 1.35; color: var(--gris-75); }
   @media (hover: hover) {
     #pq .pq-card:hover {
       transform: translateY(-3px);
@@ -69,9 +69,11 @@
   }
   #pq .pq-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
 
+  @media (max-width: 1024px) { #pq .pq-grilla { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 860px) { #pq .pq-grilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
     #pq .pq-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #pq .pq-card { border-radius: 14px; }
+    #pq .pq-card { border-radius: 8px; }
     #pq .pq-card__cuerpo { padding: .7rem .75rem .85rem; }
     #pq .pq-card__titulo { font-size: .92rem; }
     #pq .pq-card__lugar { font-size: .8rem; }

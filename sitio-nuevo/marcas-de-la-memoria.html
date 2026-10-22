@@ -33,7 +33,6 @@
     display: flex; align-items: baseline; gap: .38em;
     font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45;
   }
-  #mm .mm-lead .mm-barra { translate: 0 .1em; }
   #mm .mm-titulo {
     display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem;
     margin-bottom: clamp(18px, 3vw, 28px);
@@ -42,15 +41,18 @@
   #mm .mm-titulo .mm-barra { align-self: center; margin-right: .2em; }
   #mm .mm-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
 
-  #mm .mm-intro { display: grid; gap: 1rem; font-size: 1.05rem; text-align: center; text-wrap: pretty; }
-  #mm .mm-intro .mm-lead { display: block; text-wrap: balance; }
-  #mm .mm-intro .mm-lead .mm-barra { margin-right: .38em; translate: 0 .08em; }
+  #mm .mm-intro {
+    display: grid; gap: 1rem; max-width: 760px; margin-inline: auto;
+    font-size: 1.05rem; text-align: justify; text-align-last: left;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  #mm .mm-intro .mm-lead { display: block; }
 
   #mm .mm-marcas { margin-top: clamp(40px, 6vw, 72px); }
   #mm .mm-marca {
     display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: clamp(24px, 4vw, 48px); align-items: center;
-    padding: clamp(18px, 3vw, 32px); border-radius: 26px;
+    padding: clamp(18px, 3vw, 32px); border-radius: 8px;
     background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
     -webkit-backdrop-filter: blur(16px) saturate(160%);
             backdrop-filter: blur(16px) saturate(160%);
@@ -68,7 +70,7 @@
   #mm .mm-marca__nombre .mm-barra { align-self: center; }
   #mm .mm-marca__vida { font-size: .9rem; font-weight: 600; color: var(--gris-75); }
   #mm .mm-marca__media { display: grid; gap: 1rem; }
-  #mm .mm-marca__foto { overflow: hidden; border-radius: 18px; background: var(--gris-20); }
+  #mm .mm-marca__foto { overflow: hidden; border-radius: 6px; background: var(--gris-20); }
   #mm .mm-marca__foto img { width: 100%; aspect-ratio: 675 / 403; object-fit: cover; }
   #mm .mm-audio { display: grid; gap: .45rem; }
   #mm .mm-audio__rotulo { display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 600; }
@@ -93,7 +95,7 @@
 
 <div id="mm">
   <div class="mm-intro">
-    <p class="mm-lead"><i class="mm-barra"></i><span>Es un programa que busca favorecer la transmisión y la legibilidad de las memorias sociales, culturales y políticas de Santa Fe, al inscribir en el espacio público los hitos que se despliegan en el territorio y que son resultado del devenir histórico en el que han intervenido y producido sentidos diversos actores, grupos, colectivos e instituciones.</span></p>
+    <p class="mm-lead"><span>Es un programa que busca favorecer la transmisión y la legibilidad de las memorias sociales, culturales y políticas de Santa Fe, al inscribir en el espacio público los hitos que se despliegan en el territorio y que son resultado del devenir histórico en el que han intervenido y producido sentidos diversos actores, grupos, colectivos e instituciones.</span></p>
     <p>Los procesos de construcción de memoria resultan fundamentales para la profundización de los valores democráticos y el fortalecimiento de las instituciones y la sociedad, el programa impulsará acciones que contribuyan a dinamizar estos recuerdos en conmemoraciones, encuentros intergeneracionales, desplazamientos por el territorio de la ciudad y en la historización de debates y sus reformulaciones contemporáneas.</p>
     <p>El programa también se desplegará en el espacio virtual a través del portal oficial del municipio, brindando un mayor acceso y alcance a la geolocalización y visibilización de las huellas históricas en el territorio de la ciudad que se vayan construyendo con la colaboración de instituciones, organismos de derechos sociales, colectivos, investigadores y la ciudadanía en general.</p>
   </div>

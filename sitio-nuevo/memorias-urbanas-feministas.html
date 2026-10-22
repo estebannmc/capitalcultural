@@ -33,7 +33,6 @@
     display: flex; align-items: baseline; gap: .38em;
     font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45;
   }
-  #mf .mf-lead .mf-barra { translate: 0 .1em; }
   #mf .mf-titulo {
     display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem;
     margin-bottom: clamp(18px, 3vw, 28px);
@@ -42,9 +41,12 @@
   #mf .mf-titulo .mf-barra { align-self: center; margin-right: .2em; }
   #mf .mf-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
 
-  #mf .mf-intro { display: grid; gap: 1rem; font-size: 1.05rem; text-align: center; text-wrap: pretty; }
-  #mf .mf-intro .mf-lead { display: block; text-wrap: balance; }
-  #mf .mf-intro .mf-lead .mf-barra { margin-right: .38em; translate: 0 .08em; }
+  #mf .mf-intro {
+    display: grid; gap: 1rem; max-width: 760px; margin-inline: auto;
+    font-size: 1.05rem; text-align: justify; text-align-last: left;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  #mf .mf-intro .mf-lead { display: block; }
   #mf .mf-baldosas { margin-top: clamp(40px, 6vw, 72px); }
 
   #mf .mf-grilla {
@@ -55,7 +57,7 @@
   #mf .mf-card {
     position: relative; isolation: isolate;
     display: flex; flex-direction: column; height: 100%;
-    overflow: hidden; border-radius: 16px;
+    overflow: hidden; border-radius: 8px;
     background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
     -webkit-backdrop-filter: blur(16px) saturate(160%);
             backdrop-filter: blur(16px) saturate(160%);
@@ -95,7 +97,7 @@
   @media (max-width: 860px) { #mf .mf-grilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
     #mf .mf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #mf .mf-card { border-radius: 14px; }
+    #mf .mf-card { border-radius: 8px; }
     #mf .mf-card__cuerpo { padding: .7rem .75rem .85rem; }
     #mf .mf-card__titulo { font-size: .9rem; }
   }
@@ -113,7 +115,7 @@
 
 <div id="mf">
   <div class="mf-intro">
-    <p class="mf-lead"><i class="mf-barra"></i><span>Es un proyecto que aspira a crear un itinerario urbano específico, a través de baldosas de la memoria a modo de huella / marca, que visibilicen la presencia y la agencia femenina en la ciudad y su historia. Las baldosas como huellas, vuelven a darle entidad a las realizaciones de las mujeres, en ellas se materializa la memoria, la reconstrucción de sus vidas, proyectos y acciones. En tanto marcas, generan un puente entre tiempos y generaciones, recuperando del olvido esas necesarias memorias feministas</span></p>
+    <p class="mf-lead"><span>Es un proyecto que aspira a crear un itinerario urbano específico, a través de baldosas de la memoria a modo de huella / marca, que visibilicen la presencia y la agencia femenina en la ciudad y su historia. Las baldosas como huellas, vuelven a darle entidad a las realizaciones de las mujeres, en ellas se materializa la memoria, la reconstrucción de sus vidas, proyectos y acciones. En tanto marcas, generan un puente entre tiempos y generaciones, recuperando del olvido esas necesarias memorias feministas</span></p>
 
   </div>
 
