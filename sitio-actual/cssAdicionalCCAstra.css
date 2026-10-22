@@ -127,7 +127,11 @@ textarea {
 
 /* Hover footer */
 .footer-cc a:hover {
-  color: #00c08b !important;
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-decoration-color: #e63312;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* Linea inferior */
@@ -300,7 +304,11 @@ textarea {
 }
 
 .cc-menu-panel a:hover {
-  color: #00c08b;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #e63312;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* Ultimo sin borde */
@@ -391,7 +399,7 @@ textarea {
 }
 
 .cc-menu-toggle:hover {
-  background: #00c08b;
+  background: #00325f;
 }
 
 /* Lineas */
@@ -474,7 +482,11 @@ textarea {
 }
 
 .cc-menu-panel a:hover {
-  color: #00c08b !important;
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-decoration-color: #e63312;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* ==========================================================================
@@ -718,4 +730,13 @@ body #pf .pf-btn__tipo,
 body #pf .pf-proteccion,
 body #pf .pf-periodo {
   border-radius: 4px;
+}
+
+/* ==========================================================================
+   17. LINKS - SUBRAYADO ROJO
+   ========================================================================== */
+
+a {
+  text-decoration-color: #e63312;
+  text-underline-offset: 3px;
 }
