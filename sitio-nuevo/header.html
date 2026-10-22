@@ -250,6 +250,12 @@
 <script>
   // Sin DOMContentLoaded: el markup ya está arriba, así no depende de cuándo LiteSpeed suelte el JS
   (function () {
+    // Astra no trae viewport-fit=cover: sin eso, iPhone pinta de blanco la franja de la
+    // barra de estado y la de abajo. Con cover el fondo global llega a los bordes, y el
+    // header ya baja con env(safe-area-inset-top)
+    var vp = document.querySelector('meta[name="viewport"]');
+    if (vp && vp.content.indexOf('viewport-fit') === -1) vp.content += ', viewport-fit=cover';
+
     var header = document.getElementById('ccg-header');
     if (!header) return;
     var toggle = header.querySelector('.ccg-toggle');

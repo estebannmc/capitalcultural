@@ -11,14 +11,31 @@
    centro de cada mancha. Si se suben, el texto secundario deja de ser AA.
    ========================================================================== */
 
-/* body[class] le gana a .ast-plain-container / .ast-separate-container, con
-   las que Astra pinta el body con el color del Personalizador */
-html body[class] { background: #f4f4f3; }
+/* El color base va en html y el body queda transparente: así el lienzo, que en
+   iPhone también pinta detrás de la barra de estado y de la barra de abajo, es
+   gris y no blanco. body[class] le gana a .ast-plain-container /
+   .ast-separate-container, con las que Astra pinta el body con el color del
+   Personalizador. */
+html:root { background: #f4f4f3; }
+html body[class] { background: transparent; }
 
+/* Con viewport-fit=cover (lo agrega el script del header) la página llega a los
+   bordes del iPhone: en horizontal, el contenido no se mete debajo del notch. */
+html body[class] {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Alto del viewport grande (100lvh) y no inset: 0, para que las manchas sigan
+   por debajo de las barras de Safari cuando se achican al scrollear. */
 html body[class]::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: -1;
   pointer-events: none;
   background:
