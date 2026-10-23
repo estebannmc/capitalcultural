@@ -34,6 +34,7 @@ Decisiones tomadas:
 | `docs/barras.svg` | El remate de ocho barras, partial para el child theme |
 | `docs/sistema-visual.html` | El sistema visual completo, navegable. Abrilo en cualquier navegador |
 | `docs/sistema-visual.pdf` | Lo mismo en PDF, 10 páginas A4, para compartir o imprimir |
+| `marca/logoFooter.svg` | La marca completa para fondo oscuro: bloque SF calado + escudo. Es el asset oficial, sin tocar |
 | `marca/SF_Brandbook_V2_*.pdf` | Manual de marca (67 páginas normativas) |
 | `marca/SF_paleta_cromática.pdf` | Ficha cromática 02.4 |
 | `sitio-actual/cssAdicionalCCAstra.css` | El CSS adicional que hoy está cargado en Astra (*Personalizar → CSS adicional*) |
