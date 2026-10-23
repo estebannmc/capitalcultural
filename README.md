@@ -33,7 +33,7 @@ Decisiones tomadas:
 | `docs/design-tokens.css` | Tokens de marca y material GlassMorph, listos para encolar en el child theme |
 | `docs/barras.svg` | El remate de ocho barras, partial para el child theme |
 | `docs/sistema-visual.html` | El sistema visual completo, navegable. Abrilo en cualquier navegador |
-| `docs/sistema-visual.pdf` | Lo mismo en PDF, 11 páginas, para compartir o imprimir |
+| `docs/sistema-visual.pdf` | Lo mismo en PDF, 10 páginas A4, para compartir o imprimir |
 | `marca/SF_Brandbook_V2_*.pdf` | Manual de marca (67 páginas normativas) |
 | `marca/SF_paleta_cromática.pdf` | Ficha cromática 02.4 |
 | `sitio-actual/cssAdicionalCCAstra.css` | El CSS adicional que hoy está cargado en Astra (*Personalizar → CSS adicional*) |
@@ -61,6 +61,14 @@ Este repositorio contiene **la documentación de diseño y el plan**, no el chil
 Para ver el sistema visual con los componentes funcionando —vidrio, botones con sus estados, el remate de barras, la lámina del footer— abrí `docs/sistema-visual.html`.
 
 El PDF se genera capturando cada página con el render real del navegador, no dejando que Chromium pagine solo. Eso conserva el `backdrop-filter`, los degradés y el grano, y permite cortar las páginas donde no parten ninguna tarjeta ni dejan un título huérfano al pie. **La contra: el texto es imagen, no es seleccionable ni buscable.** Para leer y copiar, el HTML.
+
+Para regenerarlo, con `playwright` instalado:
+
+```
+node docs/build-pdf.mjs
+```
+
+Escribe `docs/sistema-visual.pdf` y, antes de hacerlo, **aborta si alguna tarjeta quedó partida**. La línea que imprime —`PARTIDAS 0 · HUERFANOS 0`— es la verificación, no un adorno: si alguno de los dos da distinto de cero hay que mirar el corte antes de publicar.
 
 ## El prototipo en Figma
 
