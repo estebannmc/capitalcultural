@@ -4,11 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fichas de Patrimonio Artístico</title>
-<!--
-  Generado a partir de las fichas publicadas (texto, galería y botones), con la foto de su tarjeta
-  en el listado. Cada bloque se pega entero en un widget HTML de su ficha, en lugar
-  del Text Editor y la Gallery actuales.
--->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;600;700&display=swap">
@@ -10450,7 +10445,7 @@
 <script>
 (function () {
   'use strict'
-  var FONDO = "/* ==========================================================================\n   FONDO GLOBAL \u00b7 manchas de marca detr\u00e1s de todo el sitio\n   Va en Apariencia \u2192 Personalizar \u2192 CSS adicional, al final.\n\n   Es una capa fija (body::before): no se mueve con el scroll, as\u00ed que el\n   header de vidrio (.ccg-pill) y su men\u00fa la esmerilan al bajar.\n   Las secciones de Elementor con color de fondo propio la tapan: para que\n   se vea, esas secciones tienen que quedar sin fondo.\n\n   Intensidades medidas: el gris de texto #606060 da 4.5:1 o m\u00e1s aun en el\n   centro de cada mancha. Si se suben, el texto secundario deja de ser AA.\n   ========================================================================== */\n\n/* body[class] le gana a .ast-plain-container / .ast-separate-container, con\n   las que Astra pinta el body con el color del Personalizador */\nhtml body[class] { background: #f4f4f3; }\n\nhtml body[class]::before {\n  content: \"\";\n  position: fixed;\n  inset: 0;\n  z-index: -1;\n  pointer-events: none;\n  background:\n    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(0, 170, 255, .26), transparent),                /* celeste, arriba a la izquierda */\n    radial-gradient(circle 35vmax at calc(100% + 1vmax) 15vmax, rgba(0, 39, 81, .12), transparent),   /* azul, arriba a la derecha */\n    radial-gradient(circle 35vmax at 45vmax calc(100% + 3vmax), rgba(230, 51, 18, .16), transparent); /* rojo de Cultura, abajo */\n}\n\n/* La secci\u00f3n de Elementor que envuelve al header de vidrio (bloque de\n   cabecera de UAE) trae fondo blanco: sin esto, arriba de todo queda una\n   franja blanca de 80px tapando el fondo. */\n#masthead .elementor-top-section { background: transparent; }\n"
+  var FONDO = "\n\n\nhtml body[class] { background: #f4f4f3; }\n\nhtml body[class]::before {\n  content: \"\";\n  position: fixed;\n  inset: 0;\n  z-index: -1;\n  pointer-events: none;\n  background:\n    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(0, 170, 255, .26), transparent),\n    radial-gradient(circle 35vmax at calc(100% + 1vmax) 15vmax, rgba(0, 39, 81, .12), transparent),\n    radial-gradient(circle 35vmax at 45vmax calc(100% + 3vmax), rgba(230, 51, 18, .16), transparent);\n}\n\n\n#masthead .elementor-top-section { background: transparent; }\n"
 
   function copiar (texto, estado) {
     function ok () { estado.textContent = 'Código copiado. Pegalo entero en el widget HTML de la ficha.' }
@@ -10473,7 +10468,6 @@
     boton.setAttribute('aria-expanded', String(!abierta))
     boton.textContent = abierta ? 'Vista previa' : 'Cerrar vista previa'
     if (abierta || caja.firstChild) return
-    // La ficha se ve como en el sitio: misma tipografía, fondo global y rutas resueltas contra el sitio real
     var iframe = document.createElement('iframe')
     iframe.title = 'Vista previa de ' + seccion.querySelector('h2').textContent
     iframe.srcdoc = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +

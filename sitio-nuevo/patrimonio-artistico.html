@@ -1,24 +1,6 @@
-<!--
-  Patrimonio Artístico · Capital Cultural
-  /capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/  (página 18656)
-
-  Cómo se carga:
-  1. Editar la página con Elementor y borrar los 42 Call to Action (son de Elementor
-     Pro y hoy no se ven).
-  2. Una sección nueva con un widget HTML adentro. Pegar ESTE ARCHIVO ENTERO.
-
-  Sólo HTML y CSS: cada tarjeta es un enlace común a su ficha, sin JS.
-  No trae h1 ni fondo: el título y las migas los pone .cc-title-wrapper, y el fondo
-  es el global del CSS adicional (sitio-nuevo/fondo-global.css).
-  Las fotos de las esculturas son los cuadrados de 600 que se subieron para los Call
-  to Action; las de los murales, una foto de cada uno. Todas están en el servidor.
--->
 <style>
-  /* El widget no suma márgenes propios */
   .elementor-widget-wrap:has(> .elementor-widget-html #pa),
   .elementor-widget-html:has(#pa) > .elementor-widget-container { padding: 0; margin: 0; }
-  /* La plantilla de Redux pone el contenido en un .ast-container flex: sin esto, la
-     página se encoge al ancho de su contenido en lugar de ocupar el contenedor */
   .ast-container > .elementor:has(#pa) { flex: 1 1 100%; min-width: 0; }
 
   #pa {
@@ -47,7 +29,7 @@
   }
   #pa .pa-titulo::before {
     content: ""; flex: none; align-self: center;
-    width: .2em; height: .78em; margin-right: .2em; /* + el gap: aire entre la barra y el texto */
+    width: .2em; height: .78em; margin-right: .2em;
     background: var(--rojo); transform: skewX(var(--inclinacion));
   }
   #pa .pa-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
@@ -57,11 +39,10 @@
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
   }
 
-  /* ───── Tarjeta: toda es el enlace a la ficha ───── */
   #pa .pa-card {
     position: relative; isolation: isolate;
     display: flex; flex-direction: column; height: 100%;
-    overflow: hidden; border-radius: 18px;
+    overflow: hidden; border-radius: 8px;
     background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
     -webkit-backdrop-filter: blur(16px) saturate(160%);
             backdrop-filter: blur(16px) saturate(160%);
@@ -86,19 +67,16 @@
       box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
     }
   }
-  /* Foco: anillo rojo sobre halo blanco */
   #pa .pa-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
 
-  /* ───── Mobile: dos columnas ───── */
   @media (max-width: 640px) {
     #pa .pa-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #pa .pa-card { border-radius: 14px; }
+    #pa .pa-card { border-radius: 8px; }
     #pa .pa-card__cuerpo { padding: .7rem .75rem .85rem; }
     #pa .pa-card__titulo { font-size: .92rem; }
     #pa .pa-card__lugar { font-size: .8rem; }
   }
 
-  /* ───── Accesibilidad ───── */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     #pa .pa-card { background: rgba(255, 255, 255, .95); }
   }
@@ -114,7 +92,6 @@
   <section class="pa-grupo" aria-labelledby="pa-esculturas">
     <h2 class="pa-titulo" id="pa-esculturas">Esculturas, monumentos y fuentes <small>31 obras</small></h2>
     <ul class="pa-grilla">
-      <!-- tarjetas:esculturas -->
       <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/alma-sin-hogar-de-jose-sedlacek/">
         <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-Plazoleta-Prefectura-Naval-alma-sin-hogar-1988-aprox.-768x434.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-Plazoleta-Prefectura-Naval-alma-sin-hogar-1988-aprox.-768x434.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/2-archivo-digital-MMAV-Plazoleta-Prefectura-Naval-alma-sin-hogar-1988-aprox.-1024x579.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="434">
         <span class="pa-card__cuerpo"><span class="pa-card__titulo">Alma sin hogar de José Sedlacek</span><span class="pa-card__lugar">San Martín 2020</span></span>
@@ -239,14 +216,12 @@
         <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-2-archivo-digital-MMAV-fotografia-de-emplazamiento-Vera-Mujica-y-columnas-2015-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-2-archivo-digital-MMAV-fotografia-de-emplazamiento-Vera-Mujica-y-columnas-2015-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/10/FOTO-DE-PORTADA-2-archivo-digital-MMAV-fotografia-de-emplazamiento-Vera-Mujica-y-columnas-2015-1024x682.jpg 1024w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="768" height="512">
         <span class="pa-card__cuerpo"><span class="pa-card__titulo">Vera Mújica de Santiago Hernández</span><span class="pa-card__lugar">San Martín 2020</span></span>
       </a></li>
-      <!-- /tarjetas:esculturas -->
     </ul>
   </section>
 
   <section class="pa-grupo" aria-labelledby="pa-murales">
     <h2 class="pa-titulo" id="pa-murales">Murales de César López Claro <small>11 obras</small></h2>
     <ul class="pa-grilla">
-      <!-- tarjetas:murales -->
       <li><a class="pa-card" href="/capitalcultural/huellas-de-mi-ciudad/patrimonio-publico/artistico/cartoneros/">
         <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1764-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1764-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_1764-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
         <span class="pa-card__cuerpo"><span class="pa-card__titulo">Cartoneros</span><span class="pa-card__lugar">Sede de ATE, San Luis 2854</span></span>
@@ -291,7 +266,6 @@
         <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231026_085753657-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231026_085753657-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/IMG_20231026_085753657-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="" loading="lazy" width="400" height="400">
         <span class="pa-card__cuerpo"><span class="pa-card__titulo">Yawar Fiesta</span><span class="pa-card__lugar">Casa Museo López Claro</span></span>
       </a></li>
-      <!-- /tarjetas:murales -->
     </ul>
   </section>
 </div>

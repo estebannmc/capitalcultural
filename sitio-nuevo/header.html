@@ -1,10 +1,3 @@
-<!--
-  Header liquid glass · Capital Cultural
-  Pegar entero en el widget HTML del bloque de header de UAE (reemplaza a sitio-actual/header.html).
-  Vista previa con página de prueba: docs/header-glass.html
-  Prefijo ccg- para no chocar con las reglas .cc-* del CSS adicional de Astra.
-  Va en <div> y no en <header>: UAE ya lo envuelve en <header id="masthead">.
--->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@700&display=swap">
@@ -12,11 +5,9 @@
 <style>
   [hidden] { display: none !important; }
 
-  /* Registradas para que el degradé del vidrio pueda interpolarse */
   @property --ccg-top { syntax: "<number>"; inherits: false; initial-value: 0; }
   @property --ccg-bot { syntax: "<number>"; inherits: false; initial-value: 0; }
 
-  /* ───── Mobile (base) ───── */
   .ccg-header {
     --ccg-azul: #002751;
     --ccg-rojo: #e63312;
@@ -24,8 +15,8 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 9990; /* debajo de la barra de admin de WordPress (99999) */
-    padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px 0;
+    z-index: 9990;
+    padding: calc(env(safe-area-inset-top, 0px) + 20px) 12px 0;
     pointer-events: none;
   }
   .ccg-header *, .ccg-header *::before, .ccg-header *::after { box-sizing: border-box; }
@@ -41,7 +32,6 @@
     margin: 0 auto;
     padding: 0 10px 0 20px;
     border-radius: 999px;
-    /* Invisible y sin capturar clics hasta que aparece el vidrio; logo y botón sí los reciben */
     pointer-events: none;
     background: linear-gradient(rgba(255, 255, 255, var(--ccg-top)), rgba(255, 255, 255, var(--ccg-bot)));
     -webkit-backdrop-filter: blur(0px) saturate(100%);
@@ -54,7 +44,6 @@
                 -webkit-backdrop-filter .4s, backdrop-filter .4s;
   }
 
-  /* Capas del vidrio compartidas por la píldora y el panel del menú */
   .ccg-pill::before, .ccg-pill::after,
   .ccg-menu::before, .ccg-menu::after {
     content: "";
@@ -66,7 +55,6 @@
     opacity: 0;
     transition: opacity .4s;
   }
-  /* Borde especular: sólo el aro de 1px, más brillante arriba a la izquierda */
   .ccg-pill::before, .ccg-menu::before {
     padding: 1px;
     background: linear-gradient(135deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, .6));
@@ -74,7 +62,6 @@
     -webkit-mask-composite: xor;
             mask-composite: exclude;
   }
-  /* Grano: rompe las bandas de color del desenfoque */
   .ccg-pill::after, .ccg-menu::after {
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     mix-blend-mode: overlay;
@@ -94,14 +81,12 @@
   .ccg-header.is-scrolled .ccg-pill::before, .ccg-menu::before { opacity: 1; }
   .ccg-header.is-scrolled .ccg-pill::after,  .ccg-menu::after  { opacity: .05; }
 
-  /* Logo: "slice" + ancho variable; al angostar el SVG se recorta CULTURA y quedan SF y la barra */
   .ccg-header .ccg-logo { display: block; pointer-events: auto; line-height: 0; }
   .ccg-logo svg { display: block; width: 178px; max-width: none; height: 35px; transition: width .4s; }
   .ccg-logo-word { font: 700 21.88px "Geologica", "Arial Narrow", sans-serif; transition: opacity .3s; }
   .ccg-header.is-scrolled .ccg-logo svg { width: 66px; }
   .ccg-header.is-scrolled .ccg-logo-word { opacity: 0; }
 
-  /* Hamburguesa, siempre visible. Doble clase para ganarle a button:hover de Astra */
   .ccg-header .ccg-toggle,
   .ccg-header .ccg-toggle:hover,
   .ccg-header .ccg-toggle:focus {
@@ -128,12 +113,10 @@
     background: var(--ccg-azul);
     transition: transform .3s, opacity .3s;
   }
-  /* Hamburguesa → cruz: 7px = alto de la línea + gap */
   .ccg-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .ccg-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .ccg-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* Panel: hermano de la píldora, no hijo; un backdrop-filter anidado no ve la página */
   .ccg-menu {
     position: absolute;
     top: calc(100% + 8px);
@@ -145,7 +128,7 @@
     background: linear-gradient(rgba(255, 255, 255, var(--ccg-top)), rgba(255, 255, 255, var(--ccg-bot)));
   }
   .ccg-header .ccg-menu ul {
-    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 100px);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 110px);
     overflow-y: auto;
     margin: 0;
     padding: 8px;
@@ -170,26 +153,19 @@
   .ccg-header .ccg-toggle:focus-visible { outline: 3px solid var(--ccg-rojo); outline-offset: 3px; }
   .ccg-header .ccg-menu a:focus-visible { outline: 3px solid var(--ccg-rojo); outline-offset: -3px; }
 
-  /* Reserva el lugar del header fijo para que el contenido no arranque tapado */
-  .ccg-spacer { height: calc(env(safe-area-inset-top, 0px) + 80px); }
+  .ccg-spacer { height: calc(env(safe-area-inset-top, 0px) + 90px); }
 
-  /* ───── Barra de admin de WordPress (sólo con sesión iniciada) ───── */
   @media (min-width: 601px) { .admin-bar .ccg-header { top: 46px; } }
   @media (min-width: 783px) { .admin-bar .ccg-header { top: 32px; } }
 
-  /* ───── Tablet y escritorio ───── */
   @media (min-width: 768px) {
     .ccg-header { padding-inline: 24px; }
     .ccg-pill { padding-left: 28px; }
     .ccg-menu { right: max(24px, (100% - 1080px) / 2); }
-    /* El resto del sitio usa el logo a 240px en escritorio (.cc-header-logo img).
-       Acá sube a 214 y no a 240: la píldora mide 60 de alto y 240 de ancho pide
-       47 de alto, que dejaría 6px de aire contra los 8 de la hamburguesa. */
     .ccg-logo svg { width: 214px; height: 42px; }
     .ccg-header.is-scrolled .ccg-logo svg { width: 79px; }
   }
 
-  /* ───── Accesibilidad y respaldo ───── */
   @media (prefers-reduced-transparency: reduce) {
     .ccg-header.is-scrolled .ccg-pill, .ccg-menu {
       background: #fff;
@@ -210,7 +186,6 @@
 <div class="ccg-header" id="ccg-header">
   <div class="ccg-pill">
     <a class="ccg-logo" href="/capitalcultural/" aria-label="Secretaría de Cultura Santa Fe">
-      <!-- logoCulturaAbr26.svg en línea, para poder ocultar la palabra al hacer scroll -->
       <svg viewBox="0 0 163.36 32.07" preserveAspectRatio="xMinYMid slice" aria-hidden="true" focusable="false">
         <path fill="#002751" d="M12.15,0c-2.05,0-4.16,1.66-4.71,3.72L.04,31.29h37.08c2.05,0,4.16-1.66,4.71-3.72L49.23,0H12.15Z"/>
         <path fill="#fff" d="M17.86,23.73c-1.24,0-2.44-.19-3.61-.56-1.17-.38-2.16-.92-2.97-1.63l2.07-3.29c.3.35.71.66,1.22.93.51.27,1.05.47,1.64.62.58.15,1.13.22,1.66.22.59,0,1.08-.08,1.46-.25.38-.17.57-.41.57-.72s-.15-.55-.44-.75c-.29-.2-.84-.4-1.64-.6l-1.15-.31c-1.68-.46-2.88-1.09-3.6-1.91-.72-.81-1.08-1.78-1.08-2.89,0-.7.15-1.35.46-1.96.31-.6.73-1.13,1.28-1.59.55-.45,1.2-.81,1.94-1.06.74-.25,1.55-.38,2.42-.38,1.25,0,2.42.18,3.5.55,1.08.36,1.94.87,2.58,1.51l-2.14,3.21c-.26-.3-.59-.57-.99-.8-.41-.23-.85-.41-1.34-.55s-.98-.2-1.47-.2c-.39,0-.73.05-1.02.14-.29.09-.51.22-.67.38-.16.16-.24.34-.24.55,0,.18.07.34.2.45s.35.23.66.34c.31.11.72.24,1.24.4l1.13.33c1.68.49,2.89,1.1,3.63,1.82.74.72,1.11,1.65,1.11,2.8,0,1.02-.27,1.93-.8,2.71-.53.78-1.28,1.39-2.23,1.83-.96.44-2.08.66-3.36.66"/>
@@ -248,8 +223,10 @@
 <div class="ccg-spacer" aria-hidden="true"></div>
 
 <script>
-  // Sin DOMContentLoaded: el markup ya está arriba, así no depende de cuándo LiteSpeed suelte el JS
   (function () {
+    var vp = document.querySelector('meta[name="viewport"]');
+    if (vp && vp.content.indexOf('viewport-fit') === -1) vp.content += ', viewport-fit=cover';
+
     var header = document.getElementById('ccg-header');
     if (!header) return;
     var toggle = header.querySelector('.ccg-toggle');
@@ -257,7 +234,7 @@
 
     var update = function () { header.classList.toggle('is-scrolled', window.scrollY > 24); };
     window.addEventListener('scroll', update, { passive: true });
-    update(); // por si la página carga ya scrolleada
+    update();
 
     var setOpen = function (open) {
       menu.hidden = !open;
@@ -268,7 +245,6 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !menu.hidden) { setOpen(false); toggle.focus(); }
     });
-    // Clic afuera del header cierra el menú
     document.addEventListener('click', function (e) { if (!header.contains(e.target)) setOpen(false); });
   })();
 </script>

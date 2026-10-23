@@ -1,0 +1,179 @@
+<style>
+  .elementor-widget-wrap:has(> .elementor-widget-html #mf),
+  .elementor-widget-html:has(#mf) > .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#mf) { flex: 1 1 100%; min-width: 0; }
+
+  #mf {
+    --azul: #002751;
+    --celeste: #00aaff;
+    --rojo: #e63312;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(32px, 5vw, 64px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #mf *, #mf *::before, #mf *::after { box-sizing: border-box; }
+  #mf :is(h2, h3, p, ul, figure) { margin: 0; padding: 0; }
+  #mf ul { list-style: none; }
+  #mf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #mf :is(h2, h3) { color: inherit; font-family: inherit; text-transform: none; }
+  #mf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #mf .mf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #mf .mf-ceja { font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--gris-75); }
+  #mf .mf-lead {
+    display: flex; align-items: baseline; gap: .38em;
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45;
+  }
+  #mf .mf-titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem;
+    margin-bottom: clamp(18px, 3vw, 28px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #mf .mf-titulo .mf-barra { align-self: center; margin-right: .2em; }
+  #mf .mf-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+
+  #mf .mf-intro {
+    display: grid; gap: 1rem; max-width: 760px; margin-inline: auto;
+    font-size: 1.05rem; text-align: justify; text-align-last: left;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  #mf .mf-intro .mf-lead { display: block; }
+  #mf .mf-baldosas { margin-top: clamp(40px, 6vw, 72px); }
+
+  #mf .mf-grilla {
+    display: grid; gap: clamp(12px, 1.6vw, 18px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  #mf .mf-card {
+    position: relative; isolation: isolate;
+    display: flex; flex-direction: column; height: 100%;
+    overflow: hidden; border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+    color: var(--azul); text-decoration: none;
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #mf .mf-card:hover { color: var(--azul); }
+  #mf .mf-card img {
+    width: 100%; max-width: none; aspect-ratio: 1; object-fit: cover; background: var(--gris-20);
+  }
+  #mf .mf-baldosa {
+    display: block; aspect-ratio: 1; padding: .8rem .85rem;
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(90% 120% at 85% 115%, rgba(0, 170, 255, .45), transparent 70%),
+      linear-gradient(130deg, var(--azul), #001630);
+    color: #fff;
+  }
+  #mf .mf-baldosa__serie { position: relative; z-index: 1; display: block; max-width: 9em; font-size: .66rem; font-weight: 600; line-height: 1.35; letter-spacing: .09em; text-transform: uppercase; color: #cfe3f5; }
+  #mf .mf-baldosa__barras { position: absolute; right: 0; bottom: 0; width: auto; height: 42%; }
+  #mf .mf-card__cuerpo { display: grid; gap: .2rem; padding: .7rem .8rem .85rem; }
+  #mf .mf-card__periodo { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gris-75); }
+  #mf .mf-card__titulo { font-size: .92rem; font-weight: 700; line-height: 1.25; }
+  @media (hover: hover) {
+    #mf .mf-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
+    }
+  }
+  #mf .mf-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  @media (max-width: 1024px) { #mf .mf-grilla { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 860px) { #mf .mf-grilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 640px) {
+    #mf .mf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #mf .mf-card { border-radius: 8px; }
+    #mf .mf-card__cuerpo { padding: .7rem .75rem .85rem; }
+    #mf .mf-card__titulo { font-size: .9rem; }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #mf .mf-card { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #mf .mf-card { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #mf *, #mf *::before, #mf *::after { transition: none !important; }
+  }
+</style>
+
+<div id="mf">
+  <div class="mf-intro">
+    <p class="mf-lead"><span>Es un proyecto que aspira a crear un itinerario urbano específico, a través de baldosas de la memoria a modo de huella / marca, que visibilicen la presencia y la agencia femenina en la ciudad y su historia. Las baldosas como huellas, vuelven a darle entidad a las realizaciones de las mujeres, en ellas se materializa la memoria, la reconstrucción de sus vidas, proyectos y acciones. En tanto marcas, generan un puente entre tiempos y generaciones, recuperando del olvido esas necesarias memorias feministas</span></p>
+
+  </div>
+
+  <section class="mf-baldosas" aria-labelledby="mf-titulo">
+    <h2 class="mf-titulo" id="mf-titulo"><i class="mf-barra"></i>Las baldosas <small>13 recorridos</small></h2>
+    <ul class="mf-grilla">
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/cautivas-siglo-xix/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/11/cautivas-siglo-XIX.jpeg" alt="" loading="lazy">
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">Hacia 1870</span><span class="mf-card__titulo">Cautivas siglo XIX</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/mujeres-afrodescendientes/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-400x400.jpg 400w" sizes="(max-width: 640px) 46vw, (max-width: 860px) 31vw, 200px" alt="" width="400" height="400" loading="lazy">
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">Siglo XIX</span><span class="mf-card__titulo">Mujeres afrodescendientes del Siglo XIX</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/primer-centro-feminista-1906/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista-400x400.jpg 400w" sizes="(max-width: 640px) 46vw, (max-width: 860px) 31vw, 200px" alt="" width="400" height="400" loading="lazy">
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">1906</span><span class="mf-card__titulo">Primer Centro Feminista 1906</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/primeras-parteras-diplomadas/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, (max-width: 860px) 31vw, 200px" alt="" width="400" height="400" loading="lazy">
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">1910 – 1922</span><span class="mf-card__titulo">Primeras Parteras Diplomadas</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/maestras-activistas-en-las-huelgas-de-1921/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Maestras-mendocinas-huelga-docente-de-1919.jpg" alt="" loading="lazy">
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">1921</span><span class="mf-card__titulo">Maestras activistas en las huelgas de 1921</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/trata-y-explotacion-sexual/">
+        <span class="mf-baldosa" aria-hidden="true"><span class="mf-baldosa__serie">Baldosa de la memoria</span><svg class="mf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/><polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/><polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/><polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/><polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/><polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/><polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/><polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/></svg></span>
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">1874 – 1936</span><span class="mf-card__titulo">Trata y explotación sexual</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/sociedad-cientifica-de-santa-fe-creada-en-1927/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Amelia-Joven.jpeg" alt="" loading="lazy">
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">1927</span><span class="mf-card__titulo">Sociedad Científica de Santa Fe creada en 1927</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/las-unidades-basicas-femeninas/">
+        <span class="mf-baldosa" aria-hidden="true"><span class="mf-baldosa__serie">Baldosa de la memoria</span><svg class="mf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/><polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/><polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/><polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/><polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/><polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/><polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/><polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/></svg></span>
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">Década de 1940</span><span class="mf-card__titulo">Las unidades básicas femeninas</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/mujeres-sindicalistas/">
+        <span class="mf-baldosa" aria-hidden="true"><span class="mf-baldosa__serie">Baldosa de la memoria</span><svg class="mf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/><polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/><polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/><polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/><polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/><polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/><polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/><polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/></svg></span>
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">Década de 1970</span><span class="mf-card__titulo">Mujeres sindicalistas en Santa Fe Capital</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/origenes-del-movimiento/">
+        <span class="mf-baldosa" aria-hidden="true"><span class="mf-baldosa__serie">Baldosa de la memoria</span><svg class="mf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/><polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/><polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/><polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/><polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/><polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/><polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/><polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/></svg></span>
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">Década de 1980</span><span class="mf-card__titulo">Orígenes del movimiento de mujeres en la ciudad de Santa Fe</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/sociabilidad-lesbica/">
+        <span class="mf-baldosa" aria-hidden="true"><span class="mf-baldosa__serie">Baldosa de la memoria</span><svg class="mf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/><polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/><polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/><polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/><polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/><polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/><polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/><polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/></svg></span>
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">1984 – 2010</span><span class="mf-card__titulo">Sociabilidad lésbica 1984 – 2010</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/mujeres-desocupadas/">
+        <span class="mf-baldosa" aria-hidden="true"><span class="mf-baldosa__serie">Baldosa de la memoria</span><svg class="mf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/><polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/><polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/><polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/><polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/><polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/><polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/><polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/></svg></span>
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">1997</span><span class="mf-card__titulo">Mujeres Desocupadas en Lucha, 1997</span></span>
+      </a></li>
+      <li><a class="mf-card" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/guardianas-de-la-memoria/">
+        <span class="mf-baldosa" aria-hidden="true"><span class="mf-baldosa__serie">Baldosa de la memoria</span><svg class="mf-baldosa__barras" viewBox="0 0 395 440" aria-hidden="true" focusable="false"><polygon points="16.0,440.0 32.0,440.0 72.2,290.0 57.9,336.0 49.8,366.0 28.9,392.0" fill="#00aaff"/><polygon points="50.0,440.0 66.0,440.0 116.5,251.4 102.2,297.4 87.1,353.7 66.2,379.7" fill="#00aaff"/><polygon points="84.0,440.0 100.0,440.0 160.9,212.9 146.5,258.9 124.4,341.3 103.5,367.3" fill="#00aaff"/><polygon points="118.0,440.0 134.0,440.0 205.2,174.3 190.9,220.3 161.8,329.0 140.8,355.0" fill="#00aaff"/><polygon points="152.0,440.0 168.0,440.0 249.5,135.7 235.2,181.7 199.1,316.6 178.1,342.6" fill="#00aaff"/><polygon points="186.0,440.0 202.0,440.0 293.9,97.1 279.5,143.1 236.4,304.3 215.4,330.3" fill="#00aaff"/><polygon points="220.0,440.0 236.0,440.0 338.2,58.6 323.9,104.6 273.7,291.9 252.7,317.9" fill="#00aaff"/><polygon points="254.0,440.0 270.0,440.0 382.5,20.0 368.2,66.0 311.0,279.6 290.0,305.6" fill="#e63312"/></svg></span>
+        <span class="mf-card__cuerpo"><span class="mf-card__periodo">Siglos XIX y XX</span><span class="mf-card__titulo">Guardianas de la Memoria</span></span>
+      </a></li>
+    </ul>
+  </section>
+</div>

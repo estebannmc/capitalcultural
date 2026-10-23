@@ -1,0 +1,2818 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fichas de Memorias Urbanas Feministas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;600;700&display=swap">
+<style>
+  :root { --azul: #002751; --celeste: #00aaff; --rojo: #e63312; --gris-75: #606060; --linea: rgba(0, 39, 81, .14); color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f4f4f3; color: var(--azul); font: 400 16px/1.6 "Encode Sans", system-ui, sans-serif; }
+  a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+  :is(a, button, summary):focus-visible { outline: 3px solid var(--rojo); outline-offset: 2px; }
+  .doc { max-width: 1040px; margin: 0 auto; padding: 32px 16px 80px; }
+  .doc h1 { margin: 0 0 .4rem; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1; }
+  .doc h1::before { content: ""; display: inline-block; width: .2em; height: .78em; margin-right: .35em; background: var(--rojo); transform: skewX(-15deg); }
+  .doc-intro { max-width: 70ch; color: #333; }
+  .doc-intro ol { padding-left: 1.2rem; }
+  .doc-indice { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px;
+    margin: 28px 0 40px; padding: 20px 24px; border-radius: 18px; background: #fff; box-shadow: 0 10px 30px -18px rgba(0, 39, 81, .35); }
+  .doc-indice h2 { margin: 0 0 .5rem; font-size: 1rem; }
+  .doc-indice ol { margin: 0; padding-left: 1.4rem; columns: 1; font-size: .95rem; }
+  .doc-ficha { margin-top: 20px; padding: 20px 22px; border-radius: 18px; background: #fff; box-shadow: 0 10px 30px -20px rgba(0, 39, 81, .35); scroll-margin-top: 16px; }
+  .doc-ficha__cab { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 20px; }
+  .doc-ficha h2 { margin: 0; font-size: 1.25rem; line-height: 1.25; }
+  .doc-ficha__meta { margin: .3rem 0 0; font-size: .88rem; color: var(--gris-75); }
+  .doc-ficha__acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+  .doc-btn { min-height: 44px; padding: 0 16px; border: 1.5px solid var(--azul); border-radius: 10px; background: transparent;
+    color: var(--azul); font: 600 15px/1 inherit; font-family: inherit; cursor: pointer; }
+  .doc-btn--primario { background: var(--azul); color: #fff; }
+  .doc-ficha__estado { min-height: 1.4em; margin: .5rem 0 0; font-size: .9rem; font-weight: 600; color: #0a6b3d; }
+  .doc-ficha__previa { margin-top: 12px; overflow: hidden; border: 1px solid var(--linea); border-radius: 14px; }
+  .doc-ficha__previa iframe { display: block; width: 100%; height: 600px; border: 0; }
+  details { margin-top: 8px; }
+  summary { cursor: pointer; font-weight: 600; min-height: 32px; }
+  textarea { width: 100%; height: 320px; margin-top: 8px; padding: 12px; border: 1px solid var(--linea); border-radius: 10px;
+    font: 12.5px/1.45 ui-monospace, Consolas, monospace; color: #1d1d1b; background: #fafafa; resize: vertical; }
+</style>
+</head>
+<body>
+<main class="doc">
+  <h1>Fichas de Memorias Urbanas Feministas</h1>
+  <div class="doc-intro">
+    <p>El código de cada una de las 13 baldosas, listo para pegar. Lleva el texto de la ficha publicada, sus fotos y el botón al PDF. 6 fichas tienen fotos; las otras 7 van sólo con el texto, a una columna.</p>
+    <ol>
+      <li>Antes de pegar, cambiá la <strong>plantilla</strong> de las 13 páginas a <strong>Elementor ancho completo</strong> (<em>Elementor Full Width</em>), la misma que usan las fichas de Patrimonio. Hoy tienen la plantilla de ancho completo de Redux, que ensancha la ficha y cambia la proporción entre el texto y la foto. Se hace de una vez: en <em>Páginas</em>, tildá las 13, <em>Acciones en lote → Editar</em>, y en <em>Plantilla</em> elegí la de Elementor.</li>
+      <li>Editá la ficha con Elementor y borrá la sección que tiene hoy (imagen o carrusel, Text Editor y botón «Leer más»).</li>
+      <li>Agregá una sección nueva con un widget HTML y pegá el código completo con <strong>Copiar código</strong>. La sección, con el ancho que trae por defecto.</li>
+    </ol>
+    <p>No trae título: el nombre de la baldosa y las migas ya los pone el sitio arriba. Tampoco trae fondo: usa el fondo global del CSS adicional. Deja 50&nbsp;px antes del footer y se adapta a cualquier ancho.</p>
+  </div>
+
+  <nav class="doc-indice" aria-label="Índice de fichas">
+    <div><h2>Baldosas, en orden cronológico</h2><ol>
+<li><a href="#f-cautivas-siglo-xix">Cautivas siglo XIX</a> <span style="color:var(--gris-75)">· Hacia 1870</span></li>
+<li><a href="#f-mujeres-afrodescendientes">Mujeres afrodescendientes del Siglo XIX</a> <span style="color:var(--gris-75)">· Siglo XIX</span></li>
+<li><a href="#f-primer-centro-feminista-1906">Primer Centro Feminista 1906</a> <span style="color:var(--gris-75)">· 1906</span></li>
+<li><a href="#f-primeras-parteras-diplomadas">Primeras Parteras Diplomadas</a> <span style="color:var(--gris-75)">· 1910 – 1922</span></li>
+<li><a href="#f-maestras-activistas-en-las-huelgas-de-1921">Maestras activistas en las huelgas de 1921</a> <span style="color:var(--gris-75)">· 1921</span></li>
+<li><a href="#f-trata-y-explotacion-sexual">Trata y explotación sexual</a> <span style="color:var(--gris-75)">· 1874 – 1936</span></li>
+<li><a href="#f-sociedad-cientifica-de-santa-fe-creada-en-1927">Sociedad Científica de Santa Fe creada en 1927</a> <span style="color:var(--gris-75)">· 1927</span></li>
+<li><a href="#f-las-unidades-basicas-femeninas">Las unidades básicas femeninas</a> <span style="color:var(--gris-75)">· Década de 1940</span></li>
+<li><a href="#f-mujeres-sindicalistas">Mujeres sindicalistas en Santa Fe Capital</a> <span style="color:var(--gris-75)">· Década de 1970</span></li>
+<li><a href="#f-origenes-del-movimiento">Orígenes del movimiento de mujeres en la ciudad de Santa Fe</a> <span style="color:var(--gris-75)">· Década de 1980</span></li>
+<li><a href="#f-sociabilidad-lesbica">Sociabilidad lésbica 1984 – 2010</a> <span style="color:var(--gris-75)">· 1984 – 2010</span></li>
+<li><a href="#f-mujeres-desocupadas">Mujeres Desocupadas en Lucha, 1997</a> <span style="color:var(--gris-75)">· 1997</span></li>
+<li><a href="#f-guardianas-de-la-memoria">Guardianas de la Memoria</a> <span style="color:var(--gris-75)">· Siglos XIX y XX</span></li>
+    </ol></div>
+  </nav>
+
+<section class="doc-ficha" id="f-cautivas-siglo-xix">
+  <div class="doc-ficha__cab"><div><h2>Cautivas siglo XIX</h2>
+    <p class="doc-ficha__meta">Página 16366 · Hacia 1870 · 1 imagen · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/cautivas-siglo-xix/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Cautivas siglo XIX">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;Hacia 1870&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;Desde la conquista de América, el proyecto de la modernidad europea separa a las personas de nuestro continente entre “civilizados/as” y “salvajes”. Luego, con la formación de los estados nacionales se desarrollan los procesos de genocidio de los pueblos originarios, y los cautiverios de mujeres, niñas y niños.&lt;/p&gt;
+        &lt;p&gt;“Las Cautivas” representa a mujeres, niñas y niños indígenas del norte del territorio santafesino que alrededor de 1870 fueron relocalizadas de manera violenta y forzada hacia la localidad de San Jerónimo del Sauce, Provincia de Santa Fe.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-cautivas.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figure class="pf-principal"&gt;
+      &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/11/cautivas-siglo-XIX.jpeg" data-pf-foto data-pf-epigrafe="Cautivas siglo XIX"&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/11/cautivas-siglo-XIX.jpeg" alt="Cautivas siglo XIX" fetchpriority="high"&gt;&lt;/a&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;dialog class="pf-visor" aria-label="Imagen ampliada"&gt;
+    &lt;button type="button" class="pf-visor__cerrar" data-pf-cerrar aria-label="Cerrar"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--prev" data-pf-prev aria-label="Imagen anterior"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M19 12H5M11 6l-6 6 6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;figure class="pf-visor__figura"&gt;&lt;img alt=""&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--next" data-pf-next aria-label="Imagen siguiente"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;p class="pf-visor__cuenta" aria-live="polite"&gt;&lt;/p&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function () {
+  'use strict'
+  var raiz = document.getElementById('pf')
+  var visor = raiz &amp;&amp; raiz.querySelector('.pf-visor')
+  if (!visor || !visor.showModal || raiz.dataset.pfInit) return
+  raiz.dataset.pfInit = '1'
+
+  var fotos = Array.prototype.slice.call(raiz.querySelectorAll('[data-pf-foto]'))
+  var img = visor.querySelector('img')
+  var epigrafe = visor.querySelector('figcaption')
+  var cuenta = visor.querySelector('.pf-visor__cuenta')
+  var prev = visor.querySelector('[data-pf-prev]')
+  var next = visor.querySelector('[data-pf-next]')
+  var actual = 0
+  var origen = null
+
+  function mostrar (i) {
+    actual = (i + fotos.length) % fotos.length
+    var a = fotos[actual]
+    var miniatura = a.querySelector('img')
+    img.src = a.href
+    img.alt = miniatura ? miniatura.alt : ''
+    epigrafe.textContent = a.getAttribute('data-pf-epigrafe') || ''
+    cuenta.textContent = (actual + 1) + ' de ' + fotos.length
+  }
+
+  prev.hidden = next.hidden = fotos.length &lt; 2
+
+  fotos.forEach(function (a, i) {
+    a.addEventListener('click', function (ev) {
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return
+      ev.preventDefault()
+      origen = a
+      mostrar(i)
+      visor.showModal()
+    })
+  })
+
+  prev.addEventListener('click', function () { mostrar(actual - 1) })
+  next.addEventListener('click', function () { mostrar(actual + 1) })
+  visor.addEventListener('click', function (ev) {
+    if (ev.target === visor || ev.target.closest('[data-pf-cerrar]')) visor.close()
+  })
+  visor.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowLeft' &amp;&amp; fotos.length &gt; 1) mostrar(actual - 1)
+    if (ev.key === 'ArrowRight' &amp;&amp; fotos.length &gt; 1) mostrar(actual + 1)
+  })
+  visor.addEventListener('close', function () {
+    img.removeAttribute('src')
+    if (origen) origen.focus()
+  })
+})()
+&lt;/script&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-mujeres-afrodescendientes">
+  <div class="doc-ficha__cab"><div><h2>Mujeres afrodescendientes del Siglo XIX</h2>
+    <p class="doc-ficha__meta">Página 16403 · Siglo XIX · 3 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/mujeres-afrodescendientes/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Mujeres afrodescendientes del Siglo XIX">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;Siglo XIX&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;El Río de la Plata estuvo vinculado a la trata esclavista y en ese marco Santa Fe no fue distinta al resto de las ciudades coloniales hispanoamericanas. Las mujeres esclavizadas desde su llegada a América eran consideradas “cuerpos” atados al trabajo, en la ruralidad y la urbanidad, siempre ligadas a producciones y servicios.&lt;/p&gt;
+        &lt;p&gt;Sin embargo, el pueblo africano en su conjunto, aún en medio de las relaciones de opresión impuestas por la cultura dominante, recreó su propia identidad y enriqueció la nuestra, legándonos músicas, vocablos, sazones, danzas que impregnan y embellecen nuestro paisaje cultural.&lt;/p&gt;
+        &lt;p&gt;“El Ombú de la Chipacera” era un espacio de sociabilidad afrodescendiente, en el que Claudia Chapaco elaboraba y vendía su chipá.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-mujeresafrodescendientes.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figure class="pf-principal"&gt;
+      &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950.jpg" data-pf-foto data-pf-epigrafe="Fotos familiares de Tomasa Ruiz y Silvana Santucci (Barrio Chalet - Santa Fe). Archivo e investigación Analía Molinari. Copias de Fototeca Museo Histórico Provincial de Santa Fe."&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-600x896.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950-600x896.jpg 600w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/SARA-LUCA-E-HIJA-ISABEL-LOBERA-1950.jpg 615w" sizes="(max-width: 860px) 100vw, 540px" alt="Fotos familiares de Tomasa Ruiz y Silvana Santucci (Barrio Chalet - Santa Fe). Archivo e investigación Analía Molinari. Copias de Fototeca Museo Histórico Provincial de Santa Fe." width="600" height="896" fetchpriority="high"&gt;&lt;/a&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;section class="pf-galeria" aria-labelledby="pf-galeria-titulo"&gt;
+    &lt;h2 class="pf-galeria__titulo" id="pf-galeria-titulo"&gt;Galería &lt;small&gt;2 imágenes&lt;/small&gt;&lt;/h2&gt;
+    &lt;ul class="pf-grilla"&gt;
+      &lt;li&gt;&lt;figure&gt;
+        &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/baldosa2-3.jpg" data-pf-foto data-pf-epigrafe=""&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/baldosa2-3.jpg" alt="Mujeres afrodescendientes del Siglo XIX, imagen 2" loading="lazy"&gt;&lt;/a&gt;
+      &lt;/figure&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;figure&gt;
+        &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/baldosa2-2.jpg" data-pf-foto data-pf-epigrafe=""&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/12/baldosa2-2.jpg" alt="Mujeres afrodescendientes del Siglo XIX, imagen 3" loading="lazy"&gt;&lt;/a&gt;
+      &lt;/figure&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+
+  &lt;dialog class="pf-visor" aria-label="Imagen ampliada"&gt;
+    &lt;button type="button" class="pf-visor__cerrar" data-pf-cerrar aria-label="Cerrar"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--prev" data-pf-prev aria-label="Imagen anterior"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M19 12H5M11 6l-6 6 6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;figure class="pf-visor__figura"&gt;&lt;img alt=""&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--next" data-pf-next aria-label="Imagen siguiente"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;p class="pf-visor__cuenta" aria-live="polite"&gt;&lt;/p&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function () {
+  'use strict'
+  var raiz = document.getElementById('pf')
+  var visor = raiz &amp;&amp; raiz.querySelector('.pf-visor')
+  if (!visor || !visor.showModal || raiz.dataset.pfInit) return
+  raiz.dataset.pfInit = '1'
+
+  var fotos = Array.prototype.slice.call(raiz.querySelectorAll('[data-pf-foto]'))
+  var img = visor.querySelector('img')
+  var epigrafe = visor.querySelector('figcaption')
+  var cuenta = visor.querySelector('.pf-visor__cuenta')
+  var prev = visor.querySelector('[data-pf-prev]')
+  var next = visor.querySelector('[data-pf-next]')
+  var actual = 0
+  var origen = null
+
+  function mostrar (i) {
+    actual = (i + fotos.length) % fotos.length
+    var a = fotos[actual]
+    var miniatura = a.querySelector('img')
+    img.src = a.href
+    img.alt = miniatura ? miniatura.alt : ''
+    epigrafe.textContent = a.getAttribute('data-pf-epigrafe') || ''
+    cuenta.textContent = (actual + 1) + ' de ' + fotos.length
+  }
+
+  prev.hidden = next.hidden = fotos.length &lt; 2
+
+  fotos.forEach(function (a, i) {
+    a.addEventListener('click', function (ev) {
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return
+      ev.preventDefault()
+      origen = a
+      mostrar(i)
+      visor.showModal()
+    })
+  })
+
+  prev.addEventListener('click', function () { mostrar(actual - 1) })
+  next.addEventListener('click', function () { mostrar(actual + 1) })
+  visor.addEventListener('click', function (ev) {
+    if (ev.target === visor || ev.target.closest('[data-pf-cerrar]')) visor.close()
+  })
+  visor.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowLeft' &amp;&amp; fotos.length &gt; 1) mostrar(actual - 1)
+    if (ev.key === 'ArrowRight' &amp;&amp; fotos.length &gt; 1) mostrar(actual + 1)
+  })
+  visor.addEventListener('close', function () {
+    img.removeAttribute('src')
+    if (origen) origen.focus()
+  })
+})()
+&lt;/script&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-primer-centro-feminista-1906">
+  <div class="doc-ficha__cab"><div><h2>Primer Centro Feminista 1906</h2>
+    <p class="doc-ficha__meta">Página 17097 · 1906 · 2 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/primer-centro-feminista-1906/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Primer Centro Feminista 1906">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;1906&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;El primer Centro Feminista de la ciudad se constituyó en 1906 en los salones de la Biblioteca Cosmopolita, por entonces ubicada en Salta al 2800. Estuvo ligado en su esencia al Comité Feminista de Buenos Aires; se proponía impulsar una participación efectiva de las mujeres en la vida pública y en la ciencia, más allá de la beneficencia. La Biblioteca era parte de la Sociedad Cosmopolita de Socorros Mutuos, conformada en 1883. En la primera década del siglo XX creció en servicios y usuarios y fue sitio de reunión vinculada a diversas inquietudes intelectuales. En 1913 se inauguró el nuevo edificio, construido en 9 de Julio al 2100, en el terreno adquirido hacia 1887 con ese propósito.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-1ercentrofeminista.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figure class="pf-principal"&gt;
+      &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista.jpg" data-pf-foto data-pf-epigrafe="Macedonia Amavet, presidenta del comité organizador del primer Centro Feminista de Santa Fe"&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/macedonia-amavet-Centro-Feminista.jpg 551w" sizes="(max-width: 860px) 100vw, 540px" alt="Macedonia Amavet, presidenta del comité organizador del primer Centro Feminista de Santa Fe" width="551" height="908" fetchpriority="high"&gt;&lt;/a&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;section class="pf-galeria" aria-labelledby="pf-galeria-titulo"&gt;
+    &lt;h2 class="pf-galeria__titulo" id="pf-galeria-titulo"&gt;Galería &lt;small&gt;1 imagen&lt;/small&gt;&lt;/h2&gt;
+    &lt;ul class="pf-grilla"&gt;
+      &lt;li&gt;&lt;figure&gt;
+        &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Centro-feminista2.jpeg" data-pf-foto data-pf-epigrafe="Banco de Imágenes Florián Paucke"&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Centro-feminista2-400x400.jpeg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Centro-feminista2-400x400.jpeg 400w" sizes="(max-width: 640px) 46vw, 260px" alt="Primer Centro Feminista de Santa Fe" width="400" height="400" loading="lazy"&gt;&lt;/a&gt;
+        &lt;figcaption&gt;Banco de Imágenes Florián Paucke&lt;/figcaption&gt;
+      &lt;/figure&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+
+  &lt;dialog class="pf-visor" aria-label="Imagen ampliada"&gt;
+    &lt;button type="button" class="pf-visor__cerrar" data-pf-cerrar aria-label="Cerrar"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--prev" data-pf-prev aria-label="Imagen anterior"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M19 12H5M11 6l-6 6 6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;figure class="pf-visor__figura"&gt;&lt;img alt=""&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--next" data-pf-next aria-label="Imagen siguiente"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;p class="pf-visor__cuenta" aria-live="polite"&gt;&lt;/p&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function () {
+  'use strict'
+  var raiz = document.getElementById('pf')
+  var visor = raiz &amp;&amp; raiz.querySelector('.pf-visor')
+  if (!visor || !visor.showModal || raiz.dataset.pfInit) return
+  raiz.dataset.pfInit = '1'
+
+  var fotos = Array.prototype.slice.call(raiz.querySelectorAll('[data-pf-foto]'))
+  var img = visor.querySelector('img')
+  var epigrafe = visor.querySelector('figcaption')
+  var cuenta = visor.querySelector('.pf-visor__cuenta')
+  var prev = visor.querySelector('[data-pf-prev]')
+  var next = visor.querySelector('[data-pf-next]')
+  var actual = 0
+  var origen = null
+
+  function mostrar (i) {
+    actual = (i + fotos.length) % fotos.length
+    var a = fotos[actual]
+    var miniatura = a.querySelector('img')
+    img.src = a.href
+    img.alt = miniatura ? miniatura.alt : ''
+    epigrafe.textContent = a.getAttribute('data-pf-epigrafe') || ''
+    cuenta.textContent = (actual + 1) + ' de ' + fotos.length
+  }
+
+  prev.hidden = next.hidden = fotos.length &lt; 2
+
+  fotos.forEach(function (a, i) {
+    a.addEventListener('click', function (ev) {
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return
+      ev.preventDefault()
+      origen = a
+      mostrar(i)
+      visor.showModal()
+    })
+  })
+
+  prev.addEventListener('click', function () { mostrar(actual - 1) })
+  next.addEventListener('click', function () { mostrar(actual + 1) })
+  visor.addEventListener('click', function (ev) {
+    if (ev.target === visor || ev.target.closest('[data-pf-cerrar]')) visor.close()
+  })
+  visor.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowLeft' &amp;&amp; fotos.length &gt; 1) mostrar(actual - 1)
+    if (ev.key === 'ArrowRight' &amp;&amp; fotos.length &gt; 1) mostrar(actual + 1)
+  })
+  visor.addEventListener('close', function () {
+    img.removeAttribute('src')
+    if (origen) origen.focus()
+  })
+})()
+&lt;/script&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-primeras-parteras-diplomadas">
+  <div class="doc-ficha__cab"><div><h2>Primeras Parteras Diplomadas</h2>
+    <p class="doc-ficha__meta">Página 17109 · 1910 – 1922 · 2 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/primeras-parteras-diplomadas/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Primeras Parteras Diplomadas">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;1910 – 1922&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;La Carrera de Parteras de Santa Fe fue creada por Ley de diciembre 1910 como formadora profesional para mujeres. Funcionó hasta 1922 en la Facultad de Farmacia y Obstetricia de la Universidad Provincial de Santa Fe, localizada en la esquina sudeste de la intersección de las calles 3 de Febrero y San Martín de la ciudad capital. Las prácticas, en tanto, se realizaban en la maternidad del “Hospital de Caridad”, hoy Dr José María Cullen. En los años de funcionamiento se graduaron 65 profesionales mujeres y 92 fueron autorizadas.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-parteras.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figure class="pf-principal"&gt;
+      &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-1000x753.jpg" data-pf-foto data-pf-epigrafe="Fotografía extraída del  libro “La Provincia de Santa Fe en el Centenario de la Independencia Argentina 1816-1916”. Eduardo Guidotti Villafañe, Director. Imprenta Rosso, Buenos Aires. Casa: pag. 195; Alumnas pag. 197"&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-768x576.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-768x576.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Facultad-de-Farmacia-y-Escuela-de-Obstetricia-Santa-Fe-1024x768.jpg 1024w" sizes="(max-width: 860px) 100vw, 540px" alt="Facultad de Farmacia y Escuela de Obstetricia de Santa Fe" width="768" height="576" fetchpriority="high"&gt;&lt;/a&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;section class="pf-galeria" aria-labelledby="pf-galeria-titulo"&gt;
+    &lt;h2 class="pf-galeria__titulo" id="pf-galeria-titulo"&gt;Galería &lt;small&gt;1 imagen&lt;/small&gt;&lt;/h2&gt;
+    &lt;ul class="pf-grilla"&gt;
+      &lt;li&gt;&lt;figure&gt;
+        &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-2-Alumnas-de-la-Escuela-de-Obstetricia-Santa-Fe-1000x753.jpg" data-pf-foto data-pf-epigrafe="Fotografía extraída del  libro “La Provincia de Santa Fe en el Centenario de la Independencia Argentina 1816-1916”. Eduardo Guidotti Villafañe, Director. Imprenta Rosso, Buenos Aires. Casa: pag. 195; Alumnas pag. 197"&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-2-Alumnas-de-la-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-2-Alumnas-de-la-Escuela-de-Obstetricia-Santa-Fe-400x400.jpg 400w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-2-Alumnas-de-la-Escuela-de-Obstetricia-Santa-Fe-780x780.jpg 780w" sizes="(max-width: 640px) 46vw, 260px" alt="Alumnas de la Escuela de Obstetricia de Santa Fe" width="400" height="400" loading="lazy"&gt;&lt;/a&gt;
+        &lt;figcaption&gt;Fotografía extraída del  libro “La Provincia de Santa Fe en el Centenario de la Independencia Argentina 1816-1916”. Eduardo Guidotti Villafañe, Director. Imprenta Rosso, Buenos Aires. Casa: pag. 195; Alumnas pag. 197&lt;/figcaption&gt;
+      &lt;/figure&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+
+  &lt;dialog class="pf-visor" aria-label="Imagen ampliada"&gt;
+    &lt;button type="button" class="pf-visor__cerrar" data-pf-cerrar aria-label="Cerrar"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--prev" data-pf-prev aria-label="Imagen anterior"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M19 12H5M11 6l-6 6 6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;figure class="pf-visor__figura"&gt;&lt;img alt=""&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--next" data-pf-next aria-label="Imagen siguiente"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;p class="pf-visor__cuenta" aria-live="polite"&gt;&lt;/p&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function () {
+  'use strict'
+  var raiz = document.getElementById('pf')
+  var visor = raiz &amp;&amp; raiz.querySelector('.pf-visor')
+  if (!visor || !visor.showModal || raiz.dataset.pfInit) return
+  raiz.dataset.pfInit = '1'
+
+  var fotos = Array.prototype.slice.call(raiz.querySelectorAll('[data-pf-foto]'))
+  var img = visor.querySelector('img')
+  var epigrafe = visor.querySelector('figcaption')
+  var cuenta = visor.querySelector('.pf-visor__cuenta')
+  var prev = visor.querySelector('[data-pf-prev]')
+  var next = visor.querySelector('[data-pf-next]')
+  var actual = 0
+  var origen = null
+
+  function mostrar (i) {
+    actual = (i + fotos.length) % fotos.length
+    var a = fotos[actual]
+    var miniatura = a.querySelector('img')
+    img.src = a.href
+    img.alt = miniatura ? miniatura.alt : ''
+    epigrafe.textContent = a.getAttribute('data-pf-epigrafe') || ''
+    cuenta.textContent = (actual + 1) + ' de ' + fotos.length
+  }
+
+  prev.hidden = next.hidden = fotos.length &lt; 2
+
+  fotos.forEach(function (a, i) {
+    a.addEventListener('click', function (ev) {
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return
+      ev.preventDefault()
+      origen = a
+      mostrar(i)
+      visor.showModal()
+    })
+  })
+
+  prev.addEventListener('click', function () { mostrar(actual - 1) })
+  next.addEventListener('click', function () { mostrar(actual + 1) })
+  visor.addEventListener('click', function (ev) {
+    if (ev.target === visor || ev.target.closest('[data-pf-cerrar]')) visor.close()
+  })
+  visor.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowLeft' &amp;&amp; fotos.length &gt; 1) mostrar(actual - 1)
+    if (ev.key === 'ArrowRight' &amp;&amp; fotos.length &gt; 1) mostrar(actual + 1)
+  })
+  visor.addEventListener('close', function () {
+    img.removeAttribute('src')
+    if (origen) origen.focus()
+  })
+})()
+&lt;/script&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-maestras-activistas-en-las-huelgas-de-1921">
+  <div class="doc-ficha__cab"><div><h2>Maestras activistas en las huelgas de 1921</h2>
+    <p class="doc-ficha__meta">Página 17111 · 1921 · 1 imagen · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/maestras-activistas-en-las-huelgas-de-1921/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Maestras activistas en las huelgas de 1921">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;1921&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;En la década 1910-20 las maestras se encontraban agrupadas en instituciones netamente sindicales. Los haberes mensuales no superaban los 111 pesos y se atrasaban de modo inhumano; la falta de escalafonamiento permitía graves injusticias. En abril de 1921 el magisterio dijo “Basta”. La huelga duró de abril a junio: se pedía el pago de los sueldos adeudados, la sanción del presupuesto escolar y el escalafón para los cargos. Entre las autoridades y en ciertos sectores de la prensa, “indignaba” la decidida actitud del sector femenino reclamante.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-primeras-luchas.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figure class="pf-principal"&gt;
+      &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Maestras-mendocinas-huelga-docente-de-1919.jpg" data-pf-foto data-pf-epigrafe="Maestras mendocinas en la huelga docente de 1919"&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Maestras-mendocinas-huelga-docente-de-1919.jpg" alt="Maestras mendocinas en la huelga docente de 1919" fetchpriority="high"&gt;&lt;/a&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;dialog class="pf-visor" aria-label="Imagen ampliada"&gt;
+    &lt;button type="button" class="pf-visor__cerrar" data-pf-cerrar aria-label="Cerrar"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--prev" data-pf-prev aria-label="Imagen anterior"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M19 12H5M11 6l-6 6 6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;figure class="pf-visor__figura"&gt;&lt;img alt=""&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--next" data-pf-next aria-label="Imagen siguiente"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;p class="pf-visor__cuenta" aria-live="polite"&gt;&lt;/p&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function () {
+  'use strict'
+  var raiz = document.getElementById('pf')
+  var visor = raiz &amp;&amp; raiz.querySelector('.pf-visor')
+  if (!visor || !visor.showModal || raiz.dataset.pfInit) return
+  raiz.dataset.pfInit = '1'
+
+  var fotos = Array.prototype.slice.call(raiz.querySelectorAll('[data-pf-foto]'))
+  var img = visor.querySelector('img')
+  var epigrafe = visor.querySelector('figcaption')
+  var cuenta = visor.querySelector('.pf-visor__cuenta')
+  var prev = visor.querySelector('[data-pf-prev]')
+  var next = visor.querySelector('[data-pf-next]')
+  var actual = 0
+  var origen = null
+
+  function mostrar (i) {
+    actual = (i + fotos.length) % fotos.length
+    var a = fotos[actual]
+    var miniatura = a.querySelector('img')
+    img.src = a.href
+    img.alt = miniatura ? miniatura.alt : ''
+    epigrafe.textContent = a.getAttribute('data-pf-epigrafe') || ''
+    cuenta.textContent = (actual + 1) + ' de ' + fotos.length
+  }
+
+  prev.hidden = next.hidden = fotos.length &lt; 2
+
+  fotos.forEach(function (a, i) {
+    a.addEventListener('click', function (ev) {
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return
+      ev.preventDefault()
+      origen = a
+      mostrar(i)
+      visor.showModal()
+    })
+  })
+
+  prev.addEventListener('click', function () { mostrar(actual - 1) })
+  next.addEventListener('click', function () { mostrar(actual + 1) })
+  visor.addEventListener('click', function (ev) {
+    if (ev.target === visor || ev.target.closest('[data-pf-cerrar]')) visor.close()
+  })
+  visor.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowLeft' &amp;&amp; fotos.length &gt; 1) mostrar(actual - 1)
+    if (ev.key === 'ArrowRight' &amp;&amp; fotos.length &gt; 1) mostrar(actual + 1)
+  })
+  visor.addEventListener('close', function () {
+    img.removeAttribute('src')
+    if (origen) origen.focus()
+  })
+})()
+&lt;/script&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-trata-y-explotacion-sexual">
+  <div class="doc-ficha__cab"><div><h2>Trata y explotación sexual</h2>
+    <p class="doc-ficha__meta">Página 17160 · 1874 – 1936 · 0 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/trata-y-explotacion-sexual/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Trata y explotación sexual">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;1874 – 1936&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;Entre 1874 y 1936 la prostitución en nuestro país estuvo reglamentada. Se aplicaba el modelo higienista francés que restringía la prostitución a un territorio marginal y delimitado de la ciudad de modo que el Estado pudiese ejercer control sobre los mismos y sobre las mujeres prostituidas las que eran sometidas a controles sanitarios periódicos.&lt;/p&gt;
+        &lt;p&gt;En 1929 la Municipalidad santafesina estableció como zona permitida para el ejercicio de la prostitución al sector comprendido entre las calles Buenos Aires al sur, San Juan al este, Corrientes al norte y el 24 ramal del FCCA al oeste. Burdeles como Chanteclair, El Santafesino, Tabaris, Edén, Royal, o el más caro de todos, La Maison París (ubicado en Buenos Aires 3760) eran engranajes fundamentales de aquella fisonomía urbana prostibularia.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-explotacion.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-sociedad-cientifica-de-santa-fe-creada-en-1927">
+  <div class="doc-ficha__cab"><div><h2>Sociedad Científica de Santa Fe creada en 1927</h2>
+    <p class="doc-ficha__meta">Página 17117 · 1927 · 3 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/sociedad-cientifica-de-santa-fe-creada-en-1927/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Sociedad Científica de Santa Fe creada en 1927">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;1927&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;La Sociedad Científica de Santa Fe fundada en 1927 fue el lugar que propició intercambios de conocimientos entre universitarixs argentinxs y extranjerxs. Amelia Larguía de Crouzeilles la integró como socia activa y publicó sus investigaciones en la revista institucional “Anales” de la mencionada institución.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/baldosas-web-amelia.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figure class="pf-principal"&gt;
+      &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Amelia-Joven.jpeg" data-pf-foto data-pf-epigrafe="Amelia Larguía de Crouzeilles joven"&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-1-Amelia-Joven.jpeg" alt="Amelia Larguía de Crouzeilles joven" fetchpriority="high"&gt;&lt;/a&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;section class="pf-galeria" aria-labelledby="pf-galeria-titulo"&gt;
+    &lt;h2 class="pf-galeria__titulo" id="pf-galeria-titulo"&gt;Galería &lt;small&gt;2 imágenes&lt;/small&gt;&lt;/h2&gt;
+    &lt;ul class="pf-grilla"&gt;
+      &lt;li&gt;&lt;figure&gt;
+        &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-2.-Amelia-Adulta-scaled.jpg" data-pf-foto data-pf-epigrafe=""&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-2.-Amelia-Adulta-scaled.jpg" alt="Amelia Larguía de Crouzeilles adulta" loading="lazy"&gt;&lt;/a&gt;
+      &lt;/figure&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;figure&gt;
+        &lt;a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-3.-Anales-de-la-Sociedad-Cientifica-Argentina.-jpeg.jpeg" data-pf-foto data-pf-epigrafe=""&gt;&lt;img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/03/Foto-3.-Anales-de-la-Sociedad-Cientifica-Argentina.-jpeg.jpeg" alt="Anales de la Sociedad Científica Argentina" loading="lazy"&gt;&lt;/a&gt;
+      &lt;/figure&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+
+  &lt;dialog class="pf-visor" aria-label="Imagen ampliada"&gt;
+    &lt;button type="button" class="pf-visor__cerrar" data-pf-cerrar aria-label="Cerrar"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--prev" data-pf-prev aria-label="Imagen anterior"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M19 12H5M11 6l-6 6 6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;figure class="pf-visor__figura"&gt;&lt;img alt=""&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;button type="button" class="pf-visor__nav pf-visor__nav--next" data-pf-next aria-label="Imagen siguiente"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;p class="pf-visor__cuenta" aria-live="polite"&gt;&lt;/p&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function () {
+  'use strict'
+  var raiz = document.getElementById('pf')
+  var visor = raiz &amp;&amp; raiz.querySelector('.pf-visor')
+  if (!visor || !visor.showModal || raiz.dataset.pfInit) return
+  raiz.dataset.pfInit = '1'
+
+  var fotos = Array.prototype.slice.call(raiz.querySelectorAll('[data-pf-foto]'))
+  var img = visor.querySelector('img')
+  var epigrafe = visor.querySelector('figcaption')
+  var cuenta = visor.querySelector('.pf-visor__cuenta')
+  var prev = visor.querySelector('[data-pf-prev]')
+  var next = visor.querySelector('[data-pf-next]')
+  var actual = 0
+  var origen = null
+
+  function mostrar (i) {
+    actual = (i + fotos.length) % fotos.length
+    var a = fotos[actual]
+    var miniatura = a.querySelector('img')
+    img.src = a.href
+    img.alt = miniatura ? miniatura.alt : ''
+    epigrafe.textContent = a.getAttribute('data-pf-epigrafe') || ''
+    cuenta.textContent = (actual + 1) + ' de ' + fotos.length
+  }
+
+  prev.hidden = next.hidden = fotos.length &lt; 2
+
+  fotos.forEach(function (a, i) {
+    a.addEventListener('click', function (ev) {
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return
+      ev.preventDefault()
+      origen = a
+      mostrar(i)
+      visor.showModal()
+    })
+  })
+
+  prev.addEventListener('click', function () { mostrar(actual - 1) })
+  next.addEventListener('click', function () { mostrar(actual + 1) })
+  visor.addEventListener('click', function (ev) {
+    if (ev.target === visor || ev.target.closest('[data-pf-cerrar]')) visor.close()
+  })
+  visor.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowLeft' &amp;&amp; fotos.length &gt; 1) mostrar(actual - 1)
+    if (ev.key === 'ArrowRight' &amp;&amp; fotos.length &gt; 1) mostrar(actual + 1)
+  })
+  visor.addEventListener('close', function () {
+    img.removeAttribute('src')
+    if (origen) origen.focus()
+  })
+})()
+&lt;/script&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-las-unidades-basicas-femeninas">
+  <div class="doc-ficha__cab"><div><h2>Las unidades básicas femeninas</h2>
+    <p class="doc-ficha__meta">Página 22519 · Década de 1940 · 0 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/las-unidades-basicas-femeninas/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Las unidades básicas femeninas">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;Década de 1940&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;En la década de 1940, en Santa Fe, Argentina, surgieron organizaciones de mujeres para respaldar la candidatura de Perón. Eva Duarte lideró la Campaña por el voto femenino. Tras obtener la ley de voto femenino, se crearon las Unidades Básicas Femeninas Peronistas (UBFP), espacios donde las mujeres se educaban, capacitaban y participaban políticamente. Estas unidades eran exclusivamente para mujeres y tenían como objetivo promover la independencia y participación femenina en la política.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/10/unidadesbasicas.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-mujeres-sindicalistas">
+  <div class="doc-ficha__cab"><div><h2>Mujeres sindicalistas en Santa Fe Capital</h2>
+    <p class="doc-ficha__meta">Página 22504 · Década de 1970 · 0 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/mujeres-sindicalistas/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Mujeres sindicalistas en Santa Fe Capital">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;Década de 1970&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;En la década de 1970, el sindicalismo docente en Santa Fe y Rosario (SINTES y SINTER) se unió a la CGT de los Argentinos. Hubo represión y desapariciones. AMSAFE es su heredera. El sindicalismo, fundamental para la historia del país, lucha contra el impacto del capitalismo en las condiciones laborales. Las mujeres sindicalistas, a medida que se unían, ampliaban sus demandas, incluyendo igualdad salarial y condiciones laborales justas. También se destacan los derechos de las trabajadoras domésticas y los trabajadores de la economía popular. La participación de las mujeres en manifestaciones fortaleció la sororidad y llevó a la creación de espacios institucionales para abordar sus demandas.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/10/Pdf_mujeres.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-origenes-del-movimiento">
+  <div class="doc-ficha__cab"><div><h2>Orígenes del movimiento de mujeres en la ciudad de Santa Fe</h2>
+    <p class="doc-ficha__meta">Página 22629 · Década de 1980 · 0 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/origenes-del-movimiento/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Orígenes del movimiento de mujeres en la ciudad de Santa Fe">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;Década de 1980&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;La conformación primigenia de lo que sería el Movimiento Social de Mujeres de la ciudad puede situarse a mediados de la década de 1980 con el surgimiento de dos organizaciones que por su inserción territorial y poder de convocatoria serían fundamentales para aglutinar a otros grupos. Una es el Sindicato de Amas de Casa que reivindicaba salario y jubilación para el ama de casa y la otra Acción Educativa que desplegaba su acción en distintos barrios santafesinos y en localidades de la región a partir de los postulados de Paulo Freire y la educación popular.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/11/movimientomujeres.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-sociabilidad-lesbica">
+  <div class="doc-ficha__cab"><div><h2>Sociabilidad lésbica 1984 – 2010</h2>
+    <p class="doc-ficha__meta">Página 24613 · 1984 – 2010 · 0 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/sociabilidad-lesbica/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Sociabilidad lésbica 1984 – 2010">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;1984 – 2010&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;¿Cómo marcar lo invisible? ¿Cómo señalar el lugar donde el deseo encendió lo prohibido? El descubrimiento de esta baldosa da cuenta de la significación y la carga simbólica que un simple espacio adquiere cuando se transforma en &lt;em&gt;un lugar&lt;/em&gt; donde &lt;em&gt;“podíamos ser quienes éramos”&lt;/em&gt;. Es por esto, que las existencias lésbicas, y junto a ellas, un gran abanico de identidades somos la demostración de que otros mundos son posibles, evidentes y necesarios.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/02/sociabilidadLe%CC%81sbica.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-mujeres-desocupadas">
+  <div class="doc-ficha__cab"><div><h2>Mujeres Desocupadas en Lucha, 1997</h2>
+    <p class="doc-ficha__meta">Página 24621 · 1997 · 0 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/mujeres-desocupadas/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Mujeres Desocupadas en Lucha, 1997">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;1997&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;En la década de los noventa, las medidas de liberalización del mercado, la convertibilidad, el individualismo, ampliaron las brechas sociales, dejando por fuera a personas que día a día engrosaban los números de desocupados. La necesidad le ganó al miedo y los vecinos y vecinas de Barrio Santa Rosa llevaron a cabo el primer piquete de Santa Fe. Sin descuidar los mandatos de cuidado y trabajo domésticos, resistiendo a la doble opresión, las mujeres del Barrio tuvieron una participación activa: cortando la circunvalación, alzando la voz en las asambleas, organizando ollas populares.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/02/Pdf_mujeresdesocupadas.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</textarea></details>
+</section>
+
+<section class="doc-ficha" id="f-guardianas-de-la-memoria">
+  <div class="doc-ficha__cab"><div><h2>Guardianas de la Memoria</h2>
+    <p class="doc-ficha__meta">Página 22835 · Siglos XIX y XX · 0 imágenes · 1 PDF · <a href="https://www.santafeciudad.gov.ar/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/guardianas-de-la-memoria/" target="_blank" rel="noopener">ver la ficha actual</a></p></div>
+    <div class="doc-ficha__acciones"><button type="button" class="doc-btn doc-btn--primario" data-copiar>Copiar código</button><button type="button" class="doc-btn" data-previa aria-expanded="false">Vista previa</button></div></div>
+  <p class="doc-ficha__estado" role="status"></p>
+  <div class="doc-ficha__previa" hidden></div>
+  <details><summary>Ver código</summary><textarea readonly spellcheck="false" aria-label="Código de Guardianas de la Memoria">&lt;style&gt;
+  .elementor-widget-wrap:has(&gt; .elementor-widget-html #pf),
+  .elementor-widget-html:has(#pf) &gt; .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container &gt; .elementor:has(#pf) { flex: 1 1 100%; min-width: 0; }
+
+  #pf {
+    --azul: #002751; --celeste: #00aaff; --rojo: #e63312;
+    --gris-20: #dadad9; --gris-75: #606060;
+    --inclinacion: -15deg; --curva: cubic-bezier(.16, 1, .3, 1);
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 32px) 50px;
+    color: var(--azul);
+    font: 400 16px/1.65 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #pf *, #pf *::before, #pf *::after { box-sizing: border-box; }
+  #pf :is(h2, p, ul, figure) { margin: 0; padding: 0; }
+  #pf ul { list-style: none; }
+  #pf img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #pf .pf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #pf :is(a, button):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pf .pf-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #pf .pf-cabecera {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px); align-items: start;
+  }
+  #pf .pf-texto { display: grid; gap: 1rem; }
+  #pf .pf-ceja, #pf .pf-ceja:hover {
+    justify-self: start;
+    font-size: .8rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--gris-75); text-decoration: none;
+  }
+  #pf .pf-ceja:hover { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: 4px; }
+  #pf .pf-lugar { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+  #pf .pf-lugar svg { flex: none; width: 18px; height: 18px; color: var(--rojo); }
+  #pf .pf-proteccion {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cuerpo { display: grid; gap: .9rem; font-size: 1.05rem; }
+  #pf .pf-cuerpo a { color: var(--azul); text-decoration-color: var(--rojo); text-underline-offset: 3px; }
+
+  #pf .pf-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+  #pf .pf-btn, #pf .pf-btn:hover, #pf .pf-btn:focus {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .6em;
+    min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--azul); color: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none;
+  }
+  #pf .pf-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 38%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+    transform: skewX(var(--inclinacion)); transition: left .6s var(--curva); pointer-events: none;
+  }
+  @media (hover: hover) { #pf .pf-btn:hover::after { left: 135%; } }
+  #pf .pf-btn .pf-barra { height: 1.05em; }
+  #pf .pf-btn__tipo {
+    padding: .25em .45em; border-radius: 5px; background: rgba(255, 255, 255, .16);
+    font-size: .72rem; letter-spacing: .06em;
+  }
+
+  #pf .pf-principal { overflow: hidden; border-radius: 22px; background: var(--gris-20);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 18px 40px -20px rgba(0, 39, 81, .45); }
+  #pf .pf-principal a { display: block; }
+  #pf .pf-principal img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  #pf .pf-galeria { margin-top: clamp(36px, 6vw, 64px); }
+  #pf .pf-galeria__titulo {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .6rem; margin-bottom: clamp(16px, 2.5vw, 24px);
+    color: inherit; font-family: inherit; text-transform: none;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pf .pf-galeria__titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
+  #pf .pf-grilla { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  #pf .pf-grilla figure {
+    height: 100%; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #pf .pf-grilla a { display: block; }
+  #pf .pf-grilla img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--gris-20); }
+  #pf .pf-grilla figcaption { padding: .65rem .85rem .8rem; font-size: .84rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #pf .pf-grilla figure:hover { transform: translateY(-3px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 40px -18px rgba(0, 39, 81, .4), inset 0 1px 0 rgba(255, 255, 255, .9); }
+  }
+
+  #pf .pf-visor {
+    width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+  }
+  #pf .pf-visor::backdrop { background: rgba(0, 18, 38, .9); }
+  #pf .pf-visor[open] { display: grid; place-items: center; }
+  #pf .pf-visor__figura { display: grid; justify-items: center; gap: .75rem; max-width: min(1100px, 100vw - 120px); }
+  #pf .pf-visor__figura img { max-width: 100%; max-height: calc(100dvh - 140px); width: auto; height: auto; border-radius: 8px; }
+  #pf .pf-visor__figura figcaption { max-width: 70ch; text-align: center; font-size: .92rem; color: #dbe3ee; }
+  #pf .pf-visor__figura figcaption:empty { display: none; }
+  #pf .pf-visor__cuenta { position: absolute; top: 18px; left: 20px; font-size: .9rem; color: #dbe3ee; }
+  #pf .pf-visor button, #pf .pf-visor button:hover, #pf .pf-visor button:focus {
+    position: absolute; display: grid; place-items: center;
+    width: 48px; height: 48px; min-height: 0; margin: 0; padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35); border-radius: 12px;
+    background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer;
+  }
+  #pf .pf-visor button:hover { background: rgba(255, 255, 255, .18); }
+  #pf .pf-visor button svg { width: 22px; height: 22px; }
+  #pf .pf-visor__cerrar { top: 14px; right: 14px; }
+  #pf .pf-visor__nav { top: 50%; translate: 0 -50%; }
+  #pf .pf-visor__nav--prev { left: 14px; }
+  #pf .pf-visor__nav--next { right: 14px; }
+  #pf .pf-visor__nav[hidden] { display: none; }
+
+  @media (max-width: 860px) {
+    #pf .pf-cabecera { grid-template-columns: minmax(0, 1fr); }
+    #pf .pf-principal { order: -1; }
+  }
+  @media (max-width: 640px) {
+    #pf .pf-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #pf .pf-grilla figcaption { padding: .55rem .65rem .7rem; font-size: .78rem; }
+    #pf .pf-visor__figura { max-width: calc(100vw - 24px); }
+    #pf .pf-visor__nav { top: auto; bottom: 16px; translate: none; }
+    #pf .pf-visor__figura img { max-height: calc(100dvh - 190px); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pf .pf-grilla figure { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pf .pf-grilla figure { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pf *, #pf *::before, #pf *::after { transition: none !important; }
+  }
+  #pf .pf-periodo {
+    justify-self: start; padding: .3rem .7rem; border-radius: 999px;
+    background: rgba(0, 39, 81, .07); color: var(--azul);
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #pf .pf-cabecera--texto { grid-template-columns: minmax(0, 1fr); }
+  #pf .pf-cabecera--texto .pf-texto { max-width: 72ch; }
+&lt;/style&gt;
+
+&lt;div id="pf"&gt;
+  &lt;div class="pf-cabecera pf-cabecera--texto"&gt;
+    &lt;div class="pf-texto"&gt;
+      &lt;a class="pf-ceja" href="/capitalcultural/huellas-de-mi-ciudad/memorias-urbanas-feministas/"&gt;Memorias Urbanas Feministas&lt;/a&gt;
+      &lt;p class="pf-periodo"&gt;Siglos XIX y XX&lt;/p&gt;
+      &lt;div class="pf-cuerpo"&gt;
+        &lt;p&gt;Las mujeres tuvieron un rol preponderante en las luchas por la memoria. Una larga historia de valentía, desde las Madres y Abuelas de Plaza de Mayo, la organización de hijos e hijas por la memoria, verdad y justicia. Una historia que aún pasado más de un siglo vuelve a ser interpelada por la memoria de los genocidios del siglo XIX. Allí también, las mujeres de las comunidades originarias asumieron su rol de testigos y denunciantes de los genocidios del siglo XIX y XX, en Napalpí, Rincón Bomba, pero también aquí en Santa Fe, en San Antonio de Obligado y San Javier. Esta baldosa representa simbólicamente dos historias intersectadas, dos, de muchas otras que los genocidios ponen, dolorosamente, en común.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="pf-acciones"&gt;
+        &lt;a class="pf-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2024/04/Guardianasdelamemoria.pdf" target="_blank" rel="noopener"&gt;&lt;i class="pf-barra"&gt;&lt;/i&gt;Leer más &lt;span class="pf-btn__tipo"&gt;PDF&lt;/span&gt;&lt;span class="pf-sr"&gt; (se abre en otra pestaña)&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</textarea></details>
+</section>
+</main>
+
+<script>
+(function () {
+  'use strict'
+  var FONDO = "\n\n\nhtml body[class] { background: #f4f4f3; }\n\nhtml body[class]::before {\n  content: \"\";\n  position: fixed;\n  inset: 0;\n  z-index: -1;\n  pointer-events: none;\n  background:\n    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(0, 170, 255, .26), transparent),\n    radial-gradient(circle 35vmax at calc(100% + 1vmax) 15vmax, rgba(0, 39, 81, .12), transparent),\n    radial-gradient(circle 35vmax at 45vmax calc(100% + 3vmax), rgba(230, 51, 18, .16), transparent);\n}\n\n\n#masthead .elementor-top-section { background: transparent; }\n"
+
+  function copiar (texto, estado) {
+    function ok () { estado.textContent = 'Código copiado. Pegalo entero en el widget HTML de la ficha.' }
+    function mal () { estado.textContent = 'No se pudo copiar solo: abrí "Ver código", seleccioná todo y copialo.' }
+    function aMano () {
+      var t = document.createElement('textarea')
+      t.value = texto; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0'
+      document.body.appendChild(t); t.select()
+      try { document.execCommand('copy') ? ok() : mal() } catch (e) { mal() }
+      document.body.removeChild(t)
+    }
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texto).then(ok, aMano)
+    aMano()
+  }
+
+  function previa (seccion, boton) {
+    var caja = seccion.querySelector('.doc-ficha__previa')
+    var abierta = !caja.hidden
+    caja.hidden = abierta
+    boton.setAttribute('aria-expanded', String(!abierta))
+    boton.textContent = abierta ? 'Vista previa' : 'Cerrar vista previa'
+    if (abierta || caja.firstChild) return
+    var iframe = document.createElement('iframe')
+    iframe.title = 'Vista previa de ' + seccion.querySelector('h2').textContent
+    iframe.srcdoc = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+      '<base href="https://www.santafeciudad.gov.ar/" target="_blank">' +
+      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;600;700&display=swap">' +
+      '<style>body{margin:0}' + FONDO + '</style></head><body>' + seccion.querySelector('textarea').value + '</body></html>'
+    iframe.addEventListener('load', function () {
+      var ajustar = function () { iframe.style.height = iframe.contentDocument.documentElement.scrollHeight + 'px' }
+      ajustar()
+      iframe.contentWindow.addEventListener('load', ajustar)
+      setTimeout(ajustar, 1500)
+    })
+    caja.appendChild(iframe)
+  }
+
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button')
+    if (!b) return
+    var seccion = b.closest('.doc-ficha')
+    if (b.hasAttribute('data-copiar')) copiar(seccion.querySelector('textarea').value, seccion.querySelector('.doc-ficha__estado'))
+    if (b.hasAttribute('data-previa')) previa(seccion, b)
+  })
+})()
+</script>
+</body>
+</html>

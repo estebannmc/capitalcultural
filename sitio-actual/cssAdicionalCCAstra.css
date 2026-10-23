@@ -127,7 +127,11 @@ textarea {
 
 /* Hover footer */
 .footer-cc a:hover {
-  color: #57b8e9 !important;
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-decoration-color: #e63312;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* Linea inferior */
@@ -305,7 +309,11 @@ textarea {
 }
 
 .cc-menu-panel a:hover {
-  color: #57b8e9;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #e63312;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* Ultimo sin borde */
@@ -396,12 +404,7 @@ textarea {
 }
 
 .cc-menu-toggle:hover {
-  background: #57b8e9;
-}
-
-/* Sobre celeste las lineas van en azul: blanco no alcanza contraste */
-.cc-menu-toggle:hover span {
-  background: #002751;
+  background: #00325f;
 }
 
 /* Lineas */
@@ -484,7 +487,11 @@ textarea {
 }
 
 .cc-menu-panel a:hover {
-  color: #57b8e9 !important;
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-decoration-color: #e63312;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* ==========================================================================
@@ -655,4 +662,86 @@ a:hover img,
   .cb-btn::after {
     display: none;
   }
+}
+
+/* ==========================================================================
+   14. TITULO Y BREADCRUMB - MOBILE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  body .cc-page-title,
+  body h1.cc-page-title {
+    line-height: 1.15;
+  }
+
+  body .cc-breadcrumb,
+  body .cc-breadcrumb a,
+  body .cc-breadcrumb span,
+  body .cc-breadcrumb .sep {
+    line-height: 1.5;
+  }
+}
+
+/* ==========================================================================
+   15. FONDO GLOBAL
+   ========================================================================== */
+
+html:root { background: #f4f4f3; }
+html body[class] { background: transparent; }
+
+html body[class] {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+html body[class]::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  height: 100lvh;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(0, 170, 255, .26), transparent),
+    radial-gradient(circle 35vmax at calc(100% + 1vmax) 15vmax, rgba(0, 39, 81, .12), transparent),
+    radial-gradient(circle 35vmax at 45vmax calc(100% + 3vmax), rgba(230, 51, 18, .16), transparent);
+}
+
+#masthead .elementor-top-section { background: transparent; }
+
+/* ==========================================================================
+   16. FICHAS DE HUELLAS - RADIOS CHICOS
+   ========================================================================== */
+
+body #pf .pf-principal {
+  border-radius: 8px;
+}
+
+body #pf .pf-grilla figure,
+body #pf .pf-visor__figura img,
+body #pf .pf-btn,
+body #pf .pf-btn:hover,
+body #pf .pf-btn:focus,
+body #pf .pf-visor button,
+body #pf .pf-visor button:hover,
+body #pf .pf-visor button:focus {
+  border-radius: 6px;
+}
+
+body #pf .pf-btn__tipo,
+body #pf .pf-proteccion,
+body #pf .pf-periodo {
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   17. LINKS - SUBRAYADO ROJO
+   ========================================================================== */
+
+a {
+  text-decoration-color: #e63312;
+  text-underline-offset: 3px;
 }

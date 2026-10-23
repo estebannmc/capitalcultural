@@ -1,33 +1,25 @@
-/* ==========================================================================
-   FONDO GLOBAL · manchas de marca detrás de todo el sitio
-   Va en Apariencia → Personalizar → CSS adicional, al final.
+html:root { background: #f4f4f3; }
+html body[class] { background: transparent; }
 
-   Es una capa fija (body::before): no se mueve con el scroll, así que el
-   header de vidrio (.ccg-pill) y su menú la esmerilan al bajar.
-   Las secciones de Elementor con color de fondo propio la tapan: para que
-   se vea, esas secciones tienen que quedar sin fondo.
-
-   Intensidades medidas: el gris de texto #606060 da 4.5:1 o más aun en el
-   centro de cada mancha. Si se suben, el texto secundario deja de ser AA.
-   ========================================================================== */
-
-/* body[class] le gana a .ast-plain-container / .ast-separate-container, con
-   las que Astra pinta el body con el color del Personalizador */
-html body[class] { background: #f4f4f3; }
+html body[class] {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
 
 html body[class]::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(0, 170, 255, .26), transparent),                /* celeste, arriba a la izquierda */
-    radial-gradient(circle 35vmax at calc(100% + 1vmax) 15vmax, rgba(0, 39, 81, .12), transparent),   /* azul, arriba a la derecha */
-    radial-gradient(circle 35vmax at 45vmax calc(100% + 3vmax), rgba(230, 51, 18, .16), transparent); /* rojo de Cultura, abajo */
+    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(0, 170, 255, .26), transparent),
+    radial-gradient(circle 35vmax at calc(100% + 1vmax) 15vmax, rgba(0, 39, 81, .12), transparent),
+    radial-gradient(circle 35vmax at 45vmax calc(100% + 3vmax), rgba(230, 51, 18, .16), transparent);
 }
 
-/* La sección de Elementor que envuelve al header de vidrio (bloque de
-   cabecera de UAE) trae fondo blanco: sin esto, arriba de todo queda una
-   franja blanca de 80px tapando el fondo. */
 #masthead .elementor-top-section { background: transparent; }
