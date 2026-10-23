@@ -106,7 +106,9 @@ Verificado contra las páginas 12, 28 y 51 del Brandbook: **el bloque redondea s
 
 En la **marca completa** (SF + escudo) el redondeo salta a los extremos del conjunto: arriba-izquierda del bloque SF y abajo-derecha del panel del escudo. Los cuatro cortes de la diagonal interna van en punta.
 
-En CSS el `skew` se aplica al mismo elemento que el `border-radius`, así que la curva se inclina junto con la forma, como en el original. La construcción está en `docs/design-tokens.css` como `.sf-lockup`, para cuando no convenga cargar el SVG; el SVG oficial del lockup y del escudo sale del Brandbook.
+**Sobre fondo oscuro el bloque SF va calado, no macizo.** Es lo que trae el asset oficial (`marca/logoFooter.svg`): contorno blanco de 1px y relleno del fondo, con las letras SF en blanco; el panel del escudo sí va lleno de blanco, con el emblema en Azul 01. No es lo mismo que el lockup chico de cabecera, que sí es un bloque macizo de Azul 01 — y es la diferencia que el footer del sistema visual tenía mal hasta que llegó el SVG.
+
+En CSS el `skew` se aplica al mismo elemento que el `border-radius`, así que la curva se inclina junto con la forma, como en el original. La construcción está en `docs/design-tokens.css` como `.sf-lockup`, para cuando no convenga cargar el SVG; para la marca completa sobre oscuro va directo `marca/logoFooter.svg`.
 
 En el lockup de tópico la palabra va en **Encode Sans Bold con tracking casi nulo** (`.005em`), no espaciada, y la barra del tópico no lleva redondeo: es un corte limpio.
 
@@ -530,5 +532,6 @@ La variación que queda es la normal de plantillas y QA, no la del recuento de p
 - `docs/design-tokens.css` — tokens de marca + material GlassMorph, listos para encolar
 - `docs/barras.svg` — el remate de barras de esquina, partial para el child theme
 - `docs/plan-glassmorph.md` — este documento
+- `marca/logoFooter.svg` — la marca completa para fondo oscuro (bloque SF **calado** + panel del escudo), asset oficial sin modificar
 - `marca/` — los dos PDFs normativos
 - `sitio-actual/` — lo que hoy está cargado en el sitio, analizado en §2.sexies: `cssAdicionalCCAstra.css`, `botonesCC.js`, `header.html`, `footer.html`, `pluginsCC.txt` y `paginasUtilCC.docx`
