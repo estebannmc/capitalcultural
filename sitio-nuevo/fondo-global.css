@@ -17,7 +17,7 @@ html body[class]::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(0, 170, 255, .26), transparent),
+    radial-gradient(circle 35vmax at 5vmax 1vmax, rgba(87, 184, 233, .38), transparent),
     radial-gradient(circle 35vmax at calc(100% + 1vmax) 15vmax, rgba(0, 39, 81, .12), transparent),
     radial-gradient(circle 35vmax at 45vmax calc(100% + 3vmax), rgba(230, 51, 18, .16), transparent);
 }

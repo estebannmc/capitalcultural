@@ -1,11 +1,34 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const W = 1240, H = 1754, PAD = 36;
+const W = 1240, H = 1754, PAD = 36;        // A4 a 150 dpi
+const DOCS = path.dirname(fileURLToPath(import.meta.url));
+const ENTRADA = path.join(DOCS, 'sistema-visual.html');
+const SALIDA  = path.join(DOCS, 'sistema-visual.pdf');
+// Las páginas sueltas son intermedias: van a una carpeta temporal propia, no
+// a una ruta de sesión fija como antes, que dejaba de existir al día siguiente.
+const PAGS = fs.mkdtempSync(path.join(os.tmpdir(), 'cc-pdf-'));
 
-const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+// Playwright renombra la carpeta del navegador en cada versión, así que se
+// busca en vez de clavarla.
+const chrome = (() => {
+  const base = process.env.PLAYWRIGHT_BROWSERS_PATH || '/opt/pw-browsers';
+  if (!fs.existsSync(base)) return undefined;
+  for (const d of fs.readdirSync(base).filter(d => d.startsWith('chromium')).sort().reverse()) {
+    for (const rel of ['chrome-linux/chrome', 'chrome-mac/Chromium.app/Contents/MacOS/Chromium']) {
+      const f = path.join(base, d, rel);
+      if (fs.existsSync(f)) return f;
+    }
+  }
+  return undefined;   // que Playwright use el suyo
+})();
+
+const b = await chromium.launch(chrome ? { executablePath: chrome } : {});
 const p = await b.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 2 });
-await p.goto('file:///home/user/capitalcultural/docs/sistema-visual.html');
+await p.goto('file://' + ENTRADA);
 await p.emulateMedia({ media: 'screen' });
 await p.waitForTimeout(3000);
 
@@ -99,11 +122,43 @@ const res = await p.evaluate(({ H, PAD }) => {
 console.log(`unidades ${res.unidades} · bloques ${res.bloques} · movidos ${res.movidos} · PARTIDAS ${res.partidas} · HUERFANOS ${res.huerfanos} · páginas ${res.paginas}`);
 if (res.partidas > 0) { await b.close(); process.exit(1); }
 
-fs.rmSync('/tmp/claude-0/-home-user-capitalcultural/f58a74a9-fc28-5d14-9a91-93454ed33844/scratchpad/art/pdf/pages', { recursive: true, force: true });
-fs.mkdirSync('/tmp/claude-0/-home-user-capitalcultural/f58a74a9-fc28-5d14-9a91-93454ed33844/scratchpad/art/pdf/pages', { recursive: true });
+fs.rmSync(PAGS, { recursive: true, force: true });
+fs.mkdirSync(PAGS, { recursive: true });
+const pags = [];
 for (let i = 0; i < res.paginas; i++) {
   await p.evaluate(y => scrollTo(0, y), i * H);
   await p.waitForTimeout(260);
-  await p.screenshot({ path: `/tmp/claude-0/-home-user-capitalcultural/f58a74a9-fc28-5d14-9a91-93454ed33844/scratchpad/art/pdf/pages/p${String(i).padStart(2, '0')}.png` });
+  // JPEG y no PNG: el PDF embebe la imagen tal cual, y diez páginas en PNG
+  // sin pérdida daban 42 MB. Con calidad 90 son ~4 y el texto sigue limpio,
+  // porque igual es imagen: la versión legible y buscable es el HTML.
+  const f = path.join(PAGS, `p${String(i).padStart(2, '0')}.jpg`);
+  await p.screenshot({ path: f, type: 'jpeg', quality: 90 });
+  pags.push(f);
 }
+await p.close();
+
+// El PDF se arma con el mismo Chromium: una página por imagen, a sangre y sin
+// márgenes. Así no hace falta ninguna herramienta de más, y el paso de armado
+// deja de ser algo que alguien tiene que acordarse de correr aparte.
+const hoja = path.join(PAGS, 'hoja.html');
+// El <title> termina siendo el título del PDF en el visor, así que no
+// puede quedar el nombre del archivo intermedio.
+fs.writeFileSync(hoja, `<!doctype html><meta charset="utf-8"><title>Capital Cultural · Sistema visual</title><style>
+  @page { size: A4; margin: 0 }
+  html, body { margin: 0; padding: 0; background: #fff }
+  img { display: block; width: 210mm; height: 297mm; break-after: page }
+  img:last-child { break-after: auto }
+</style>` + pags.map(f => `<img src="file://${f}">`).join(''));
+
+const q = await b.newPage();
+await q.goto('file://' + hoja);
+// A4 de verdad y no "1240 px convertidos a puntos": así se imprime 1:1 en vez
+// de depender de que el visor lo encoja. La proporción coincide — 1240/1754 es
+// 0.7069 y 210/297 es 0.7071 — así que no deforma nada.
+await q.pdf({ path: SALIDA, format: 'A4',
+              margin: { top: 0, right: 0, bottom: 0, left: 0 }, printBackground: true });
 await b.close();
+
+const kb = (fs.statSync(SALIDA).size / 1024 / 1024).toFixed(1);
+console.log(`PDF: ${SALIDA} · ${res.paginas} páginas · ${kb} MB`);
+fs.rmSync(PAGS, { recursive: true, force: true });
