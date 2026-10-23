@@ -233,6 +233,12 @@ section{margin-top:56px;scroll-margin-top:24px}
 .sw{border-radius:18px;overflow:hidden}
 .sw__chip{height:96px;display:flex;align-items:flex-end;padding:11px 13px;
   font:600 12px/1 var(--sans);letter-spacing:.07em}
+/* El rol iba en blanco sobre la muestra: sobre la roja daba 4.33 a 12px. Va
+   en pastilla blanca con el texto en Azul 01 (14.90) — igual en las cuatro,
+   porque una etiqueta que cambia de color según la muestra se lee como otra
+   cosa cada vez. */
+.sw__chip span{background:#fff;color:var(--azul-01);
+  padding:4px 8px;border-radius:4px;box-shadow:0 1px 3px rgba(0,39,81,.18)}
 .sw__body{padding:12px 14px 14px;font-size:12.5px;line-height:1.5;font-variant-numeric:tabular-nums}
 .sw__name{font-weight:600;font-size:13.5px;letter-spacing:-.01em;display:block;margin-bottom:3px}
 .sw__hex{color:var(--ink-2)}
@@ -335,7 +341,10 @@ section{margin-top:56px;scroll-margin-top:24px}
 
 /* tópico · blanco sobre rojo = 4.33: AA sólo en texto grande.
    Por eso viene forzado a tamaño lg y no existe en md ni sm. */
-.btn--topico{background:var(--rojo);color:#fff;
+/* 700 y no 600: a 19px WCAG sólo considera "texto grande" la negrita, y
+   blanco sobre rojo da 4.33 — pasa contra el 3.0 de texto grande, no contra
+   el 4.5 de texto normal. Es la misma restricción que el documento enuncia. */
+.btn--topico{background:var(--rojo);color:#fff;font-weight:700;
   min-height:54px;padding:0 28px;font-size:19px;
   box-shadow:0 10px 24px -10px rgba(230,51,18,.6)}
 .btn--topico .bar{background:#fff}
@@ -389,7 +398,10 @@ section{margin-top:56px;scroll-margin-top:24px}
 .cmp__fill{height:26px;border-radius:0 5px 5px 0;display:flex;align-items:center;
   justify-content:flex-end;padding-right:11px;color:#fff;font-weight:600;font-size:13px;
   font-variant-numeric:tabular-nums;white-space:nowrap;min-width:84px}
-.cmp__fill--caro{background:var(--rojo)}
+/* La barra en rojo está bien —el rojo vive en barras— pero la cifra DENTRO
+   daba 4.33 a 13px. El relleno se oscurece a Azul 01 y el rojo queda como
+   remate al final de la barra, que es la lectura que importa. */
+.cmp__fill--caro{background:var(--azul-01);box-shadow:inset -5px 0 0 var(--rojo)}
 .cmp__fill--barato{background:var(--celeste)}
 .cmp__fill--barato{color:var(--azul-01)}
 .cmp__foot{font-size:12.5px;color:var(--ink-3);margin-top:2px}
@@ -419,7 +431,11 @@ section{margin-top:56px;scroll-margin-top:24px}
 .costos th:first-child,.costos td:first-child{text-align:left}
 .costos thead th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
 .costos tbody tr:last-child td{border-bottom:0}
-.costos .hot{color:var(--topico);font-weight:600}
+/* El valor iba en rojo: 3.94 sobre el fondo, texto corrido, justo lo que la
+   regla prohíbe. El número pasa a Azul 01 y la alarma la da un filete rojo,
+   que es donde el rojo sí funciona. */
+.costos .hot{color:var(--azul-01);font-weight:700;
+  box-shadow:inset -3px 0 0 var(--topico);padding-right:9px}
 .tabla-wrap{overflow-x:auto}
 
 .phases{display:grid;gap:12px}
@@ -554,10 +570,10 @@ section{margin-top:56px;scroll-margin-top:24px}
   <div class="sw-group">
     <h3>Los colores de marca</h3>
     <div class="grid g2">
-      <div class="sw glass-soft"><div class="sw__chip" style="background:#002751;color:#fff">DOMINANTE</div><div class="sw__body"><span class="sw__name">Santa Fe Azul 01</span><span class="sw__hex">#002751 · 0 39 81</span><span class="sw__pms">PANTONE 540</span></div></div>
-      <div class="sw glass-soft"><div class="sw__chip" style="background:#57b8e9;color:#002751">SUPERFICIE</div><div class="sw__body"><span class="sw__name">Celeste</span><span class="sw__hex">#57b8e9 · 87 184 233</span><span class="sw__pms">CMYK 60 10 0 0</span></div></div>
-      <div class="sw glass-soft"><div class="sw__chip" style="background:#e63312;color:#fff">SUBMARCA</div><div class="sw__body"><span class="sw__name">Rojo Cultura</span><span class="sw__hex">#e63312 · 230 51 18</span><span class="sw__pms">El color del tópico</span></div></div>
-      <div class="sw glass-soft"><div class="sw__chip" style="background:#fca100;color:#002751">SUBMARCA</div><div class="sw__body"><span class="sw__name">Naranja Cultura</span><span class="sw__hex">#fca100 · 252 161 0</span><span class="sw__pms">Alternativa al rojo para el tópico</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#002751;color:#fff"><span>DOMINANTE</span></div><div class="sw__body"><span class="sw__name">Santa Fe Azul 01</span><span class="sw__hex">#002751 · 0 39 81</span><span class="sw__pms">PANTONE 540</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#57b8e9;color:#002751"><span>SUPERFICIE</span></div><div class="sw__body"><span class="sw__name">Celeste</span><span class="sw__hex">#57b8e9 · 87 184 233</span><span class="sw__pms">CMYK 60 10 0 0</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#e63312;color:#fff"><span>SUBMARCA</span></div><div class="sw__body"><span class="sw__name">Rojo Cultura</span><span class="sw__hex">#e63312 · 230 51 18</span><span class="sw__pms">El color del tópico</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#fca100;color:#002751"><span>SUBMARCA</span></div><div class="sw__body"><span class="sw__name">Naranja Cultura</span><span class="sw__hex">#fca100 · 252 161 0</span><span class="sw__pms">Alternativa al rojo para el tópico</span></div></div>
     </div>
   </div>
 
@@ -572,7 +588,7 @@ section{margin-top:56px;scroll-margin-top:24px}
   <div class="sw-group">
     <h3>Neutros</h3>
     <div class="grid g3">
-      <div class="sw glass-soft"><div class="sw__chip" style="background:#ffffff;color:#002751;box-shadow:inset 0 0 0 1px rgba(0,39,81,.12)">BASE</div><div class="sw__body"><span class="sw__name">Blanco</span><span class="sw__hex">#ffffff · 255 255 255</span></div></div>
+      <div class="sw glass-soft"><div class="sw__chip" style="background:#ffffff;color:#002751;box-shadow:inset 0 0 0 1px rgba(0,39,81,.12)"><span>BASE</span></div><div class="sw__body"><span class="sw__name">Blanco</span><span class="sw__hex">#ffffff · 255 255 255</span></div></div>
       <div class="sw glass-soft"><div class="sw__chip" style="background:#dadad9;color:#1d1d1b">K 20</div><div class="sw__body"><span class="sw__name">Gris claro</span><span class="sw__hex">#dadad9 · 218 218 217</span></div></div>
       <div class="sw glass-soft"><div class="sw__chip" style="background:#606060;color:#fff">K 75</div><div class="sw__body"><span class="sw__name">Gris medio</span><span class="sw__hex">#606060 · 96 96 96</span></div></div>
       <div class="sw glass-soft"><div class="sw__chip" style="background:#1d1d1b;color:#fff">K 100</div><div class="sw__body"><span class="sw__name">Negro</span><span class="sw__hex">#1d1d1b · 29 29 27</span></div></div>
