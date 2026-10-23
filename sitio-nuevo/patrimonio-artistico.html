@@ -35,8 +35,8 @@
   #pa .pa-titulo small { font-size: .95rem; font-weight: 600; color: var(--gris-75); letter-spacing: 0; }
 
   #pa .pa-grilla {
-    display: grid; gap: clamp(14px, 2vw, 22px);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    display: grid; gap: clamp(12px, 1.6vw, 18px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   #pa .pa-card {
@@ -56,9 +56,9 @@
     display: block; width: 100%; height: auto; max-width: none; aspect-ratio: 1;
     object-fit: cover; border-radius: 0; background: var(--gris-20);
   }
-  #pa .pa-card__cuerpo { display: grid; gap: .3rem; padding: .85rem 1rem 1.05rem; }
-  #pa .pa-card__titulo { font-size: 1.02rem; font-weight: 700; line-height: 1.25; }
-  #pa .pa-card__lugar { font-size: .88rem; line-height: 1.35; color: var(--gris-75); }
+  #pa .pa-card__cuerpo { display: grid; gap: .2rem; padding: .7rem .8rem .85rem; }
+  #pa .pa-card__titulo { font-size: .92rem; font-weight: 700; line-height: 1.25; }
+  #pa .pa-card__lugar { font-size: .82rem; line-height: 1.35; color: var(--gris-75); }
   @media (hover: hover) {
     #pa .pa-card:hover {
       transform: translateY(-3px);
@@ -67,6 +67,8 @@
   }
   #pa .pa-card:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
 
+  @media (max-width: 1024px) { #pa .pa-grilla { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 860px) { #pa .pa-grilla { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
     #pa .pa-grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     #pa .pa-card { border-radius: 8px; }
