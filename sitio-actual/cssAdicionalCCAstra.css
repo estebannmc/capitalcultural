@@ -201,7 +201,11 @@ textarea {
 }
 
 .cc-breadcrumb a:hover {
+  color: #002751 !important;
   text-decoration: underline;
+  text-decoration-color: #e63312 !important;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .cc-breadcrumb .sep {
