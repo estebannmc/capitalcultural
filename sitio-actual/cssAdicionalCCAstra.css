@@ -168,9 +168,14 @@ textarea {
    04. TITULO DE PAGINA Y BREADCRUMB
    ========================================================================== */
 
+#masthead .elementor-section,
+#masthead .elementor-widget-wrap {
+  padding: 0 !important;
+}
+
 .cc-title-wrapper {
   max-width: 1100px;
-  margin: 30px auto 20px;
+  margin: 20px auto 20px;
   padding: 0 20px;
 }
 
