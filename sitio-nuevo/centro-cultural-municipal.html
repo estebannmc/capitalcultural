@@ -1,0 +1,118 @@
+<style>
+  .elementor-widget-wrap:has(> .elementor-widget-html #cm),
+  .elementor-widget-html:has(#cm) > .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#cm) { flex: 1 1 100%; min-width: 0; }
+
+  #cm {
+    --azul: #002751;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(32px, 5vw, 64px) clamp(16px, 4vw, 32px) 0;
+  }
+  #cm *, #cm *::before, #cm *::after { box-sizing: border-box; }
+  #cm :is(p, ul, figure) { margin: 0; padding: 0; }
+  #cm img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #cm a:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #cm .cm-grilla { display: grid; gap: clamp(40px, 6vw, 72px); }
+  #cm .cm-texto {
+    display: grid; gap: 1rem; max-width: 760px; margin-inline: auto;
+    font-size: 1.05rem; text-align: justify; text-align-last: left;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  #cm .cm-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+
+  #cm .cm-espacios {
+    display: grid; gap: clamp(12px, 1.6vw, 18px); grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%; max-width: 760px; margin-inline: auto;
+  }
+  #cm .cm-fila {
+    position: relative; isolation: isolate;
+    display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; align-items: center; gap: 1.1rem;
+    padding: .7rem 1.1rem .7rem .7rem; border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+    color: var(--azul); text-decoration: none;
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #cm .cm-fila:hover { color: var(--azul); }
+  #cm .cm-fila img { width: 120px; height: 92px; object-fit: cover; border-radius: 6px; background: var(--gris-20); }
+  #cm .cm-fila__titulo { display: block; font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+  #cm .cm-fila__texto { display: block; margin-top: .25rem; font-size: .92rem; line-height: 1.4; color: var(--gris-75); }
+  #cm .cm-fila__flecha {
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 6px;
+    background: var(--azul); color: #fff;
+  }
+  #cm .cm-fila__flecha svg { width: 18px; height: 18px; transition: transform .3s var(--curva); }
+  @media (hover: hover) {
+    #cm .cm-fila:hover { transform: translateX(4px); }
+    #cm .cm-fila:hover .cm-fila__flecha svg { transform: translateX(3px); }
+  }
+
+  @media (min-width: 861px) {
+    #cm .cm-fila {
+      grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr;
+      align-items: start; height: 100%;
+      padding: .7rem .7rem 1rem;
+    }
+    #cm .cm-fila img { grid-column: 1 / -1; width: 100%; height: auto; aspect-ratio: 390 / 290; }
+    #cm .cm-fila > span:nth-child(2) { padding-left: .35rem; }
+    #cm .cm-fila__flecha { align-self: end; }
+  }
+  @media (min-width: 861px) and (hover: hover) {
+    #cm .cm-fila:hover { transform: translateY(-4px); }
+  }
+  @media (max-width: 860px) {
+    #cm .cm-espacios { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 480px) {
+    #cm .cm-fila { grid-template-columns: 84px minmax(0, 1fr); gap: .85rem; }
+    #cm .cm-fila img { width: 84px; height: 72px; }
+    #cm .cm-fila__flecha { display: none; }
+  }
+
+  #cm .cm-agenda { margin-bottom: 50px; }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #cm .cm-fila { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #cm .cm-fila { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #cm *, #cm *::before, #cm *::after { transition: none !important; }
+  }
+</style>
+
+<div id="cm">
+  <div class="cm-grilla">
+    <div class="cm-texto">
+      <p class="cm-lead">Este centro cultural impulsa actividades abiertas al público, como exposiciones, presentaciones de libros y talleres.</p>
+      <p>Está compuesto por la Fotogalería, un espacio dedicado a la exposición, investigación y formación en fotografía, con especial interés en las prácticas fotográficas locales. Por su parte, la Biblioteca Muttis ofrece servicios de consulta en sala y préstamo de libros a domicilio. Su catálogo incorpora un amplio repertorio de autores santafesinos, literatura infantil, materiales con perspectiva de género y nuevos sectores para el encuentro y la lectura.</p>
+    </div>
+    <nav class="cm-espacios" aria-label="Espacios del Centro Cultural Municipal">
+      <a class="cm-fila" href="/capitalcultural/centroculturalmunicipal/bibliotecamuttis/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2024/08/MPucci_SC_BibliotecaMunicipal_CharlaCementerio_04072024_022-390x290.jpg" alt="" loading="lazy" width="390" height="290">
+        <span><span class="cm-fila__titulo">Biblioteca Profesor Enrique Muttis</span><span class="cm-fila__texto">Consulta en sala, préstamo a domicilio y autores santafesinos</span></span>
+        <span class="cm-fila__flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="cm-fila" href="/capitalcultural/museos-y-salas/fotogaleria/">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/07/MarcePucci_SC_Feria_FotogaleriaMunicipal_PEMuttis_16052026_086.jpg-768x512.jpeg" alt="" loading="lazy" width="768" height="512">
+        <span><span class="cm-fila__titulo">Fotogalería</span><span class="cm-fila__texto">Exposición, formación e investigación en fotografía</span></span>
+        <span class="cm-fila__flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+    <div class="cm-agenda">[ccmunicipal]</div>
+  </div>
+</div>
