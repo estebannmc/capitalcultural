@@ -65,11 +65,11 @@ Decisiones tomadas:
 - **Yoast**, en la caja de la página:
   - Frase clave: `Biblioteca Muttis`
   - Título SEO: `Biblioteca Municipal Profesor Enrique Muttis | Santa Fe`
-  - Meta descripción: `Biblioteca pública municipal en Cortada Falucho 2450, Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria. Horarios y cómo asociarse.`
+  - Meta descripción: `Biblioteca pública municipal en Primera Junta 2451, Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria. Horarios y cómo asociarse.`
   - Imagen para redes (pestaña *Social*): `2024/09/BMuttis.jpg`, la fachada.
 - **La URL vieja `/capitalcultural/bibliotecamuttis/` da 404**, y con ella las páginas hijas (*Café y literatura*, *Cursos y talleres*…). Conviene redirigirla a `/centroculturalmunicipal/bibliotecamuttis/` con *Redirection* para no perder los enlaces que ya tenía.
 - **Los datos de contacto vienen de la ficha de la Red de Bibliotecas** y no tienen correo. La Fotogalería publica otro horario (lunes a viernes de 8 a 20): confirmar cuál es el de la biblioteca antes de publicar. El horario también está en el JSON-LD del final del código, así que hay que cambiarlo en los dos lugares.
-- **La dirección también hay que confirmarla.** La página usa Cortada Falucho 2450, como Wikipedia y la Red de Bibliotecas; el censo de la Biblioteca Nacional y los flyers de 2024 dicen Primera Junta 2451. El edificio da a las dos calles.
+- **La dirección es Primera Junta 2451**, confirmada. Wikipedia y la Red de Bibliotecas todavía dicen Cortada Falucho 2450: el edificio da a las dos calles.
 - **La historia del edificio** sale de la nota de UNO Santa Fe del 11/09/2020 sobre el acondicionamiento de la sala de las bóvedas, y la de Muttis, de Wikipedia. No se encontró año de construcción ni arquitecto del Banco Municipal.
 
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
