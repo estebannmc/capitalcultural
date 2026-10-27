@@ -63,19 +63,15 @@
   #bm .bm-datos dt { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
   #bm .bm-datos dd { font-size: 1.05rem; }
   #bm .bm-foto { overflow: hidden; border-radius: 6px; background: var(--gris-20); }
-  #bm .bm-foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 70%; }
+  #bm .bm-foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
   #bm .bm-tarjetas { display: grid; gap: clamp(12px, 1.6vw, 18px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
   #bm .bm-tarjeta { padding: clamp(18px, 2.4vw, 26px); }
   #bm .bm-tarjeta .bm-titulo { font-size: 1.25rem; }
-  #bm .bm-lista { display: grid; gap: .5rem; }
-  #bm .bm-lista li { display: flex; gap: .6rem; line-height: 1.45; }
-  #bm .bm-lista li::before {
-    content: ""; flex: none; width: 4px; height: .8em; margin-top: .35em;
-    background: var(--rojo); transform: skewX(var(--inclinacion));
-  }
+  #bm .bm-lista { display: grid; gap: .5rem; line-height: 1.45; }
 
-  #bm .bm-historia { max-width: 760px; }
+  #bm .bm-historia { display: grid; gap: 1rem; max-width: 760px; }
+  #bm .bm-historia .bm-titulo { margin-bottom: 0; }
   #bm .bm-historia p { font-size: 1.05rem; text-align: justify; text-align-last: left; -webkit-hyphens: auto; hyphens: auto; }
 
   @media (max-width: 860px) {
@@ -112,7 +108,7 @@
         </dl>
       </div>
       <figure class="bm-foto">
-        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2024/09/BMuttis-1024x1024.jpg" alt="Entrada del Centro Cultural Municipal de Santa Fe, con la placa de la Biblioteca Pública Profesor Enrique Muttis" loading="lazy" width="1024" height="1024">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/04/MPucci_SC_BibliotecaMunicipal_CharlaCementerio_04072024_067-1024x683.jpg" alt="Tomos de la enciclopedia El patrimonio del mundo en un estante de la Biblioteca Muttis" loading="lazy" width="1024" height="683">
       </figure>
     </section>
 
@@ -131,6 +127,7 @@
           <li>Fotocopia del DNI</li>
           <li>Fotocopia de un impuesto o servicio a tu nombre</li>
           <li>Dos fotos de 3 × 3 cm</li>
+          <li>La asociación es gratuita</li>
         </ul>
       </section>
       <section class="bm-tarjeta bm-vidrio" aria-labelledby="bm-coleccion-titulo">
@@ -147,7 +144,9 @@
 
     <section class="bm-historia" aria-labelledby="bm-historia-titulo">
       <h2 class="bm-titulo" id="bm-historia-titulo"><i class="bm-barra"></i>Historia</h2>
-      <p>La biblioteca fue creada en diciembre de 1945, en las cercanías del Teatro Municipal. En la década del 70 estuvo en calle Rivadavia, entre Primera Junta y Cortada Falucho, y en los 80 funcionó en el edificio de la Municipalidad. Desde 1992 ocupa su sede actual, en Cortada Falucho 2450.</p>
+      <p>La biblioteca fue creada en diciembre de 1945, en las cercanías del Teatro Municipal. En la década del 70 estuvo en calle Rivadavia, entre Primera Junta y Cortada Falucho, y en los 80 funcionó en el edificio de la Municipalidad.</p>
+      <p>En 1992 se instaló en el Centro Cultural Municipal y tomó el nombre de Enrique Rodolfo Muttis (1934-1991): profesor de Historia y Geografía, periodista de Canal 13 e intendente de Santa Fe desde 1989 hasta su muerte, en julio de 1991.</p>
+      <p>El edificio, sobre calle 25 de Mayo entre Cortada Falucho y Primera Junta, fue construido para el Banco Municipal. Más tarde alojó al Liceo Municipal Antonio Fuentes del Arco: la sala de las antiguas bóvedas del banco pasó a ser la Escuela de Danzas, y César López Claro pintó allí murales alusivos a las escuelas del Liceo. En 2020 esa sala se acondicionó para ampliar la biblioteca, con entrada propia por Primera Junta, mobiliario histórico restaurado y los murales conservados a la vista.</p>
     </section>
   </div>
 </div>
@@ -163,6 +162,7 @@
   "description": "Biblioteca pública de la Municipalidad de Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria.",
   "telephone": "+54 342 457-4158",
   "foundingDate": "1945-12",
+  "isAccessibleForFree": true,
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Cortada Falucho 2450",
