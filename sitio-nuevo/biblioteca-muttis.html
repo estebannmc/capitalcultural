@@ -1,0 +1,181 @@
+<style>
+  .elementor-widget-wrap:has(> .elementor-widget-html #bm),
+  .elementor-widget-html:has(#bm) > .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#bm) { flex: 1 1 100%; min-width: 0; }
+
+  #bm {
+    --azul: #002751;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(32px, 5vw, 64px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #bm *, #bm *::before, #bm *::after { box-sizing: border-box; }
+  #bm :is(h2, p, ul, dl, dd, figure) { margin: 0; padding: 0; }
+  #bm ul { list-style: none; }
+  #bm img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #bm h2 { color: inherit; font-family: inherit; text-transform: none; }
+  #bm a:not(.cb-btn) { color: var(--azul); text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+  #bm a:not(.cb-btn):focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #bm .bm-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #bm .bm-titulo {
+    display: flex; align-items: baseline; gap: 0 .6rem;
+    margin-bottom: clamp(14px, 2vw, 20px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #bm .bm-titulo .bm-barra { align-self: center; margin-right: .2em; }
+
+  #bm .bm-grilla { display: grid; gap: clamp(40px, 6vw, 72px); }
+  #bm .bm-texto {
+    display: grid; gap: 1rem; max-width: 760px; margin-inline: auto;
+    font-size: 1.05rem; text-align: justify; text-align-last: left;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  #bm .bm-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+  #bm .bm-accion { display: flex; justify-content: center; margin-top: 1rem; }
+
+  #bm .bm-vidrio {
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+
+  #bm .bm-visita {
+    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(24px, 4vw, 48px); align-items: center;
+    padding: clamp(18px, 3vw, 32px);
+  }
+  #bm .bm-datos { display: grid; gap: 1rem; }
+  #bm .bm-datos dt { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  #bm .bm-datos dd { font-size: 1.05rem; }
+  #bm .bm-foto { overflow: hidden; border-radius: 6px; background: var(--gris-20); }
+  #bm .bm-foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 70%; }
+
+  #bm .bm-tarjetas { display: grid; gap: clamp(12px, 1.6vw, 18px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #bm .bm-tarjeta { padding: clamp(18px, 2.4vw, 26px); }
+  #bm .bm-tarjeta .bm-titulo { font-size: 1.25rem; }
+  #bm .bm-lista { display: grid; gap: .5rem; }
+  #bm .bm-lista li { display: flex; gap: .6rem; line-height: 1.45; }
+  #bm .bm-lista li::before {
+    content: ""; flex: none; width: 4px; height: .8em; margin-top: .35em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+
+  #bm .bm-historia { max-width: 760px; }
+  #bm .bm-historia p { font-size: 1.05rem; text-align: justify; text-align-last: left; -webkit-hyphens: auto; hyphens: auto; }
+
+  @media (max-width: 860px) {
+    #bm .bm-visita, #bm .bm-tarjetas { grid-template-columns: minmax(0, 1fr); }
+    #bm .bm-foto { order: -1; }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #bm .bm-vidrio { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #bm .bm-vidrio { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+</style>
+
+<div id="bm">
+  <div class="bm-grilla">
+    <div class="bm-texto">
+      <p class="bm-lead">La Biblioteca Municipal Profesor Enrique Muttis es la biblioteca pública de la Municipalidad de Santa Fe. Funciona en el Centro Cultural Municipal, en Cortada Falucho 2450, en el centro de la ciudad.</p>
+      <p>Ofrece consulta en sala, préstamo de libros a domicilio para sus socios y prensa diaria. Su catálogo reúne colecciones de enciclopedias, obras de geografía e historia y un amplio repertorio de autores santafesinos, literatura infantil y materiales con perspectiva de género, con nuevos sectores para el encuentro y la lectura. Comparte el edificio con la <a href="/capitalcultural/museos-y-salas/fotogaleria/">Fotogalería Municipal</a>.</p>
+      <div class="bm-accion">
+        <a class="cb-btn" href="#"><span>Accedé al catálogo de libros</span></a>
+      </div>
+    </div>
+
+    <section class="bm-visita bm-vidrio" aria-labelledby="bm-visita-titulo">
+      <div>
+        <h2 class="bm-titulo" id="bm-visita-titulo"><i class="bm-barra"></i>Visitá la biblioteca</h2>
+        <dl class="bm-datos">
+          <div><dt>Dirección</dt><dd>Cortada Falucho 2450, barrio Centro · <a href="https://www.google.com/maps/search/?api=1&amp;query=Cortada%20Falucho%202450%2C%20Santa%20Fe" target="_blank" rel="noopener">Ver en el mapa</a></dd></div>
+          <div><dt>Horario</dt><dd>Lunes a viernes de 7:30 a 19:30<br>Sábados de 9:30 a 12:30</dd></div>
+          <div><dt>Teléfono</dt><dd><a href="tel:+543424574158">(0342) 457-4158</a></dd></div>
+          <div><dt>Tipo de biblioteca</dt><dd>Pública</dd></div>
+        </dl>
+      </div>
+      <figure class="bm-foto">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2024/09/BMuttis-1024x1024.jpg" alt="Entrada del Centro Cultural Municipal de Santa Fe, con la placa de la Biblioteca Pública Profesor Enrique Muttis" loading="lazy" width="1024" height="1024">
+      </figure>
+    </section>
+
+    <div class="bm-tarjetas">
+      <section class="bm-tarjeta bm-vidrio" aria-labelledby="bm-servicios-titulo">
+        <h2 class="bm-titulo" id="bm-servicios-titulo"><i class="bm-barra"></i>Servicios</h2>
+        <ul class="bm-lista">
+          <li>Consulta en sala</li>
+          <li>Préstamo de libros a domicilio, para socios</li>
+          <li>Prensa diaria</li>
+        </ul>
+      </section>
+      <section class="bm-tarjeta bm-vidrio" aria-labelledby="bm-socios-titulo">
+        <h2 class="bm-titulo" id="bm-socios-titulo"><i class="bm-barra"></i>Cómo asociarse</h2>
+        <ul class="bm-lista">
+          <li>Fotocopia del DNI</li>
+          <li>Fotocopia de un impuesto o servicio a tu nombre</li>
+          <li>Dos fotos de 3 × 3 cm</li>
+        </ul>
+      </section>
+      <section class="bm-tarjeta bm-vidrio" aria-labelledby="bm-coleccion-titulo">
+        <h2 class="bm-titulo" id="bm-coleccion-titulo"><i class="bm-barra"></i>La colección</h2>
+        <ul class="bm-lista">
+          <li>Enciclopedias y obras generales</li>
+          <li>Geografía e historia</li>
+          <li>Autores santafesinos</li>
+          <li>Literatura infantil</li>
+          <li>Materiales con perspectiva de género</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="bm-historia" aria-labelledby="bm-historia-titulo">
+      <h2 class="bm-titulo" id="bm-historia-titulo"><i class="bm-barra"></i>Historia</h2>
+      <p>La biblioteca fue creada en diciembre de 1945, en las cercanías del Teatro Municipal. En la década del 70 estuvo en calle Rivadavia, entre Primera Junta y Cortada Falucho, y en los 80 funcionó en el edificio de la Municipalidad. Desde 1992 ocupa su sede actual, en Cortada Falucho 2450.</p>
+    </section>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Library",
+  "name": "Biblioteca Municipal Profesor Enrique Muttis",
+  "alternateName": "Biblioteca Muttis",
+  "url": "https://www.santafeciudad.gov.ar/capitalcultural/centroculturalmunicipal/bibliotecamuttis/",
+  "image": "https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2024/09/BMuttis-1024x1024.jpg",
+  "description": "Biblioteca pública de la Municipalidad de Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria.",
+  "telephone": "+54 342 457-4158",
+  "foundingDate": "1945-12",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Cortada Falucho 2450",
+    "addressLocality": "Santa Fe",
+    "addressRegion": "Santa Fe",
+    "postalCode": "3000",
+    "addressCountry": "AR"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:30", "closes": "19:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:30", "closes": "12:30" }
+  ],
+  "containedInPlace": { "@type": "CivicStructure", "name": "Centro Cultural Municipal", "url": "https://www.santafeciudad.gov.ar/capitalcultural/centroculturalmunicipal/" },
+  "parentOrganization": { "@type": "GovernmentOrganization", "name": "Municipalidad de Santa Fe", "url": "https://www.santafeciudad.gov.ar/" }
+}
+</script>
