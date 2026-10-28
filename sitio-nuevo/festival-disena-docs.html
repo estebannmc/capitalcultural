@@ -1,0 +1,323 @@
+<style>
+  .fd-docs { display: grid; gap: clamp(56px, 8vw, 88px); padding-block: 0 50px; }
+
+  .fd-buscar { display: grid; gap: .4em; max-width: 420px; }
+  .fd-buscar label { font-size: .78em; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  .fd-buscar input {
+    width: 100%; min-height: 48px; padding: 0 14px; border: 0; border-radius: 6px;
+    background: #fff; box-shadow: inset 0 0 0 2px var(--gris-20); color: var(--azul); font: inherit;
+  }
+  .fd-buscar input:hover { box-shadow: inset 0 0 0 2px var(--celeste); }
+  .fd-buscar-resultado { color: var(--gris-75); font-size: .93em; }
+
+  .fd .fd-lista-titulo { display: flex; align-items: baseline; gap: .6em; margin-top: .5em; font-size: 1.15em; font-weight: 700; }
+  .fd-lista-titulo span { color: var(--gris-75); font-size: .95em; font-weight: 500; }
+  .fd-marcas { columns: 5 140px; column-gap: 24px; }
+  .fd-marcas li { break-inside: avoid; padding: 8px 0; border-top: 1px solid var(--gris-20); font-size: .95em; line-height: 1.35; overflow-wrap: anywhere; }
+  .fd-marcas li[hidden] { display: none; }
+
+  .fd-suplentes li { display: flex; align-items: flex-start; gap: 10px; }
+  .fd-suplentes li::before {
+    content: attr(data-n); flex: none; display: grid; place-items: center; min-width: 24px; height: 24px; padding: 0 5px;
+    border-radius: 5px; background: var(--azul); color: #fff; font-size: .78em; font-weight: 700;
+  }
+
+  .fd-pdfs { display: grid; gap: 10px; }
+  .fd-pdf {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 18px;
+    padding: 18px clamp(16px, 2.4vw, 24px); color: var(--azul); text-decoration: none;
+    transition: transform .3s cubic-bezier(.16, 1, .3, 1), box-shadow .3s ease;
+  }
+  .fd-pdf .fd-icono { grid-row: span 2; width: 34px; height: 34px; }
+  .fd-pdf h3 { font-size: 1.08em; font-weight: 700; line-height: 1.25; }
+  .fd-pdf p { grid-column: 2; font-size: .95em; line-height: 1.45; }
+  .fd-pdf .fd-meta { grid-column: 3; grid-row: 1 / span 2; color: var(--gris-75); font-size: .88em; text-align: right; white-space: nowrap; }
+  .fd-pdf:hover { transform: translateX(4px); }
+  .fd-pdf:hover h3 { text-decoration: underline; text-decoration-color: var(--rojo); text-decoration-thickness: 2px; text-underline-offset: .22em; }
+
+  @media (max-width: 700px) {
+    .fd-pdf { grid-template-columns: auto minmax(0, 1fr); }
+    .fd-pdf .fd-meta { grid-column: 2; grid-row: auto; text-align: left; }
+  }
+</style>
+
+<div class="fd fd-docs">
+  <section class="fd-seccion" aria-labelledby="seleccionados">
+    <h2 class="fd-titulo" id="seleccionados">Resultados de la convocatoria 2026/2027</h2>
+    <div class="fd-texto">
+      <p>El jurado del Festival Diseña seleccionó 200 proyectos titulares y 20 suplentes, que van a participar de la Edición Diciembre 2026 y de la Edición Invierno 2027. La selección se hizo según los criterios de las Bases y Condiciones de la convocatoria.</p>
+      <p>Los listados reproducen los del <a href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/09/festivalDisenaActaJurados2026_2027.pdf" target="_blank" rel="noopener">acta de actuación de jurados del 25 de septiembre de 2026</a>, que es el documento original y la fuente ante cualquier diferencia.</p>
+    </div>
+
+    <div class="fd-buscar">
+      <label for="fd-buscar-marca">Buscá tu marca</label>
+      <input type="search" id="fd-buscar-marca" autocomplete="off" placeholder="Por ejemplo: cerámica">
+      <p class="fd-buscar-resultado" id="fd-buscar-resultado" aria-live="polite"></p>
+    </div>
+
+    <h3 class="fd-lista-titulo">Marcas titulares <span>200 · en orden alfabético</span></h3>
+    <ul class="fd-marcas" data-buscable>
+        <li>30-J Retazos con Historia</li>
+        <li>Aberama</li>
+        <li>Agamdeco</li>
+        <li>Aires de Campo Deco Natural</li>
+        <li>Alep Vitrofusion</li>
+        <li>Alexandra Lencería</li>
+        <li>Aliwen Arte&amp;Diseño</li>
+        <li>Alpasinche</li>
+        <li>Alta Remera</li>
+        <li>Alwa Arte y Cerámica</li>
+        <li>Ama Chamana</li>
+        <li>Ama la Realidad</li>
+        <li>Amigas Accesorios</li>
+        <li>Amorita</li>
+        <li>Ana de Barro</li>
+        <li>Anacleta</li>
+        <li>Analuzdeco</li>
+        <li>Anandaesencia</li>
+        <li>Araucaria Home</li>
+        <li>Asch</li>
+        <li>Atlantica.Ceramica</li>
+        <li>Aurora and Etnhya</li>
+        <li>Ave</li>
+        <li>Ay! Lucila</li>
+        <li>Ayni Fitocosmética</li>
+        <li>Bárby</li>
+        <li>Bianca B.</li>
+        <li>Bonjour Petit</li>
+        <li>Borramente</li>
+        <li>Bramma Diseño - Productos en Chapa</li>
+        <li>Brotes. Hilo Vivo</li>
+        <li>Bueno Perdon</li>
+        <li>Bunny Box Argentina</li>
+        <li>By Ciempies</li>
+        <li>By Saint</li>
+        <li>By Toro</li>
+        <li>Cactus SN</li>
+        <li>Camaleonicos</li>
+        <li>Caótica Culture</li>
+        <li>Casa Elena</li>
+        <li>Caselli</li>
+        <li>Catarsis</li>
+        <li>Celestina</li>
+        <li>Cherry Velas Gourmet</li>
+        <li>Churi</li>
+        <li>Cosas de Madera SC</li>
+        <li>Cositas Linto</li>
+        <li>Creaffica</li>
+        <li>Cuore di Calabria</li>
+        <li>Delospalos</li>
+        <li>Descartes</li>
+        <li>Desde el Alma</li>
+        <li>DM Diseños en Madera</li>
+        <li>El Conejo de la Luna</li>
+        <li>El Equipo Azul</li>
+        <li>El Inventario</li>
+        <li>En Llamas</li>
+        <li>Encantada Infantil</li>
+        <li>Encuadernacion Alem</li>
+        <li>Enhebro</li>
+        <li>Ensueños - Prendas y Accesorios Infantiles</li>
+        <li>Ernestina Moro</li>
+        <li>Etoa</li>
+        <li>Fedro</li>
+        <li>Fibra Natural</li>
+        <li>Filii Moda Infantil ®</li>
+        <li>Flor Barraza Textil Vivo</li>
+        <li>Flor Rico Indumentaria</li>
+        <li>Florippa</li>
+        <li>Free Kick</li>
+        <li>Gala Artes</li>
+        <li>Garabatos_SF</li>
+        <li>GE.Diseños</li>
+        <li>Gémeaux</li>
+        <li>Geozana</li>
+        <li>Gi Curioni</li>
+        <li>Gordanita</li>
+        <li>Grey Pieroni</li>
+        <li>Guirnaldas Amorosas</li>
+        <li>HB Estudio</li>
+        <li>Hebra Mestiza</li>
+        <li>Idea Madera</li>
+        <li>Ideas Compartidas</li>
+        <li>IMA Natural</li>
+        <li>India</li>
+        <li>InJusta Bags</li>
+        <li>Ipopotamo</li>
+        <li>Ivana Ladner Upcycling</li>
+        <li>Jacinta</li>
+        <li>Jarupkin</li>
+        <li>Jesca Accesorios</li>
+        <li>Josefina Venturini</li>
+        <li>Josephine Maison</li>
+        <li>Jugados</li>
+        <li>Kardamomo</li>
+        <li>Kika</li>
+        <li>Kindasurf</li>
+        <li>Kosiak</li>
+        <li>La Luna al Revés</li>
+        <li>La Maria</li>
+        <li>La Vicuña</li>
+        <li>Lagú</li>
+        <li>Las Clement Style</li>
+        <li>Las Grilli</li>
+        <li>Las Silvestres, Diseño con Flores</li>
+        <li>Laserland</li>
+        <li>Le Park</li>
+        <li>Leales a lo Nuestro</li>
+        <li>Lis</li>
+        <li>Lisi &amp; CO</li>
+        <li>Little Baby</li>
+        <li>Lúdica</li>
+        <li>Lumière</li>
+        <li>Luno</li>
+        <li>Maagal</li>
+        <li>Maderarte &amp; Deco</li>
+        <li>Mags</li>
+        <li>Malaza®</li>
+        <li>Mapiq , Tienda Colectiva</li>
+        <li>Maple</li>
+        <li>Meli Vanni</li>
+        <li>Melollevo Paracasa</li>
+        <li>Merci Natural</li>
+        <li>Meta</li>
+        <li>Metáfora</li>
+        <li>Mi Suelito Lindo</li>
+        <li>Miel Nativa</li>
+        <li>Mimiya Morell</li>
+        <li>Mita y Mita</li>
+        <li>Mona</li>
+        <li>Mono Bono</li>
+        <li>Mostra</li>
+        <li>MoYaNá</li>
+        <li>Mucho Antojo</li>
+        <li>Mundo Blanco</li>
+        <li>Muy Bonito</li>
+        <li>N&amp;G Sé Diferente</li>
+        <li>Nami Herramientas Creativas</li>
+        <li>Nativas</li>
+        <li>Naturalito</li>
+        <li>Nido</li>
+        <li>Niños Magicos</li>
+        <li>Nítida</li>
+        <li>Nommada</li>
+        <li>Olivia Tejidos</li>
+        <li>Origen Nativo</li>
+        <li>Pastiche</li>
+        <li>Paz Ayuso</li>
+        <li>Petrabuona Concreto</li>
+        <li>Pippa</li>
+        <li>Posdata</li>
+        <li>Prego</li>
+        <li>Preta</li>
+        <li>Proyecto AY</li>
+        <li>Pukavy</li>
+        <li>Rømu</li>
+        <li>Raíces Nuestras</li>
+        <li>Rebe</li>
+        <li>Rebrote Cerámica</li>
+        <li>Remeras Asesinas</li>
+        <li>Rina</li>
+        <li>Rita Porcelana</li>
+        <li>RockandPola</li>
+        <li>Romina Hereñu</li>
+        <li>Sanarte Arte Cuero</li>
+        <li>Sangría</li>
+        <li>Santa Brisa</li>
+        <li>Santaceramica</li>
+        <li>Santina Cueros</li>
+        <li>Sayen Diseños en Madera</li>
+        <li>Séquito Gin</li>
+        <li>Shatmoo</li>
+        <li>Sheru</li>
+        <li>Shiva Velas</li>
+        <li>Silvestre</li>
+        <li>Sol de Abril</li>
+        <li>Somosqenti</li>
+        <li>Suri</li>
+        <li>Tablargentina</li>
+        <li>Takini</li>
+        <li>Tatan Enfans</li>
+        <li>Táurea</li>
+        <li>Té con Limón</li>
+        <li>Te Cuento</li>
+        <li>Tejiendo Sueños Santa Fe</li>
+        <li>Telar del Rio</li>
+        <li>Terra Lontana</li>
+        <li>Tila Cosmética</li>
+        <li>Tinna Bags</li>
+        <li>Tova</li>
+        <li>Trama</li>
+        <li>Tramando Sueños</li>
+        <li>Tramoya</li>
+        <li>Tremo</li>
+        <li>Utresd</li>
+        <li>Vestite (Sabelero/Tatengue)</li>
+        <li>Vola Estudio</li>
+        <li>Vytra Vitrofusion</li>
+        <li>York</li>
+        <li>Zeppelin Puzzles</li>
+    </ul>
+
+    <h3 class="fd-lista-titulo">Marcas suplentes <span>20 · en orden de convocatoria</span></h3>
+    <p class="fd-nota">Si un proyecto titular desiste, la vacante se cubre respetando este orden.</p>
+    <ol class="fd-marcas fd-suplentes" data-buscable>
+        <li data-n="1">MB Mascotas y Deco</li>
+        <li data-n="2">Don Hilario Regionales</li>
+        <li data-n="3">Dínamo Ediciones</li>
+        <li data-n="4">Eloisa Tachas</li>
+        <li data-n="5">La Maison de Teté</li>
+        <li data-n="6">Iskabech</li>
+        <li data-n="7">Pura Luz</li>
+        <li data-n="8">Celestino</li>
+        <li data-n="9">Caprichos de Mar</li>
+        <li data-n="10">Alma Vajilla de Autor</li>
+        <li data-n="11">Arte con Maderas</li>
+        <li data-n="12">JugArte Madera</li>
+        <li data-n="13">Calma Esencia</li>
+        <li data-n="14">Pipetua Accesorios</li>
+        <li data-n="15">Astromelia Deco</li>
+        <li data-n="16">Digopunto</li>
+        <li data-n="17">Expresión Botánica</li>
+        <li data-n="18">Gabi Creaciones</li>
+        <li data-n="19">Zaffira</li>
+        <li data-n="20">Mundo Fungi</li>
+    </ol>
+  </section>
+
+  <section class="fd-seccion" aria-labelledby="fd-pdfs-titulo">
+    <h2 class="fd-titulo" id="fd-pdfs-titulo">Documentación oficial · Ciclo 2026/2027</h2>
+    <div class="fd-texto">
+      <p>Lineamientos de participación, criterios de evaluación, normativa vigente y lo necesario para presentar proyectos. Corresponde a la convocatoria 2026/2027, que selecciona los proyectos de la Edición Diciembre 2026 y la Edición Invierno 2027.</p>
+    </div>
+    <div class="fd-pdfs">
+      <a class="fd-pdf fd-vidrio" href="https://santafeciudad.gov.ar/wp-content/uploads/2026/05/lineamientos-dsn.pdf" target="_blank" rel="noopener"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-pdf"></use></svg><h3>Lineamientos</h3><p>Condiciones generales de participación, criterios de selección y funcionamiento del festival.</p><span class="fd-meta">PDF · 04/05/2026</span></a>
+      <a class="fd-pdf fd-vidrio" href="https://santafeciudad.gov.ar/wp-content/uploads/2026/05/carpeta-dsn.pdf" target="_blank" rel="noopener"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-pdf"></use></svg><h3>Carpeta de presentación</h3><p>Modelo y requisitos para presentar proyectos y completar la postulación.</p><span class="fd-meta">PDF · 04/05/2026</span></a>
+      <a class="fd-pdf fd-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/00046-2026-completo-BEM-y-DIDI.pdf" target="_blank" rel="noopener"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-pdf"></use></svg><h3>Decreto 46/26</h3><p>Aspectos organizativos y administrativos de la edición vigente.</p><span class="fd-meta">PDF · 04/05/2026</span></a>
+      <a class="fd-pdf fd-vidrio" href="https://santafeciudad.gov.ar/wp-content/uploads/2026/05/ORDE_12656.pdf" target="_blank" rel="noopener"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-pdf"></use></svg><h3>Ordenanza de creación del festival</h3><p>Marco normativo que institucionaliza el festival y crea la Mesa de Diseño Santafesino.</p><span class="fd-meta">PDF · 04/05/2026</span></a>
+      <a class="fd-pdf fd-vidrio" href="https://santafeciudad.gov.ar/wp-content/uploads/2026/05/Ordenanza-12326.pdf" target="_blank" rel="noopener"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-pdf"></use></svg><h3>Ordenanza Área Metropolitana</h3><p>Normativa de integración regional y articulación metropolitana.</p><span class="fd-meta">PDF · 04/05/2026</span></a>
+      <a class="fd-pdf fd-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/Reglamento-de-Ferias.pdf" target="_blank" rel="noopener"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-pdf"></use></svg><h3>Reglamento de ferias</h3><p>Normas generales de funcionamiento, convivencia y participación en las ferias.</p><span class="fd-meta">PDF · 04/05/2026</span></a>
+      <a class="fd-pdf fd-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/09/festivalDisenaActaJurados2026_2027.pdf" target="_blank" rel="noopener"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-pdf"></use></svg><h3>Seleccionados</h3><p>Acta de actuación de jurados del ciclo 2026/2027, con los criterios de evaluación y los listados de marcas.</p><span class="fd-meta">PDF · 25/09/2026</span></a>
+    </div>
+  </section>
+
+  <p class="fd-cierre">¿Ya leíste la documentación? <a href="/capitalcultural/festivaldisena/formaciones/">Conocé las formaciones del ciclo</a></p>
+</div>
+
+<script>
+  (function () {
+    var campo = document.getElementById('fd-buscar-marca');
+    var aviso = document.getElementById('fd-buscar-resultado');
+    var items = document.querySelectorAll('.fd-docs [data-buscable] li');
+    function plano(t) { return t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+    campo.addEventListener('input', function () {
+      var q = plano(campo.value.trim()), n = 0;
+      items.forEach(function (li) {
+        var ok = !q || plano(li.textContent).indexOf(q) > -1;
+        li.hidden = !ok;
+        if (ok) n++;
+      });
+      aviso.textContent = q ? (n ? n + (n === 1 ? ' marca coincide.' : ' marcas coinciden.') : 'Ninguna marca coincide.') : '';
+    });
+  })();
+</script>

@@ -51,6 +51,11 @@ Decisiones tomadas:
 | `sitio-nuevo/centro-cultural-municipal.html` | **Centro Cultural Municipal**: texto, los dos espacios (Biblioteca Muttis y Fotogalería) y el shortcode `[ccmunicipal]` con 50 px abajo. Widget HTML entero |
 | `sitio-nuevo/biblioteca-muttis.html` | **Biblioteca Profesor Enrique Muttis**: texto, botón al catálogo, datos de visita, servicios, cómo asociarse, colección e historia, con datos estructurados `Library` de schema.org. Widget HTML entero |
 | `sitio-nuevo/fichas-memorias-feministas.html` | El código de las 13 fichas de baldosas, con *Copiar código* y vista previa. Abrilo en el navegador |
+| `sitio-nuevo/festival-disena-comun.html` | **Festival Diseña, bloque común**: Encode Sans variable (única tipografía), estilos `.fd`, menú de la sección e íconos. Primer widget HTML de las cuatro páginas |
+| `sitio-nuevo/festival-disena-inicio.html` | **Festival Diseña, inicio**: hero con la foto en tamaño 1536, cifras, ciclo en cinco pasos, galería en mosaico con visor y video que carga YouTube al tocar play |
+| `sitio-nuevo/festival-disena-trayectoria.html` | **Festival Diseña, Historia y Trayectoria**: datos clave, línea de hitos, rubros, herramientas de apoyo y Expresiva |
+| `sitio-nuevo/festival-disena-formaciones.html` | **Festival Diseña, Formaciones**: ciclo en curso, archivo de clínicas plegado por año y los 15 disertantes con iniciales y CV en ventana |
+| `sitio-nuevo/festival-disena-docs.html` | **Festival Diseña, Documentación Oficial**: las 220 marcas seleccionadas con buscador y los siete PDF |
 
 ### Huellas de mi Ciudad: lo que queda a mano
 
@@ -71,6 +76,27 @@ Decisiones tomadas:
 - **Los datos de contacto vienen de la ficha de la Red de Bibliotecas** y no tienen correo. La Fotogalería publica otro horario (lunes a viernes de 8 a 20): confirmar cuál es el de la biblioteca antes de publicar. El horario también está en el JSON-LD del final del código, así que hay que cambiarlo en los dos lugares.
 - **La dirección es Primera Junta 2451**, confirmada. Wikipedia y la Red de Bibliotecas todavía dicen Cortada Falucho 2450: el edificio da a las dos calles.
 - **La historia del edificio** sale de la nota de UNO Santa Fe del 11/09/2020 sobre el acondicionamiento de la sala de las bóvedas, y la de Muttis, de Wikipedia. No se encontró año de construcción ni arquitecto del Banco Municipal.
+
+### Festival Diseña: cómo se carga y lo que queda a mano
+
+- **En cada una de las cuatro páginas** de `/festivaldisena/` hay cinco widgets HTML: header, menú, tarjetas e íconos, contenido y footer. El menú se reemplaza por `festival-disena-comun.html`, el de tarjetas e íconos se borra y el de contenido se reemplaza por el archivo de la página. Header y footer no se tocan.
+- **El nombre es «Festival Diseña»**, y «Festival Diseña Santa Fe» donde hace falta el lugar. La pestaña sale del *Título SEO* de Yoast, cargado el 28/10/2026 en las cuatro páginas (con la meta descripción de inicio, que decía «La Diseña»):
+  - Inicio: `Festival Diseña Santa Fe`
+  - `Historia y Trayectoria · Festival Diseña Santa Fe`
+  - `Formaciones · Festival Diseña Santa Fe`
+  - `Documentación Oficial · Festival Diseña Santa Fe`
+- **El peso de la home baja de ~25 MB a menos de 1 MB.** El visor de la galería cargaba los diez originales (1,8 a 2,6 MB cada uno) aunque nadie lo abriera, y el hero usaba otro original de 2,1 MB. Ahora el hero usa los tamaños de WordPress (768 a 1536), las fotos del visor se bajan al abrirlo y YouTube carga al tocar play.
+- **Lo que queda del lado de WordPress** —afecta a todo el sitio, probarlo en otras páginas antes—:
+  - *Elementor → Ajustes del sitio → Tipografía*: las fuentes globales piden Alegreya Sans, Andada Pro y Rubik, que no se usan, y Encode Sans dos veces con 18 variantes. Pasarlas todas a Encode Sans.
+  - *Elementor → Ajustes → Funciones*: activar *Inline Font Icons*. Hoy se cargan tres hojas de Font Awesome y dos veces eicons sin ningún ícono en la página.
+  - *Elementor → Ajustes del sitio → Tipografía → Enlaces*: el color de hover es el verde `#12cb8e` (`.elementor-kit-2577 a:hover`) y pinta de verde los links de todo el sitio. Las páginas del festival lo pisan; pasarlo a Azul 01 lo arregla en todas.
+  - El HTML no se guarda en caché: Cloudflare responde `DYNAMIC`. Hace falta un plugin de caché de página (se instala por ZIP) o APO de Cloudflare.
+- **Geologica sigue en el header**, sólo en la palabra «CULTURA» del logo. Es el header de todo el sitio (`sitio-nuevo/header.html`); si también ahí va Encode Sans, se cambia en ese archivo.
+- **Disertantes sin foto.** LinkedIn no muestra perfiles ni fotos sin iniciar sesión, así que van con iniciales sobre celeste. Lo correcto es pedirles la foto a cada uno, con permiso de uso. Para sumarla: subirla a Medios y reemplazar su `<span class="fd-avatar">` por `<img class="fd-avatar" src="…" width="192" height="192" loading="lazy" alt="">`.
+- **Rosario Kerz no tiene CV publicado.** Se sacó el *Ver CV* que llevaba a un texto de relleno; cuando esté, se suma el enlace y su ventana como en los demás.
+- **El menú ya no queda fijo al bajar.** No lo hacía antes, porque estaba en un widget propio y `position: sticky` no sale de su contenedor, y además quedaba debajo del header fijo.
+- **Cambios de texto:** el hero ya no repite «Festival Diseña es…», porque el título de la página lo dice justo arriba. «¿Tenés una marca? Cómo participar» lleva a Documentación Oficial, donde están los lineamientos, y no a Formaciones.
+- **Confirmar los hitos:** «2017, 10 años» y «2022, 15 años» no cierran con una primera edición en 2008. Cierran si se cuentan ediciones (10.ª y 15.ª), no años.
 
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
 

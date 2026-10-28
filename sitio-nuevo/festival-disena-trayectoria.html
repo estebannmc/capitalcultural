@@ -1,0 +1,119 @@
+<style>
+  .fd-trayectoria { display: grid; gap: clamp(56px, 8vw, 88px); padding-block: 0 50px; }
+
+  .fd-bloque { display: grid; gap: clamp(18px, 2.4vw, 26px); }
+  .fd-bloque > .fd-titulo { margin-bottom: 0; }
+  .fd-dos { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+
+  .fd-datos { padding: clamp(20px, 3.4vw, 40px); }
+  .fd-datos dl { display: grid; gap: 1.1em; padding-left: clamp(20px, 3vw, 32px); border-left: 3px solid var(--celeste); }
+  .fd-datos dt { font-size: .78em; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  .fd-datos dd { font-size: 1.05em; font-weight: 600; line-height: 1.4; }
+
+  .fd .fd-hitos { position: relative; display: grid; gap: 18px; padding-block: 6px; }
+  .fd-hitos::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; translate: -1.5px 0; border-radius: 2px; background: linear-gradient(180deg, var(--celeste), var(--azul)); }
+  .fd-hito { position: relative; display: grid; gap: .25em; width: 50%; padding-right: clamp(28px, 4vw, 48px); text-align: right; }
+  .fd-hito:nth-child(even) { margin-left: 50%; padding-right: 0; padding-left: clamp(28px, 4vw, 48px); text-align: left; }
+  .fd-hito::before {
+    content: ""; position: absolute; top: .55em; right: -9px; width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; box-shadow: inset 0 0 0 4px var(--azul);
+  }
+  .fd-hito:nth-child(even)::before { right: auto; left: -9px; }
+  .fd-hito-anio { font-size: clamp(1.8em, 3.4vw, 2.4em); font-weight: 800; font-stretch: 75%; line-height: 1; }
+  .fd-hito p { color: var(--gris-75); font-size: 1em; line-height: 1.45; }
+
+  .fd .fd-rubros { padding: 8px clamp(24px, 3.6vw, 44px); }
+  .fd-rubro { display: grid; grid-template-columns: 28px minmax(0, 15em) minmax(0, 1fr); gap: clamp(16px, 2.4vw, 32px); align-items: start; padding-block: 24px; }
+  .fd-rubro + .fd-rubro { border-top: 1px solid var(--gris-20); }
+  .fd-rubro .fd-icono { margin-top: -2px; }
+  .fd-rubro h3 { font-size: 1.12em; font-weight: 700; line-height: 1.25; }
+  .fd-rubro p { font-size: 1em; line-height: 1.5; }
+
+  .fd-expresiva-logo { display: block; overflow: hidden; border-radius: 8px; }
+  .fd-expresiva-logo img { width: 100%; }
+
+  @media (max-width: 860px) {
+    .fd-dos { grid-template-columns: minmax(0, 1fr); }
+    .fd-rubro { grid-template-columns: 28px minmax(0, 1fr); row-gap: .35em; }
+    .fd-rubro p { grid-column: 2; }
+    .fd-expresiva-logo { max-width: 320px; }
+    .fd-hitos::before { left: 9px; }
+    .fd-hito, .fd-hito:nth-child(even) { width: auto; margin-left: 0; padding: 0 0 0 40px; text-align: left; }
+    .fd-hito::before, .fd-hito:nth-child(even)::before { right: auto; left: 0; }
+  }
+</style>
+
+<div class="fd fd-trayectoria">
+  <p class="fd-lead">El recorrido del Festival Diseña desde su primera edición en 2008 hasta hoy: los hitos de su crecimiento, los rubros que reúne cada año y el rol de Expresiva, la incubadora que acompaña a los emprendimientos culturales santafesinos. Una mirada al festival como política pública de diseño y economía creativa.</p>
+
+  <section class="fd-bloque fd-datos fd-vidrio" aria-labelledby="fd-datos-titulo">
+    <h2 class="fd-titulo" id="fd-datos-titulo">Datos clave del festival</h2>
+    <div class="fd-dos">
+      <div class="fd-texto">
+        <p>El Festival Diseña lo organiza la Secretaría de Cultura de la Municipalidad de Santa Fe. Su sede principal es, histórica y actualmente, el Centro de Convenciones Estación Belgrano, en sus andenes y en su planta alta; las primeras ediciones se hicieron en el Predio Ferial.</p>
+        <p>Aunque prioriza el talento local de Santa Fe capital y del área metropolitana, es un referente de diseño en la Región Centro: Santa Fe, Entre Ríos y Córdoba.</p>
+      </div>
+      <dl>
+        <div><dt>Organiza</dt><dd>Secretaría de Cultura, Municipalidad de Santa Fe</dd></div>
+        <div><dt>Sede</dt><dd>Centro de Convenciones Estación Belgrano</dd></div>
+        <div><dt>Ediciones</dt><dd>Diciembre (navideña o de verano) y, con frecuencia, una de invierno en julio</dd></div>
+        <div><dt>Entrada</dt><dd>Libre y gratuita</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="fd-bloque" aria-labelledby="fd-hitos-titulo">
+    <h2 class="fd-titulo" id="fd-hitos-titulo">Línea de hitos</h2>
+    <ol class="fd-hitos">
+      <li class="fd-hito"><span class="fd-hito-anio">2008</span><p>Nacimiento del evento. Primeras ediciones en el Predio Ferial.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2010</span><p>Se consolida como política pública. Edición navideña o de verano.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2010–2017</span><p>La Estación Belgrano se convierte en sede principal.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2016</span><p>271 marcas y más de 500 diseñadores.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2017</span><p>10 años del festival y expansión regional.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2018</span><p>Récord de visitantes y ordenanza municipal.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2022</span><p>Celebración de los 15 años.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2024</span><p>Regreso de las mentorías y clínicas presenciales.</p></li>
+      <li class="fd-hito"><span class="fd-hito-anio">2025</span><p>Foco en sustentabilidad e innovación.</p></li>
+    </ol>
+  </section>
+
+  <section class="fd-bloque" aria-labelledby="fd-rubros-titulo">
+    <h2 class="fd-titulo" id="fd-rubros-titulo">Rubros y enfoque</h2>
+    <p class="fd-texto">El festival es una gran muestra de diseño y emprendimiento que promueve la producción local y sustentable, con una fuerte impronta local e identidad cultural. Estos son los rubros de participación.</p>
+    <ul class="fd-rubros fd-vidrio">
+      <li class="fd-rubro"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-shirt"></use></svg><h3>Indumentaria y textil</h3><p>Confección, intervención, estampado y tejido de prendas para personas y mascotas.</p></li>
+      <li class="fd-rubro"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-bag"></use></svg><h3>Accesorios y complementos</h3><p>Joyería, sombreros, calzado y accesorios portables como bolsos, billeteras, mochilas y valijas.</p></li>
+      <li class="fd-rubro"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-lamp"></use></svg><h3>Objetos y mobiliario</h3><p>Iluminación, muebles, utilitarios, juegos, objetos editoriales, decoración y equipamiento para el hogar.</p></li>
+      <li class="fd-rubro"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-monitor"></use></svg><h3>Comunicación multisoporte</h3><p>Diseño gráfico, editoriales y sellos discográficos, producción de contenidos, realidad aumentada y virtual, videojuegos e impresión 3D.</p></li>
+      <li class="fd-rubro"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-leaf"></use></svg><h3>Almacén natural</h3><p>Alimentación saludable, bienestar y cosmética: cuidado corporal, perfumería, esencias, sahumerios, velas y alimentos gourmet envasados con identidad estética.</p></li>
+    </ul>
+  </section>
+
+  <section class="fd-bloque" aria-labelledby="fd-apoyo-titulo">
+    <h2 class="fd-titulo" id="fd-apoyo-titulo">Herramientas de apoyo</h2>
+    <p class="fd-texto">El festival va más allá de la exposición y la venta: funciona como un espacio de desarrollo para quienes emprenden.</p>
+    <div class="fd-tarjetas fd-tarjetas--2">
+      <a class="fd-tarjeta fd-vidrio" href="/capitalcultural/festivaldisena/formaciones/"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-graduation"></use></svg><h3>Formación</h3><p>Clínicas, mentorías y talleres a cargo de especialistas, para profesionalizar los emprendimientos en diseño, estrategias y modelos de negocio.</p><span class="fd-flecha">Ver formaciones</span></a>
+      <div class="fd-tarjeta fd-vidrio"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-seed"></use></svg><h3>Incubación</h3><p>Trabaja junto a Expresiva, la incubadora de emprendimientos de base cultural de la UNL y la Municipalidad, que selecciona, capacita e impulsa muchos de los proyectos participantes.</p></div>
+      <div class="fd-tarjeta fd-vidrio"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-mappin"></use></svg><h3>Expansión</h3><p>En algunas ediciones hubo rondas de negocios con tiendas nacionales —INKA, La Virilo y KOI, entre otras— para abrir canales de venta en todo el país.</p></div>
+      <div class="fd-tarjeta fd-vidrio"><svg class="fd-icono" aria-hidden="true"><use href="#fd-i-search"></use></svg><h3>Criterios de selección</h3><p>Innovación en diseño, impronta local, sustentabilidad y circularidad, y vínculo con la historia y la cultura.</p></div>
+    </div>
+  </section>
+
+  <section class="fd-bloque" aria-labelledby="fd-expresiva-titulo">
+    <h2 class="fd-titulo" id="fd-expresiva-titulo">El rol de Expresiva</h2>
+    <div class="fd-dos">
+      <div class="fd-texto">
+        <p>En el festival se destaca la participación de proyectos de Expresiva, la Incubadora de Emprendimientos Culturales de Santa Fe, que gestionan juntas la Municipalidad y la Universidad Nacional del Litoral (UNL). Esos proyectos tienen espacios propios dentro del evento, con marcas en distintas etapas: preincubadas, incubadas y egresadas.</p>
+        <p>Expresiva acerca a quienes emprenden formación, capacitación y apoyo técnico, e incluso acceso a financiamiento de la universidad, equipamiento cultural y promoción por parte del gobierno local.</p>
+        <p>Las «empresas de base cultural» son los sectores que producen y distribuyen bienes y servicios cuyo valor económico deriva de su valor cultural: más de treinta subsectores, como editorial, audiovisual, fonográfico, diseño, multimedia, software, artes visuales y escénicas.</p>
+        <p>Como toda incubadora, detecta ideas o proyectos en sus primeras etapas y los acompaña con los métodos habituales de incubación de empresas, atendiendo a las particularidades de los ambientes culturales. Se ingresa por una convocatoria anual.</p>
+      </div>
+      <a class="fd-expresiva-logo" href="https://www.unl.edu.ar/vinculacion/incubadora-expresiva/" target="_blank" rel="noopener">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/00-botones-web-16.jpg" width="598" height="319" loading="lazy" decoding="async" alt="Expresiva, Incubadora de Emprendimientos Culturales de Santa Fe (abre el sitio de la UNL)">
+      </a>
+    </div>
+  </section>
+
+  <p class="fd-cierre">El Festival Diseña se convirtió en un motor de la economía creativa santafesina y en un atractivo turístico en las épocas en que se realiza. <a href="/capitalcultural/festivaldisena/formaciones/">Conocé las formaciones</a></p>
+</div>
