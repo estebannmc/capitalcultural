@@ -1,0 +1,294 @@
+<style>
+  .fd-formaciones { display: grid; gap: clamp(56px, 8vw, 88px); padding-block: 0 50px; }
+  .fd-en-curso { display: grid; gap: 1em; padding: clamp(18px, 3vw, 32px); }
+  .fd-en-curso .fd-titulo { margin-bottom: 0; }
+  .fd-etiqueta { display: inline-block; width: fit-content; padding: 4px 10px; border-radius: 6px; background: var(--celeste); color: var(--azul); font-size: .85em; font-weight: 700; }
+
+  .fd-anios { display: grid; gap: 12px; }
+  .fd-anio > summary {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 16px;
+    padding: clamp(16px, 2.4vw, 22px) clamp(18px, 2.4vw, 26px); cursor: pointer; list-style: none;
+  }
+  .fd-anio > summary::-webkit-details-marker { display: none; }
+  .fd-anio > summary h3 { font-size: clamp(1.15em, 2vw, 1.35em); font-weight: 700; line-height: 1.2; }
+  .fd-anio-desc { grid-column: 1; color: var(--gris-75); font-size: .95em; line-height: 1.45; }
+  .fd-anio > summary::after {
+    content: ""; grid-column: 2; grid-row: 1 / span 2; width: 12px; height: 12px; margin-right: 6px;
+    border-right: 3px solid var(--rojo); border-bottom: 3px solid var(--rojo);
+    transform: translateY(-3px) rotate(45deg); transition: transform .25s ease;
+  }
+  .fd-anio[open] > summary::after { transform: translateY(3px) rotate(-135deg); }
+  .fd-anio-cuerpo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 32px); padding: 4px clamp(18px, 2.4vw, 26px) clamp(20px, 3vw, 28px); }
+
+  .fd-clinica { display: grid; grid-row: span 4; grid-template-rows: subgrid; align-content: start; row-gap: .45em; padding-top: 14px; border-top: 3px solid var(--celeste); }
+  .fd-clinica h4 { font-size: 1.05em; font-weight: 700; line-height: 1.3; }
+  .fd-clinica .fd-autor { color: var(--gris-75); font-size: .95em; line-height: 1.4; }
+  .fd-mas > summary { display: inline-flex; align-items: center; gap: 8px; width: fit-content; cursor: pointer; list-style: none; font-size: .95em; font-weight: 600; }
+  .fd-mas > summary::-webkit-details-marker { display: none; }
+  .fd-mas > summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid var(--rojo); border-bottom: 2px solid var(--rojo); transform: translateY(-2px) rotate(45deg); transition: transform .2s ease; }
+  .fd-mas[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+  .fd-mas p { margin-top: .5em; font-size: .97em; line-height: 1.55; }
+  .fd .fd-ver-video { display: inline-flex; align-items: center; gap: 8px; width: fit-content; color: var(--azul); font-size: .95em; font-weight: 600; text-decoration: none; }
+  .fd-ver-video svg { width: 26px; height: 26px; padding: 6px; border-radius: 5px; background: var(--rojo); color: #fff; }
+  .fd-ver-video:hover span { text-decoration: underline; text-decoration-color: var(--rojo); text-decoration-thickness: 2px; text-underline-offset: .22em; }
+
+  .fd-disertantes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 18px); }
+  .fd-disertante { display: flex; flex-direction: column; align-items: center; gap: .5em; padding: clamp(18px, 2.4vw, 24px); text-align: center; }
+  .fd .fd-avatar {
+    display: grid; place-items: center; width: 96px; height: 96px; margin-bottom: .35em; border-radius: 50%;
+    background: var(--celeste); color: var(--azul); object-fit: cover;
+    font-size: 2em; font-weight: 800; font-stretch: 75%; letter-spacing: .02em;
+  }
+  .fd-disertante h3 { font-size: 1.08em; font-weight: 700; line-height: 1.25; }
+  .fd-disertante p { color: var(--gris-75); font-size: .93em; line-height: 1.45; }
+  .fd .fd-ver-cv { margin-top: auto; padding-top: .35em; color: var(--azul); font-size: .95em; font-weight: 600; text-decoration: underline; text-decoration-color: var(--rojo); text-decoration-thickness: 2px; text-underline-offset: .22em; }
+
+  .fd-cv { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; padding: 20px; background: rgba(0, 39, 81, .6); }
+  .fd-cv:target { display: flex; }
+  .fd-cv-fondo { position: absolute; inset: 0; cursor: zoom-out; }
+  .fd-cv-caja { position: relative; display: grid; gap: .9em; width: 100%; max-width: 620px; max-height: 85vh; overflow-y: auto; padding: clamp(24px, 4vw, 36px); border-radius: 8px; background: #fff; }
+  .fd-cv-caja h3 { padding-right: 40px; font-size: 1.35em; font-weight: 700; }
+  .fd-cv-caja p { font-size: 1em; line-height: 1.6; }
+  .fd .fd-cv-cerrar { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 6px; color: var(--azul); font-size: 28px; line-height: 1; text-decoration: none; }
+  .fd .fd-cv-cerrar:hover { background: rgba(87, 184, 233, .2); }
+
+  @media (max-width: 860px) {
+    .fd-anio-cuerpo { grid-template-columns: minmax(0, 1fr); }
+    .fd-disertantes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .fd-disertantes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fd-disertante { padding: 16px 12px; }
+  }
+</style>
+
+<div class="fd fd-formaciones">
+  <p class="fd-lead">Una vez cerrada la selección de proyectos, quienes quedaron seleccionados participan de tres clínicas obligatorias como parte del acompañamiento previo a la Edición Diciembre.</p>
+
+  <section class="fd-en-curso fd-vidrio" aria-labelledby="fd-curso-titulo">
+    <span class="fd-etiqueta">En curso</span>
+    <h2 class="fd-titulo" id="fd-curso-titulo">Ciclo 2026/2027</h2>
+    <div class="fd-texto">
+      <p>Se harán 26 encuentros presenciales de clínicas, a cargo de Germán Lang y Miranda Mayer. El detalle de los talleres y las charlas del ciclo va a estar disponible próximamente.</p>
+      <p>Las clínicas son espacios de asesoramiento personalizado para fortalecer emprendimientos de diseño y producción creativa. En encuentros con especialistas, los participantes reciben herramientas, orientación y devoluciones sobre gestión, comercialización, comunicación, identidad de marca, producción y desarrollo de sus proyectos.</p>
+      <p>Con una lógica parecida a la de una consultoría de marca, buscan alinear la identidad de cada emprendimiento con sus productos, servicios y canales de comunicación, para construir propuestas sólidas que transmitan un mensaje claro, se diferencien en el mercado y crezcan comercialmente.</p>
+      <p>Ya están los resultados de la convocatoria de este ciclo: <a href="/capitalcultural/festivaldisena/docs/#seleccionados">ver las marcas seleccionadas</a>.</p>
+    </div>
+  </section>
+
+  <section class="fd-seccion" aria-labelledby="fd-archivo-titulo">
+    <h2 class="fd-titulo" id="fd-archivo-titulo">Archivo de clínicas</h2>
+    <p class="fd-texto">A lo largo de las ediciones, profesionales del sector trabajaron sobre innovación y diseño, el uso de materiales locales, la sustentabilidad, la proyección en el territorio y la relación con nuestra historia y cultura.</p>
+
+    <div class="fd-anios">
+      <details class="fd-anio fd-vidrio" id="clinicas-2025-2026" open>
+        <summary><h3>Clínicas 2025 – 2026</h3><span class="fd-anio-desc">25 encuentros de consultoría de marca y producto, 2 charlas y 2 talleres.</span></summary>
+        <div class="fd-anio-cuerpo">
+          <article class="fd-clinica">
+            <h4>Clínicas: 25 encuentros</h4>
+            <p class="fd-autor">A cargo de Germán Lang, Lautaro García y Miranda Mayer.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Veinticinco encuentros presenciales de consultoría de marca y producto con los mentores del ciclo.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Charla I: «Estrategia, contenidos y agenda de marketing para vender»</h4>
+            <p class="fd-autor">A cargo de Daiana Pozzi y Lely Brito (agencia Pozzi).</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Una charla práctica para emprendedores que buscan potenciar su presencia y sus ventas, en las redes y en las ferias. Parte de un enfoque estratégico para definir la identidad y la percepción de la marca, y avanza hacia la creación de contenidos atractivos, con herramientas simples para organizar una agenda de marketing digital clara y realista.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Charla II: «Vendé con magia»</h4>
+            <p class="fd-autor">A cargo de Carla Repetto.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Una invitación a comunicar desde la emoción y la autenticidad. Propone estrategias de venta accesibles y adaptables a distintos contextos —ferias, redes, tiendas o chat—, una guía práctica para vender productos creativos, ejercicios para contar la propia historia y recursos para usar la inteligencia artificial en la creación de textos, publicaciones y mensajes sin perder la voz propia.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Taller I: «La imagen publicitaria como comunicación eficiente»</h4>
+            <p class="fd-autor">A cargo de Gustavo Arellaga.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Realizador audiovisual, fotógrafo y editor con más de 15 años de experiencia en producción de contenidos para empresas, productoras y eventos. Especializado en fotografía, videografía, edición profesional y operación de drones, trabajó junto a marcas reconocidas, agencias de marketing y productoras de espectáculos, y fue docente de fotografía en organismos públicos y espacios de formación.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Taller II: «Armado de stand y espacios de venta con identidad de marca»</h4>
+            <p class="fd-autor">A cargo de Martín Escape (FEDRO).</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Cofundador y director de FEDRO, emprendimiento de diseño y cerámica artesanal de Santa Fe. Cuenta con una sólida trayectoria en gestión comercial, posicionamiento de marca y desarrollo de productos pintados a mano, y lideró la expansión federal de la firma a través de incubadoras regionales y ferias de diseño.</p></details>
+          </article>
+        </div>
+      </details>
+
+      <details class="fd-anio fd-vidrio" id="clinicas-2024-2025">
+        <summary><h3>Clínicas 2024 – 2025</h3><span class="fd-anio-desc">18 encuentros de asesoramiento personalizado, 3 charlas y 1 taller.</span></summary>
+        <div class="fd-anio-cuerpo">
+          <article class="fd-clinica">
+            <h4>Clínicas: 18 encuentros</h4>
+            <p class="fd-autor">A cargo de Germán Lang, Moriana Abraham y Miranda Mayer.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Espacios de asesoramiento personalizado destinados a fortalecer emprendimientos de diseño y producción creativa. Con una lógica similar a la de una consultoría de marca, los encuentros aportaron herramientas, orientación y devoluciones específicas sobre gestión, comercialización, comunicación, identidad de marca, producción y desarrollo de cada proyecto, buscando alinear la identidad de cada emprendimiento con sus productos, servicios y canales de comunicación.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Charla I: «Diseño de futuros: creación de escenarios y estrategias para transformar la realidad»</h4>
+            <p class="fd-autor">A cargo de Laura Novik.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Especialista en diseño de futuros sostenibles, estrategia e innovación, con más de 30 años acompañando procesos de transformación en organizaciones de América Latina. Cofundadora de Blink Design Consulting y Raíz Diseño, dirige el Laboratorio Futuros de la Universidad Atlántida Argentina y es una referente latinoamericana en diseño estratégico y transformación organizacional.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Charla II: «Comunicación en redes sociales»</h4>
+            <p class="fd-autor">A cargo de María Celeste Nasimbera.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Periodista especializada en comunicación, medios digitales y tendencias, con amplia experiencia en contenidos para la industria del diseño y la moda. Lidera el área digital de L'Officiel Argentina, elabora informes para el Observatorio de Tendencias del INTI y creó Crónicas de Moda, medio dedicado a la difusión del diseño argentino contemporáneo.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Charla III: «Comunicación estratégica para empresas a escala humana»</h4>
+            <p class="fd-autor">A cargo de la agencia Pozzi.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Estudio de diseño estratégico e innovación con más de 17 años de trayectoria, especializado en el desarrollo de soluciones creativas para organizaciones y marcas. Su práctica combina pensamiento estratégico, innovación y colaboración interdisciplinaria, impulsando procesos de transformación con una mirada contemporánea.</p></details>
+          </article>
+          <article class="fd-clinica">
+            <h4>Taller I: «Armado de stand y espacios de venta con identidad de marca»</h4>
+            <p class="fd-autor">A cargo de Martín Escape (FEDRO).</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Cofundador y director de FEDRO, emprendimiento de diseño y cerámica artesanal de Santa Fe. Cuenta con una sólida trayectoria en gestión comercial, posicionamiento de marca y desarrollo de productos pintados a mano, y lideró la expansión federal de la firma a través de incubadoras regionales y ferias de diseño.</p></details>
+          </article>
+        </div>
+      </details>
+
+      <details class="fd-anio fd-vidrio" id="clinicas-2023-2024">
+        <summary><h3>Clínicas 2023 – 2024</h3><span class="fd-anio-desc">El proyecto de diseño, el diseño contemporáneo y la artesanía. Con video.</span></summary>
+        <div class="fd-anio-cuerpo">
+          <article class="fd-clinica">
+            <h4>Clínica I: «El proyecto de diseño»</h4>
+            <p class="fd-autor">A cargo de Rosario Kerz.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>El objetivo de esta clínica es, retomando el concepto de «proceso creativo» desarrollado en la edición pasada, repensar el itinerario de creación de productos de diseño, lo que se conoce como proyecto de diseño. El proyecto de diseño es el camino que todo diseñador realiza, al encontrar una necesidad y buscar una solución mediante el desarrollo de un objeto concreto. Alcanzar las instancias finales en un proyecto de diseño implica atravesar una serie de etapas, desde la identificación de necesidades concretas hasta su concreción. Esta clínica se propone abordar lo que significa desarrollar un proyecto de diseño y sus etapas, y la importancia de estos para conseguir un diseño exitoso.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=IXj0mK0P4R4" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+          <article class="fd-clinica">
+            <h4>Clínica II: «El diseño contemporáneo y sus posibles prácticas»</h4>
+            <p class="fd-autor">A cargo de Moriana Abraham.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>El propósito de esta clínica es comprender la red de relaciones que se tejen en la cultura del diseño, revisar la definición de diseño, de consumo y de sustentabilidad. Se propone explorar desafíos clave para la construcción de un sector sostenible e implementar prácticas sustentables. También trabajaremos con el concepto de usuario, sus necesidades y su relación con el consumo.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=H2GiRzz1YGQ" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+          <article class="fd-clinica">
+            <h4>Clínica III: «Artesanía y diseño, coexistencia contemporánea»</h4>
+            <p class="fd-autor">A cargo de Jorge Moragues.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Con base en las ideas impartidas en la edición pasada, proponemos afianzar el concepto de identidad en el diseño, pero al presente, centrado en las prácticas contemporáneas vinculadas al oficio. La presente clínica pretende revisar las diferencias que supone lo artesanal y el diseño, y lo artesanal en el diseño, con sus contrastes, similitudes y articulaciones en pos de una coexistencia productiva; y evolucionar por caminos posibles, transformando y afianzando la identidad regional en función del diseño de autoría.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=81cCfSVIQdk" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+        </div>
+      </details>
+
+      <details class="fd-anio fd-vidrio" id="clinicas-2022-2023">
+        <summary><h3>Clínicas 2022 – 2023</h3><span class="fd-anio-desc">El proceso creativo, la transformación del proyecto y las identidades. Con video.</span></summary>
+        <div class="fd-anio-cuerpo">
+          <article class="fd-clinica">
+            <h4>Clínica I: «El proceso creativo»</h4>
+            <p class="fd-autor">A cargo de la Lic. María del Rosario Kerz.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Esta clínica trata acerca del proceso creativo, proceso fundamental en la disciplina del diseño, ya que es el generador de las ideas que dan vida a nuestros productos. En primer lugar, veremos su definición según dos perspectivas contrapuestas, una mirada pragmática y la otra de «inspiración divina». A continuación, nos introduciremos en sus etapas, tomando las fases desarrolladas por Graham Wallas: fase de preparación, fase de incubación, fase de iluminación y fase de verificación. También se tratará de los problemas más habituales cuando emprendemos la aventura que significa el camino del proceso creativo. Por último, abordaremos los remedios y herramientas útiles que nos ayudan a superar estos obstáculos, y así llegar a la solución del problema y enriquecer el resultado de nuestros procesos creativos.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=cQHbwb6ae6o" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+          <article class="fd-clinica">
+            <h4>Clínica II: «Hacia la transformación del proyecto de Diseño»</h4>
+            <p class="fd-autor">A cargo de Moriana Abraham.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Se conversó sobre las razones y situaciones actuales que nos proponen una transformación en el proyecto de diseño y en las relaciones que se establecen entre los diferentes actores. Introduciremos conceptos de la mano de algunos referentes como Manzini o Guayabero, innovación social, el diseño como mediador. A través del desarrollo de tres ejes posibles de transformación se desarrollarán estudios de casos de marcas nacionales que experimentan y llevan adelante estos conceptos que los paradigmas del siglo XXI proponen.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=IC09Rxiapy0" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+          <article class="fd-clinica">
+            <h4>Clínica III: «Articulando identidades»</h4>
+            <p class="fd-autor">A cargo de Jorge Moragues.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Se pretende reflexionar sobre las últimas tendencias sociales que nos presentan posibles escenarios, haciendo hincapié mediante un recorrido en lo local. Tomando conciencia de nuestra historia nacional y regional, desde los pueblos originarios hasta las diversas funciones culturales que construyeron historias con identidades generales y particulares, siendo la estética de sutiles mezclas, cargada de reminiscencias y rica en metáforas e imágenes, la que habla de lo colectivo y lo mestizo. Revisaremos la circunstancia de creación y su reformulación en el siglo XX, con los distintos hechos sociales que atravesaron a la sociedad afectando a lo local, a partir de los indicios originarios, los migratorios y una vasta carga cultural. La intención es procurar, mediante la reflexión, la toma de conciencia, contemplando y apreciando el entorno, para seguir evolucionando en los proyectos y la producción.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=-cAGsw8O1zE" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+        </div>
+      </details>
+
+      <details class="fd-anio fd-vidrio" id="clinicas-2021-2022">
+        <summary><h3>Clínicas 2021 – 2022</h3><span class="fd-anio-desc">Innovación, potencialidad de marca y diseño industrioso. Con video.</span></summary>
+        <div class="fd-anio-cuerpo">
+          <article class="fd-clinica">
+            <h4>Clínica I: «Recurso para la innovación»</h4>
+            <p class="fd-autor">Dimensión del usuario en la experiencia de diseño, a cargo de Jéssica Roude.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Jéssica Roude es profesora, investigadora y diseñadora en el Centro de Producción, Innovación, Desarrollo de Diseño Industrial de la Universidad Nacional de Lanús, Buenos Aires. Pertenece al movimiento internacional de Diseño Industrial Interdisciplinar, una corriente que se define como diferente y complementaria a la establecida por la educación, el mercado y la economía actual. Lleva las metodologías, procesos y materiales del Diseño Industrial Clásico a un plano de producción e investigación interdisciplinar. A través de papers y ponencias en distintos eventos internacionales, Roude plantea alternativas de análisis científico en Diseño Industrial y establece nexos entre las innovaciones tecnológicas actuales y el aprovechamiento eficiente de los recursos del hábitat humano.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=qrnCx99vsp4" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+          <article class="fd-clinica">
+            <h4>Clínica II: «Potencialidad de la marca»</h4>
+            <p class="fd-autor">Dimensión emocional y narrativa en relación con nuestra historia, a cargo de Judith Savino.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Judith Savino, titular de Conbarro, emprendimiento de objetos de autor elaborados en arcilla del litoral santafesino, realiza asesoramientos a emprendimientos en relación con la poética de marca y el tono emocional. Savino plantea en profundidad las dimensiones que componen la concepción de las marcas. Para cada una de estas características desarrolla conceptos y ejercicios para optimizar la narración de las mismas y los posibles modos de comunicarlas en cada evento, feria, exposición, vidriera real o virtual donde las marcas se presenten. A la vez, analiza narrativas acertadas y desacertadas que permiten repasar todo lo desarrollado.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=oSZCY6vLiJU" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+          <article class="fd-clinica">
+            <h4>Clínica III: «Diseño industrioso»</h4>
+            <p class="fd-autor">A cargo de Alejandro Sarmiento.</p>
+            <details class="fd-mas"><summary>Leer más</summary><p>Alejandro Sarmiento describe un panorama del universo del diseño donde la manipulación de materiales, la observación del entorno natural y social inspiran la creación de objetos y productos de diseño sustentables, a partir de las experiencias, signos, símbolos y significados que vamos adquiriendo en nuestro recorrido por la vida y el planeta. Sus proyectos involucran diferentes campos del diseño y el arte, y abarcan desde la exploración y experimentación hasta el desarrollo de productos. Sarmiento diseñó para empresas como Essen de Argentina, I-D Fashion Magazine de Londres y Centro Studi Alessi-Proyecto Biológico Milán (Italia); creó el «Proyecto Pet» de reciclaje de residuos sólidos urbanos; es cofundador del proyecto «Vacavaliente» y creador de «Satorilab», laboratorio de diseño experimental interdisciplinar. Phaidon Press (Londres), a través de su libro FORK, lo consideró uno de los 100 diseñadores más influyentes del mundo.</p></details>
+            <a class="fd-ver-video" href="https://www.youtube.com/watch?v=LL-6rvs3MGE" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg><span>Ver video</span></a>
+          </article>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="fd-seccion" aria-labelledby="disertantes">
+    <h2 class="fd-titulo" id="disertantes">Disertantes</h2>
+    <ul class="fd-disertantes">
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">LG</span><h3>Lautaro García</h3><p>Diseñador industrial orientado a la innovación, la creatividad y el diseño de experiencias.</p><a class="fd-ver-cv" href="#cv-garcia">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">CR</span><h3>Carla Repetto</h3><p>Abogada especializada en Derecho Empresarial y Propiedad Intelectual.</p><a class="fd-ver-cv" href="#cv-repetto">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">GA</span><h3>Gustavo Arellaga</h3><p>Realizador audiovisual, fotógrafo y editor con más de 15 años de experiencia.</p><a class="fd-ver-cv" href="#cv-arellaga">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">GL</span><h3>Germán Lang</h3><p>Diseñador multidisciplinario, consultor y gestor cultural especializado en economía creativa.</p><a class="fd-ver-cv" href="#cv-lang">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">MA</span><h3>Moriana Abraham</h3><p>Diseñadora industrial y gráfica especializada en sustentabilidad y «slow design».</p><a class="fd-ver-cv" href="#cv-abraham">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">MM</span><h3>Miranda Mayer</h3><p>Licenciada en Diseño Industrial especializada en innovación y diseño estratégico.</p><a class="fd-ver-cv" href="#cv-mayer">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">LN</span><h3>Laura Novik</h3><p>Referente latinoamericana en diseño de futuros sostenibles, estrategia e innovación.</p><a class="fd-ver-cv" href="#cv-novik">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">MN</span><h3>María Celeste Nasimbera</h3><p>Periodista especializada en comunicación digital, diseño y moda; creadora de Crónicas de Moda.</p><a class="fd-ver-cv" href="#cv-nasimbera">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">AP</span><h3>Agencia Pozzi</h3><p>Estudio de diseño estratégico e innovación con más de 17 años de trayectoria.</p><a class="fd-ver-cv" href="#cv-pozzi">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">ME</span><h3>Martín Escape</h3><p>Cofundador y director de FEDRO, diseño y cerámica artesanal de Santa Fe.</p><a class="fd-ver-cv" href="#cv-escape">Ver CV completo</a></li>
+
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">RK</span><h3>Rosario Kerz</h3><p>A cargo de las clínicas «El proyecto de diseño» y «El proceso creativo».</p></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">JM</span><h3>Jorge Moragues</h3><p>Licenciado en Diseño con 29 años de trayectoria docente en indumentaria y vestuario escénico.</p><a class="fd-ver-cv" href="#cv-moragues">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">JR</span><h3>Jéssica Roude</h3><p>Diseñadora industrial e investigadora del movimiento de Diseño Industrial Interdisciplinar.</p><a class="fd-ver-cv" href="#cv-roude">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">JS</span><h3>Judith Savino</h3><p>Diseñadora de objetos de autor en arcilla y asesora en identidad de marca.</p><a class="fd-ver-cv" href="#cv-savino">Ver CV completo</a></li>
+      <li class="fd-disertante fd-vidrio"><span class="fd-avatar" aria-hidden="true">AS</span><h3>Alejandro Sarmiento</h3><p>Diseñador experimental, entre los 100 diseñadores más influyentes del mundo según Phaidon Press.</p><a class="fd-ver-cv" href="#cv-sarmiento">Ver CV completo</a></li>
+    </ul>
+  </section>
+
+  <p class="fd-cierre">¿Querés que tu proyecto participe del próximo ciclo? <a href="/capitalcultural/festivaldisena/docs/">Mirá la documentación oficial</a></p>
+
+  <div class="fd-cv" id="cv-garcia"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-garcia-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-garcia-t">Lautaro García</h3>
+    <p>Diseñador industrial en formación, con experiencia en investigación, docencia y desarrollo de proyectos vinculados a la innovación, la creatividad y el diseño. Se desempeñó como coordinador lúdico-pedagógico en programas del Ministerio de Innovación y Cultura de la Provincia de Santa Fe y desarrolla actividades de formación como tallerista.</p>
+    <p>Actualmente dirige el área creativa de la marca de indumentaria TORA VIRTUAL, integrando pensamiento estratégico, diseño y producción de experiencias con una mirada orientada a la experimentación y la innovación.</p></div></div>
+  <div class="fd-cv" id="cv-repetto"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-repetto-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-repetto-t">Carla Repetto</h3>
+    <p>Abogada especializada en Derecho Empresarial y Propiedad Intelectual, con una sólida trayectoria en asesoramiento estratégico para empresas, emprendedores y organizaciones vinculadas a la innovación, el comercio electrónico y los negocios basados en conocimiento. Magíster en Propiedad Intelectual, Agente de la Propiedad Industrial y doctoranda en Ciencias Sociales, combina la práctica profesional con la docencia e investigación universitaria.</p>
+    <p>Trabajó como consultora para organismos nacionales e internacionales, entre ellos la Organización de Estados Iberoamericanos (OEI) y el Instituto Nacional de la Propiedad Industrial (INPI), y desarrolla actividades de formación a través de cursos, conferencias y programas de capacitación, promoviendo la protección de los activos intangibles como herramienta para el desarrollo productivo y la innovación.</p></div></div>
+  <div class="fd-cv" id="cv-arellaga"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-arellaga-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-arellaga-t">Gustavo Arellaga</h3>
+    <p>Realizador audiovisual, fotógrafo y editor con más de 15 años de experiencia en producción de contenidos para empresas, productoras y eventos. Especializado en fotografía, videografía, edición profesional y operación de drones, trabajó junto a reconocidas marcas, agencias de marketing y productoras de espectáculos. Además, se desempeñó como docente de fotografía en organismos públicos y espacios de formación, combinando creatividad, técnica y experiencia en comunicación audiovisual.</p></div></div>
+  <div class="fd-cv" id="cv-lang"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-lang-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-lang-t">Germán Lang</h3>
+    <p>Diseñador multidisciplinario, consultor y gestor cultural con una amplia trayectoria en el desarrollo de proyectos creativos vinculados al diseño y las industrias culturales. Se desempeñó durante más de una década como Coordinador del Sector Diseño de la Dirección Nacional de Industrias Culturales del Ministerio de Cultura de la Nación, y cuenta con una sólida experiencia en gestión pública, docencia universitaria e investigación.</p>
+    <p>Especializado en comunicación estratégica, fortalecimiento de MiPyMEs y economía creativa, lideró programas, mercados culturales y proyectos de innovación en Argentina y Latinoamérica, además de asesorar a emprendedores, organizaciones e instituciones públicas y privadas. Su perfil combina gestión, formación y consultoría para impulsar el desarrollo del diseño como herramienta de transformación e innovación.</p></div></div>
+  <div class="fd-cv" id="cv-abraham"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-abraham-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-abraham-t">Moriana Abraham</h3>
+    <p>Diseñadora industrial, docente, investigadora y consultora especializada en diseño, innovación y sustentabilidad, con más de 20 años de trayectoria profesional y académica. Radicada en Córdoba, su trabajo adhiere al movimiento «slow design» (diseño lento). Es docente e investigadora en Morfología en la Carrera de Diseño Industrial de la UNC, en la Licenciatura en Diseño Industrial en UNL y en la Carrera Diseño Gráfico de la Universidad Blas Pascal. Desde 2014 coordina cursos de posgrado sobre nuevos paradigmas en el diseño de indumentaria, con eje en la sustentabilidad, y desde 2020 dirige la Carrera de Especialización en Diseño Textil e Indumentaria en FAUD/UNC. Es socia fundadora del estudio Qué! Diseño.</p>
+    <p>A lo largo de su carrera desarrolló proyectos de diseño para instituciones y empresas, lideró procesos de curaduría, capacitación y mentoría para emprendedores, y recibió numerosos premios nacionales e internacionales por sus productos. Se desempeña además como coordinadora, jurado y capacitadora en programas, eventos y convocatorias públicas y privadas sobre diseño en Córdoba, Santa Fe y Entre Ríos. Su trabajo integra investigación, gestión, docencia y desarrollo de productos, con un fuerte enfoque en la innovación, la producción sustentable y el fortalecimiento del diseño argentino.</p></div></div>
+  <div class="fd-cv" id="cv-mayer"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-mayer-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-mayer-t">Miranda Mayer</h3>
+    <p>Licenciada en Diseño Industrial, especializada en innovación, diseño estratégico y metodologías centradas en las personas. Cuenta con formación de posgrado en Future Strategic Design, dictado por graduados de la Universidad de Delft (Países Bajos), y actualmente cursa el Posgrado en Diseño Estratégico de la Universidad Nacional de Rosario.</p>
+    <p>Fue finalista del concurso internacional Index Award «Diseño Responde 2023» y participó como investigadora en el proyecto internacional Crafting Futures, impulsado por REDIT y el British Council. Se desempeñó en proyectos de fortalecimiento de las Industrias Creativas para la Región Centro (Córdoba, Santa Fe y Entre Ríos) y actualmente es Jefa de Trabajos Prácticos de la cátedra Morfología II de Diseño Industrial en la Universidad Nacional del Litoral. Su perfil combina investigación, docencia y gestión de proyectos, con un enfoque en la innovación, el diseño estratégico y la sustentabilidad.</p></div></div>
+  <div class="fd-cv" id="cv-novik"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-novik-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-novik-t">Laura Novik</h3>
+    <p>Especialista en diseño de futuros sostenibles, estrategia e innovación, con más de 30 años de trayectoria acompañando procesos de transformación en organizaciones de América Latina. Cofundadora de Blink Design Consulting y Raíz Diseño, asesoró a empresas, organismos públicos y organizaciones internacionales en innovación, sostenibilidad, prospectiva y desarrollo de capacidades.</p>
+    <p>Dirige el Laboratorio Futuros de la Universidad Atlántida Argentina y desarrolla una destacada trayectoria académica como docente e investigadora en universidades de Argentina y del exterior. Su perfil se complementa con una amplia experiencia como conferencista, jurado internacional y autora de publicaciones especializadas en diseño, futuros y sostenibilidad, consolidándose como una referente latinoamericana en diseño estratégico y transformación organizacional.</p></div></div>
+  <div class="fd-cv" id="cv-nasimbera"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-nasimbera-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-nasimbera-t">María Celeste Nasimbera</h3>
+    <p>Periodista especializada en comunicación, medios digitales y tendencias, con amplia experiencia en contenidos para la industria del diseño y la moda. Actualmente lidera el área digital de L'Officiel Argentina, elabora informes de comunicación para el Observatorio de Tendencias del INTI y se desempeña como docente y consultora en estrategias de comunicación.</p>
+    <p>Es creadora de Crónicas de Moda, un medio nativo digital dedicado a la difusión del diseño argentino contemporáneo, desde donde impulsa la visibilidad de diseñadores emergentes y promueve el desarrollo del sector a través de iniciativas de comunicación y construcción de comunidad.</p></div></div>
+  <div class="fd-cv" id="cv-pozzi"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-pozzi-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-pozzi-t">Agencia Pozzi</h3>
+    <p>Pozzi es un estudio de diseño estratégico e innovación con más de 17 años de trayectoria, especializado en el desarrollo de soluciones creativas para organizaciones y marcas. A lo largo de su evolución consolidó un enfoque de trabajo basado en la colaboración interdisciplinaria, la creatividad y la generación de conocimiento, redefiniendo sus servicios para responder a los nuevos desafíos del diseño.</p>
+    <p>Su práctica combina pensamiento estratégico, innovación y una fuerte cultura de trabajo en equipo, impulsando procesos de transformación con una mirada contemporánea y orientada al aprendizaje continuo.</p></div></div>
+  <div class="fd-cv" id="cv-escape"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-escape-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-escape-t">Martín Escape</h3>
+    <p>Cofundador y director de FEDRO, un destacado emprendimiento de diseño y cerámica artesanal en Santa Fe, Argentina. Cuenta con una sólida trayectoria en gestión comercial, posicionamiento de marca y desarrollo de productos pintados a mano. Lideró la expansión de la firma a nivel federal mediante la participación en incubadoras regionales e importantes ferias de diseño.</p></div></div>
+  <div class="fd-cv" id="cv-moragues"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-moragues-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-moragues-t">Jorge Moragues</h3>
+    <p>Licenciado en Diseño egresado de la Escuela Municipal de Diseño y Artes Visuales de la Municipalidad de la Ciudad de Santa Fe. Profesor titular de Diseño de Indumentaria en la FADU (UBA), de Historia de la Indumentaria y de Elementos de Diseño de la Indumentaria, entre otras cátedras. Fue director del Museo Nacional de la Historia del Traje. Dictó cursos, másteres y talleres sobre dirección de arte, identidad en el diseño, comunicación de moda e historia del traje y la moda. Participó de muestras y desfiles como la Pasarela Nacional MICA, desfiles de cátedra en FADU-UBA y muestras en el Centro Cultural Recoleta, entre otras. Entre sus publicaciones se destacan «El diseño posible. Paradigmas, mercado e identidad del diseño de indumentaria y textil en Argentina» y «De Gino Bogani al Diseño de Autor». También escribió para medios como revista Viva y la sección Cultura del diario Clarín.</p></div></div>
+  <div class="fd-cv" id="cv-roude"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-roude-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-roude-t">Jéssica Roude</h3>
+    <p>Profesora, investigadora y diseñadora en el Centro de Producción, Innovación, Desarrollo de Diseño Industrial de la Universidad Nacional de Lanús, Buenos Aires. Pertenece al movimiento internacional de Diseño Industrial Interdisciplinar, una corriente que se define como diferente y complementaria a la establecida por la educación, el mercado y la economía actual. Lleva las metodologías, procesos y materiales del Diseño Industrial Clásico a un plano de producción e investigación interdisciplinar. A través de papers y ponencias en distintos eventos internacionales, plantea alternativas de análisis científico en Diseño Industrial y establece nexos entre las innovaciones tecnológicas actuales y el aprovechamiento eficiente de los recursos del hábitat humano.</p></div></div>
+  <div class="fd-cv" id="cv-savino"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-savino-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-savino-t">Judith Savino</h3>
+    <p>Titular de Conbarro, emprendimiento de objetos de autor elaborados en arcilla del litoral santafesino. Realiza asesoramientos a emprendimientos en relación con la poética de marca y el tono emocional, y desarrolla conceptos y ejercicios para optimizar la narración de marca en cada evento, feria, exposición, vidriera real o virtual donde se presenten.</p></div></div>
+  <div class="fd-cv" id="cv-sarmiento"><a href="#disertantes" class="fd-cv-fondo" aria-hidden="true" tabindex="-1"></a><div class="fd-cv-caja" role="dialog" aria-labelledby="cv-sarmiento-t"><a href="#disertantes" class="fd-cv-cerrar" aria-label="Cerrar">&times;</a><h3 id="cv-sarmiento-t">Alejandro Sarmiento</h3>
+    <p>Describe un panorama del universo del diseño donde la manipulación de materiales, la observación del entorno natural y social inspiran la creación de objetos y productos de diseño sustentables. Sus proyectos abarcan desde la exploración y experimentación hasta el desarrollo de productos, y diseñó para empresas como Essen de Argentina, I-D Fashion Magazine de Londres y Centro Studi Alessi-Proyecto Biológico Milán (Italia). Creó el «Proyecto Pet» de reciclaje de residuos sólidos urbanos; es cofundador del proyecto «Vacavaliente» y creador de «Satorilab», laboratorio de diseño experimental interdisciplinar. Phaidon Press (Londres), a través de su libro FORK, lo consideró uno de los 100 diseñadores más influyentes del mundo.</p></div></div>
+</div>
+
+<script>
+  (function () {
+    function abrir() {
+      var d = location.hash && document.querySelector('details' + location.hash.replace(/[^#\w-]/g, ''));
+      if (d) { d.open = true; d.scrollIntoView(); }
+    }
+    abrir();
+    window.addEventListener('hashchange', abrir);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.querySelector('.fd-cv:target')) location.hash = '#disertantes';
+    });
+  })();
+</script>

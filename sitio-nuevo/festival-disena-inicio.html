@@ -1,0 +1,214 @@
+<style>
+
+  .fd-hero {
+    --barra: 0px;
+    position: relative; display: flex; align-items: flex-end; overflow: hidden;
+    margin-inline: calc(50% - 50vw + var(--barra) / 2);
+    min-height: clamp(440px, 64vh, 640px);
+    background: var(--azul);
+    color: #fff;
+  }
+  .fd-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+
+  .fd-hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0, 39, 81, .5) 0%, rgba(0, 39, 81, .62) 45%, rgba(0, 39, 81, .92) 100%);
+  }
+  .fd-hero-contenido {
+    position: relative; z-index: 1; width: 100%; max-width: 1120px; margin-inline: auto;
+    padding: 0 clamp(16px, 4vw, 32px) clamp(28px, 5vw, 56px);
+    display: grid; gap: clamp(16px, 2vw, 22px);
+  }
+  .fd .fd-hero-aviso {
+    display: inline-flex; align-items: center; gap: .55em; width: fit-content;
+    padding: 8px 16px; border-radius: 6px; background: var(--celeste); color: var(--azul);
+    font-size: .9em; font-weight: 700; line-height: 1.3;
+  }
+  .fd-hero-texto {
+    max-width: 30ch; color: #fff; text-shadow: 0 1px 12px rgba(0, 20, 43, .45);
+    font-size: clamp(1.6em, 3.6vw, 2.6em); font-weight: 650; font-stretch: 90%; line-height: 1.12; letter-spacing: -.015em;
+  }
+  .fd-hero-acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fd-hero .fd-btn { background: rgba(255, 255, 255, .92); box-shadow: none; }
+  .fd-hero .cb-btn { box-shadow: 0 0 0 2px rgba(255, 255, 255, .9); }
+
+  .fd-cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 3vw, 32px); }
+  .fd-cifra { display: grid; align-content: start; gap: .35em; padding-top: 14px; border-top: 3px solid var(--celeste); }
+  .fd-cifra-num { font-size: clamp(2.4em, 5vw, 3.6em); font-weight: 800; font-stretch: 75%; line-height: .95; letter-spacing: -.01em; }
+  .fd-cifra-num.fd-cifra-num--texto { font-size: clamp(1.6em, 3vw, 2.2em); line-height: 1.05; }
+  .fd-cifra p { color: var(--gris-75); font-size: .97em; line-height: 1.45; }
+
+  .fd-ciclo { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 18px); counter-reset: paso; }
+  .fd-paso { position: relative; display: grid; align-content: start; gap: .5em; padding-top: 56px; counter-increment: paso; }
+  .fd-paso::before {
+    content: counter(paso); position: absolute; top: 0; left: 0; z-index: 1;
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 6px;
+    background: var(--azul); color: #fff; font-size: 1.1em; font-weight: 800;
+  }
+  .fd-paso::after { content: ""; position: absolute; top: 19px; left: 40px; right: calc(-1 * clamp(12px, 1.6vw, 18px)); height: 3px; background: var(--celeste); }
+  .fd-paso:last-child::after { display: none; }
+  .fd-paso h3 { font-size: 1.08em; font-weight: 700; line-height: 1.25; }
+  .fd-paso p { color: var(--gris-75); font-size: .95em; line-height: 1.5; }
+
+  .fd-galeria { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: dense; gap: 8px; }
+  .fd-galeria a { display: block; overflow: hidden; border-radius: 6px; aspect-ratio: 3 / 2; background: var(--gris-20); cursor: zoom-in; }
+  .fd-galeria a:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+  .fd-galeria a:nth-child(10) { grid-column: 3 / span 2; grid-row: 3 / span 2; aspect-ratio: auto; }
+  .fd-galeria img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.16, 1, .3, 1); }
+  .fd-galeria a:hover img { transform: scale(1.04); }
+  .fd-credito { color: var(--gris-75); font-size: .88em; }
+
+  .fd-visor { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; background: rgba(0, 20, 43, .94); }
+  .fd-visor:target { display: flex; }
+  .fd-visor-fondo { position: absolute; inset: 0; cursor: zoom-out; }
+  .fd-visor img { position: relative; z-index: 1; max-width: 92vw; max-height: 86vh; width: auto; height: auto; object-fit: contain; border-radius: 4px; }
+  .fd .fd-visor :is(.fd-visor-cerrar, .fd-visor-flecha) {
+    position: absolute; z-index: 2; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 6px;
+    color: #fff; font-size: 30px; line-height: 1; text-decoration: none; background: rgba(255, 255, 255, .12);
+  }
+  .fd-visor-cerrar { top: 16px; right: 16px; }
+  .fd-visor-flecha { top: 50%; transform: translateY(-50%); }
+  .fd-visor-ant { left: 12px; }
+  .fd-visor-sig { right: 12px; }
+
+  .fd-video { position: relative; display: block; max-width: 880px; width: 100%; margin-inline: auto; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px; background: #000; }
+  .fd-video img, .fd-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+  .fd-video-play {
+    position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 1;
+    display: grid; place-items: center; width: 76px; height: 76px; border-radius: 8px;
+    background: var(--rojo); color: #fff; transition: scale .25s cubic-bezier(.16, 1, .3, 1);
+  }
+  .fd-video-play svg { width: 34px; height: 34px; }
+  .fd-video:hover .fd-video-play { scale: 1.08; }
+  .fd-video-titulo { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 40px 20px 16px; color: #fff; font-weight: 600; background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .7)); }
+
+  .fd-inicio { display: grid; gap: clamp(56px, 8vw, 96px); padding-block: clamp(40px, 6vw, 72px) 50px; }
+
+  @media (max-width: 900px) {
+    .fd-cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fd-ciclo { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .fd-paso { padding: 0 0 28px 60px; min-height: 40px; }
+    .fd-paso::after { top: 40px; bottom: 0; left: 19px; right: auto; width: 3px; height: auto; }
+    .fd-paso:last-child { padding-bottom: 0; }
+  }
+  @media (max-width: 700px) {
+    .fd-galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fd-galeria a:nth-child(1), .fd-galeria a:nth-child(10) { grid-column: span 2; grid-row: auto; aspect-ratio: 3 / 2; }
+    .fd-hero-acciones > * { flex: 1 1 100%; }
+  }
+</style>
+
+<div class="fd">
+  <section class="fd-hero" aria-label="Presentación">
+    <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-1536x1024.jpg"
+         srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-768x512.jpg 768w,
+                 https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-1024x683.jpg 1024w,
+                 https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-1536x1024.jpg 1536w,
+                 https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013.jpg 1920w"
+         sizes="100vw" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
+    <div class="fd-hero-contenido">
+      <p class="fd-hero-aviso">Convocatoria 2026/2027 · Conocé los resultados</p>
+      <p class="fd-hero-texto">El encuentro de diseño de Santa Fe: creatividad, innovación y economía creativa local, con cientos de marcas de la región cada año.</p>
+      <div class="fd-hero-acciones">
+        <a class="cb-btn" href="/capitalcultural/festivaldisena/docs/#seleccionados"><span>Ver las marcas seleccionadas</span></a>
+        <a class="fd-btn" href="/capitalcultural/festivaldisena/docs/">¿Tenés una marca? Cómo participar</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="fd-inicio">
+    <section aria-label="El festival en cifras">
+      <ul class="fd-cifras">
+        <li class="fd-cifra"><span class="fd-cifra-num">18 años</span><p>Impulsando el diseño santafesino desde 2008.</p></li>
+        <li class="fd-cifra"><span class="fd-cifra-num">+270</span><p>Marcas participando en una sola edición del festival.</p></li>
+        <li class="fd-cifra"><span class="fd-cifra-num">5 rubros</span><p>Indumentaria, objetos, accesorios, almacén natural y comunicación.</p></li>
+        <li class="fd-cifra"><span class="fd-cifra-num fd-cifra-num--texto">Estación Belgrano</span><p>Sede histórica del festival en la ciudad de Santa Fe.</p></li>
+      </ul>
+    </section>
+
+    <section class="fd-seccion" aria-labelledby="fd-ciclo-titulo">
+      <h2 class="fd-titulo" id="fd-ciclo-titulo">Cómo funciona el ciclo del festival</h2>
+      <p class="fd-texto">Festival Diseña no es un evento puntual: funciona como un programa anual con estas etapas.</p>
+      <ol class="fd-ciclo">
+        <li class="fd-paso"><h3>Apertura de la convocatoria</h3><p>Se abre la inscripción para marcas y diseñadores.</p></li>
+        <li class="fd-paso"><h3>Selección de proyectos</h3><p>Se evalúan y seleccionan los proyectos participantes.</p></li>
+        <li class="fd-paso"><h3>Clínicas, talleres y mentorías</h3><p>Formación y acompañamiento a los proyectos seleccionados.</p></li>
+        <li class="fd-paso"><h3>Edición Diciembre</h3><p>Primera edición del festival dentro del ciclo.</p></li>
+        <li class="fd-paso"><h3>Edición Invierno</h3><p>Segunda edición, al año siguiente: coincide con la apertura de la próxima convocatoria.</p></li>
+      </ol>
+    </section>
+
+    <section class="fd-seccion" aria-labelledby="fd-galeria-titulo">
+      <h2 class="fd-titulo" id="fd-galeria-titulo">Así se vive el festival</h2>
+      <div class="fd-galeria" id="galeria">
+        <a href="#foto-1"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_248-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_248-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_248-1024x683.jpg 1024w" sizes="(max-width: 700px) 100vw, 560px" width="768" height="512" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2025"></a>
+        <a href="#foto-2"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2025"></a>
+        <a href="#foto-3"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_049-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_049-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_049-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"></a>
+        <a href="#foto-4"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_012-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_012-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_012-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"></a>
+        <a href="#foto-5"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_047-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_047-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_047-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"></a>
+        <a href="#foto-6"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_083-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_083-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_083-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"></a>
+        <a href="#foto-7"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_103-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_103-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_103-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"></a>
+        <a href="#foto-8"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_051-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_051-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_051-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2024"></a>
+        <a href="#foto-9"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_075-300x200.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_075-300x200.jpg 300w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_075-768x512.jpg 768w" sizes="(max-width: 700px) 50vw, 280px" width="300" height="200" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2024"></a>
+        <a href="#foto-10"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_038-768x512.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_038-768x512.jpg 768w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_038-1024x683.jpg 1024w" sizes="(max-width: 700px) 100vw, 560px" width="768" height="512" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2024"></a>
+      </div>
+      <p class="fd-credito">Fotos: Marce Pucci.</p>
+    </section>
+
+    <section class="fd-seccion" aria-labelledby="fd-video-titulo">
+      <h2 class="fd-titulo" id="fd-video-titulo"><i class="fd-barra"></i>El festival desde adentro</h2>
+      <a class="fd-video" href="https://www.youtube.com/watch?v=uUcArYR7KL0" data-youtube="uUcArYR7KL0" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/uUcArYR7KL0/maxresdefault.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="">
+        <span class="fd-video-play"><svg aria-hidden="true"><use href="#fd-i-play"></use></svg></span>
+        <span class="fd-video-titulo">Ver el video institucional del Festival Diseña</span>
+      </a>
+    </section>
+
+    <p class="fd-cierre">¿Querés conocer más? <a href="/capitalcultural/festivaldisena/trayectoria/">Conocé la historia del festival</a></p>
+  </div>
+
+  <div class="fd-visor" id="foto-1"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-10" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_248-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_248-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_248-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2025"><a href="#foto-2" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-2"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-1" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/05/MarcePucci_SC_LaDisena_14122025_013-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2025"><a href="#foto-3" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-3"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-2" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_049-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_049-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_049-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"><a href="#foto-4" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-4"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-3" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_012-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_012-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_012-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"><a href="#foto-5" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-5"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-4" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_047-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_047-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_047-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"><a href="#foto-6" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-6"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-5" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_083-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_083-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_083-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"><a href="#foto-7" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-7"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-6" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_103-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_103-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_Invierno_EB_10072025_103-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Invierno 2025"><a href="#foto-8" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-8"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-7" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_051-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_051-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_051-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2024"><a href="#foto-9" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-9"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-8" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_075-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_075-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_075-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2024"><a href="#foto-10" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="fd-visor" id="foto-10"><a href="#galeria" class="fd-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#galeria" class="fd-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#foto-9" class="fd-visor-flecha fd-visor-ant" aria-label="Foto anterior">&#10094;</a><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_038-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_038-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/11/MarcePucci_SC_LaDisen%CC%83a_EB_14122024_038-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Festival Diseña, Edición Diciembre 2024"><a href="#foto-1" class="fd-visor-flecha fd-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+</div>
+
+<script>
+  (function () {
+    function medir() {
+      var barra = window.innerWidth - document.documentElement.clientWidth;
+      document.querySelectorAll('.fd-hero').forEach(function (h) { h.style.setProperty('--barra', barra + 'px'); });
+    }
+    medir();
+    window.addEventListener('resize', medir);
+
+    document.addEventListener('keydown', function (e) {
+      var abierto = document.querySelector('.fd-visor:target');
+      if (!abierto) return;
+      var destino = { Escape: '#galeria', ArrowRight: '.fd-visor-sig', ArrowLeft: '.fd-visor-ant' }[e.key];
+      if (!destino) return;
+      location.hash = destino === '#galeria' ? destino : abierto.querySelector(destino).getAttribute('href');
+    });
+
+    document.querySelectorAll('.fd-video[data-youtube]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + a.dataset.youtube + '?autoplay=1&rel=0';
+        f.title = 'Festival Diseña: video institucional';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        var caja = document.createElement('div');
+        caja.className = 'fd-video';
+        caja.appendChild(f);
+        a.replaceWith(caja);
+      });
+    });
+  })();
+</script>
