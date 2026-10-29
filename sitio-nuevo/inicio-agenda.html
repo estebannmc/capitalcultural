@@ -39,7 +39,7 @@
     var d = mayus(parte(e.start, { weekday: 'short' })) + ' ' + fecha(e.start);
     return e.allDay ? d : d + ' · ' + parte(e.start, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) + ' h';
   };
-  var norm = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\W+/g, ' ').trim(); };
+  var norm = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\W+/g, ' ').trim(); };
   var esMuestra = function (e) { return norm(e.kicker) === 'muestra'; };
   // La agenda no publica el precio: se marca con la categoría «Gratis» o «Entrada libre».
   var esGratis = function (e) { return /\b(gratis|gratuit[oa]|entrada libre)\b/.test(norm((e.categories || []).join(' ') + ' ' + e.kicker + ' ' + e.title)); };
