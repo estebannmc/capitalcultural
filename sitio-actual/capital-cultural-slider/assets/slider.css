@@ -330,6 +330,41 @@
   outline-offset: 3px;
 }
 
+.cc-slider .cc-pause {
+  position: absolute;
+  right: 24px;
+  bottom: 12px;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .88), rgba(255, 255, 255, .56));
+  color: var(--cc-azul);
+  box-shadow: 0 8px 20px -10px rgba(0, 39, 81, .4), inset 0 1px 0 #fff;
+  cursor: pointer;
+}
+
+.cc-slider .cc-pause:hover,
+.cc-slider .cc-pause:focus {
+  background: var(--cc-celeste);
+  color: var(--cc-azul);
+}
+
+.cc-slider .cc-pause:focus-visible {
+  outline: 3px solid var(--cc-rojo);
+  outline-offset: 3px;
+}
+
+.cc-pause svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.cc-pause .cc-play-icon { display: none; fill: currentColor; stroke-width: 1.5; }
+.cc-slider.is-paused .cc-pause-icon { display: none; }
+.cc-slider.is-paused .cc-play-icon { display: block; }
+
 .cc-prev { left: 24px; }
 .cc-next { right: 24px; }
 

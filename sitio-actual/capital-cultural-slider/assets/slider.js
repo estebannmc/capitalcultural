@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       const progress = slides[index].querySelector(".cc-progress");
-      if (progress) {
+      if (progress && !paused) {
         setTimeout(function () {
           progress.style.transition = "width " + duration + "ms linear";
           progress.style.width = "100%";
@@ -63,8 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function nextSlide() { goToSlide((index + 1) % slides.length); }
     function prevSlide() { goToSlide((index - 1 + slides.length) % slides.length); }
 
+    const pause = slider.querySelector(".cc-pause");
+    let paused = false;
+
     function startAuto() {
-      if (slides.length < 2) return;
+      if (slides.length < 2 || paused) return;
       stopAuto();
       interval = setInterval(nextSlide, duration);
     }
@@ -77,6 +80,25 @@ document.addEventListener("DOMContentLoaded", function () {
     function restartAuto() {
       stopAuto();
       startAuto();
+    }
+
+    if (pause) {
+      pause.addEventListener("click", function () {
+        paused = !paused;
+        pause.setAttribute("aria-label", paused ? "Reanudar el slider" : "Pausar el slider");
+        slider.classList.toggle("is-paused", paused);
+        if (paused) {
+          stopAuto();
+          const prog = slides[index].querySelector(".cc-progress");
+          if (prog) {
+            const width = getComputedStyle(prog).width;
+            prog.style.transition = "none";
+            prog.style.width = width;
+          }
+        } else {
+          goToSlide(index);
+        }
+      });
     }
 
     if (next) next.addEventListener("click", nextSlide);

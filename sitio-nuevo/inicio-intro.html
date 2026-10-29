@@ -1,0 +1,216 @@
+<style>
+  /* Estilos de los cuatro widgets de la home (intro, agenda, accesos y newsletter).
+     Este widget va primero en la página: los otros tres los usan. */
+  .elementor-widget-html:has(.cci) { min-width: 0; }
+  .elementor-widget-html:has(.cci) > .elementor-widget-container { padding: 0; margin: 0; }
+  .elementor-widget-wrap:has(> .elementor-widget-html .cci) { padding: 0; }
+  .ast-container > .elementor:has(.cci) { flex: 1 1 100%; min-width: 0; }
+  /* shortcut: el slider 2.3.1 mide 100vw y con barra de scroll se pasa del ancho; corregirlo en el plugin (width: 100%). */
+  .elementor-section:has(.cc-slider) { overflow-x: clip; }
+
+  .cci {
+    --azul: #002751;
+    --celeste: #57b8e9;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    --vidrio: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    --sombra: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+    color: var(--azul);
+    font: 400 16px/1.5 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px;
+    margin-inline: auto;
+    /* --aire: el espacio entre secciones. --desfase: lo que baja el título cuando la cabeza
+       lleva el enlace de 44 px; se suma donde la sección siguiente no tiene cabeza propia. */
+    --aire: clamp(28px, 5vw, 56px);
+    --desfase: calc((44px - 1.15 * clamp(22.4px, 2.6vw, 30.4px)) / 2);
+    padding: var(--aire) clamp(16px, 4vw, 32px) 0;
+  }
+  /* Medidas en px y no en rem: Astra achica la fuente raíz en el celular (~11,9 px). */
+  .cci *, .cci *::before, .cci *::after { box-sizing: border-box; }
+  /* Desde 1200 px la sección de Elementor (1140 px con 10 de aire) ya deja el margen:
+     sin padding propio, el contenido mide 1120 px y arranca alineado con el slider y las noticias. */
+  @media (min-width: 1200px) { .cci { padding-inline: 0; } }
+  .cci :is(h1, h2, h3, p, ul, li, figure) { margin: 0; padding: 0; }
+  .cci ul { list-style: none; }
+  .cci :is(h1, h2, h3) { color: inherit; font-family: inherit; text-transform: none; letter-spacing: -.01em; }
+  .cci img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  .cci a { color: inherit; text-decoration: none; }
+  .cci a:focus-visible, .cci button:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+  .cci [id] { scroll-margin-top: 110px; }
+  #noticias { scroll-margin-top: 110px; }
+  /* La sección de noticias no trae aire arriba y el tema le fuerza el padding a 0: lo pone la agenda abajo.
+     Desde 641 px el plugin centra su título contra las flechas de 44 px, que ya da el desfase; hasta 640 px
+     la cabeza va apilada (antes se partía según el ancho) y el desfase lo suma la agenda. */
+  .cci#agenda { padding-bottom: var(--aire); }
+  @media (max-width: 640px) {
+    .cci#agenda { padding-bottom: calc(var(--aire) + var(--desfase)); }
+    #noticias .ccn-head { flex-direction: column; align-items: flex-start; }
+  }
+  /* Mismo margen lateral que los bloques .cci: en el celular las noticias quedaban pegadas al borde. */
+  #noticias .ccn-noticias { box-sizing: border-box; max-width: 1120px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 32px); }
+  @media (min-width: 1200px) { #noticias .ccn-noticias { padding-inline: 0; } }
+
+  .cci .cci-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  .cci .cci-cabeza {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px;
+    margin-bottom: clamp(14px, 2.4vw, 24px);
+  }
+  .cci .cci-titulo {
+    display: flex; align-items: baseline; gap: 9.6px;
+    font-size: clamp(22.4px, 2.6vw, 30.4px); font-weight: 700; line-height: 1.15;
+  }
+  .cci .cci-titulo .cci-barra { align-self: center; }
+  .cci .cci-mas {
+    display: inline-flex; align-items: center; gap: 5.6px; min-height: 44px;
+    font-weight: 600; text-decoration: underline; text-decoration-color: var(--rojo);
+    text-decoration-thickness: 2px; text-underline-offset: 4px;
+  }
+  .cci .cci-ext { width: 14px; height: 14px; flex: none; }
+
+  /* Intro */
+  .cci-intro { padding-bottom: clamp(20px, 3vw, 32px); }
+  .cci-intro h1 {
+    max-width: 22ch;
+    font-size: clamp(30.4px, 4.6vw, 49.6px); font-weight: 800; line-height: 1.05;
+  }
+  .cci-intro p { max-width: 60ch; margin-top: 14.4px; font-size: clamp(16px, 1.6vw, 18.4px); color: var(--gris-75); }
+
+  /* Tarjetas de agenda y muestras */
+  .cci .cci-fila {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+  }
+  .cci .cci-card {
+    position: relative; display: flex; flex-direction: column; height: 100%;
+    border-radius: 8px; overflow: hidden;
+    background: var(--vidrio); box-shadow: var(--sombra);
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    transition: transform .3s var(--curva);
+  }
+  .cci .cci-media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--gris-20); }
+  .cci .cci-media img { width: 100%; height: 100%; object-fit: cover; }
+  .cci .cci-marcas { position: absolute; left: 10px; top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .cci .cci-marca {
+    padding: 4px 9px; border-radius: 4px;
+    background: #fff; color: var(--azul);
+    font-size: 12px; font-weight: 700; line-height: 1.2; letter-spacing: .04em; text-transform: uppercase;
+  }
+  .cci .cci-marca--gratis { background: var(--azul); color: #fff; }
+  .cci .cci-cuerpo { display: grid; gap: 4.8px; padding: 13.6px 16px 16px; }
+  .cci .cci-nombre { font-size: 17px; font-weight: 700; line-height: 1.2; }
+  .cci .cci-cuando { font-weight: 600; }
+  .cci .cci-donde { font-size: 15px; color: var(--gris-75); line-height: 1.35; }
+  .cci .cci-fechas {
+    justify-self: start; margin-top: 4px; padding: 3px 8px; border-radius: 4px;
+    background: rgba(87, 184, 233, .25); font-size: 14px; font-weight: 600;
+  }
+  .cci .cci-aviso { color: var(--gris-75); }
+  .cci .cci-aviso a { font-weight: 600; text-decoration: underline; text-decoration-color: var(--rojo); }
+  @media (hover: hover) { .cci .cci-card:hover { transform: translateY(-4px); } }
+
+  /* En el celular la agenda y las muestras son una fila deslizable */
+  @media (max-width: 640px) {
+    .cci .cci-fila {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px;
+      margin-inline: -16px; padding: 4px 16px 18px;
+      scrollbar-width: none;
+    }
+    .cci .cci-fila::-webkit-scrollbar { display: none; }
+    .cci .cci-fila > li { flex: 0 0 76%; scroll-snap-align: start; }
+  }
+
+  /* Accesos */
+  .cci .cci-grupos { display: grid; gap: clamp(16px, 2.4vw, 28px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cci .cci-grupo h3 {
+    margin-bottom: 10px; font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gris-75);
+  }
+  .cci .cci-grupo ul { display: grid; gap: 16px; }
+  /* Los botones son los .cb-btn del CSS adicional, con el nombre alineado a la izquierda
+     a 36 px del borde en todos. botonesCC.js dibuja la barra roja 17 px antes del texto:
+     queda a 19 px del borde, con aire a los dos lados cuando el texto se corre en el hover. */
+  .cci .cb-btn { justify-content: flex-start; height: 100%; padding: 0 24px 0 36px; }
+  .cci .cb-btn span { display: inline-flex; align-items: center; gap: 6px; text-align: left; }
+  .cci .cb-btn .cci-ext { flex: none; width: 13px; height: 13px; }
+
+  @media (max-width: 860px) {
+    .cci .cci-grupos { grid-template-columns: minmax(0, 1fr); }
+    .cci .cci-grupo ul {
+      display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px;
+      margin-inline: -16px; padding: 2px 16px 14px; scrollbar-width: none;
+    }
+    .cci .cci-grupo ul::-webkit-scrollbar { display: none; }
+    .cci .cci-grupo li { flex: 0 0 auto; scroll-snap-align: start; }
+    .cci .cb-btn { white-space: nowrap; }
+  }
+
+  /* Newsletter */
+  .cci-news { padding-top: calc(var(--aire) + var(--desfase)); padding-bottom: clamp(40px, 6vw, 72px); }
+  .cci .cci-lamina {
+    position: relative; isolation: isolate; overflow: hidden;
+    display: grid; gap: 22.4px; align-items: center;
+    padding: clamp(24px, 5vw, 56px);
+    border-radius: 12px; color: #fff;
+    background:
+      radial-gradient(92% 130% at 74% 118%, rgba(255, 255, 255, .34) 0%, #57b8e9 22%, rgba(87, 184, 233, .5) 42%, rgba(16, 80, 138, .22) 62%, transparent 84%),
+      linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
+  }
+  .cci .cci-lamina::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(100deg, rgba(0, 18, 38, .72) 0%, rgba(0, 18, 38, .4) 38%, rgba(0, 18, 38, .12) 56%, transparent 70%);
+  }
+  .cci .cci-lamina h2 { font-size: clamp(25.6px, 3.6vw, 40px); font-weight: 800; line-height: 1.08; max-width: 18ch; }
+  .cci .cci-lamina p { margin-top: 11.2px; max-width: 46ch; font-size: clamp(16px, 1.6vw, 17.9px); color: rgba(255, 255, 255, .92); }
+  .cci .cci-lamina a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  /* El panel oscurece las barras que pasan por detrás: el blanco sobre celeste no da contraste. */
+  .cci .cci-form {
+    width: 100%; max-width: 460px; padding: clamp(16px, 2.4vw, 24px); border-radius: 10px;
+    background: rgba(0, 22, 48, .62);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
+  }
+  .cci .cci-form .wpcf7-form { display: grid; gap: 12px; margin: 0; }
+  .cci .cci-form p { margin: 0; max-width: none; }
+  .cci .cci-form label { display: grid; gap: 5.6px; font-weight: 600; color: #fff; }
+  .cci .cci-form input[type="email"] {
+    width: 100%; height: 52px; margin: 0; padding: 0 16px;
+    border: 0; border-radius: 8px; background: #fff; color: var(--azul); font: inherit; font-size: 16px;
+  }
+  .cci .cci-form input[type="email"]:focus { outline: 0; box-shadow: 0 0 0 3px var(--rojo); }
+  .cci .cci-form .wpcf7-acceptance label { display: flex; align-items: flex-start; gap: 8.8px; font-weight: 400; font-size: 15px; }
+  .cci .cci-form .wpcf7-list-item { margin: 0; }
+  .cci .cci-form input[type="checkbox"] { flex: none; width: 24px; height: 24px; margin: 0; accent-color: var(--celeste); }
+  .cci .cci-form input[type="submit"] {
+    justify-self: start; min-height: 52px; margin: 0; padding: 0 26px;
+    border: 0; border-radius: 8px; background: #fff; color: var(--azul);
+    font: inherit; font-weight: 700; cursor: pointer;
+  }
+  .cci .cci-form input[type="submit"]:hover { background: var(--celeste); color: var(--azul); }
+  .cci .cci-form input[type="submit"]:focus-visible { outline: 0; box-shadow: 0 0 0 3px var(--rojo); }
+  .cci .cci-form .wpcf7-response-output { margin: 0; padding: 9.6px 12.8px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .6); color: #fff; }
+  .cci .cci-form .wpcf7-not-valid-tip { color: #fff; font-weight: 600; }
+  .cci .cci-form .wpcf7-spinner { display: none; }
+  .cci .cci-barras { position: absolute; right: clamp(16px, 4vw, 44px); bottom: 0; z-index: -1; height: clamp(110px, 16vw, 190px); width: auto; opacity: .9; }
+  @media (min-width: 861px) { .cci .cci-lamina { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); } }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .cci .cci-card { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .cci .cci-card { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cci *, .cci *::before, .cci *::after { transition: none !important; }
+  }
+</style>
+
+<div class="cci cci-intro">
+  <h1>Agenda, espacios y eventos de la cultura de Santa Fe</h1>
+  <p>Capital Cultural es el sitio de la Secretaría de Cultura de la Municipalidad de Santa Fe: qué ver esta semana, las muestras en exhibición, los museos, teatros y salas de la ciudad, y cómo participar.</p>
+</div>

@@ -42,6 +42,7 @@ Decisiones tomadas:
 | `sitio-actual/header.html` · `footer.html` | El HTML de los bloques de Ultimate Addons que arman la cabecera y el pie |
 | `sitio-nuevo/header.html` | **El header nuevo**, liquid glass: se pega entero en el widget HTML del bloque de header de UAE, en lugar de `sitio-actual/header.html` |
 | `docs/header-glass.html` | Vista previa del header nuevo sobre una página de prueba. Abrilo en cualquier navegador |
+| `docs/inicio-preview.html` | **Vista previa de la home nueva**, antes de cargarla en Elementor: la home publicada con el header y los cuatro widgets nuevos en su lugar, y la agenda y las noticias del día en que se armó. Se regenera con `python docs/build-inicio-preview.py` |
 | `sitio-actual/pluginsCC.txt` | Plugins instalados en el WordPress, con versión; los marcados *¿es necesario?* están en revisión |
 | `sitio-actual/paginasUtilCC.docx` | Listado de páginas del sitio |
 | `sitio-actual/capitalcultural.WordPress.2026-10-22.xml` | Export de las páginas del WordPress (*Herramientas → Exportar*), con los datos de Elementor. De acá salen los textos e imágenes de las páginas nuevas |
@@ -56,6 +57,10 @@ Decisiones tomadas:
 | `sitio-nuevo/festival-disena-trayectoria.html` | **Festival Diseña, Historia y Trayectoria**: datos clave, línea de hitos, rubros, herramientas de apoyo y Expresiva |
 | `sitio-nuevo/festival-disena-formaciones.html` | **Festival Diseña, Formaciones**: ciclo en curso, archivo de clínicas plegado por año y los 15 disertantes con iniciales y CV en ventana |
 | `sitio-nuevo/festival-disena-docs.html` | **Festival Diseña, Documentación Oficial**: las 220 marcas seleccionadas con buscador y los siete PDF |
+| `sitio-nuevo/inicio-intro.html` | **Home, intro**: el H1 con la frase de qué es Capital Cultural y los estilos de los cuatro widgets de la home. Va primero |
+| `sitio-nuevo/inicio-agenda.html` | **Home, agenda y En exhibición**: lee el feed de la agenda, junta los eventos con varias fechas, marca «Gratis» y deja las muestras sólo en En exhibición |
+| `sitio-nuevo/inicio-accesos.html` | **Home, accesos**: los 16 destinos en tres grupos (Eventos · Espacios · Programas), con los botones `.cb-btn` de siempre y el nombre alineado a la izquierda; Teatro Municipal y Convocatorias vigentes llevan ↗ porque salen de Capital Cultural |
+| `sitio-nuevo/inicio-newsletter.html` | **Home, newsletter**: la lámina «Suscribite a nuestro newsletter cultural» con el formulario de Contact Form 7 adentro |
 
 ### Huellas de mi Ciudad: lo que queda a mano
 
@@ -97,6 +102,45 @@ Decisiones tomadas:
 - **El menú ya no queda fijo al bajar.** No lo hacía antes, porque estaba en un widget propio y `position: sticky` no sale de su contenedor, y además quedaba debajo del header fijo.
 - **Cambios de texto:** el hero ya no repite «Festival Diseña es…», porque el título de la página lo dice justo arriba. «¿Tenés una marca? Cómo participar» lleva a Documentación Oficial, donde están los lineamientos, y no a Formaciones.
 - **Confirmar los hitos:** «2017, 10 años» y «2022, 15 años» no cierran con una primera edición en 2008. Cierran si se cuentan ediciones (10.ª y 15.ª), no años.
+
+### Home: cómo se carga y lo que queda a mano
+
+- **El orden en Elementor**, de arriba abajo. Cada widget nuevo es un widget HTML con el archivo entero adentro:
+  1. Header, sin tocar la sección. Su HTML es `sitio-nuevo/header.html`, que ahora trae el menú visible en escritorio (Agenda · Espacios · Eventos · Convocatorias · Noticias) y el buscador. Es el de todo el sitio.
+  2. `inicio-intro.html`, en una sección nueva. Tiene el H1 y los estilos de los otros tres widgets, así que va primero.
+  3. La sección del slider `[capital_slider]`, sin tocar.
+  4. `inicio-accesos.html`, en la sección de los doce botones de espacios. Se borra la sección de los cuatro eventos (+ Feria, Festival Diseña, Noche de los Museos y Feria del Libro): ahora están en el grupo Eventos. Se dice así y no «Festivales» porque el único festival es el Diseña; los otros son eventos que la Secretaría produce o coproduce.
+  5. `inicio-agenda.html`, en la sección de la agenda: se borra el shortcode de la agenda y se pone este widget en su lugar. Trae primero *En exhibición* y después la *Agenda*.
+  6. La sección de Noticias, con *Avanzado → ID CSS* `noticias` para que funcione el enlace del menú.
+  7. `inicio-newsletter.html`, en una sección nueva. **Queda para después**: la home se publica sin el newsletter hasta elegir el servicio de envío (ver abajo).
+  8. Se borra la sección **Propuestas activas y próximas**: repetía tres muestras de la agenda.
+- **El newsletter no se publica todavía.** Contact Form 7 sólo junta correos: no guarda la lista ni envía. Lo recomendado es un servicio externo (Brevo o MailerLite, o el que ya use la Municipalidad) con la cuenta a nombre de `capitalcultural@`, el dominio autenticado por sistemas (SPF/DKIM) y el texto de consentimiento revisado por legales (Ley 25.326; la base puede tener que registrarse ante la AAIP). Cuando esté, se cambia el shortcode de `inicio-newsletter.html` por el formulario de ese servicio. Lo que sigue es la variante con Contact Form 7, por si se usa mientras tanto.
+- **Variante con Contact Form 7**, que ya está instalado. Hay que crear el formulario y cambiar `NEWSLETTER` en el shortcode por su id. Plantilla del formulario:
+  ```
+  <label>Tu correo electrónico [email* correo autocomplete:email placeholder "nombre@correo.com"]</label>
+  [acceptance acepto] Acepto recibir la agenda cultural por correo. Puedo darme de baja cuando quiera. [/acceptance]
+  [submit "Suscribirme"]
+  ```
+  En *Correo*: para `capitalcultural@santafeciudad.gov.ar`, asunto `Alta en el newsletter cultural: [correo]`. CF7 sólo manda un mail por alta, no guarda la lista ni envía el newsletter: para tener la lista, instalar *Flamingo* (es del mismo autor), y para enviarlo hace falta un servicio de envío (Brevo, Mailchimp…). Si se elige uno, se reemplaza el shortcode por su formulario y la lámina queda igual.
+- **«Gratis» sale de la agenda.** El feed no trae el precio, así que la marca aparece cuando el evento tiene la categoría «Gratis» o «Entrada libre» en `agenda.santafeciudad.gov.ar`, o lo dice el título. Hoy ningún evento la tiene. No está comprobado que la categoría nueva llegue al feed: cargarla en un evento y mirar la home.
+- **«Más fechas»**: los eventos con el mismo título y el mismo lugar se juntan en una tarjeta, con la primera fecha y «Más fechas hasta el…». La agenda nueva no tiene los filtros Hoy · Este finde · Esta semana: con dos o tres eventos de Cultura por semana casi siempre quedaban vacíos.
+- **Las muestras** (las que en la agenda llevan «Muestra») van sólo en *En exhibición*, ordenadas por la que cierra antes.
+- **Alt de las fotos de Noticias.** El plugin de noticias las deja con `alt=""` y su código no está en este repo. `inicio-agenda.html` las completa con el titular; lo correcto es arreglarlo en el plugin. Con eso la home pasa de 49 imágenes sin alt a 0.
+- **El slider tiene botón de pausa**, que pide la pauta 2.2.2 de WCAG porque pasa solo cada 20 segundos. **Ya está publicado**: el sitio tiene la versión 2.3.1, con el mismo botón y CSS para el celular que este repo no tiene. La copia de `sitio-actual/capital-cultural-slider/` quedó atrás, en 2.2.2: no subirla como ZIP, porque volvería el plugin a una versión anterior. Hay que traer la 2.3.1 al repo.
+- **Teatro Municipal** tiene sitio propio y lleva ↗, igual que Convocatorias vigentes, que está en otra parte del sitio de la Municipalidad. Red de bibliotecas santafesinas es de Capital Cultural: el botón viejo apuntaba a `/bibliotecaspopularessantafesinas/`, que no carga, y ahora va a `/capitalcultural/bibliotecaspopularessantafesinas/`. El botón *Centro Cultural Muttis* pasa a llamarse **Centro Cultural Municipal**, como la página; en el header apuntaba a `/bibliotecamuttis/`, que da 404.
+- **Auditoría de la home** (29/10/2026, en `docs/inicio-preview.html`, a 375, 768, 1024, 1280 y 1440 px). Los bloques nuevos no tienen scroll lateral, texto de menos de 14 px, texto cortado ni fallas de contraste; hay un solo H1 y ninguna imagen sin alt. Lo que se corrigió en la auditoría:
+  - Astra achica la fuente raíz en el celular (~11,9 px) y los bloques medían en `rem`: el texto bajaba a 10–12 px. Ahora van en px.
+  - Los bloques arrancaban 32 px más adentro que el slider y las noticias. Ahora todo usa la misma caja de 1120 px.
+  - Los enlaces del menú pasaron de 35 a 44 px de alto, y la casilla del newsletter, de 13 a 24 px.
+  - Explorá es una sola región de navegación y no tres.
+- **Lo que la auditoría encontró en los plugins**, que no están en este repo:
+  - **Slider 2.3.1**: mide `width: 100vw` y con la barra de scroll de escritorio se pasa del ancho y aparece scroll lateral, también en el sitio publicado. La home lo recorta con `overflow-x: clip`; lo correcto es `width: 100%` en el plugin. Los puntos de navegación miden 30 × 4 px (el mínimo es 24 × 24) y los textos de la placa, 10 y 13 px.
+  - **Noticias**: la fecha y el resumen van en 12 y 13 px.
+  - **Agenda**: el feed da la imagen original (1200 px) para tarjetas de 254 px. Si el plugin pudiera pedir el tamaño `medium_large` de WordPress, la home bajaría bastante de peso.
+- **Yoast**, en la caja de la página de inicio:
+  - Meta descripción: `Agenda cultural de Santa Fe: muestras, conciertos, eventos y convocatorias de la Secretaría de Cultura, y los museos, teatros y salas de la ciudad.` (la de 2021 hablaba de «vidrieras virtuales»)
+  - Imagen para redes (pestaña *Social*): `2026/07/MarcePucci_SC_MMAV_SalonAnualNacional_25012025_002.jpg`, en el tamaño 1536×1024. La de ahora es el logo de 2021, de 663×220.
+  - Título SEO, si se quiere cambiar: `Capital Cultural · Agenda y espacios culturales de Santa Fe`. Hoy la pestaña dice «Inicio - Capital Cultural».
 
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
 

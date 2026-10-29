@@ -1,0 +1,113 @@
+<section class="cci" id="en-exhibicion" aria-labelledby="cci-muestras-t">
+  <div class="cci-cabeza">
+    <h2 class="cci-titulo" id="cci-muestras-t"><span class="cci-barra" aria-hidden="true"></span>En exhibición</h2>
+    <a class="cci-mas" href="/capitalcultural/museos-y-salas/">Museos y salas</a>
+  </div>
+  <ul class="cci-fila" data-cci="muestras" aria-busy="true"></ul>
+</section>
+
+<section class="cci" id="agenda" aria-labelledby="cci-agenda-t">
+  <div class="cci-cabeza">
+    <h2 class="cci-titulo" id="cci-agenda-t"><span class="cci-barra" aria-hidden="true"></span>Agenda</h2>
+    <a class="cci-mas" href="https://agenda.santafeciudad.gov.ar/" target="_blank" rel="noopener">Ver agenda completa<svg class="cci-ext" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="screen-reader-text">(se abre en otro sitio)</span></a>
+  </div>
+  <ul class="cci-fila" data-cci="agenda" aria-busy="true"></ul>
+</section>
+
+<script>
+(function () {
+  var AGENDA = 'https://agenda.santafeciudad.gov.ar/';
+  var TZ = 'America/Argentina/Buenos_Aires';
+  var MAX = 8;
+  var agenda = document.querySelector('[data-cci="agenda"]');
+  var muestras = document.querySelector('[data-cci="muestras"]');
+  if (!agenda || !muestras) return;
+
+  var parte = function (ts, opts) { return new Intl.DateTimeFormat('es-AR', Object.assign({ timeZone: TZ }, opts)).format(ts * 1000).replace('.', ''); };
+  var dia = function (ts) { return parte(ts, { year: 'numeric', month: '2-digit', day: '2-digit' }); };
+  var anioActual = parte(Date.now() / 1000, { year: 'numeric' });
+  var fecha = function (ts) {
+    var s = parte(ts, { day: 'numeric', month: 'short' });
+    var y = parte(ts, { year: 'numeric' });
+    return y === anioActual ? s : s + ' ' + y;
+  };
+  var mayus = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
+  // Un evento que termina a medianoche termina el día anterior.
+  var fin = function (e) { return e.end - 1; };
+  var cuando = function (e) {
+    if (dia(e.start) !== dia(fin(e))) return fecha(e.start) + ' al ' + fecha(fin(e));
+    var d = mayus(parte(e.start, { weekday: 'short' })) + ' ' + fecha(e.start);
+    return e.allDay ? d : d + ' · ' + parte(e.start, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) + ' h';
+  };
+  var norm = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\W+/g, ' ').trim(); };
+  var esMuestra = function (e) { return norm(e.kicker) === 'muestra'; };
+  // La agenda no publica el precio: se marca con la categoría «Gratis» o «Entrada libre».
+  var esGratis = function (e) { return /\b(gratis|gratuit[oa]|entrada libre)\b/.test(norm((e.categories || []).join(' ') + ' ' + e.kicker + ' ' + e.title)); };
+  var esc = function (s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
+
+  var tarjeta = function (e, linea, extra) {
+    var marcas = (e.kicker && !esMuestra(e) ? '<span class="cci-marca">' + esc(e.kicker) + '</span>' : '') +
+      (esGratis(e) ? '<span class="cci-marca cci-marca--gratis">Gratis</span>' : '');
+    return '<li><a class="cci-card" href="' + esc(e.url) + '" target="_blank" rel="noopener">' +
+      '<span class="cci-media">' + (e.image ? '<img src="' + esc(e.image) + '" alt="' + esc(e.title) + '" loading="lazy" decoding="async">' : '') +
+      (marcas ? '<span class="cci-marcas">' + marcas + '</span>' : '') + '</span>' +
+      '<span class="cci-cuerpo"><h3 class="cci-nombre">' + esc(e.title) + '</h3>' +
+      '<span class="cci-cuando">' + esc(linea) + '</span>' +
+      (e.venue ? '<span class="cci-donde">' + esc(e.venue) + '</span>' : '') + (extra || '') +
+      '</span><span class="screen-reader-text">(se abre en la agenda)</span></a></li>';
+  };
+  var aviso = function (ul, texto) {
+    ul.innerHTML = '<li class="cci-aviso">' + texto + ' <a href="' + AGENDA + '" target="_blank" rel="noopener">Mirá la agenda completa</a>.</li>';
+  };
+  var listo = function () { agenda.removeAttribute('aria-busy'); muestras.removeAttribute('aria-busy'); };
+
+  fetch('/capitalcultural/wp-admin/admin-ajax.php?action=cca_eventos', { credentials: 'same-origin' })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      var ahora = data.now || Date.now() / 1000;
+      var eventos = (data.events || [])
+        .filter(function (e) { return e.end > ahora && (e.categories || []).indexOf('Cultura') !== -1; })
+        .sort(function (a, b) { return a.start - b.start; });
+
+      // Un evento con varias fechas se muestra una vez, con la primera fecha y «Más fechas».
+      var grupos = [], porClave = {};
+      eventos.filter(function (e) { return !esMuestra(e); }).forEach(function (e) {
+        var k = norm(e.title) + '|' + norm(e.venue);
+        if (porClave[k]) porClave[k].push(e); else grupos.push(porClave[k] = [e]);
+      });
+      agenda.innerHTML = grupos.slice(0, MAX).map(function (g) {
+        var ultimo = Math.max.apply(null, g.map(fin));
+        var mas = g.length > 1 ? '<span class="cci-fechas">Más fechas hasta el ' + esc(fecha(ultimo)) + '</span>' : '';
+        return tarjeta(g[0], cuando(g[0]), mas);
+      }).join('');
+      if (!grupos.length) aviso(agenda, 'No hay actividades cargadas para los próximos días.');
+
+      // Las muestras van sólo en «En exhibición», ordenadas por la que cierra antes.
+      var enMuestra = eventos.filter(esMuestra).sort(function (a, b) { return a.end - b.end; });
+      muestras.innerHTML = enMuestra.slice(0, MAX).map(function (e) {
+        return tarjeta(e, 'Hasta el ' + fecha(fin(e)));
+      }).join('');
+      if (!enMuestra.length) aviso(muestras, 'No hay muestras cargadas en este momento.');
+      listo();
+    })
+    .catch(function () {
+      aviso(agenda, 'No pudimos cargar la agenda.');
+      muestras.closest('section').hidden = true;
+      listo();
+    });
+
+  // shortcut: el plugin de noticias deja las fotos con alt vacío; se completa con el título hasta corregirlo en el plugin.
+  var conAlt = function (root) {
+    root.querySelectorAll('.ccn-card img:not([alt]), .ccn-card img[alt=""]').forEach(function (img) {
+      var t = img.closest('.ccn-card').querySelector('.ccn-name');
+      if (t) img.alt = t.textContent.trim();
+    });
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-ccn-noticias]').forEach(function (n) {
+      conAlt(n);
+      new MutationObserver(function () { conAlt(n); }).observe(n, { childList: true, subtree: true });
+    });
+  });
+})();
+</script>

@@ -128,7 +128,7 @@
     background: linear-gradient(rgba(255, 255, 255, var(--ccg-top)), rgba(255, 255, 255, var(--ccg-bot)));
   }
   .ccg-header .ccg-menu ul {
-    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 110px);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 170px);
     overflow-y: auto;
     margin: 0;
     padding: 8px;
@@ -152,8 +152,93 @@
   .ccg-header .ccg-logo:focus-visible,
   .ccg-header .ccg-toggle:focus-visible { outline: 3px solid var(--ccg-rojo); outline-offset: 3px; }
   .ccg-header .ccg-menu a:focus-visible { outline: 3px solid var(--ccg-rojo); outline-offset: -3px; }
+  .ccg-header .ccg-nav a:focus-visible { outline: 3px solid var(--ccg-rojo); outline-offset: 0; }
+
+  .ccg-header .ccg-nav { display: none; }
+  .ccg-header .ccg-nav a,
+  .ccg-header .ccg-nav a:hover,
+  .ccg-header .ccg-nav a:focus {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    color: var(--ccg-azul);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    pointer-events: auto;
+  }
+  .ccg-header .ccg-nav a:hover { background: rgba(255, 255, 255, .6); }
+  .ccg-ext { width: 12px; height: 12px; flex: none; }
+
+  .ccg-header .ccg-search {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .7);
+    box-shadow: inset 0 0 0 1px rgba(0, 39, 81, .14);
+    pointer-events: auto;
+  }
+  .ccg-header .ccg-search input,
+  .ccg-header .ccg-search input:focus {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    margin: 0;
+    padding: 0 4px 0 16px;
+    border: 0;
+    border-radius: 999px 0 0 999px;
+    background: transparent;
+    box-shadow: none;
+    color: var(--ccg-azul);
+    font: inherit;
+    font-size: 15px;
+    outline: 0;
+  }
+  .ccg-header .ccg-search input::placeholder { color: #606060; opacity: 1; }
+  .ccg-header .ccg-search:focus-within { box-shadow: 0 0 0 3px var(--ccg-rojo); }
+  .ccg-header .ccg-search button,
+  .ccg-header .ccg-search button:hover,
+  .ccg-header .ccg-search button:focus {
+    display: grid;
+    place-content: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: none;
+    color: var(--ccg-azul);
+    cursor: pointer;
+  }
+  .ccg-search svg { width: 20px; height: 20px; }
+  .ccg-header .ccg-pill > .ccg-search { display: none; }
+  .ccg-menu .ccg-search { margin: 8px 8px 0; }
+  .ccg-header .ccg-menu .ccg-seccion a { font-weight: 700; }
+  .ccg-header .ccg-menu .ccg-seccion + li:not(.ccg-seccion) { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0, 39, 81, .14); }
 
   .ccg-spacer { height: calc(env(safe-area-inset-top, 0px) + 90px); }
+
+  /* Debajo de 1024 px el menú visible no entra en la píldora: vive en el desplegable. */
+  @media (min-width: 1024px) {
+    .ccg-header .ccg-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+    .ccg-header .ccg-pill > .ccg-search { display: flex; width: 150px; margin: 0 4px 0 8px; }
+    .ccg-header .ccg-menu .ccg-search, .ccg-header .ccg-menu .ccg-seccion { display: none; }
+  }
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    .ccg-header .ccg-nav a, .ccg-header .ccg-nav a:hover, .ccg-header .ccg-nav a:focus { padding-inline: 8px; }
+    .ccg-header .ccg-pill > .ccg-search { width: 140px; }
+  }
+  @media (min-width: 1200px) { .ccg-header .ccg-pill > .ccg-search { width: 200px; } }
 
   @media (min-width: 601px) { .admin-bar .ccg-header { top: 46px; } }
   @media (min-width: 783px) { .admin-bar .ccg-header { top: 32px; } }
@@ -194,13 +279,33 @@
         <text class="ccg-logo-word" x="59.13" y="23.41" fill="#002751">CULTURA</text>
       </svg>
     </a>
+    <nav class="ccg-nav" aria-label="Secciones">
+      <a href="/capitalcultural/#agenda">Agenda</a>
+      <a href="/capitalcultural/#espacios">Espacios</a>
+      <a href="/capitalcultural/#eventos">Eventos</a>
+      <a href="https://santafeciudad.gov.ar/secretaria-de-cultura/convocatorias-vigentes/">Convocatorias<svg class="ccg-ext" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="screen-reader-text">(otro sitio)</span></a>
+      <a href="/capitalcultural/#noticias">Noticias</a>
+    </nav>
+    <form class="ccg-search" role="search" action="/capitalcultural/" method="get">
+      <input type="search" name="s" placeholder="Buscar" aria-label="Buscar en Capital Cultural">
+      <button type="submit" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></button>
+    </form>
     <button class="ccg-toggle" type="button" aria-label="Menú" aria-expanded="false" aria-controls="ccg-menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 
   <nav class="ccg-menu" id="ccg-menu" aria-label="Principal" hidden>
+    <form class="ccg-search" role="search" action="/capitalcultural/" method="get">
+      <input type="search" name="s" placeholder="Buscar" aria-label="Buscar en Capital Cultural">
+      <button type="submit" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></button>
+    </form>
     <ul>
+      <li class="ccg-seccion"><a href="/capitalcultural/#agenda">Agenda</a></li>
+      <li class="ccg-seccion"><a href="/capitalcultural/#espacios">Espacios</a></li>
+      <li class="ccg-seccion"><a href="/capitalcultural/#eventos">Eventos</a></li>
+      <li class="ccg-seccion"><a href="https://santafeciudad.gov.ar/secretaria-de-cultura/convocatorias-vigentes/">Convocatorias <svg class="ccg-ext" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="screen-reader-text">(otro sitio)</span></a></li>
+      <li class="ccg-seccion"><a href="/capitalcultural/#noticias">Noticias</a></li>
       <li><a href="/capitalcultural/masferia/">+ Feria</a></li>
       <li><a href="/capitalcultural/festivaldisena/">Festival Diseña</a></li>
       <li><a href="/capitalcultural/nochedelosmuseos/">Noche de los Museos</a></li>
@@ -208,15 +313,14 @@
       <li><a href="/capitalcultural/anfiteatro/">Anfiteatro del Sur</a></li>
       <li><a href="/capitalcultural/estacionbelgrano/">Estación Belgrano</a></li>
       <li><a href="/capitalcultural/mercadoprogreso/">Mercado Progreso</a></li>
-      <li><a href="https://teatromunicipal.santafeciudad.gov.ar/">Teatro Municipal</a></li>
-      <li><a href="/capitalcultural/bibliotecamuttis/">Centro Cultural Muttis</a></li>
+      <li><a href="https://teatromunicipal.santafeciudad.gov.ar/">Teatro Municipal <svg class="ccg-ext" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="screen-reader-text">(otro sitio)</span></a></li>
+      <li><a href="/capitalcultural/centroculturalmunicipal/">Centro Cultural Municipal</a></li>
       <li><a href="/capitalcultural/museos-y-salas/">Museos y Salas</a></li>
       <li><a href="/capitalcultural/somosmusica/">Somos Música</a></li>
       <li><a href="/capitalcultural/elencoyorganismos/">Elenco y Organismos</a></li>
       <li><a href="/capitalcultural/bibliotecaspopularessantafesinas/">Red de bibliotecas santafesinas</a></li>
       <li><a href="/capitalcultural/huellas-de-mi-ciudad/">Huellas de mi Ciudad</a></li>
       <li><a href="/capitalcultural/caminosculturales/">Caminos Culturales</a></li>
-      <li><a href="/secretaria-de-cultura/convocatorias-vigentes/">Convocatorias vigentes</a></li>
     </ul>
   </nav>
 </div>

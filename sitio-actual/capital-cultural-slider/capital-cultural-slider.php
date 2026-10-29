@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Capital Cultural Slider
  * Description: Slider principal administrable para Capital Cultural. Usar shortcode [capital_slider].
- * Version: 2.2.1
+ * Version: 2.2.2
  * Author: Esteban
  * Text Domain: capital-cultural-slider
  */
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class Capital_Cultural_Slider {
-    const VERSION = '2.2.1';
+    const VERSION = '2.2.2';
     const POST_TYPE = 'cc_slide';
     const NONCE = 'cc_slider_nonce';
     const NONCE_ACTION = 'cc_slider_save_meta';
@@ -411,6 +411,12 @@ final class Capital_Cultural_Slider {
             <button class="cc-arrow cc-prev" type="button" aria-label="Slide anterior">&#10094;</button>
             <button class="cc-arrow cc-next" type="button" aria-label="Slide siguiente">&#10095;</button>
             <div class="cc-dots" aria-label="Navegación del slider"></div>
+            <?php if (count($slide_ids) > 1) : ?>
+                <button class="cc-pause" type="button" aria-label="Pausar el slider">
+                    <svg class="cc-pause-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14M16 5v14"/></svg>
+                    <svg class="cc-play-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5l11 7-11 7z"/></svg>
+                </button>
+            <?php endif; ?>
         </div>
         <?php
         return ob_get_clean();
