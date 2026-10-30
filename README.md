@@ -149,6 +149,29 @@ Decisiones tomadas:
   - Facebook y WhatsApp guardan la vista previa vieja un tiempo. Para renovarla: pegar la URL en el *Depurador de contenido compartido* de Meta y tocar *Volver a extraer*.
   - **Ojo al editar la home en Elementor**: Yoast guarda su formulario junto con la página. Si al abrir el editor la pestaña de Yoast muestra el título o la descripción vacíos, no guardar hasta que aparezcan.
 
+### Resultados de búsqueda
+
+Los renderiza Astra, no Elementor. Cambiado el 30/10/2026:
+
+- **Sin autor.** *Personalizar → Blog* (`blog-meta`) pasó de autor y fecha a sólo fecha, así que el nombre sale del HTML en la búsqueda y en los archivos de entradas. Antes era un enlace a `/author/ecordoba/`, que mostraba el usuario de WordPress. **La fecha queda**, a pedido, debajo del título.
+- **Diseño:** sección 18 de `sitio-actual/cssAdicionalCCAstra.css`, cargada en *CSS adicional*. Tarjetas como las de la home, toda la tarjeta es clicable, misma caja de 1120 px, medidas en px. Sólo afecta a `.search`. Es lo único que se sumó al CSS publicado: el resto del archivo del repo no coincide con el del sitio (16.119 y 15.366 caracteres antes del cambio) y conviene compararlos.
+- **Textos en inglés:** fragmento de WPCode *Traducciones de Astra (paginación y buscador)*, id 33388, PHP sólo en el frontend. Traduce Next, Previous, Search... y Post pagination, y vale para todo el sitio:
+  ```php
+  add_filter( 'gettext_astra', function ( $traduccion, $texto ) {
+  	$textos = array(
+  		'Next'            => 'Siguiente',
+  		'Previous'        => 'Anterior',
+  		'Search...'       => 'Buscar…',
+  		'Post pagination' => 'Paginación de entradas',
+  	);
+  	return isset( $textos[ $texto ] ) ? $textos[ $texto ] : $traduccion;
+  }, 10, 2 );
+  ```
+- **Lo que queda:**
+  - `/author/ecordoba/` sigue respondiendo y muestra el usuario. Se apaga en *Yoast SEO → Ajustes → Características del sitio → Archivos de autor*.
+  - Algunos resúmenes salen del texto de la página y quedan rotos: «NCHE DE LS MUSES» en Noche de los Museos, donde las O del título son gráficos.
+  - La búsqueda no encuentra lo que está sólo en `agenda.santafeciudad.gov.ar`: «Hábitat» da cero resultados aunque la muestra está en la home.
+
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
 
 Para ver el sistema visual con los componentes funcionando —vidrio, botones con sus estados, el remate de barras, la lámina del footer— abrí `docs/sistema-visual.html`.

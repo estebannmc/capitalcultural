@@ -751,3 +751,90 @@ a {
   text-decoration-color: #e63312;
   text-underline-offset: 3px;
 }
+
+/* ==========================================================================
+   18. RESULTADOS DE BÚSQUEDA
+   Medidas en px: Astra achica la fuente raíz en el celular.
+   ========================================================================== */
+
+/* La miga del sitio no tiene página actual en la búsqueda: queda la de Astra */
+.search .cc-breadcrumb { display: none; }
+
+.search .ast-archive-title,
+.search .ast-archive-title span { color: #002751; font-weight: 800; }
+
+/* Misma caja de 1120 px que la home */
+.search .site-main {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1184px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}
+.search .site-main > .ast-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+  margin: 0;
+}
+.search .site-main .ast-article-post { width: auto; margin: 0; padding: 0; }
+
+.search .site-main .ast-article-inner {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+  box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+  transition: transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+@media (hover: hover) {
+  .search .site-main .ast-article-inner:hover { transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search .site-main .ast-article-inner { transition: none; }
+}
+
+/* El autor ya no sale de Astra (blog-meta): de esa línea queda la fecha */
+.search .ast-blog-meta-container { margin: 0 0 8px; }
+.search .ast-blog-meta-container .entry-meta { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.4; color: #606060; }
+.search .ast-blog-featured-section:empty,
+.search .site-main .entry-content { display: none; }
+
+.search .site-main .entry-title { margin: 0 0 8px; font-size: 19px; font-weight: 700; line-height: 1.25; }
+.search .site-main .entry-title a { color: #002751; text-decoration: none; }
+/* Toda la tarjeta lleva al resultado */
+.search .site-main .entry-title a::after { content: ""; position: absolute; inset: 0; border-radius: 8px; }
+.search .site-main .entry-title a:focus-visible { outline: 0; }
+.search .site-main .entry-title a:focus-visible::after { box-shadow: 0 0 0 2px #fff, 0 0 0 5px #e63312; }
+
+.search .ast-excerpt-container,
+.search .ast-excerpt-container p { margin: 0; font-size: 15px; line-height: 1.5; color: #606060; }
+
+.search .ast-pagination { padding: 32px 0 50px; }
+.search .ast-pagination .nav-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; }
+.search .ast-pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  float: none;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  color: #002751;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+}
+.search .ast-pagination .page-numbers.current { background: #002751; color: #fff; }
+.search .ast-pagination .page-numbers.dots { min-width: 0; }
+.search .ast-pagination .page-numbers.next,
+.search .ast-pagination .page-numbers.prev { width: auto; }
+
+.search-no-results .no-results { max-width: 560px; margin: 32px auto 50px; text-align: center; }
+.search-no-results .no-results p { font-size: 16px; line-height: 1.5; color: #002751; }
