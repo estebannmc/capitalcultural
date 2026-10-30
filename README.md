@@ -168,7 +168,7 @@ Los renderiza Astra, no Elementor. Cambiado el 30/10/2026:
   }, 10, 2 );
   ```
 - **Lo que queda:**
-  - `/author/ecordoba/` sigue respondiendo y muestra el usuario. Se apaga en *Yoast SEO → Ajustes → Características del sitio → Archivos de autor*.
+  - `/author/ecordoba/` sigue respondiendo y muestra el usuario. Se apaga en *Yoast SEO → Ajustes → Avanzado → Archivos de autor*.
   - Algunos resúmenes salen del texto de la página y quedan rotos: «NCHE DE LS MUSES» en Noche de los Museos, donde las O del título son gráficos.
   - La búsqueda no encuentra lo que está sólo en `agenda.santafeciudad.gov.ar`: «Hábitat» da cero resultados aunque la muestra está en la home.
 
