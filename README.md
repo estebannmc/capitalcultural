@@ -168,7 +168,8 @@ Los renderiza Astra, no Elementor. Cambiado el 30/10/2026:
   }, 10, 2 );
   ```
 - **Lo que queda:**
-  - `/author/ecordoba/` sigue respondiendo y muestra el usuario. Se apaga en *Yoast SEO → Ajustes → Avanzado → Archivos de autor*.
+  - **Archivo de autor apagado** el 30/10/2026 en *Yoast SEO → Ajustes → Avanzado → Archivos de autor*: `/author/ecordoba/` redirige a la home, `?author=N` da 404 y el sitemap ya no lo lista.
+  - El nombre sigue en los metadatos de Yoast de las 85 entradas, sin verse en la página: `meta author`, «Escrito por» en las vistas previas de enlaces y el JSON-LD. Sale de *Usuarios → Perfil → Mostrar este nombre públicamente*, o con filtros de Yoast.
   - Algunos resúmenes salen del texto de la página y quedan rotos: «NCHE DE LS MUSES» en Noche de los Museos, donde las O del título son gráficos.
   - La búsqueda no encuentra lo que está sólo en `agenda.santafeciudad.gov.ar`: «Hábitat» da cero resultados aunque la muestra está en la home.
 
