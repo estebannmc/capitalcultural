@@ -105,6 +105,8 @@ Decisiones tomadas:
 
 ### Home: cómo se carga y lo que queda a mano
 
+**Publicada el 29/10/2026**, en este orden y con el header nuevo. Las secciones del slider, de los botones y de la agenda traían márgenes de Elementor (40, 50 y 50/25 px) que se pusieron en 0, y la de Noticias va con *Separación de columnas: sin separación* y 50 px de margen abajo hasta el footer. La sección de la intro se creó desde la API de Elementor: si se rehace a mano, verificar que la columna y el widget tengan id.
+
 - **El orden en Elementor**, de arriba abajo. Cada widget nuevo es un widget HTML con el archivo entero adentro:
   1. Header, sin tocar la sección. Su HTML es `sitio-nuevo/header.html`, que ahora trae el menú visible en escritorio (Agenda · Espacios · Eventos · Convocatorias · Noticias) y el buscador. Es el de todo el sitio.
   2. `inicio-intro.html`, en una sección nueva. Tiene el H1 y los estilos de los otros tres widgets, así que va primero.
@@ -126,7 +128,9 @@ Decisiones tomadas:
 - **«Más fechas»**: los eventos con el mismo título y el mismo lugar se juntan en una tarjeta, con la primera fecha y «Más fechas hasta el…». La agenda nueva no tiene los filtros Hoy · Este finde · Esta semana: con dos o tres eventos de Cultura por semana casi siempre quedaban vacíos.
 - **Las muestras** (las que en la agenda llevan «Muestra») van sólo en *En exhibición*, ordenadas por la que cierra antes.
 - **Alt de las fotos de Noticias.** El plugin de noticias las deja con `alt=""` y su código no está en este repo. `inicio-agenda.html` las completa con el titular; lo correcto es arreglarlo en el plugin. Con eso la home pasa de 49 imágenes sin alt a 0.
-- **El slider tiene botón de pausa**, que pide la pauta 2.2.2 de WCAG porque pasa solo cada 20 segundos. **Ya está publicado**: el sitio tiene la versión 2.3.1, con el mismo botón y CSS para el celular que este repo no tiene. La copia de `sitio-actual/capital-cultural-slider/` quedó atrás, en 2.2.2: no subirla como ZIP, porque volvería el plugin a una versión anterior. Hay que traer la 2.3.1 al repo.
+- **El slider tiene botón de pausa**, que pide la pauta 2.2.2 de WCAG porque pasa solo cada 20 segundos. `sitio-actual/capital-cultural-slider/` es **la versión 2.3.2 publicada**, copiada del sitio el 29/10/2026 y comparada archivo por archivo: el sitio iba por delante del repo (srcset de las imágenes, botón con texto, etiquetas sugeridas). Si se vuelve a tocar el plugin en el panel, traerlo al repo antes de seguir.
+- **Enlaces del menú a la home** (`#agenda`, `#espacios`, `#eventos`, `#noticias`): el tema pone `scroll-behavior: smooth` y el salto animado de la carga no siempre llegaba. `inicio-agenda.html` salta sin animación al cargar y otra vez cuando terminan de cargar las muestras, salvo que la persona ya haya movido la página.
+- **El feed de la agenda a veces tarda** (`admin-ajax.php?action=cca_eventos`): cuando vence su caché lo rearma pidiendo la agenda y tardó 22 a 40 segundos; después responde en menos de un segundo. Mientras tanto las secciones dicen «Cargando…». No se le puso tiempo límite porque cortar el pedido puede dejar la caché sin rearmar. Lo correcto es que el plugin de la agenda (no está en este repo) renueve la caché con WP-Cron antes de que venza.
 - **Teatro Municipal** tiene sitio propio y lleva ↗, igual que Convocatorias vigentes, que está en otra parte del sitio de la Municipalidad. Red de bibliotecas santafesinas es de Capital Cultural: el botón viejo apuntaba a `/bibliotecaspopularessantafesinas/`, que no carga, y ahora va a `/capitalcultural/bibliotecaspopularessantafesinas/`. El botón *Centro Cultural Muttis* pasa a llamarse **Centro Cultural Municipal**, como la página; en el header apuntaba a `/bibliotecamuttis/`, que da 404.
 - **Auditoría de la home** (29/10/2026, en `docs/inicio-preview.html`, a 375, 768, 1024, 1280 y 1440 px). Los bloques nuevos no tienen scroll lateral, texto de menos de 14 px, texto cortado ni fallas de contraste; hay un solo H1 y ninguna imagen sin alt. Lo que se corrigió en la auditoría:
   - Astra achica la fuente raíz en el celular (~11,9 px) y los bloques medían en `rem`: el texto bajaba a 10–12 px. Ahora van en px.
@@ -134,13 +138,16 @@ Decisiones tomadas:
   - Los enlaces del menú pasaron de 35 a 44 px de alto, y la casilla del newsletter, de 13 a 24 px.
   - Explorá es una sola región de navegación y no tres.
 - **Lo que la auditoría encontró en los plugins**, que no están en este repo:
-  - **Slider 2.3.1**: mide `width: 100vw` y con la barra de scroll de escritorio se pasa del ancho y aparece scroll lateral, también en el sitio publicado. La home lo recorta con `overflow-x: clip`; lo correcto es `width: 100%` en el plugin. Los puntos de navegación miden 30 × 4 px (el mínimo es 24 × 24) y los textos de la placa, 10 y 13 px.
+  - **Slider 2.3.2**: mide `width: 100vw` y con la barra de scroll de escritorio se pasa del ancho y aparece scroll lateral, también en el sitio publicado. La home lo recorta con `overflow-x: clip`; lo correcto es `width: 100%` en el plugin. Los puntos de navegación miden 30 × 4 px (el mínimo es 24 × 24) y los textos de la placa, 10 y 13 px.
   - **Noticias**: la fecha y el resumen van en 12 y 13 px.
   - **Agenda**: el feed da la imagen original (1200 px) para tarjetas de 254 px. Si el plugin pudiera pedir el tamaño `medium_large` de WordPress, la home bajaría bastante de peso.
-- **Yoast**, en la caja de la página de inicio:
-  - Meta descripción: `Agenda cultural de Santa Fe: muestras, conciertos, eventos y convocatorias de la Secretaría de Cultura, y los museos, teatros y salas de la ciudad.` (la de 2021 hablaba de «vidrieras virtuales»)
-  - Imagen para redes (pestaña *Social*): `2026/07/MarcePucci_SC_MMAV_SalonAnualNacional_25012025_002.jpg`, en el tamaño 1536×1024. La de ahora es el logo de 2021, de 663×220.
-  - Título SEO, si se quiere cambiar: `Capital Cultural · Agenda y espacios culturales de Santa Fe`. Hoy la pestaña dice «Inicio - Capital Cultural».
+- **Yoast**, cargado el 29/10/2026 en la página de inicio (frase clave: `Capital Cultural`):
+  - Título SEO: `%%sitename%% %%sep%% Agenda, espacios y eventos de Santa Fe` → «Capital Cultural - Agenda, espacios y eventos de Santa Fe» (57 caracteres). Antes: «Inicio - Capital Cultural».
+  - Meta descripción (145 caracteres, empieza con la frase clave): `Capital Cultural reúne la agenda cultural de Santa Fe: muestras, conciertos, eventos y convocatorias, y los museos, teatros y salas de la ciudad.` La de 2021 hablaba de «vidrieras virtuales».
+  - Imagen para redes: `2026/10/capitalcultural-redes-1200x630-1.jpg` (id 33364), 1200×630 y 68 KB, recortada de la foto de Marce Pucci del Salón Anual Nacional en el MMAV. Se hizo aparte porque Yoast sirve el original de esa foto (1920 px, 1,5 MB) aunque se elija un tamaño menor, y con ese peso WhatsApp no suele mostrar la vista previa. La foto original también quedó con texto alternativo.
+  - Puntajes de Yoast: SEO de −9 a 83, título de 17 a 100, meta descripción de 22 a 83. Lo que sigue marcando es de contenido: la frase clave aparece una sola vez en el texto, ningún H2 la lleva y la página tiene unas 200 palabras fijas (la agenda y las noticias se cargan después y Yoast no las cuenta).
+  - Facebook y WhatsApp guardan la vista previa vieja un tiempo. Para renovarla: pegar la URL en el *Depurador de contenido compartido* de Meta y tocar *Volver a extraer*.
+  - **Ojo al editar la home en Elementor**: Yoast guarda su formulario junto con la página. Si al abrir el editor la pestaña de Yoast muestra el título o la descripción vacíos, no guardar hasta que aparezcan.
 
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
 

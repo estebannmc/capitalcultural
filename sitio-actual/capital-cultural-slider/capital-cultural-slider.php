@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Capital Cultural Slider
  * Description: Slider principal administrable para Capital Cultural. Usar shortcode [capital_slider].
- * Version: 2.2.2
+ * Version: 2.3.2
  * Author: Esteban
  * Text Domain: capital-cultural-slider
  */
@@ -12,12 +12,16 @@ if (!defined('ABSPATH')) {
 }
 
 final class Capital_Cultural_Slider {
-    const VERSION = '2.2.2';
+    const VERSION = '2.3.2';
     const POST_TYPE = 'cc_slide';
     const NONCE = 'cc_slider_nonce';
     const NONCE_ACTION = 'cc_slider_save_meta';
     const ORDER_NONCE = 'cc_slider_order_nonce';
     const TRANSIENT_KEY = 'cc_slider_active_ids';
+    const LABEL_PRESETS = ['Convocatoria abierta', 'Resultados', 'Evento', 'Muestra', 'Festival'];
+    // Ancho más grande que se sirve: el original suele subirse sin optimizar y pesar 10 veces más.
+    const MAX_IMAGE_WIDTH = 2048;
+    const SLIDER_HEIGHT = 520;
 
     public function __construct() {
         add_action('init', [$this, 'register_post_type']);
@@ -125,7 +129,7 @@ final class Capital_Cultural_Slider {
             'no_found_rows'  => true,
         ]);
 
-        $labels = [];
+        $labels = array_combine(self::LABEL_PRESETS, self::LABEL_PRESETS);
         foreach ($slides as $slide_id) {
             $label = trim((string) get_post_meta($slide_id, '_cc_label', true));
             if (!$label) {
@@ -140,6 +144,72 @@ final class Capital_Cultural_Slider {
         return array_values($labels);
     }
 
+    private function default_button_text($label) {
+        $label = function_exists('mb_strtolower') ? mb_strtolower($label) : strtolower($label);
+        if (strpos($label, 'resultado') !== false) {
+            return 'Ver resultados';
+        }
+        if (strpos($label, 'convocatoria') !== false) {
+            return 'Ver convocatoria';
+        }
+        return 'Ver más';
+    }
+
+    /**
+     * Imagen del slide con srcset de los tamaños intermedios que genera WordPress.
+     * El original queda afuera salvo que no haya otro tamaño.
+     */
+    private function get_slide_image($post_id) {
+        $thumb_id = get_post_thumbnail_id($post_id);
+        if (!$thumb_id) {
+            return ['src' => plugin_dir_url(__FILE__) . 'assets/fallback.svg', 'srcset' => '', 'sizes' => ''];
+        }
+
+        $candidates = [];
+        foreach (array_merge(get_intermediate_image_sizes(), ['full']) as $size) {
+            $data = wp_get_attachment_image_src($thumb_id, $size);
+            if (!$data || empty($data[1])) {
+                continue;
+            }
+            $is_full = $size === 'full';
+            if (!$is_full && empty($data[3])) {
+                continue;
+            }
+            $candidates[(int) $data[1]] = ['url' => $data[0], 'width' => (int) $data[1], 'height' => (int) $data[2], 'full' => $is_full];
+        }
+        ksort($candidates);
+
+        // Solo tamaños apaisados de al menos 768px; los recortes cuadrados no sirven de fondo.
+        $usable = array_filter($candidates, function ($c) {
+            return $c['width'] >= 768 && $c['width'] <= self::MAX_IMAGE_WIDTH && $c['width'] >= $c['height'];
+        });
+        $intermediate = array_filter($usable, function ($c) {
+            return !$c['full'];
+        });
+        if ($intermediate) {
+            $usable = $intermediate;
+        }
+        if (!$usable) {
+            $full = wp_get_attachment_image_src($thumb_id, 'full');
+            return ['src' => $full ? $full[0] : '', 'srcset' => '', 'sizes' => ''];
+        }
+
+        $srcset = [];
+        foreach ($usable as $c) {
+            $srcset[] = esc_url($c['url']) . ' ' . $c['width'] . 'w';
+        }
+        $largest = end($usable);
+
+        // En el celular la foto cubre 520px de alto, así que se ve más ancha que la pantalla.
+        $mobile_width = (int) round(self::SLIDER_HEIGHT * $largest['width'] / max(1, $largest['height']));
+
+        return [
+            'src'    => $largest['url'],
+            'srcset' => implode(', ', $srcset),
+            'sizes'  => '(max-width: 768px) ' . max(375, $mobile_width) . 'px, (min-width: 1920px) 1920px, 100vw',
+        ];
+    }
+
     public function render_meta_box($post) {
         wp_nonce_field(self::NONCE_ACTION, self::NONCE);
 
@@ -150,6 +220,7 @@ final class Capital_Cultural_Slider {
         $label_options = $this->get_label_options($post->ID);
         $description = $this->get_meta($post->ID, 'description');
         $url = $this->get_meta($post->ID, 'url', '#');
+        $button = $this->get_meta($post->ID, 'button');
         $active = $this->get_meta($post->ID, 'active', '1');
         $new_tab = $this->get_meta($post->ID, 'new_tab', '0');
         $start_date = $this->get_meta($post->ID, 'start_date');
@@ -164,7 +235,7 @@ final class Capital_Cultural_Slider {
                         <option value="<?php echo esc_attr($option); ?>"></option>
                     <?php endforeach; ?>
                 </datalist>
-                <div class="cc-slider-admin-help">Escribí para buscar una existente o cargá una nueva. El título queda solo con el nombre.</div>
+                <div class="cc-slider-admin-help">Elegí una de la lista o escribí una nueva. Cuando una convocatoria cierra y salen los seleccionados, cambiala a “Resultados”.</div>
             </div>
 
             <div class="cc-slider-admin-field cc-slider-admin-full">
@@ -177,6 +248,12 @@ final class Capital_Cultural_Slider {
                 <label for="cc_url">URL del slide</label>
                 <input type="text" id="cc_url" name="cc_url" value="<?php echo esc_attr($url); ?>" placeholder="/capitalcultural/.../">
                 <div class="cc-slider-admin-help">Puede ser relativa, por ejemplo: /capitalcultural/nochedelosmuseos/</div>
+            </div>
+
+            <div class="cc-slider-admin-field">
+                <label for="cc_button">Texto del botón</label>
+                <input type="text" id="cc_button" name="cc_button" value="<?php echo esc_attr($button); ?>" maxlength="30" placeholder="<?php echo esc_attr($this->default_button_text($label)); ?>">
+                <div class="cc-slider-admin-help">Opcional. Vacío usa “<?php echo esc_html($this->default_button_text($label)); ?>” según la etiqueta. Por ejemplo: Inscribirme, Ver programa.</div>
             </div>
 
             <div class="cc-slider-admin-field">
@@ -246,6 +323,7 @@ final class Capital_Cultural_Slider {
 
         $description = isset($_POST['cc_description']) ? wp_kses_post(wp_unslash($_POST['cc_description'])) : '';
         $label = isset($_POST['cc_label']) ? sanitize_text_field(wp_unslash($_POST['cc_label'])) : '';
+        $button = isset($_POST['cc_button']) ? sanitize_text_field(wp_unslash($_POST['cc_button'])) : '';
         $url = isset($_POST['cc_url']) ? sanitize_text_field(wp_unslash($_POST['cc_url'])) : '#';
         if ($url === '') {
             $url = '#';
@@ -286,6 +364,7 @@ final class Capital_Cultural_Slider {
 
         update_post_meta($post_id, '_cc_label', $label);
         update_post_meta($post_id, '_cc_description', $description);
+        update_post_meta($post_id, '_cc_button', $button);
         update_post_meta($post_id, '_cc_url', $clean_url);
         update_post_meta($post_id, '_cc_active', $active);
         update_post_meta($post_id, '_cc_new_tab', $new_tab);
@@ -383,16 +462,17 @@ final class Capital_Cultural_Slider {
                 $description = get_post_meta($post_id, '_cc_description', true);
                 $url = get_post_meta($post_id, '_cc_url', true);
                 $new_tab = get_post_meta($post_id, '_cc_new_tab', true);
-                $image = get_the_post_thumbnail_url($post_id, 'full');
-                if (!$image) {
-                    $image = plugin_dir_url(__FILE__) . 'assets/fallback.svg';
+                $image = $this->get_slide_image($post_id);
+                $button = trim((string) get_post_meta($post_id, '_cc_button', true));
+                if (!$button) {
+                    $button = $this->default_button_text($label);
                 }
                 $target = $new_tab === '1' ? ' target="_blank" rel="noopener noreferrer"' : '';
                 ?>
                 <div class="cc-slide <?php echo $i === 0 ? 'active' : ''; ?>">
                     <a href="<?php echo esc_url($url ?: '#'); ?>"<?php echo $target; ?>>
                         <span class="cc-media">
-                            <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>" loading="<?php echo $i === 0 ? 'eager' : 'lazy'; ?>" decoding="async">
+                            <img src="<?php echo esc_url($image['src']); ?>"<?php if ($image['srcset']) : ?> srcset="<?php echo esc_attr($image['srcset']); ?>" sizes="<?php echo esc_attr($image['sizes']); ?>"<?php endif; ?> alt="<?php echo esc_attr($title); ?>"<?php echo $i === 0 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"'; ?> decoding="async">
                         </span>
                         <div class="cc-overlay"></div>
                         <div class="cc-content">
@@ -403,6 +483,9 @@ final class Capital_Cultural_Slider {
                             <div class="cc-title"><?php echo esc_html($title); ?></div>
                             <?php if ($description) : ?>
                                 <div class="cc-text"><?php echo wpautop(wp_kses_post($description)); ?></div>
+                            <?php endif; ?>
+                            <?php if ($url && $url !== '#') : ?>
+                                <span class="cc-button"><?php echo esc_html($button); ?><svg class="cc-button-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span>
                             <?php endif; ?>
                         </div>
                     </a>

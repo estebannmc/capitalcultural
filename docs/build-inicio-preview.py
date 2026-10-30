@@ -1,4 +1,4 @@
-"""Arma docs/inicio-preview.html: la home publicada con los bloques nuevos de sitio-nuevo/.
+"""Arma docs/inicio-preview.html: la home publicada con los widgets de sitio-nuevo/ en su lugar.
 
 Baja la home, la agenda y las noticias del día y deja todo en un solo archivo que se abre
 en cualquier navegador. Uso, desde la raíz del repo: python docs/build-inicio-preview.py
@@ -52,11 +52,15 @@ def widget(contenido):
 
 
 s = secciones(html)
-ids = ['b74bfbd', '86b3116', 'd3370b7', '605bd05', '78fc948', '732d9a5', 'db085f2', '7beab50']
+# Secciones de la home publicada el 29/10/2026: header, intro, slider, Explorá, agenda, noticias y footer.
+ids = ['b74bfbd', '5380a0a', '86b3116', '605bd05', '732d9a5', '78fc948', '7beab50']
 assert all(i in s for i in ids), [i for i in ids if i not in s]
 trozo = lambda i: html[s[i][0]:s[i][1]]
-noticias = trozo('78fc948').replace('<section ', '<section id="noticias" ', 1)
+noticias = trozo('78fc948')
+if 'id="noticias"' not in noticias[:300]:
+    noticias = noticias.replace('<section ', '<section id="noticias" ', 1)
 
+# Los widgets salen de sitio-nuevo/, así la vista previa muestra lo que todavía no se cargó.
 cuerpo = ''.join([
     widget(leer('header.html')),
     widget(leer('inicio-intro.html')),

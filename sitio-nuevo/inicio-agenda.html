@@ -3,7 +3,7 @@
     <h2 class="cci-titulo" id="cci-muestras-t"><span class="cci-barra" aria-hidden="true"></span>En exhibición</h2>
     <a class="cci-mas" href="/capitalcultural/museos-y-salas/">Museos y salas</a>
   </div>
-  <ul class="cci-fila" data-cci="muestras" aria-busy="true"></ul>
+  <ul class="cci-fila" data-cci="muestras" aria-busy="true"><li class="cci-aviso">Cargando las muestras…</li></ul>
 </section>
 
 <section class="cci" id="agenda" aria-labelledby="cci-agenda-t">
@@ -11,7 +11,7 @@
     <h2 class="cci-titulo" id="cci-agenda-t"><span class="cci-barra" aria-hidden="true"></span>Agenda</h2>
     <a class="cci-mas" href="https://agenda.santafeciudad.gov.ar/" target="_blank" rel="noopener">Ver agenda completa<svg class="cci-ext" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="screen-reader-text">(se abre en otro sitio)</span></a>
   </div>
-  <ul class="cci-fila" data-cci="agenda" aria-busy="true"></ul>
+  <ul class="cci-fila" data-cci="agenda" aria-busy="true"><li class="cci-aviso">Cargando la agenda…</li></ul>
 </section>
 
 <script>
@@ -59,7 +59,21 @@
   var aviso = function (ul, texto) {
     ul.innerHTML = '<li class="cci-aviso">' + texto + ' <a href="' + AGENDA + '" target="_blank" rel="noopener">Mirá la agenda completa</a>.</li>';
   };
-  var listo = function () { agenda.removeAttribute('aria-busy'); muestras.removeAttribute('aria-busy'); };
+  // Al llegar con un #ancla del menú: salto sin animación (el tema pone scroll-behavior: smooth y el salto
+  // animado de la carga no siempre llega) y otra vez cuando cargan las muestras, que empujan lo de abajo,
+  // salvo que la persona ya haya movido la página.
+  var hash = location.hash.slice(1), yAncla = null;
+  var irAlAncla = function () {
+    var ancla = hash && document.getElementById(hash);
+    if (!ancla || (yAncla !== null && Math.abs(window.scrollY - yAncla) > 2)) return;
+    var html = document.documentElement, antes = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    ancla.scrollIntoView();
+    html.style.scrollBehavior = antes;
+    yAncla = window.scrollY;
+  };
+  window.addEventListener('load', irAlAncla);
+  var listo = function () { agenda.removeAttribute('aria-busy'); muestras.removeAttribute('aria-busy'); irAlAncla(); };
 
   fetch('/capitalcultural/wp-admin/admin-ajax.php?action=cca_eventos', { credentials: 'same-origin' })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
