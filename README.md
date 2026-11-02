@@ -90,6 +90,7 @@ Decisiones tomadas:
 ### Mercado Progreso: lo que queda a mano
 
 - **Publicada el 02/11/2026**, como un solo widget HTML con `mercado-progreso.html` (página 24705). Se borraron las otras tres secciones de Elementor: el texto, el contacto y la de autoridades con el escudo, que ya está en el header y el footer.
+- **El widget quedó en la sección de los botones viejos**, que tenía 50 px de margen arriba. El CSS del archivo anula el margen y el relleno de su sección (`.elementor-section:has(#mp)`), así que entre las migas y el texto queda la misma distancia que en Centro Cultural Municipal.
 - **La foto** es la del patio central de Federico Cairoli que ya estaba en Medios (`2021/04/04.Mercado_Progreso_-_Ph.Federico_Cairoli_low.jpg`, ID 12320, 1280 × 853), en su tamaño de 1024. No lleva crédito en la página, igual que las anteriores; si se quiere, va como `<figcaption>`.
 - **Las fotos de Marcelo Pucci del centenario** (IDs 27980 y 27607) tienen la ñ de *Años* descompuesta en el nombre del archivo: la URL con la ñ normal da 404. Si se usan, copiar la URL desde Medios, no escribirla a mano.
 - **No hay horario de atención** en la página publicada, así que no se inventó. Si lo hay, va como un `<div><dt>Horario</dt><dd>…</dd></div>` más en *Visitá el Mercado Progreso*.
