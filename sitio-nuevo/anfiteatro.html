@@ -5,7 +5,6 @@
 
   #an {
     --azul: #002751;
-    --celeste: #57b8e9;
     --gris-20: #dadad9;
     --gris-75: #606060;
     --rojo: #e63312;
@@ -42,12 +41,7 @@
     -webkit-hyphens: auto; hyphens: auto;
   }
   #an .an-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
-  #an .an-accesos { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 1rem; }
-
-  #an .an-cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 3vw, 32px); }
-  #an .an-cifra { display: grid; align-content: start; gap: .35em; padding-top: 14px; border-top: 3px solid var(--celeste); }
-  #an .an-cifra-num { font-size: clamp(2.2rem, 4.6vw, 3.2rem); font-weight: 800; line-height: .95; letter-spacing: -.02em; }
-  #an .an-cifra p { color: var(--gris-75); line-height: 1.45; }
+  #an .an-accesos { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1rem; }
 
   #an .an-vidrio {
     border-radius: 8px;
@@ -83,7 +77,6 @@
 
   @media (max-width: 860px) {
     #an .an-visita, #an .an-tarjetas, #an .an-accesos { grid-template-columns: minmax(0, 1fr); }
-    #an .an-cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     #an .an-foto { order: -1; }
   }
   @media (max-width: 560px) {
@@ -107,18 +100,8 @@
       <nav class="an-accesos" aria-label="Propuestas del Anfiteatro">
         <a class="cb-btn" href="/capitalcultural/anfiteatro/teatroanfi/"><span>Teatro en el Anfi</span></a>
         <a class="cb-btn" href="/capitalcultural/capacitaciones4por4/"><span>Capacitaciones 4x4</span></a>
-        <a class="cb-btn" href="https://santafeciudad.gov.ar/secretaria-de-cultura/convocatorias-vigentes/"><span>Convocatorias vigentes</span></a>
       </nav>
     </div>
-
-    <section aria-label="El Anfiteatro en cifras">
-      <ul class="an-cifras">
-        <li class="an-cifra"><span class="an-cifra-num">1787</span><p>butacas en las gradas, cuatro de ellas para personas con discapacidad</p></li>
-        <li class="an-cifra"><span class="an-cifra-num">5</span><p>sectores de gradas, con 21 filas</p></li>
-        <li class="an-cifra"><span class="an-cifra-num">70</span><p>espectadores en la sala bajo tablas</p></li>
-        <li class="an-cifra"><span class="an-cifra-num">18</span><p>camarines: dieciséis para artistas y dos de uso común</p></li>
-      </ul>
-    </section>
 
     <section class="an-visita an-vidrio" aria-labelledby="an-visita-titulo">
       <div>
