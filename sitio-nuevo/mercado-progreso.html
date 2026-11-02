@@ -66,6 +66,10 @@
   #mp .mp-foto { overflow: hidden; border-radius: 6px; background: var(--gris-20); }
   #mp .mp-foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
+  #mp .mp-historia { display: grid; gap: 1rem; max-width: 760px; }
+  #mp .mp-historia .mp-titulo { margin-bottom: 0; }
+  #mp .mp-historia p { font-size: 1.05rem; text-align: justify; text-align-last: left; -webkit-hyphens: auto; hyphens: auto; }
+
   #mp .mp-autoridades { max-width: 760px; }
   #mp .mp-autoridades dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .5rem 1.5rem; }
   #mp .mp-autoridades dt { color: var(--gris-75); }
@@ -93,9 +97,8 @@
 <div id="mp">
   <div class="mp-grilla">
     <div class="mp-texto">
-      <p class="mp-lead">El Mercado Progreso, inaugurado en 1925, formó parte del histórico circuito comercial de la ciudad junto al Mercado Central y el Mercado Norte.</p>
-      <p>Tras varios años de abandono, en 2011 la Municipalidad de Santa Fe inició un proceso de puesta en valor que lo transformó en un espacio cultural clave para la ciudad. Desde entonces, es gestionado por la Secretaría de Cultura junto a organizaciones sociales, educativas y comunitarias, y es un punto de encuentro para expresiones artísticas, emprendimientos creativos y la industria cultural local.</p>
-      <p>En el corazón de Barrio Candioti, frente a la Plaza Pueyrredón e integrado al Paseo de Boulevard Gálvez, el Mercado Progreso es hoy un espacio abierto y diverso. Allí conviven propuestas de música, teatro, cine, diseño, danza, artesanías y mucho más, en un entorno que combina tradición e innovación.</p>
+      <p class="mp-lead">El Mercado Progreso es un espacio cultural de la Municipalidad de Santa Fe en el corazón de Barrio Candioti, frente a la Plaza Pueyrredón e integrado al Paseo de Boulevard Gálvez.</p>
+      <p>Lo gestiona la Secretaría de Cultura junto a organizaciones sociales, educativas y comunitarias, y es un punto de encuentro para expresiones artísticas, emprendimientos creativos y la industria cultural local. En su patio y sus galerías conviven propuestas de música, teatro, cine, diseño, danza, artesanías y mucho más, en un entorno que combina tradición e innovación.</p>
       <p>Este edificio patrimonial es un lugar de referencia para la cultura santafesina y regional, donde se celebran la creatividad, el encuentro y la identidad de la comunidad.</p>
     </div>
 
@@ -126,6 +129,14 @@
       <figure class="mp-foto">
         <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/04/04.Mercado_Progreso_-_Ph.Federico_Cairoli_low-1024x682.jpg" alt="El patio central del Mercado Progreso, con la estructura de hierro del antiguo techo sobre el césped y las naves de ladrillo a los costados" loading="lazy" width="1024" height="682">
       </figure>
+    </section>
+
+    <section class="mp-historia" aria-labelledby="mp-historia-titulo">
+      <h2 class="mp-titulo" id="mp-historia-titulo"><i class="mp-barra"></i>Historia del Mercado Progreso</h2>
+      <p>El mercado nació de una concesión: en 1922, la Ordenanza N.º 2087 cedió los terrenos al empresario Luis Coll por 25 años, con la condición de que fuera «un modelo en cuanto a comodidades e higiene». Se inauguró el 31 de enero de 1925 y formó parte del circuito comercial de la ciudad junto al Mercado Central y el Mercado Norte.</p>
+      <p>El edificio es un rectángulo de casi 30 por 80 metros, con dos entradas enfrentadas, por Balcarce y por Ituzaingó. Adentro, columnas de hierro fundido separan una nave central de dos laterales. La planta baja tenía más de cien puestos —48 de carne, 32 de verduras, 14 de fiambres, 4 de pescado y 7 de rubros varios—, cada uno con pileta y agua corriente; arriba había salones y locales, y en el subsuelo, seis cámaras frigoríficas.</p>
+      <p>Al vencer la concesión, el sector de Ituzaingó funcionó como frigorífico. En los años sesenta el edificio ya estaba abandonado y, aunque el municipio evaluó reabrirlo como mercado, terminó usándolo como corralón de vehículos retenidos.</p>
+      <p>En 2011 la Municipalidad inició su puesta en valor: restituyó balcones y ornamentos y recuperó la fachada norte, sobre Balcarce, y la nave central, donde funciona la Casa del Bicentenario. Una década después se acondicionó el patio con un escenario de 9 por 5 metros, se renovó la instalación eléctrica de las dos galerías y se mejoraron sanitarios y accesibilidad, lo que amplió en un 40 % el espacio habilitado. En 2025 el Mercado Progreso cumplió cien años.</p>
     </section>
 
     <section class="mp-autoridades" aria-labelledby="mp-autoridades-titulo">
