@@ -94,7 +94,7 @@ Decisiones tomadas:
 - **Las fotos de Marcelo Pucci del centenario** (IDs 27980 y 27607) tienen la ñ de *Años* descompuesta en el nombre del archivo: la URL con la ñ normal da 404. Si se usan, copiar la URL desde Medios, no escribirla a mano.
 - **No hay horario de atención** en la página publicada, así que no se inventó. Si lo hay, va como un `<div><dt>Horario</dt><dd>…</dd></div>` más en *Visitá el Mercado Progreso*.
 - **Las nueve propuestas** van en una grilla de 3 × 3: primero las vigentes y al final las de 2025 (*Aniversario* y *Teatro en el Mercado 2025*). Cuando haya *Teatro en el Mercado 2027*, la de 2025 se puede sacar.
-- **«Coordinador Teatro Municipal»** figura entre las autoridades, igual que en el Anfiteatro. Se dejó tal cual.
+- **Se sacó «Coordinador Teatro Municipal»** de las autoridades: no corresponde al Mercado.
 - **Cambios de texto:** el primer párrafo se partió para que la fecha de inauguración haga de entrada, se sacaron *estratégicamente* y *actualmente*, y los nombres de los ciclos van en minúscula salvo el primer término (*Cine bajo las estrellas*).
 
 ### SEO cargado: Centro Cultural, Biblioteca Muttis, Anfiteatro y Mercado Progreso
