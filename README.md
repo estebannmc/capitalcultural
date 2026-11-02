@@ -98,7 +98,7 @@ Decisiones tomadas:
 - **Presentación e historia van separadas**, como en la Biblioteca Muttis: arriba qué es el Mercado hoy y abajo, antes de las autoridades, *Historia del Mercado Progreso*. Se sacaron *estratégicamente* y *actualmente*, y los nombres de los ciclos van en minúscula salvo el primer término (*Cine bajo las estrellas*).
 - **La historia sale de la nota de El Litoral por el centenario** (31/01/2025, *El Mercado Progreso cumple 100 años: su historia y un misterio…*), que a su vez cita el libro *Inventario. 200 obras del patrimonio arquitectónico de Santa Fe*: la Ordenanza 2087 de 1922, la concesión a Luis Coll, la inauguración del 31/01/1925, las medidas, los puestos y el abandono. No se encontró arquitecto ni constructora.
 - **Dos datos para confirmar.** La nota fecha la obra de Barletta en 2010 en el texto y en 2011 en una foto; se dejó 2011, como decía la página. La obra del escenario de 9 × 5 m figura «10 años más tarde, en la gestión de Emilio Jatón», sin año, así que va como «una década después».
-- **La dirección no coincide.** La página dice Balcarce 1625; El Litoral y la agenda cultural de 2021 dicen Balcarce 1635. Confirmar cuál es y, si cambia, corregirla en los datos de visita, el enlace al mapa, el JSON-LD y la meta descripción de Yoast.
+- **La dirección es Balcarce 1635**, confirmada. La página vieja decía 1625; se corrigió en los datos de visita, el enlace al mapa, el JSON-LD y la meta descripción de Yoast.
 
 ### SEO cargado: Centro Cultural, Biblioteca Muttis, Anfiteatro y Mercado Progreso
 
@@ -116,7 +116,7 @@ Meta descripciones:
 - **Centro Cultural:** `Exposiciones, presentaciones de libros y talleres abiertos al público en el centro de Santa Fe. Reúne la Fotogalería y la Biblioteca Muttis.`
 - **Biblioteca Muttis:** `Biblioteca pública municipal en Primera Junta 2451, Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria. Horarios y cómo asociarse.`
 - **Anfiteatro:** `Anfiteatro público en el Parque del Sur, Av. Presidente Illia 1100, Santa Fe. 1787 butacas, escenario renovado y sala bajo tablas para 70 personas.`
-- **Mercado Progreso:** `El Mercado Progreso es el espacio cultural municipal de Barrio Candioti, en Balcarce 1625, Santa Fe: teatro, música, cine y títeres.`
+- **Mercado Progreso:** `El Mercado Progreso es el espacio cultural municipal de Barrio Candioti, en Balcarce 1635, Santa Fe: teatro, música, cine y títeres.`
 
 ### Festival Diseña: cómo se carga y lo que queda a mano
 
