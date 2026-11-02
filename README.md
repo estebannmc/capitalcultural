@@ -50,6 +50,7 @@ Decisiones tomadas:
 | `sitio-nuevo/memorias-urbanas-feministas.html` | **Memorias Urbanas Feministas**: las 13 baldosas en orden cronológico, con tarjeta a cada ficha |
 | `sitio-nuevo/centro-cultural-municipal.html` | **Centro Cultural Municipal**: texto, los dos espacios (Biblioteca Muttis y Fotogalería) y el shortcode `[ccmunicipal]` con 50 px abajo. Widget HTML entero |
 | `sitio-nuevo/biblioteca-muttis.html` | **Biblioteca Profesor Enrique Muttis**: texto, botón al catálogo, datos de visita, servicios, cómo asociarse, colección e historia, con datos estructurados `Library` de schema.org. Widget HTML entero |
+| `sitio-nuevo/anfiteatro.html` | **Anfiteatro Municipal Juan de Garay**: texto, los tres accesos (Teatro en el Anfi, Capacitaciones 4x4, Convocatorias), cifras, datos de visita con la foto aérea, las seis características del espacio y autoridades, con datos estructurados `PerformingArtsTheater`. Widget HTML entero |
 | `sitio-nuevo/fichas-memorias-feministas.html` | El código de las 13 fichas de baldosas, con *Copiar código* y vista previa. Abrilo en el navegador |
 | `sitio-nuevo/festival-disena-comun.html` | **Festival Diseña, bloque común**: Encode Sans variable (única tipografía), estilos `.fd`, menú de la sección e íconos. Primer widget HTML de las cuatro páginas |
 | `sitio-nuevo/festival-disena-inicio.html` | **Festival Diseña, inicio**: hero con la foto en tamaño 1536, cifras, ciclo en cinco pasos, galería en mosaico con visor y video que carga YouTube al tocar play |
@@ -76,6 +77,15 @@ Decisiones tomadas:
 - **Los datos de contacto vienen de la ficha de la Red de Bibliotecas** y no tienen correo. La Fotogalería publica otro horario (lunes a viernes de 8 a 20): confirmar cuál es el de la biblioteca antes de publicar. El horario también está en el JSON-LD del final del código, así que hay que cambiarlo en los dos lugares.
 - **La dirección es Primera Junta 2451**, confirmada. Wikipedia y la Red de Bibliotecas todavía dicen Cortada Falucho 2450: el edificio da a las dos calles.
 - **La historia del edificio** sale de la nota de UNO Santa Fe del 11/09/2020 sobre el acondicionamiento de la sala de las bóvedas, y la de Muttis, de Wikipedia. No se encontró año de construcción ni arquitecto del Banco Municipal.
+
+### Anfiteatro: lo que queda a mano
+
+- **Cómo se carga.** La página tiene hoy nueve widgets (texto, botones, títulos, tarjetas, contacto, el escudo y autoridades). Se borran todos y queda uno solo, HTML, con `anfiteatro.html`. El escudo municipal se saca: ya está en el header y el footer.
+- **El correo no coincide.** La página publicada muestra `anfiteatro.juandegaray@santafeciudad.gov.ar` pero el enlace manda a `anfiteatrojuandegaray@gmail.com`. El código nuevo usa el institucional en los dos lados; confirmar que esa casilla existe y se lee antes de publicar. Si no, cambiarlo en el `mailto:`, en el texto y en el JSON-LD.
+- **«Coordinador Teatro Municipal»** figura entre las autoridades del Anfiteatro. Se dejó tal cual; confirmar si es el cargo correcto o si falta la coordinación propia del Anfiteatro.
+- **La foto es la aérea de 2021** (`2021/06/anfiEdit.jpg`), la única en color que muestra gradas y escenario juntos. Si hay una más reciente, se cambia en el `src`, el `srcset` y el `image` del JSON-LD.
+- **No hay horario de atención** en la página publicada, así que no se inventó. Si la boletería tiene uno, va como un `<div><dt>Horario</dt><dd>…</dd></div>` más en *Visitá el Anfiteatro*.
+- **Cambios de texto:** *Ubicación* y *Accesibilidad* dejaron de ser tarjetas y pasaron a los datos de visita, donde se buscan. Se corrigieron *Caracteristicas* y *podo táctiles*, y los títulos van en minúscula (*Bajo tablas*, *Sobre tablas*) como en el resto del sitio.
 
 ### Festival Diseña: cómo se carga y lo que queda a mano
 
