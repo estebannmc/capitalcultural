@@ -50,6 +50,7 @@ Decisiones tomadas:
 | `sitio-nuevo/memorias-urbanas-feministas.html` | **Memorias Urbanas Feministas**: las 13 baldosas en orden cronológico, con tarjeta a cada ficha |
 | `sitio-nuevo/centro-cultural-municipal.html` | **Centro Cultural Municipal**: texto, los dos espacios (Biblioteca Muttis y Fotogalería) y el shortcode `[ccmunicipal]` con 50 px abajo. Widget HTML entero |
 | `sitio-nuevo/biblioteca-muttis.html` | **Biblioteca Profesor Enrique Muttis**: texto, botón al catálogo, datos de visita, servicios, cómo asociarse, colección e historia, con datos estructurados `Library` de schema.org. Widget HTML entero |
+| `sitio-nuevo/anfiteatro.html` | **Anfiteatro Municipal Juan de Garay**: texto, los dos accesos (Teatro en el Anfi y Capacitaciones 4x4), datos de visita con la foto aérea, las seis características del espacio y autoridades, con datos estructurados `PerformingArtsTheater`. Widget HTML entero |
 | `sitio-nuevo/fichas-memorias-feministas.html` | El código de las 13 fichas de baldosas, con *Copiar código* y vista previa. Abrilo en el navegador |
 | `sitio-nuevo/festival-disena-comun.html` | **Festival Diseña, bloque común**: Encode Sans variable (única tipografía), estilos `.fd`, menú de la sección e íconos. Primer widget HTML de las cuatro páginas |
 | `sitio-nuevo/festival-disena-inicio.html` | **Festival Diseña, inicio**: hero con la foto en tamaño 1536, cifras, ciclo en cinco pasos, galería en mosaico con visor y video que carga YouTube al tocar play |
@@ -67,15 +68,39 @@ Decisiones tomadas:
 ### Biblioteca Muttis: lo que queda a mano
 
 - **El botón del catálogo apunta a `#`.** Cuando esté la URL del sistema de consulta, se cambia el `href` del `.cb-btn`.
-- **Yoast**, en la caja de la página:
-  - Frase clave: `Biblioteca Muttis`
-  - Título SEO: `Biblioteca Municipal Profesor Enrique Muttis | Santa Fe`
-  - Meta descripción: `Biblioteca pública municipal en Primera Junta 2451, Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria. Horarios y cómo asociarse.`
-  - Imagen para redes (pestaña *Social*): `2024/09/BMuttis.jpg`, la fachada.
+- **Yoast** quedó cargado el 02/11/2026: ver *SEO cargado* más abajo.
 - **La URL vieja `/capitalcultural/bibliotecamuttis/` da 404**, y con ella las páginas hijas (*Café y literatura*, *Cursos y talleres*…). Conviene redirigirla a `/centroculturalmunicipal/bibliotecamuttis/` con *Redirection* para no perder los enlaces que ya tenía.
 - **Los datos de contacto vienen de la ficha de la Red de Bibliotecas** y no tienen correo. La Fotogalería publica otro horario (lunes a viernes de 8 a 20): confirmar cuál es el de la biblioteca antes de publicar. El horario también está en el JSON-LD del final del código, así que hay que cambiarlo en los dos lugares.
 - **La dirección es Primera Junta 2451**, confirmada. Wikipedia y la Red de Bibliotecas todavía dicen Cortada Falucho 2450: el edificio da a las dos calles.
 - **La historia del edificio** sale de la nota de UNO Santa Fe del 11/09/2020 sobre el acondicionamiento de la sala de las bóvedas, y la de Muttis, de Wikipedia. No se encontró año de construcción ni arquitecto del Banco Municipal.
+
+### Anfiteatro: lo que queda a mano
+
+- **Publicada el 02/11/2026**, como un solo widget HTML con `anfiteatro.html`, y con la foto ya en Medios (`2026/11/anfiteatro-juan-de-garay-aerea.jpg`, ID 33415). El escudo municipal se sacó: ya está en el header y el footer.
+- **El correo no coincide.** La página publicada muestra `anfiteatro.juandegaray@santafeciudad.gov.ar` pero el enlace manda a `anfiteatrojuandegaray@gmail.com`. El código nuevo usa el institucional en los dos lados; confirmar que esa casilla existe y se lee antes de publicar. Si no, cambiarlo en el `mailto:`, en el texto y en el JSON-LD.
+- **«Coordinador Teatro Municipal»** figura entre las autoridades del Anfiteatro. Se dejó tal cual; confirmar si es el cargo correcto o si falta la coordinación propia del Anfiteatro.
+- **La foto** es `sitio-nuevo/img/anfiteatro-juan-de-garay-aerea.jpg` (880 × 660, 103 KB), un recorte de la aérea `SELECCIONADA-10A-120-cm-x-80-cm-300-ppp.jpg` con foco en gradas y escenario.
+- **No usar la aérea original en la web.** Está en Medios (ID 33413) con 6300 × 9450 px y 31 MB, y WordPress no le generó ningún tamaño: cualquier página que la use carga los 31 MB enteros. Es un archivo para imprimir (120 × 80 cm a 300 ppp). Si se quiere tener en Medios para la web, subir una versión de 2560 px de lado mayor.
+- **La foto aérea anterior** (`2021/06/anfiEdit.jpg`) **tiene marca de agua y no es nuestra.** Se sacó de la página nueva, pero sigue en Medios; conviene revisar si otra página la usa.
+- **No hay horario de atención** en la página publicada, así que no se inventó. Si la boletería tiene uno, va como un `<div><dt>Horario</dt><dd>…</dd></div>` más en *Visitá el Anfiteatro*.
+- **Se sacó el botón «Convocatorias vigentes»**, que llevaba fuera de Capital Cultural, a la página general de la Secretaría.
+- **Cambios de texto:** *Ubicación* y *Accesibilidad* dejaron de ser tarjetas y pasaron a los datos de visita, donde se buscan. Se corrigieron *Caracteristicas* y *podo táctiles*, y los títulos van en minúscula (*Bajo tablas*, *Sobre tablas*) como en el resto del sitio.
+
+### SEO cargado: Centro Cultural, Biblioteca Muttis y Anfiteatro
+
+Cargado en la caja de Yoast el 02/11/2026 y verificado en las páginas publicadas. Sólo se tocó Yoast: el contenido de las páginas no cambió.
+
+| Página | Frase clave | Título SEO | Imagen para redes |
+|---|---|---|---|
+| Centro Cultural Municipal | `Centro Cultural Municipal` | `Centro Cultural Municipal \| Santa Fe` | Feria de la Fotogalería, de Marcelo Pucci (ID 31147) |
+| Biblioteca Muttis | `Biblioteca Muttis` | `Biblioteca Municipal Profesor Enrique Muttis \| Santa Fe` | La fachada, `2024/09/BMuttis.jpg` (ID 24150) |
+| Anfiteatro | `Anfiteatro Juan de Garay` | `Anfiteatro Municipal Juan de Garay \| Santa Fe` | La aérea recortada (ID 33415) |
+
+Meta descripciones:
+
+- **Centro Cultural:** `Exposiciones, presentaciones de libros y talleres abiertos al público en el centro de Santa Fe. Reúne la Fotogalería y la Biblioteca Muttis.`
+- **Biblioteca Muttis:** `Biblioteca pública municipal en Primera Junta 2451, Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria. Horarios y cómo asociarse.`
+- **Anfiteatro:** `Anfiteatro público en el Parque del Sur, Av. Presidente Illia 1100, Santa Fe. 1787 butacas, escenario renovado y sala bajo tablas para 70 personas.`
 
 ### Festival Diseña: cómo se carga y lo que queda a mano
 
