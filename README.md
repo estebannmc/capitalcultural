@@ -51,6 +51,7 @@ Decisiones tomadas:
 | `sitio-nuevo/centro-cultural-municipal.html` | **Centro Cultural Municipal**: texto, los dos espacios (Biblioteca Muttis y Fotogalería) y el shortcode `[ccmunicipal]` con 50 px abajo. Widget HTML entero |
 | `sitio-nuevo/biblioteca-muttis.html` | **Biblioteca Profesor Enrique Muttis**: texto, botón al catálogo, datos de visita, servicios, cómo asociarse, colección e historia, con datos estructurados `Library` de schema.org. Widget HTML entero |
 | `sitio-nuevo/anfiteatro.html` | **Anfiteatro Municipal Juan de Garay**: texto, los dos accesos (Teatro en el Anfi y Capacitaciones 4x4), datos de visita con la foto aérea, las seis características del espacio y autoridades, con datos estructurados `PerformingArtsTheater`. Widget HTML entero |
+| `sitio-nuevo/mercado-progreso.html` | **Mercado Progreso**: texto, las nueve propuestas, datos de visita con la foto del patio y autoridades, con datos estructurados `EventVenue`. Widget HTML entero |
 | `sitio-nuevo/fichas-memorias-feministas.html` | El código de las 13 fichas de baldosas, con *Copiar código* y vista previa. Abrilo en el navegador |
 | `sitio-nuevo/festival-disena-comun.html` | **Festival Diseña, bloque común**: Encode Sans variable (única tipografía), estilos `.fd`, menú de la sección e íconos. Primer widget HTML de las cuatro páginas |
 | `sitio-nuevo/festival-disena-inicio.html` | **Festival Diseña, inicio**: hero con la foto en tamaño 1536, cifras, ciclo en cinco pasos, galería en mosaico con visor y video que carga YouTube al tocar play |
@@ -86,21 +87,33 @@ Decisiones tomadas:
 - **Se sacó el botón «Convocatorias vigentes»**, que llevaba fuera de Capital Cultural, a la página general de la Secretaría.
 - **Cambios de texto:** *Ubicación* y *Accesibilidad* dejaron de ser tarjetas y pasaron a los datos de visita, donde se buscan. Se corrigieron *Caracteristicas* y *podo táctiles*, y los títulos van en minúscula (*Bajo tablas*, *Sobre tablas*) como en el resto del sitio.
 
-### SEO cargado: Centro Cultural, Biblioteca Muttis y Anfiteatro
+### Mercado Progreso: lo que queda a mano
 
-Cargado en la caja de Yoast el 02/11/2026 y verificado en las páginas publicadas. Sólo se tocó Yoast: el contenido de las páginas no cambió.
+- **Publicada el 02/11/2026**, como un solo widget HTML con `mercado-progreso.html` (página 24705). Se borraron las otras tres secciones de Elementor: el texto, el contacto y la de autoridades con el escudo, que ya está en el header y el footer.
+- **La foto** es la del patio central de Federico Cairoli que ya estaba en Medios (`2021/04/04.Mercado_Progreso_-_Ph.Federico_Cairoli_low.jpg`, ID 12320, 1280 × 853), en su tamaño de 1024. No lleva crédito en la página, igual que las anteriores; si se quiere, va como `<figcaption>`.
+- **Las fotos de Marcelo Pucci del centenario** (IDs 27980 y 27607) tienen la ñ de *Años* descompuesta en el nombre del archivo: la URL con la ñ normal da 404. Si se usan, copiar la URL desde Medios, no escribirla a mano.
+- **No hay horario de atención** en la página publicada, así que no se inventó. Si lo hay, va como un `<div><dt>Horario</dt><dd>…</dd></div>` más en *Visitá el Mercado Progreso*.
+- **Las nueve propuestas** van en una grilla de 3 × 3: primero las vigentes y al final las de 2025 (*Aniversario* y *Teatro en el Mercado 2025*). Cuando haya *Teatro en el Mercado 2027*, la de 2025 se puede sacar.
+- **«Coordinador Teatro Municipal»** figura entre las autoridades, igual que en el Anfiteatro. Se dejó tal cual.
+- **Cambios de texto:** el primer párrafo se partió para que la fecha de inauguración haga de entrada, se sacaron *estratégicamente* y *actualmente*, y los nombres de los ciclos van en minúscula salvo el primer término (*Cine bajo las estrellas*).
+
+### SEO cargado: Centro Cultural, Biblioteca Muttis, Anfiteatro y Mercado Progreso
+
+Cargado en la caja de Yoast el 02/11/2026 y verificado en las páginas publicadas. En las tres primeras sólo se tocó Yoast; el Mercado Progreso se cargó junto con la página nueva.
 
 | Página | Frase clave | Título SEO | Imagen para redes |
 |---|---|---|---|
 | Centro Cultural Municipal | `Centro Cultural Municipal` | `Centro Cultural Municipal \| Santa Fe` | Feria de la Fotogalería, de Marcelo Pucci (ID 31147) |
 | Biblioteca Muttis | `Biblioteca Muttis` | `Biblioteca Municipal Profesor Enrique Muttis \| Santa Fe` | La fachada, `2024/09/BMuttis.jpg` (ID 24150) |
 | Anfiteatro | `Anfiteatro Juan de Garay` | `Anfiteatro Municipal Juan de Garay \| Santa Fe` | La aérea recortada (ID 33415) |
+| Mercado Progreso | `Mercado Progreso` | `Mercado Progreso, espacio cultural en Candioti \| Santa Fe` | El patio central, de Federico Cairoli (ID 12320) |
 
 Meta descripciones:
 
 - **Centro Cultural:** `Exposiciones, presentaciones de libros y talleres abiertos al público en el centro de Santa Fe. Reúne la Fotogalería y la Biblioteca Muttis.`
 - **Biblioteca Muttis:** `Biblioteca pública municipal en Primera Junta 2451, Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria. Horarios y cómo asociarse.`
 - **Anfiteatro:** `Anfiteatro público en el Parque del Sur, Av. Presidente Illia 1100, Santa Fe. 1787 butacas, escenario renovado y sala bajo tablas para 70 personas.`
+- **Mercado Progreso:** `El Mercado Progreso es el espacio cultural municipal de Barrio Candioti, en Balcarce 1625, Santa Fe: teatro, música, cine y títeres.`
 
 ### Festival Diseña: cómo se carga y lo que queda a mano
 
