@@ -122,14 +122,14 @@ Decisiones tomadas:
 
 ### Somos Música: lo que queda a mano
 
-- **Sin publicar.** Va como un solo widget HTML con `somos-musica.html` en la primera sección de Elementor (página 24875); el resto de las secciones (textos, botón, los dos acordeones, la galería y los logos) se borran. El CSS anula el margen y el relleno de su sección, como en el Mercado Progreso, y deja 50 px hasta el footer.
+- **Publicada el 04/11/2026** (página 24875), como un solo widget HTML con `somos-musica.html` en la primera sección de Elementor. Se borraron las otras cuatro (inscripción, los dos acordeones, la galería y los logos). El CSS anula el margen y el relleno de su sección, como en el Mercado Progreso, y deja 50 px hasta el footer.
 - **Contacto:** `cultura@santafeciudad.gov.ar` y el teléfono de la Secretaría, (0342) 457-1609, el mismo del footer. Están también en el JSON-LD del final.
 - **La galería baja de ~40 MB a menos de 1 MB.** La vieja cargaba los 19 originales (unos 2 MB cada uno, ~40 MB) aunque nadie abriera el visor. Ahora la grilla usa el recorte de 400 × 400 de WordPress y el visor el de 1536, que se baja recién al abrir cada foto. *Concierto en barrio El Pozo* no tiene tamaños intermedios en Medios: el visor usa el original, de 145 KB.
 - **Sedes:** los ocho enlaces de Google Maps pasaron a OpenStreetMap con las coordenadas de cada lugar. El Club Cabaña Leiva no tenía coordenadas en Google y OpenStreetMap no tiene la altura 8300 de Grandoli: el punto es la calle Grandoli en Cabaña Leiva, aproximado. Si se sabe la dirección de las demás sedes, va como `<span class="sm-nota">…</span>`, como en el club.
 - **«Inscripción abierta»** se dejó como decía la página vieja («Continúa abierta la inscripción…»). Cuando cierre, cambiar el título y sacar el botón al formulario de Google.
 - **El JSON-LD `FAQPage` que generaba Elementor** con los acordeones (preguntas que eran nombres de escuelas) desaparece con ellos.
 - **Cambios de texto:** *Igualdad de oportunidades* se sumó a la presentación. Se corrigieron *Continua*, *Gral.Brigadier E. López* (es Brigadier General Estanislao López) y los nombres van con *N.º* y comillas latinas. «SOMOS Música» va como «Somos Música», el título de la página.
-- **Yoast, para cargar:** hoy la imagen para redes es el logo de Terranza.
+- **Yoast** quedó cargado el 04/11/2026 y verificado en la página publicada. Antes la imagen para redes era el logo de Terranza; ahora es la foto del violín (ID 25795), que Yoast sirve en su tamaño de 1024.
 
 | Frase clave | Título SEO | Meta descripción | Imagen para redes |
 |---|---|---|---|
