@@ -1,0 +1,186 @@
+<style>
+  .elementor-section:has(#ms),
+  .elementor-widget-wrap:has(> .elementor-widget-html #ms),
+  .elementor-widget-html:has(#ms) > .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#ms) { flex: 1 1 100%; min-width: 0; }
+
+  #ms {
+    --azul: #002751;
+    --gris-10: #eeeeed;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(16px, 2vw, 24px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #ms *, #ms *::before, #ms *::after { box-sizing: border-box; }
+  #ms :is(h2, h3, p, ul, ol) { margin: 0; padding: 0; }
+  #ms :is(ul, ol) { list-style: none; }
+  #ms :is(h2, h3) { color: inherit; font-family: inherit; text-transform: none; }
+  #ms a { color: var(--azul); text-decoration: none; }
+  #ms a:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #ms .ms-grilla { display: grid; gap: clamp(40px, 6vw, 72px); }
+  #ms .ms-texto { display: grid; gap: 1rem; max-width: 760px; margin-inline: auto; }
+  #ms .ms-cuerpo { font-size: 1.05rem; }
+  #ms .ms-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+
+  #ms .ms-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #ms .ms-titulo {
+    display: flex; align-items: baseline; gap: 0 .6rem;
+    margin-bottom: clamp(18px, 3vw, 28px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #ms .ms-titulo .ms-barra { align-self: center; margin-right: .2em; }
+  #ms .ms-subtitulo {
+    margin: 0 0 .75rem;
+    font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75);
+  }
+  #ms .ms-subtitulo:not(:first-of-type) { margin-top: clamp(24px, 3vw, 32px); }
+
+  #ms .ms-vidrio {
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+
+  /* Espacios */
+  #ms .ms-espacios { display: grid; gap: clamp(12px, 1.6vw, 16px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #ms .ms-espacio {
+    display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; align-items: center; gap: 1rem;
+    height: 100%; padding: .6rem 1rem .6rem .6rem;
+    transition: transform .3s var(--curva);
+  }
+  #ms .ms-espacio img {
+    display: block; width: 96px; height: 72px; object-fit: cover; border-radius: 6px;
+    background: var(--gris-20);
+  }
+  #ms .ms-espacio__nombre { display: block; font-size: 1.1rem; font-weight: 700; line-height: 1.25; }
+  #ms .ms-espacio__texto { display: block; margin-top: .25rem; font-size: .92rem; line-height: 1.4; color: var(--gris-75); }
+  #ms .ms-flecha {
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 6px;
+    background: var(--azul); color: #fff;
+  }
+  #ms .ms-flecha svg { width: 18px; height: 18px; transition: transform .3s var(--curva); }
+  @media (hover: hover) {
+    #ms .ms-espacio:hover { transform: translateX(4px); }
+    #ms .ms-espacio:hover .ms-flecha svg { transform: translateX(3px); }
+  }
+
+  /* Publicaciones */
+  #ms .ms-intro { max-width: 760px; margin: -.5rem 0 clamp(18px, 3vw, 24px); color: var(--gris-75); }
+  #ms .ms-pubs { display: grid; gap: clamp(20px, 3vw, 32px) clamp(14px, 2vw, 24px); grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  #ms .ms-pub { display: flex; flex-direction: column; height: 100%; }
+  #ms .ms-pub__tapa {
+    display: grid; place-items: center; aspect-ratio: 210 / 297; margin-bottom: .8rem;
+    overflow: hidden; border-radius: 4px; background: var(--gris-10);
+    box-shadow: 0 1px 2px rgba(0, 39, 81, .12), 0 12px 24px -14px rgba(0, 39, 81, .45);
+    transition: transform .35s var(--curva), box-shadow .35s var(--curva);
+  }
+  #ms .ms-pub__tapa img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 0; }
+  #ms .ms-pub__numero { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); font-variant-numeric: tabular-nums; }
+  #ms .ms-pub__titulo { margin-top: .2rem; font-weight: 700; line-height: 1.3; }
+  #ms .ms-pub__espacio { margin-top: .25rem; font-size: .88rem; line-height: 1.35; color: var(--gris-75); }
+  #ms .ms-pub__archivo {
+    display: inline-flex; align-items: center; gap: .4rem; margin-top: auto; padding-top: .6rem;
+    font-size: .85rem; font-weight: 600; white-space: nowrap;
+  }
+  #ms .ms-pub__archivo svg { width: 16px; height: 16px; flex: none; }
+  @media (hover: hover) {
+    #ms .ms-pub:hover .ms-pub__tapa { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(0, 39, 81, .12), 0 20px 32px -16px rgba(0, 39, 81, .55); }
+    #ms .ms-pub:hover .ms-pub__titulo { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+  }
+
+  @media (max-width: 1024px) {
+    #ms .ms-pubs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    #ms .ms-espacios { grid-template-columns: minmax(0, 1fr); }
+    #ms .ms-pubs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    #ms .ms-pubs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 480px) {
+    #ms .ms-espacio { grid-template-columns: 72px minmax(0, 1fr) auto; gap: .85rem; padding-right: .75rem; }
+    #ms .ms-espacio img { width: 72px; height: 60px; }
+    #ms .ms-flecha { width: 36px; height: 36px; }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #ms .ms-vidrio { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #ms .ms-vidrio { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #ms *, #ms *::before, #ms *::after { transition: none !important; }
+  }
+</style>
+
+<div id="ms">
+  <div class="ms-grilla">
+    <div class="ms-texto">
+      <p class="ms-lead">Los museos y salas municipales difunden el patrimonio de la ciudad y promueven la formación, la producción y la circulación de prácticas artísticas diversas, con propuestas accesibles para todos los públicos.</p>
+      <p class="ms-cuerpo">Para eso actualizan sus funciones, objetivos y estrategias según los contextos y las problemáticas de hoy.</p>
+    </div>
+
+    <section aria-labelledby="ms-espacios-titulo">
+      <h2 class="ms-titulo" id="ms-espacios-titulo"><i class="ms-barra"></i>Nuestros espacios</h2>
+
+      <h3 class="ms-subtitulo">Museos</h3>
+      <ul class="ms-espacios">
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/manzana-jesuitica/"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/05/museoinmaculada-390x290.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Manzana Jesuítica y Museo Colegio Inmaculada</span><span class="ms-espacio__texto">La obra de la Compañía de Jesús en Santa Fe, con el Observatorio y las salas</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/museo-de-la-ciudad/"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2021/05/museodelaciudad-390x290.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Museo de la Ciudad</span><span class="ms-espacio__texto">Historias cotidianas de Santa Fe y de quienes la habitan</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/museo-de-la-constitucion-nacional/"><img src="/capitalcultural/wp-content/uploads/2026/11/espacio-museo-de-la-constitucion-nacional.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Museo de la Constitución Nacional</span><span class="ms-espacio__texto">La historia constitucional en la Ciudad de la Constitución</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/museo-del-teatro/"><img src="/capitalcultural/wp-content/uploads/2026/11/espacio-museo-del-teatro.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Museo del Teatro</span><span class="ms-espacio__texto">El patrimonio del Teatro Municipal y el fondo de Ariel Ramírez</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/cesarlopezclaro/"><img src="/capitalcultural/wp-content/uploads/2026/11/espacio-cesarlopezclaro.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Museo Municipal César López Claro</span><span class="ms-espacio__texto">La casa del pintor en barrio Guadalupe y la obra que donó a la ciudad</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/mmav/"><img src="/capitalcultural/wp-content/uploads/2026/11/espacio-mmav.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Museo Municipal de Artes Visuales Sor Josefa Díaz y Clucellas</span><span class="ms-espacio__texto">Referencia de las artes visuales de la región desde 1936</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+      </ul>
+
+      <h3 class="ms-subtitulo">Salas</h3>
+      <ul class="ms-espacios">
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/cec/"><img src="/capitalcultural/wp-content/uploads/2026/11/espacio-cec.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Centro Experimental del Color</span><span class="ms-espacio__texto">Formación, producción y exhibición de artes visuales en la Estación Belgrano</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/fotogaleria/"><img src="/capitalcultural/wp-content/uploads/2026/11/espacio-fotogaleria.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Fotogalería Municipal</span><span class="ms-espacio__texto">Exposición, formación e investigación en fotografía</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/ariel-ramirez/"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/12/salaRamirez-390x290.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Sala Ariel Ramírez</span><span class="ms-espacio__texto">Conciertos, ciclos y muestras en homenaje al pianista santafesino</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        <li><a class="ms-espacio ms-vidrio" href="/capitalcultural/museos-y-salas/sala-mercado-editorial/"><img src="/capitalcultural/wp-content/uploads/2026/11/espacio-sala-mercado-editorial.jpg" alt="" loading="lazy" width="390" height="290"><span><span class="ms-espacio__nombre">Sala Mercado Editorial</span><span class="ms-espacio__texto">Archivo literario y editorial de la ciudad y la región, de libre acceso</span></span><span class="ms-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="ms-publicaciones-titulo">
+      <h2 class="ms-titulo" id="ms-publicaciones-titulo"><i class="ms-barra"></i>Publicaciones digitales</h2>
+      <p class="ms-intro">Catálogos y cuadernos de las muestras de los museos y salas, para leer o descargar en PDF.</p>
+
+      <ol class="ms-pubs">
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2026/10/andarLaCalleCEC.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2026-3-andar-la-calle.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 3 · 2026</span><span class="ms-pub__titulo">Andar la calle. Una sombra de hierba</span><span class="ms-pub__espacio">Centro Experimental del Color</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 15,7 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2026/06/CEC-Pubicacion-digital-El-Origen-de-la-Substancia-Importara-la-Importancia-del-Origen.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2026-2-el-origen-de-la-substancia.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 2 · 2026</span><span class="ms-pub__titulo">El origen de la substancia importará la importancia del origen</span><span class="ms-pub__espacio">Centro Experimental del Color</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 1,6 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2026/05/publicacionDigitalFotogaleria.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2026-1-fotogaleria-proa.jpg" alt="" loading="lazy" width="399" height="566"></span><span class="ms-pub__numero">N.º 1 · 2026</span><span class="ms-pub__titulo">Fotogalería + PROA</span><span class="ms-pub__espacio">Fotogalería Municipal</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 4,9 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2025/01/2025-Editorial-Digital-CEC-Centro-Experimental-del-Color-Clases-de-Apoyo.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2025-1-clases-de-apoyo.jpg" alt="" loading="lazy" width="318" height="566"></span><span class="ms-pub__numero">N.º 1 · 2025</span><span class="ms-pub__titulo">Clases de apoyo</span><span class="ms-pub__espacio">Centro Experimental del Color</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 12,6 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/11/Editorial-Digital-11-Mercado-Editorial-Catalogo-Abierto.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-11-catalogo-abierto.jpg" alt="" loading="lazy" width="318" height="566"></span><span class="ms-pub__numero">N.º 11 · 2024</span><span class="ms-pub__titulo">Catálogo abierto de editoriales y librerías independientes</span><span class="ms-pub__espacio">Sala Mercado Editorial</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 6,5 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/10/Editorial-Digital-10-Centro-Experimental-del-Color-Fortaleza-de-la-Infancia.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-10-fortaleza-de-la-infancia.jpg" alt="" loading="lazy" width="318" height="566"></span><span class="ms-pub__numero">N.º 10 · 2024</span><span class="ms-pub__titulo">Fortaleza de la infancia</span><span class="ms-pub__espacio">Centro Experimental del Color</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 19,3 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/11/Editorial-Digital-9-Museo-Sor-Josefa-Monte-Infinito-Bichas-de-Rio.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-9-monte-infinito.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 9 · 2024</span><span class="ms-pub__titulo">Monte infinito + Bichas de ríos</span><span class="ms-pub__espacio">Museo de Artes Visuales Sor Josefa Díaz y Clucellas</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 9,6 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/08/CEC_FlorMeyer_digital.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-8-gran-espiritu-gracias.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 8 · 2024</span><span class="ms-pub__titulo">¡Gran espíritu, gracias!</span><span class="ms-pub__espacio">Centro Experimental del Color</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 2,5 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/08/MMAV_agostodigital.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-7-entre-la-lanza-y-el-sable.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 7 · 2024</span><span class="ms-pub__titulo">Entre la lanza y el sable + El mundo es bello antes de ser verdadero</span><span class="ms-pub__espacio">Museo de Artes Visuales Sor Josefa Díaz y Clucellas</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 1,5 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/07/Pedroni_editorialdigital-1.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-6-jose-pedroni.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 6 · 2024</span><span class="ms-pub__titulo">José Pedroni: obras completas</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 1,8 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/06/cecEstefaniaRotman.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-5-acaso-los-perros.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 5 · 2024</span><span class="ms-pub__titulo">¿Acaso los perros piensan en el tiempo?</span><span class="ms-pub__espacio">Centro Experimental del Color</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 7,2 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/06/MMAV_OciosidadesRotayenpie.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-4-ociosidades.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 4 · 2024</span><span class="ms-pub__titulo">Ociosidades + Rota y en pie</span><span class="ms-pub__espacio">Museo de Artes Visuales Sor Josefa Díaz y Clucellas</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 1,6 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/06/MuseodelTeatro_editorial.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-3-de-banquetes.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 3 · 2024</span><span class="ms-pub__titulo">De banquetes, bailes y veladas</span><span class="ms-pub__espacio">Museo del Teatro</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 4,9 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/05/Muestras-CECLopezClaro.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-2-penumbra.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 2 · 2024</span><span class="ms-pub__titulo">Penumbra: obras de César López Claro</span><span class="ms-pub__espacio">Museo Municipal César López Claro</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 3,3 MB</span></a></li>
+        <li><a class="ms-pub" href="/capitalcultural/wp-content/uploads/2024/05/MMAV_marzodigital.pdf" target="_blank" rel="noopener"><span class="ms-pub__tapa"><img src="/capitalcultural/wp-content/uploads/2026/11/publicacion-2024-1-una-habitacion-propia.jpg" alt="" loading="lazy" width="400" height="566"></span><span class="ms-pub__numero">N.º 1 · 2024</span><span class="ms-pub__titulo">Una habitación propia + Rum rum Sor Josefa</span><span class="ms-pub__espacio">Museo de Artes Visuales Sor Josefa Díaz y Clucellas</span><span class="ms-pub__archivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF · 2,9 MB</span></a></li>
+      </ol>
+    </section>
+  </div>
+</div>

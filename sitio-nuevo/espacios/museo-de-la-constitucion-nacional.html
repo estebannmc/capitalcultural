@@ -1,0 +1,270 @@
+<style>
+  .elementor-section:has(#me),
+  .elementor-widget-wrap:has(> .elementor-widget-html #me),
+  .elementor-widget-html:has(#me) > .elementor-widget-container { padding: 0; margin: 0; }
+  .elementor:has(#me) > .elementor-section:has(#me) + .elementor-section { margin-top: clamp(40px, 6vw, 72px); }
+  .elementor:has(#me) > .elementor-section:last-child { padding-bottom: 50px; margin-bottom: 0; }
+  .elementor:has(#me) > .elementor-section:last-child .elementor-widget-wrap { padding-bottom: 0; }
+  .elementor-widget-wrap:has(> .elementor-widget-html #me) > .elementor-element { margin-bottom: 0; }
+  .elementor-widget-wrap:has(> .elementor-widget-html #me) > .elementor-element:not(:has(#me)) {
+    width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 32px);
+  }
+  .ast-container > .elementor:has(#me) { flex: 1 1 100%; min-width: 0; }
+
+  #me {
+    --azul: #002751;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(16px, 2vw, 24px) clamp(16px, 4vw, 32px) 0;
+  }
+  #me *, #me *::before, #me *::after { box-sizing: border-box; }
+  #me :is(h2, p, dl, dd) { margin: 0; padding: 0; }
+  #me h2 { color: inherit; font-family: inherit; text-transform: none; }
+  #me a:not(.me-btn) { color: var(--azul); text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; overflow-wrap: anywhere; }
+  #me a:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #me .me-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #me .me-titulo {
+    display: flex; align-items: baseline; gap: 0 .6rem;
+    margin-bottom: clamp(14px, 2vw, 20px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #me .me-titulo .me-barra { align-self: center; margin-right: .2em; }
+
+  #me .me-grilla { display: grid; gap: clamp(40px, 6vw, 72px); }
+  #me .me-texto {
+    display: grid; gap: 1rem; max-width: 760px; margin-inline: auto;
+    font-size: 1.05rem; text-align: justify; text-align-last: left;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  #me .me-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+
+  #me .me-visita {
+    display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(24px, 4vw, 48px); align-items: start;
+    padding: clamp(18px, 3vw, 32px); border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  #me .me-datos { display: grid; gap: 1rem; }
+  #me .me-visita--solo { grid-template-columns: minmax(0, 1fr); }
+  #me .me-datos dt { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  #me .me-datos dd { font-size: 1.02rem; }
+
+  #me .me-mapa { display: grid; gap: .6rem; }
+  #me .me-mapa__lienzo {
+    position: relative; overflow: hidden; width: 100%; aspect-ratio: 4 / 3;
+    border-radius: 6px; background: #f4f4f3;
+  }
+  #me .me-mapa__aviso { position: absolute; inset: 0; display: grid; place-content: center; padding: 1rem; text-align: center; color: var(--gris-75); }
+  #me .me-mapa__enlaces { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; font-size: .9rem; }
+  #me .me-punto { display: block; width: 18px; height: 18px; border-radius: 50%; background: var(--rojo); box-shadow: 0 0 0 3px #fff, 0 3px 10px rgba(0, 0, 0, .35); }
+  #me .maplibregl-ctrl-group { overflow: hidden; border: 1px solid var(--gris-20); border-radius: 6px; background: #fff; box-shadow: 0 6px 18px rgba(0, 39, 81, .16); }
+  #me .maplibregl-ctrl-group button, #me .maplibregl-ctrl-group button:focus {
+    display: block; width: 36px; height: 36px; min-height: 0; margin: 0; padding: 0;
+    border: 0; border-radius: 0; background-color: transparent; box-shadow: none;
+  }
+  #me .maplibregl-ctrl-group button + button { border-top: 1px solid var(--gris-20); }
+  #me .maplibregl-ctrl-attrib { background: rgba(255, 255, 255, .85); color: var(--gris-75); font-family: inherit; font-size: .72rem; }
+  #me .maplibregl-ctrl-attrib a { color: var(--azul); text-decoration: none; }
+  #me .maplibregl-ctrl-attrib-button, #me .maplibregl-ctrl-attrib-button:hover, #me .maplibregl-ctrl-attrib-button:focus {
+    min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 6px; background-color: transparent; box-shadow: none;
+  }
+  #me .maplibregl-cooperative-gesture-screen { background: rgba(4, 22, 44, .72); color: #fff; font-family: inherit; font-size: .95rem; font-weight: 600; }
+
+  #me .me-propuestas .me-titulo { margin-bottom: 0; }
+
+  @media (max-width: 860px) {
+    #me .me-visita { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #me .me-visita { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #me .me-visita { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+</style>
+
+<div id="me">
+  <div class="me-grilla">
+    <div class="me-texto">
+      <p class="me-lead">El Museo de la Constitución Nacional difunde los principios y valores de la Carta Magna con un recorrido por la historia constitucional argentina.</p>
+      <p>Se inauguró el 10 de diciembre de 2018 en el Parque-Biblioteca, frente a la costa. Refleja la identidad de Santa Fe como Ciudad de la Constitución y promueve los derechos de todas las personas.</p>
+    </div>
+
+    <section class="me-visita" aria-labelledby="me-visita-titulo">
+      <div>
+        <h2 class="me-titulo" id="me-visita-titulo"><i class="me-barra"></i>Visitá el Museo de la Constitución</h2>
+        <dl class="me-datos">
+          <div><dt>Martes a viernes</dt><dd>De marzo a noviembre, de 8:30 a 12:30 horas y de 14 a 18 horas. De diciembre a febrero, de 8:30 a 12:30 horas y de 16 a 20 horas.</dd></div>
+          <div><dt>Sábados</dt><dd>De marzo a agosto, de 14 a 18 horas. De septiembre a febrero, de 16 a 20 horas.</dd></div>
+          <div><dt>Feriados</dt><dd>De marzo a agosto, de 15 a 18 horas. De septiembre a febrero, de 17 a 20 horas.</dd></div>
+          <div><dt>Domingos y lunes</dt><dd>Cerrado.</dd></div>
+          <div><dt>Visitas mediadas</dt><dd>Duran una hora. Cupo de 30 personas por visita.</dd></div>
+          <div><dt>Entrada</dt><dd>Libre y gratuita.</dd></div>
+          <div><dt>Dirección</dt><dd>Av. Circunvalación y 1° de Mayo</dd></div>
+          <div><dt>Visitas educativas en grupo</dt><dd>De lunes a viernes de 8 a 18 horas, por WhatsApp o por correo.<br><a href="https://wa.me/5493425118351" target="_blank" rel="noopener">WhatsApp +54 9 342 511-8351</a> · <a href="mailto:turnos.museo@gmail.com">turnos.museo@gmail.com</a></dd></div>
+        </dl>
+      </div>
+      <div class="me-mapa">
+        <div class="me-mapa__lienzo" data-me-mapa data-lat="-31.669238" data-lng="-60.717109" data-nombre="Museo de la Constitución Nacional" role="region" aria-label="Mapa de ubicación de Museo de la Constitución Nacional"></div>
+        <p class="me-mapa__enlaces">
+          <a href="https://www.openstreetmap.org/?mlat=-31.669238&amp;mlon=-60.717109#map=18/-31.669238/-60.717109" target="_blank" rel="noopener">Ver en OpenStreetMap</a>
+          <a href="https://www.openstreetmap.org/directions?to=-31.669238%2C-60.717109" target="_blank" rel="noopener">Cómo llegar</a>
+        </p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var lienzo = document.querySelector('#me [data-me-mapa]')
+  if (!lienzo || lienzo.dataset.meInit === '1') return
+  lienzo.dataset.meInit = '1'
+
+  var MAPLIBRE = {
+    js: 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js',
+    jsSri: 'sha384-5+cfbwT0iiub6VsQAdn6yz16nr6sDiQoHx6tm4O8OVYXHYOxcffFmCJBL0dgdvGp',
+    css: 'https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css',
+    cssSri: 'sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK'
+  }
+  var ESTILO = 'https://tiles.openfreemap.org/styles/positron'
+  var P = {
+    fondo: '#f4f4f3', manzana: '#ededeb', verde: '#e4ebe7', agua: '#cfe8f7',
+    edificio: '#e2e2df', edificioBorde: '#d5d5d2', calle: '#ffffff', borde: '#d3d3d0',
+    limite: 'rgba(0,39,81,.25)', texto: '#606060', textoAgua: '#3d7aa6', halo: '#ffffff'
+  }
+  var TEXTOS = {
+    'AttributionControl.ToggleAttribution': 'Mostrar créditos del mapa',
+    'NavigationControl.ZoomIn': 'Acercar',
+    'NavigationControl.ZoomOut': 'Alejar',
+    'CooperativeGesturesHandler.WindowsHelpText': 'Usá Ctrl + la rueda del mouse para acercar el mapa',
+    'CooperativeGesturesHandler.MacHelpText': 'Usá ⌘ + la rueda del mouse para acercar el mapa',
+    'CooperativeGesturesHandler.MobileHelpText': 'Usá dos dedos para mover el mapa'
+  }
+
+  // Comparte la carga con el mapa de Patrimonio si los dos están en la misma página.
+  function cargarMapLibre () {
+    if (window.maplibregl) return Promise.resolve(window.maplibregl)
+    if (window.PP_MAPLIBRE) return window.PP_MAPLIBRE
+    var hoja = document.createElement('link')
+    hoja.rel = 'stylesheet'; hoja.href = MAPLIBRE.css; hoja.integrity = MAPLIBRE.cssSri; hoja.crossOrigin = 'anonymous'
+    document.head.appendChild(hoja)
+    var carga = window.PP_MAPLIBRE = new Promise(function (ok, mal) {
+      var s = document.createElement('script')
+      s.src = MAPLIBRE.js; s.integrity = MAPLIBRE.jsSri; s.crossOrigin = 'anonymous'; s.async = true
+      s.onload = function () { window.maplibregl ? ok(window.maplibregl) : mal(new Error('MapLibre no quedó disponible')) }
+      s.onerror = function () { mal(new Error('No se pudo cargar MapLibre')) }
+      document.head.appendChild(s)
+    })
+    carga.catch(function () { window.PP_MAPLIBRE = null })
+    return carga
+  }
+
+  function tematizar (estilo) {
+    estilo.layers = estilo.layers.filter(function (l) { return l.type !== 'raster' && l.type !== 'hillshade' && !/shield/.test(l.id) })
+    estilo.layers.forEach(function (l) {
+      var id = l.id, p = l.paint = l.paint || {}
+      if (l.type === 'background') p['background-color'] = P.fondo
+      else if (l.type === 'fill') {
+        p['fill-color'] = /water/.test(id) ? P.agua : /building/.test(id) ? P.edificio
+          : /park|wood|grass|landcover/.test(id) ? P.verde : /pier|aeroway/.test(id) ? P.fondo : P.manzana
+        if (/building/.test(id)) p['fill-outline-color'] = P.edificioBorde
+      } else if (l.type === 'line') {
+        p['line-color'] = /water/.test(id) ? P.agua : /boundary/.test(id) ? P.limite
+          : /casing/.test(id) ? P.borde : /dashline|pier/.test(id) ? P.fondo : P.calle
+      } else if (l.type === 'symbol') {
+        var agua = /water/.test(id)
+        p['text-color'] = agua ? P.textoAgua : P.texto
+        p['text-halo-color'] = agua ? P.agua : P.halo
+        p['text-halo-width'] = 1.2
+        p['text-halo-blur'] = 0
+      }
+    })
+    return estilo
+  }
+
+  function montar () {
+    var punto = [parseFloat(lienzo.dataset.lng), parseFloat(lienzo.dataset.lat)]
+    var estilo = fetch(ESTILO).then(function (r) { if (!r.ok) throw new Error('Estilo HTTP ' + r.status); return r.json() }).then(tematizar)
+    Promise.all([cargarMapLibre(), estilo]).then(function (r) {
+      var ml = r[0]
+      var mapa = new ml.Map({
+        container: lienzo, style: r[1], center: punto, zoom: 16,
+        cooperativeGestures: true, dragRotate: false, pitchWithRotate: false, touchPitch: false,
+        attributionControl: { compact: true }, locale: TEXTOS
+      })
+      mapa.touchZoomRotate.disableRotation()
+      mapa.keyboard.disableRotation()
+      mapa.addControl(new ml.NavigationControl({ showCompass: false }), 'top-right')
+      var marca = document.createElement('span')
+      marca.className = 'me-punto'
+      marca.setAttribute('role', 'img')
+      marca.setAttribute('aria-label', lienzo.dataset.nombre)
+      new ml.Marker({ element: marca, anchor: 'center' }).setLngLat(punto).addTo(mapa)
+      mapa.once('idle', function () {
+        var c = lienzo.querySelector('.maplibregl-ctrl-attrib.maplibregl-compact')
+        if (c) c.classList.remove('maplibregl-compact-show')
+      })
+    }).catch(function (err) {
+      lienzo.innerHTML = '<p class="me-mapa__aviso">No pudimos cargar el mapa. Usá el enlace a OpenStreetMap de abajo.</p>'
+      if (window.console) console.error('[Museos y Salas]', err)
+    })
+  }
+
+  if (!('IntersectionObserver' in window)) return montar()
+  var vigia = new IntersectionObserver(function (e) {
+    if (!e.some(function (x) { return x.isIntersecting })) return
+    vigia.disconnect()
+    montar()
+  }, { rootMargin: '300px 0px' })
+  vigia.observe(lienzo)
+})()
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Museum",
+  "name": "Museo de la Constitución Nacional",
+  "url": "https://www.santafeciudad.gov.ar/capitalcultural/museos-y-salas/museo-de-la-constitucion-nacional/",
+  "publicAccess": true,
+  "isAccessibleForFree": true,
+  "parentOrganization": {
+    "@type": "GovernmentOrganization",
+    "name": "Municipalidad de Santa Fe",
+    "url": "https://www.santafeciudad.gov.ar/"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Circunvalación y 1° de Mayo",
+    "addressLocality": "Santa Fe",
+    "addressRegion": "Santa Fe",
+    "postalCode": "3000",
+    "addressCountry": "AR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -31.669238,
+    "longitude": -60.717109
+  },
+  "email": "turnos.museo@gmail.com"
+}
+</script>

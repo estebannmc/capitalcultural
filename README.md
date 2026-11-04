@@ -52,6 +52,11 @@ Decisiones tomadas:
 | `sitio-nuevo/biblioteca-muttis.html` | **Biblioteca Profesor Enrique Muttis**: texto, botón al catálogo, datos de visita, servicios, cómo asociarse, colección e historia, con datos estructurados `Library` de schema.org. Widget HTML entero |
 | `sitio-nuevo/anfiteatro.html` | **Anfiteatro Municipal Juan de Garay**: texto, los dos accesos (Teatro en el Anfi y Capacitaciones 4x4), datos de visita con la foto aérea, las seis características del espacio y autoridades, con datos estructurados `PerformingArtsTheater`. Widget HTML entero |
 | `sitio-nuevo/mercado-progreso.html` | **Mercado Progreso**: presentación, las nueve propuestas, datos de visita con la foto del patio, historia y autoridades, con datos estructurados `EventVenue`. Widget HTML entero |
+| `sitio-nuevo/museos-y-salas.html` | **Museos y Salas**: presentación, los diez espacios con foto en dos grupos (museos y salas) y las 15 publicaciones digitales en grilla de tapas, con número, año, espacio y peso del PDF. Widget HTML entero |
+| `sitio-nuevo/espacios/` | **Las 10 fichas de Museos y Salas**: presentación, *Visitá…* con horarios, contacto y mapa de OpenFreeMap, y el título de propuestas. Un widget HTML por página, generado con `generar.py` desde `plantilla.html` |
+| `sitio-nuevo/img/redes/` | Imágenes para redes de 1200 × 630 de seis espacios, ya en Medios |
+| `sitio-nuevo/img/espacios/` | Siete fotos a color de los espacios de Museos y Salas, en 390 × 290 (16–40 KB cada una), ya en Medios |
+| `sitio-nuevo/img/publicaciones/` | Las 15 tapas de las publicaciones digitales: la primera página de cada PDF, en JPG de 566 px de alto (24–56 KB cada una, 569 KB en total). Se suben a Medios |
 | `sitio-nuevo/fichas-memorias-feministas.html` | El código de las 13 fichas de baldosas, con *Copiar código* y vista previa. Abrilo en el navegador |
 | `sitio-nuevo/festival-disena-comun.html` | **Festival Diseña, bloque común**: Encode Sans variable (única tipografía), estilos `.fd`, menú de la sección e íconos. Primer widget HTML de las cuatro páginas |
 | `sitio-nuevo/festival-disena-inicio.html` | **Festival Diseña, inicio**: hero con la foto en tamaño 1536, cifras, ciclo en cinco pasos, galería en mosaico con visor y video que carga YouTube al tocar play |
@@ -92,7 +97,7 @@ Decisiones tomadas:
 - **Publicada el 02/11/2026**, como un solo widget HTML con `mercado-progreso.html` (página 24705). Se borraron las otras tres secciones de Elementor: el texto, el contacto y la de autoridades con el escudo, que ya está en el header y el footer.
 - **El widget quedó en la sección de los botones viejos**, que tenía 50 px de margen arriba. El CSS del archivo anula el margen y el relleno de su sección (`.elementor-section:has(#mp)`), así que entre las migas y el texto queda la misma distancia que en Centro Cultural Municipal.
 - **La foto** es la del patio central de Federico Cairoli que ya estaba en Medios (`2021/04/04.Mercado_Progreso_-_Ph.Federico_Cairoli_low.jpg`, ID 12320, 1280 × 853), en su tamaño de 1024. No lleva crédito en la página, igual que las anteriores; si se quiere, va como `<figcaption>`.
-- **Las fotos de Marcelo Pucci del centenario** (IDs 27980 y 27607) tienen la ñ de *Años* descompuesta en el nombre del archivo: la URL con la ñ normal da 404. Si se usan, copiar la URL desde Medios, no escribirla a mano.
+- **Las fotos de Marcela Pucci del centenario** (IDs 27980 y 27607) tienen la ñ de *Años* descompuesta en el nombre del archivo: la URL con la ñ normal da 404. Si se usan, copiar la URL desde Medios, no escribirla a mano.
 - **No hay horario de atención** en la página publicada, así que no se inventó. Si lo hay, va como un `<div><dt>Horario</dt><dd>…</dd></div>` más en *Visitá el Mercado Progreso*.
 - **Las nueve propuestas** van en una grilla de 3 × 3: primero las vigentes y al final las de 2025 (*Aniversario* y *Teatro en el Mercado 2025*). Cuando haya *Teatro en el Mercado 2027*, la de 2025 se puede sacar.
 - **Se sacó «Coordinador Teatro Municipal»** de las autoridades: no corresponde al Mercado.
@@ -101,16 +106,59 @@ Decisiones tomadas:
 - **Dos datos para confirmar.** La nota fecha la obra de Barletta en 2010 en el texto y en 2011 en una foto; se dejó 2011, como decía la página. La obra del escenario de 9 × 5 m figura «10 años más tarde, en la gestión de Emilio Jatón», sin año, así que va como «una década después».
 - **La dirección es Balcarce 1635**, confirmada. La página vieja decía 1625; se corrigió en los datos de visita, el enlace al mapa, el JSON-LD y la meta descripción de Yoast.
 
-### SEO cargado: Centro Cultural, Biblioteca Muttis, Anfiteatro y Mercado Progreso
+### Museos y Salas: lo que queda a mano
+
+- **Publicada el 04/11/2026** (página 20080), como un solo widget HTML con `museos-y-salas.html` en la primera sección de Elementor. Se borraron las otras dos (botones y publicaciones). El CSS anula el margen y el relleno de esa sección: entre las migas y el texto quedan 44 px en escritorio y 36 px en celular.
+- **Las 15 tapas están en Medios** (IDs 33502 a 33516) y **las 7 fotos de los espacios** también (IDs 33495 a 33501), todas en `2026/11/` con el mismo nombre que en el repo. Se usan en su tamaño original, no en los que genera WordPress.
+- **Las tapas son la primera página de cada PDF.** Doce son A4; *Fortaleza de la infancia*, *Catálogo abierto* y *Clases de apoyo* son 9:16 y se ven enteras en el recuadro A4, con un margen gris a los costados.
+- **La imagen para redes** es `sitio-nuevo/img/museos-y-salas-redes.jpg`, la fachada del CEC en 1200 × 630 (ID 33517).
+- **Siete espacios tienen foto a color, sacada de Drive.** CEC, Fotogalería, López Claro y Sor Josefa usan la foto de fachada de la tapa de su dossier 2026, que está en la carpeta *Dossier espacios*; el Museo de la Constitución, la de la tapa de `MCN_Dossier2026.pdf`. El Museo del Teatro usa la araña del Teatro Municipal, de Marcela Pucci (`MPucci_TeatroMunicipal_16052024_056.jpg`), y la Sala Mercado Editorial, una foto de la Noche de los Museos (`NocheDeLosMuseosMercadoEditorial2.jpg`). Las de los dossiers no tienen el nombre del fotógrafo.
+- **Tres siguen con la foto en blanco y negro del backup**, ya en Medios, porque en Drive no hay fotos limpias a color, sólo piezas de redes con texto encima o fotos de archivo: Manzana Jesuítica (`2021/05/museoinmaculada-390x290.jpg`), Museo de la Ciudad (`2021/05/museodelaciudad-390x290.jpg`) y Sala Ariel Ramírez (`2022/12/salaRamirez-390x290.jpg`). Cuando haya una foto a color, se sube en 390 × 290 y se cambia el `src`.
+- **José Pedroni: obras completas** (#6, 2024) va sin espacio. Si es de la Sala Mercado Editorial o de otro, sumar `<span class="ms-pub__espacio">…</span>` después del título.
+- **El espacio de las demás publicaciones sale del nombre del archivo**, salvo *Penumbra*, confirmada en el Museo Municipal César López Claro.
+- **Al sumar una publicación:** exportar la primera página del PDF en JPG de 566 px de alto, subirla a Medios y copiar un `<li>` al principio de la lista, con su tapa, número, año, título, espacio y peso del PDF.
+- **Cambios de texto:** se partió la presentación en dos párrafos y se acortó. Los títulos de las publicaciones van en minúscula salvo el primer término, como en el resto del sitio. *Entre la lanza y el sable* suma *+ El mundo es bello antes de ser verdadero*, como dice su tapa. El botón decía «Manzana Jesuítica y Colegio Inmaculada»; ahora usa el nombre de su página, «Manzana Jesuítica y Museo Colegio Inmaculada».
+
+### Fichas de los espacios: lo que queda a mano
+
+- **Publicadas el 04/11/2026**, las diez. Cada página quedó con una sola sección: el widget HTML de `sitio-nuevo/espacios/<slug>.html` y, debajo, el shortcode de propuestas. Hay 50 px hasta el footer. El Museo de la Constitución conserva sus dos secciones propias (Parque, Museo y Auditorio, y el material didáctico) debajo de la ficha, y los 50 px van al pie de la última.
+- **Para cambiar un texto, un horario o un contacto**, se edita `ESPACIOS` en `generar.py`, se corre `python sitio-nuevo/espacios/generar.py` y se pega el `.html` de ese espacio en su widget. Los horarios van con «horas», nunca con «h».
+- **El mapa es MapLibre con el estilo de OpenFreeMap**, como en Patrimonio Público, y carga cuando se acerca a la pantalla. Los enlaces son a OpenStreetMap: no queda ningún Google Maps. Las coordenadas salen de Nominatim; la Fotogalería se ubicó por el frente sobre el Pasaje Falucho, porque OpenStreetMap no tiene la altura 2451 de Primera Junta.
+- **Shortcodes corregidos.** La Sala Ariel Ramírez usaba `[salaramirez]` y el Mercado Editorial `[salamercado]`, que no existen: no mostraban ninguna propuesta. Ahora son `[salaarielramirez]` (10 propuestas) y `[salamercadoeditorial]` (13). El Museo del Teatro tenía las propuestas en un widget HTML y pasó al shortcode `[museodelteatro]`. La lista de shortcodes está en *Programación Cultural → Ayuda y shortcodes*.
+- **El Museo de la Ciudad es itinerante**: va sin dirección ni mapa, y el horario dice «Según cada muestra».
+- **El Museo de la Constitución no tiene propuestas cargadas** en Programación Cultural (0). Si se cargan, se suma un widget con `[museoconstitucion]`.
+- **La Sala Ariel Ramírez no tenía horario ni dirección.** Se tomó de sus propuestas: planta alta de la Estación Belgrano, Bv. Gálvez 1150, y abre en los conciertos. No tiene correo propio.
+- **El WhatsApp del CEC no coincidía**: el texto decía 511-8351 (el del Museo de la Constitución) y el enlace 511-8392. Quedó el 511-8392; confirmar.
+- **Se borraron los dos botones de la Fotogalería**: uno llevaba a `/bibliotecamuttis/`, que da 404, y el otro a `#`. Ahora el texto enlaza al Centro Cultural Municipal y a la Biblioteca Muttis.
+- **Los títulos de las páginas no se tocaron**: el del CEC sigue siendo «Sala CEC», que es el que aparece como título y en las migas.
+- **Los textos de las propuestas** (los que carga cada espacio en Programación Cultural) todavía usan «h» en los horarios. Eso se corrige en cada propuesta, no en las fichas.
+
+| Página | ID | Frase clave | Título SEO | Imagen para redes |
+|---|---|---|---|---|
+| CEC | 20428 | `Centro Experimental del Color` | `Centro Experimental del Color (CEC) \| Santa Fe` | Fachada del CEC (ID 33517) |
+| Fotogalería | 24139 | `Fotogalería Municipal` | `Fotogalería Municipal \| Santa Fe` | Entrada de la Fotogalería (ID 33525) |
+| Manzana Jesuítica | 23414 | `Manzana Jesuítica` | `Manzana Jesuítica y Museo Colegio Inmaculada \| Santa Fe` | `2021/05/museoinmaculada.jpg` (ID 13013) |
+| Museo de la Ciudad | 20091 | `Museo de la Ciudad` | `Museo de la Ciudad \| Santa Fe` | `2021/05/museodelaciudad-scaled.jpg` (ID 13014) |
+| Museo de la Constitución | 22929 | `Museo de la Constitución Nacional` | `Museo de la Constitución Nacional \| Santa Fe` | Fachada del dossier 2026 (ID 33526) |
+| López Claro | 27565 | `Museo César López Claro` | `Casa Museo César López Claro \| Santa Fe` | Fachada (ID 33527) |
+| Sor Josefa | 20341 | `Museo Sor Josefa` | `Museo de Artes Visuales Sor Josefa Díaz y Clucellas \| Santa Fe` | Frente del museo (ID 33528) |
+| Museo del Teatro | 23358 | `Museo del Teatro` | `Museo del Teatro Municipal 1° de Mayo \| Santa Fe` | La araña del Teatro, de Marcela Pucci (ID 33529) |
+| Sala Ariel Ramírez | 15198 | `Sala Ariel Ramírez` | `Sala Ariel Ramírez \| Santa Fe` | `2022/12/salaRamirez.jpg` (ID 20278) |
+| Sala Mercado Editorial | 20519 | `Sala Mercado Editorial` | `Sala Mercado Editorial \| Santa Fe` | Noche de los Museos (ID 33530) |
+
+Las meta descripciones se cargaron en Yoast, una por página, de 140 a 149 caracteres, con la dirección del espacio cuando la tiene.
+
+### SEO cargado: Centro Cultural, Biblioteca Muttis, Anfiteatro, Mercado Progreso y Museos y Salas
 
 Cargado en la caja de Yoast el 02/11/2026 y verificado en las páginas publicadas. En las tres primeras sólo se tocó Yoast; el Mercado Progreso se cargó junto con la página nueva.
 
 | Página | Frase clave | Título SEO | Imagen para redes |
 |---|---|---|---|
-| Centro Cultural Municipal | `Centro Cultural Municipal` | `Centro Cultural Municipal \| Santa Fe` | Feria de la Fotogalería, de Marcelo Pucci (ID 31147) |
+| Centro Cultural Municipal | `Centro Cultural Municipal` | `Centro Cultural Municipal \| Santa Fe` | Feria de la Fotogalería, de Marcela Pucci (ID 31147) |
 | Biblioteca Muttis | `Biblioteca Muttis` | `Biblioteca Municipal Profesor Enrique Muttis \| Santa Fe` | La fachada, `2024/09/BMuttis.jpg` (ID 24150) |
 | Anfiteatro | `Anfiteatro Juan de Garay` | `Anfiteatro Municipal Juan de Garay \| Santa Fe` | La aérea recortada (ID 33415) |
 | Mercado Progreso | `Mercado Progreso` | `Mercado Progreso, espacio cultural en Candioti \| Santa Fe` | El patio central, de Federico Cairoli (ID 12320) |
+| Museos y Salas | `Museos y Salas` | `Museos y Salas Municipales \| Santa Fe` | La fachada del CEC a color, del dossier 2026 (ID 33517) |
 
 Meta descripciones:
 
@@ -118,6 +166,7 @@ Meta descripciones:
 - **Biblioteca Muttis:** `Biblioteca pública municipal en Primera Junta 2451, Santa Fe. Consulta en sala, préstamo de libros a domicilio y prensa diaria. Horarios y cómo asociarse.`
 - **Anfiteatro:** `Anfiteatro público en el Parque del Sur, Av. Presidente Illia 1100, Santa Fe. 1787 butacas, escenario renovado y sala bajo tablas para 70 personas.`
 - **Mercado Progreso:** `El Mercado Progreso es el espacio cultural municipal de Barrio Candioti, en Balcarce 1635, Santa Fe: teatro, música, cine y títeres.`
+- **Museos y Salas** (04/11/2026): `Los diez museos y salas municipales de Santa Fe, del Museo Sor Josefa al CEC, y sus publicaciones digitales: catálogos de muestras para leer en PDF.`
 
 ### Festival Diseña: cómo se carga y lo que queda a mano
 
