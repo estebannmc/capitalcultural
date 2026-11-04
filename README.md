@@ -53,6 +53,7 @@ Decisiones tomadas:
 | `sitio-nuevo/anfiteatro.html` | **Anfiteatro Municipal Juan de Garay**: texto, los dos accesos (Teatro en el Anfi y Capacitaciones 4x4), datos de visita con la foto aérea, las seis características del espacio y autoridades, con datos estructurados `PerformingArtsTheater`. Widget HTML entero |
 | `sitio-nuevo/mercado-progreso.html` | **Mercado Progreso**: presentación, las nueve propuestas, datos de visita con la foto del patio, historia y autoridades, con datos estructurados `EventVenue`. Widget HTML entero |
 | `sitio-nuevo/museos-y-salas.html` | **Museos y Salas**: presentación, los diez espacios con foto en dos grupos (museos y salas) y las 15 publicaciones digitales en grilla de tapas, con número, año, espacio y peso del PDF. Widget HTML entero |
+| `sitio-nuevo/somos-musica.html` | **Somos Música**: presentación, inscripción con el formulario y el contacto de la Secretaría, las ocho sedes por tipo de instrumento con enlace a OpenStreetMap, galería de 19 fotos con visor y los logos de quienes acompañan, con datos estructurados `EducationalOccupationalProgram`. Widget HTML entero |
 | `sitio-nuevo/espacios/` | **Las 10 fichas de Museos y Salas**: presentación, *Visitá…* con horarios, contacto y mapa de OpenFreeMap, y el título de propuestas. Un widget HTML por página, generado con `generar.py` desde `plantilla.html` |
 | `sitio-nuevo/img/redes/` | Imágenes para redes de 1200 × 630 de seis espacios, ya en Medios |
 | `sitio-nuevo/img/espacios/` | Siete fotos a color de los espacios de Museos y Salas, en 390 × 290 (16–40 KB cada una), ya en Medios |
@@ -118,6 +119,21 @@ Decisiones tomadas:
 - **El espacio de las demás publicaciones sale del nombre del archivo**, salvo *Penumbra*, confirmada en el Museo Municipal César López Claro.
 - **Al sumar una publicación:** exportar la primera página del PDF en JPG de 566 px de alto, subirla a Medios y copiar un `<li>` al principio de la lista, con su tapa, número, año, título, espacio y peso del PDF.
 - **Cambios de texto:** se partió la presentación en dos párrafos y se acortó. Los títulos de las publicaciones van en minúscula salvo el primer término, como en el resto del sitio. *Entre la lanza y el sable* suma *+ El mundo es bello antes de ser verdadero*, como dice su tapa. El botón decía «Manzana Jesuítica y Colegio Inmaculada»; ahora usa el nombre de su página, «Manzana Jesuítica y Museo Colegio Inmaculada».
+
+### Somos Música: lo que queda a mano
+
+- **Sin publicar.** Va como un solo widget HTML con `somos-musica.html` en la primera sección de Elementor (página 24875); el resto de las secciones (textos, botón, los dos acordeones, la galería y los logos) se borran. El CSS anula el margen y el relleno de su sección, como en el Mercado Progreso, y deja 50 px hasta el footer.
+- **Contacto:** `cultura@santafeciudad.gov.ar` y el teléfono de la Secretaría, (0342) 457-1609, el mismo del footer. Están también en el JSON-LD del final.
+- **La galería baja de ~40 MB a menos de 1 MB.** La vieja cargaba los 19 originales (unos 2 MB cada uno, ~40 MB) aunque nadie abriera el visor. Ahora la grilla usa el recorte de 400 × 400 de WordPress y el visor el de 1536, que se baja recién al abrir cada foto. *Concierto en barrio El Pozo* no tiene tamaños intermedios en Medios: el visor usa el original, de 145 KB.
+- **Sedes:** los ocho enlaces de Google Maps pasaron a OpenStreetMap con las coordenadas de cada lugar. El Club Cabaña Leiva no tenía coordenadas en Google y OpenStreetMap no tiene la altura 8300 de Grandoli: el punto es la calle Grandoli en Cabaña Leiva, aproximado. Si se sabe la dirección de las demás sedes, va como `<span class="sm-nota">…</span>`, como en el club.
+- **«Inscripción abierta»** se dejó como decía la página vieja («Continúa abierta la inscripción…»). Cuando cierre, cambiar el título y sacar el botón al formulario de Google.
+- **El JSON-LD `FAQPage` que generaba Elementor** con los acordeones (preguntas que eran nombres de escuelas) desaparece con ellos.
+- **Cambios de texto:** *Igualdad de oportunidades* se sumó a la presentación. Se corrigieron *Continua*, *Gral.Brigadier E. López* (es Brigadier General Estanislao López) y los nombres van con *N.º* y comillas latinas. «SOMOS Música» va como «Somos Música», el título de la página.
+- **Yoast, para cargar:** hoy la imagen para redes es el logo de Terranza.
+
+| Frase clave | Título SEO | Meta descripción | Imagen para redes |
+|---|---|---|---|
+| `Somos Música` | `Somos Música, orquestas infantiles y juveniles \| Santa Fe` | `Orquestas infantiles y juveniles gratuitas en barrios de Santa Fe, para niñas, niños y adolescentes de 7 a 14 años. Los instrumentos se prestan.` (144) | `2025/06/15-noviembre-2024-SOMOS-Musica-1.jpg` |
 
 ### Fichas de los espacios: lo que queda a mano
 
