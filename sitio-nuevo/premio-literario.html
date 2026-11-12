@@ -1,0 +1,229 @@
+<style>
+  .elementor-section:has(#pl),
+  .elementor-widget-wrap:has(> .elementor-widget-html #pl),
+  .elementor-widget-html:has(#pl) > .elementor-widget-container { padding: 0; margin: 0; }
+  .elementor-column:has(#pl),
+  .elementor-widget-wrap:has(> .elementor-widget-html #pl) > .elementor-element { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#pl) { flex: 1 1 100%; min-width: 0; }
+
+  #pl {
+    --azul: #002751;
+    --celeste: #57b8e9;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(16px, 2vw, 24px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #pl *, #pl *::before, #pl *::after { box-sizing: border-box; }
+  #pl :is(h2, h3, p, ul, ol) { margin: 0; padding: 0; }
+  #pl :is(ul, ol) { list-style: none; }
+  #pl :is(h2, h3) { color: inherit; font-family: inherit; text-transform: none; }
+  #pl cite { font-style: italic; }
+  #pl a { color: var(--azul); text-decoration: none; }
+  #pl a:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #pl .pl-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #pl .pl-titulo {
+    display: flex; align-items: baseline; gap: 0 .6rem;
+    margin-bottom: clamp(20px, 3vw, 28px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #pl .pl-titulo .pl-barra { align-self: center; margin-right: .2em; }
+  #pl .pl-etiqueta { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+
+  #pl .pl-grilla { display: grid; gap: clamp(64px, 9vw, 112px); }
+
+  #pl .pl-vidrio {
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+
+  /* Ganadores */
+  #pl .pl-cabeza {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+    gap: 16px clamp(16px, 3vw, 40px); align-items: end; margin-bottom: clamp(28px, 4vw, 40px);
+  }
+  #pl .pl-cabeza .pl-titulo { margin-bottom: .4rem; }
+  #pl .pl-cabeza p { font-size: 1.05rem; }
+  #pl .pl-cabeza .cb-btn { width: 100%; min-height: 64px; }
+
+  #pl .pl-obras { display: grid; gap: clamp(16px, 2vw, 24px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #pl .pl-obra { display: grid; align-content: start; gap: .35rem; padding: clamp(18px, 2.6vw, 28px); }
+  #pl .pl-obra__titulo { font-size: 1.3rem; font-weight: 700; line-height: 1.25; }
+  #pl .pl-obra__autor { font-weight: 600; }
+  #pl .pl-obra__resena { margin-top: .4rem; color: var(--gris-75); }
+
+  #pl .pl-ganadora {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: .35rem clamp(24px, 4vw, 48px);
+    padding: clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px) clamp(32px, 4vw, 44px);
+    border-radius: 8px; background: var(--azul); color: #fff;
+    box-shadow: 0 18px 36px -18px rgba(0, 39, 81, .7);
+  }
+  #pl .pl-ganadora > * { grid-column: 1; }
+  #pl .pl-ganadora .pl-etiqueta { color: var(--celeste); }
+  #pl .pl-ganadora .pl-obra__titulo { font-size: clamp(1.6rem, 3.4vw, 2.3rem); line-height: 1.12; letter-spacing: -.01em; }
+  #pl .pl-ganadora .pl-obra__autor { font-size: 1.1rem; }
+  #pl .pl-ganadora .pl-obra__resena {
+    grid-column: 2; grid-row: 1 / span 4; align-self: center; margin: 0;
+    padding-left: clamp(16px, 2.4vw, 28px); border-left: 3px solid var(--rojo);
+    font-size: 1.05rem; line-height: 1.55; color: #fff;
+  }
+  #pl .pl-premio { margin-top: .6rem; font-size: .95rem; color: rgba(255, 255, 255, .85); }
+  #pl .pl-premio strong { color: #fff; }
+
+  /* Jurado */
+  #pl .pl-jurado { display: grid; gap: 24px clamp(20px, 3vw, 32px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #pl .pl-jurado li { padding-top: .8rem; border-top: 2px solid var(--azul); }
+  #pl .pl-jurado__nombre { display: block; font-weight: 700; line-height: 1.3; }
+  #pl .pl-jurado__rol { display: block; margin-top: .2rem; font-size: .92rem; line-height: 1.45; color: var(--gris-75); }
+
+  /* Documentos */
+  #pl .pl-docs { display: grid; gap: clamp(14px, 2vw, 20px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #pl .pl-doc {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem;
+    height: 100%; padding: 1rem 1rem 1rem 1.2rem; transition: transform .3s var(--curva);
+  }
+  #pl .pl-doc__nombre { display: block; font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+  #pl .pl-doc__texto { display: block; margin-top: .15rem; font-size: .92rem; line-height: 1.4; color: var(--gris-75); }
+  #pl .pl-flecha { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 6px; background: var(--azul); color: #fff; }
+  #pl .pl-flecha svg { width: 18px; height: 18px; transition: transform .3s var(--curva); }
+  @media (hover: hover) {
+    #pl .pl-doc:hover { transform: translateX(4px); }
+    #pl .pl-doc:hover .pl-flecha svg { transform: translateY(3px); }
+    #pl .pl-doc:hover .pl-doc__nombre { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+  }
+
+  @media (max-width: 860px) {
+    #pl .pl-cabeza, #pl .pl-ganadora, #pl .pl-docs { grid-template-columns: minmax(0, 1fr); }
+    #pl .pl-ganadora .pl-obra__resena { grid-column: 1; grid-row: auto; margin-top: .75rem; }
+  }
+  @media (max-width: 640px) {
+    #pl .pl-obras, #pl .pl-jurado { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #pl .pl-vidrio { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #pl .pl-vidrio { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #pl .pl-doc, #pl .pl-flecha svg { transition: none; }
+  }
+</style>
+
+<div id="pl">
+  <div class="pl-grilla">
+    <section id="ganadores-2026" aria-labelledby="pl-ganadores-titulo">
+      <div class="pl-cabeza">
+        <div>
+          <h2 class="pl-titulo" id="pl-ganadores-titulo"><i class="pl-barra"></i>Ganadores 2026: novela</h2>
+          <p>Entre las 42 obras recibidas, el jurado eligió por unanimidad la novela ganadora y otorgó dos menciones.</p>
+        </div>
+        <a class="cb-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/Acta-Premio-Literario-2026.pdf" target="_blank" rel="noopener"><span>Leé el fallo del jurado</span></a>
+      </div>
+
+      <ol class="pl-obras">
+        <li class="pl-obra pl-ganadora">
+          <p class="pl-etiqueta">Novela ganadora</p>
+          <h3 class="pl-obra__titulo"><cite>Estrategias para quedarse un tiempo más</cite></h3>
+          <p class="pl-obra__autor">Javier Bonatti</p>
+          <p class="pl-obra__resena">«Subvierte los límites genéricos tradicionales entre la autoficción, el ensayo lírico y la memoria familiar», a partir de una pregunta: ¿cómo se cuenta un padre que nunca se contó?</p>
+          <p class="pl-premio"><strong>$1.500.000</strong> y la edición de la obra por la Municipalidad, con un tiraje de 300 ejemplares.</p>
+        </li>
+        <li class="pl-obra pl-vidrio">
+          <p class="pl-etiqueta">Primera mención</p>
+          <h3 class="pl-obra__titulo"><cite>Nubes pasajeras</cite></h3>
+          <p class="pl-obra__autor">Juan Carlos Ramírez</p>
+          <p class="pl-obra__resena">Una criatura animal y ominosa transforma la vida cotidiana de un barrio santafesino.</p>
+        </li>
+        <li class="pl-obra pl-vidrio">
+          <p class="pl-etiqueta">Segunda mención</p>
+          <h3 class="pl-obra__titulo"><cite>Cosmicidio</cite></h3>
+          <p class="pl-obra__autor">Pablo Daniel Escudero Mosset</p>
+          <p class="pl-obra__resena">Ciencia ficción especulativa en un futuro donde mover cuerpos celestes es un trámite burocrático.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="pl-jurado-titulo">
+      <h2 class="pl-titulo" id="pl-jurado-titulo"><i class="pl-barra"></i>Jurado</h2>
+      <ul class="pl-jurado">
+        <li><span class="pl-jurado__nombre">Carlos Roberto Ríos</span><span class="pl-jurado__rol">Presidente del Premio Literario, en representación del Departamento Ejecutivo Municipal</span></li>
+        <li><span class="pl-jurado__nombre">María Susana Ibañez</span><span class="pl-jurado__rol">En representación de las sociedades de escritores de la ciudad</span></li>
+        <li><span class="pl-jurado__nombre">Elsa Zunilda Pomi</span><span class="pl-jurado__rol">Ganadora de ediciones anteriores del Premio Literario Municipal</span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="pl-docs-titulo">
+      <h2 class="pl-titulo" id="pl-docs-titulo"><i class="pl-barra"></i>Documentos oficiales</h2>
+      <ul class="pl-docs">
+        <li><a class="pl-doc pl-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/Acta-Premio-Literario-2026.pdf" target="_blank" rel="noopener"><span><span class="pl-doc__nombre">Fallo del jurado 2026</span><span class="pl-doc__texto">Acta del 10 de noviembre de 2026 · PDF · 118 KB</span></span><span class="pl-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg></span></a></li>
+        <li><a class="pl-doc pl-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/06/Decreto-49-26-Premio-Literario-2026.pdf" target="_blank" rel="noopener"><span><span class="pl-doc__nombre">Decreto N.º 49/26</span><span class="pl-doc__texto">Convocatoria 2026 · PDF · 263 KB</span></span><span class="pl-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg></span></a></li>
+        <li><a class="pl-doc pl-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/06/anexo-premiolit.pdf" target="_blank" rel="noopener"><span><span class="pl-doc__nombre">Reglamento 2026</span><span class="pl-doc__texto">Anexo del decreto, bases y condiciones · PDF · 210 KB</span></span><span class="pl-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg></span></a></li>
+        <li><a class="pl-doc pl-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/06/Ordenanza-12326-area-metropolitana.pdf" target="_blank" rel="noopener"><span><span class="pl-doc__nombre">Ordenanza N.º 12.326</span><span class="pl-doc__texto">Área Metropolitana Santa Fe · PDF · 188 KB</span></span><span class="pl-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg></span></a></li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "name": "Estrategias para quedarse un tiempo más",
+      "author": { "@type": "Person", "name": "Javier Bonatti" },
+      "genre": "Novela",
+      "inLanguage": "es",
+      "award": "Premio Literario Municipalidad de Santa Fe 2026, novela ganadora"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Nubes pasajeras",
+      "author": { "@type": "Person", "name": "Juan Carlos Ramírez" },
+      "genre": "Novela",
+      "inLanguage": "es",
+      "award": "Premio Literario Municipalidad de Santa Fe 2026, primera mención"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Cosmicidio",
+      "author": { "@type": "Person", "name": "Pablo Daniel Escudero Mosset" },
+      "genre": "Novela",
+      "inLanguage": "es",
+      "award": "Premio Literario Municipalidad de Santa Fe 2026, segunda mención"
+    },
+    {
+      "@type": "DigitalDocument",
+      "name": "Fallo del jurado del Premio Literario Municipalidad de Santa Fe 2026",
+      "url": "https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/Acta-Premio-Literario-2026.pdf",
+      "encodingFormat": "application/pdf",
+      "dateCreated": "2026-11-10",
+      "inLanguage": "es",
+      "publisher": {
+        "@type": "GovernmentOrganization",
+        "name": "Secretaría de Cultura de la Municipalidad de Santa Fe",
+        "parentOrganization": { "@type": "GovernmentOrganization", "name": "Municipalidad de Santa Fe", "url": "https://www.santafeciudad.gov.ar/" }
+      }
+    }
+  ]
+}
+</script>

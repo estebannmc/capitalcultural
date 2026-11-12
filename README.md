@@ -54,6 +54,7 @@ Decisiones tomadas:
 | `sitio-nuevo/mercado-progreso.html` | **Mercado Progreso**: presentación, las nueve propuestas, datos de visita con la foto del patio, historia y autoridades, con datos estructurados `EventVenue`. Widget HTML entero |
 | `sitio-nuevo/museos-y-salas.html` | **Museos y Salas**: presentación, los diez espacios con foto en dos grupos (museos y salas) y las 15 publicaciones digitales en grilla de tapas, con número, año, espacio y peso del PDF. Widget HTML entero |
 | `sitio-nuevo/somos-musica.html` | **Somos Música**: presentación, inscripción con el formulario y el contacto de la Secretaría, las ocho sedes por tipo de instrumento con enlace a OpenStreetMap, galería de 19 fotos con visor y los logos de quienes acompañan, con datos estructurados `EducationalOccupationalProgram`. Widget HTML entero |
+| `sitio-nuevo/premio-literario.html` | **Premio Literario Municipal**: los ganadores 2026 (novela ganadora y dos menciones, con sus autores) y un botón al fallo, el jurado y los cuatro documentos oficiales en PDF, con datos estructurados de las tres obras y del acta. Widget HTML entero |
 | `sitio-nuevo/espacios/` | **Las 10 fichas de Museos y Salas**: presentación, *Visitá…* con horarios, contacto y mapa de OpenFreeMap, y el título de propuestas. Un widget HTML por página, generado con `generar.py` desde `plantilla.html` |
 | `sitio-nuevo/img/redes/` | Imágenes para redes de 1200 × 630 de seis espacios, ya en Medios |
 | `sitio-nuevo/img/espacios/` | Siete fotos a color de los espacios de Museos y Salas, en 390 × 290 (16–40 KB cada una), ya en Medios |
@@ -134,6 +135,23 @@ Decisiones tomadas:
 | Frase clave | Título SEO | Meta descripción | Imagen para redes |
 |---|---|---|---|
 | `Somos Música` | `Somos Música, orquestas infantiles y juveniles \| Santa Fe` | `Orquestas infantiles y juveniles gratuitas en barrios de Santa Fe, para niñas, niños y adolescentes de 7 a 14 años. Los instrumentos se prestan.` (144) | `2025/06/15-noviembre-2024-SOMOS-Musica-1.jpg` |
+
+### Premio Literario: cómo se carga y lo que queda a mano
+
+- **Página 30621**, hija de la Sala Mercado Editorial. Tiene una sola sección de Elementor con tres widgets (título, texto y las tarjetas de documentos): se borran los tres y queda un widget HTML con `premio-literario.html`. El CSS anula el margen y el relleno de su sección y deja 50 px hasta el footer.
+- **Página resumida a pedido:** ganadores, jurado y documentos oficiales, nada más. Se sacaron la presentación del premio y el detalle de la convocatoria (requisitos, inscripción, consultas): están en el reglamento.
+- **Los datos salen del acta y del parte de prensa oficial.** El acta (`2026/11/Acta-Premio-Literario-2026.pdf`, 2 páginas, 118 KB) es un escaneo sin texto seleccionable y sólo da seudónimos; los autores salen del parte: Javier Bonatti (ganador, *Connor Wind*), Juan Carlos Ramírez (primera mención, *a b c d e f g*) y Pablo Daniel Escudero Mosset (segunda, *Mauri*). Los seudónimos no se muestran en la página. La cita de la ganadora es textual del fallo; las de las menciones, resumidas.
+- **El acta publica los DNI de los tres jurados**, y también el Decreto 49/26. La página no los repite. Si se quiere evitarlo, subir una versión del acta con los DNI tapados, con el mismo nombre de archivo.
+- **El acta salta del punto 2 al 4**: no hay punto 3. Es así en el original.
+- **Se sacó la tarjeta «Inscripción»**, que llevaba a Convocatorias vigentes de la Secretaría: la convocatoria cerró el 30/09/2026.
+- **Tiraje:** el parte y la página vieja dicen «mínimo de trescientos ejemplares». Se usó lo que dice el Decreto 49/26: «un tiraje de trescientos (300) ejemplares», sin «mínimo».
+- **Para la edición 2027:** se copia la sección `#ganadores-2026` arriba con los datos nuevos y la de 2026 queda abajo, o se reemplaza.
+
+| Frase clave | Título SEO | Meta descripción | Imagen para redes |
+|---|---|---|---|
+| `Premio Literario Municipal` | `Premio Literario Municipal 2026, novela ganadora \| Santa Fe` | `Premio Literario Municipal 2026: ganó Estrategias para quedarse un tiempo más, de Javier Bonatti. Menciones, jurado y el fallo oficial en PDF.` (142) | La de la Sala Mercado Editorial (ID 33530) |
+
+Hoy Yoast usa la meta descripción genérica («la convocatoria de cada año…») y la imagen general del sitio (`capitalcultural-redes-1200x630-1.jpg`). Cuando cambie la edición, actualizar el título y la descripción con el año nuevo.
 
 ### Fichas de los espacios: lo que queda a mano
 
