@@ -151,7 +151,7 @@ Decisiones tomadas:
 |---|---|---|---|
 | `Premio Literario Municipal` | `Premio Literario Municipal 2026, novela ganadora \| Santa Fe` | `Premio Literario Municipal 2026: ganó Estrategias para quedarse un tiempo más, de Javier Bonatti. Menciones, jurado y el fallo oficial en PDF.` (142) | La de la Sala Mercado Editorial (ID 33530) |
 
-Hoy Yoast usa la meta descripción genérica («la convocatoria de cada año…») y la imagen general del sitio (`capitalcultural-redes-1200x630-1.jpg`). Cuando cambie la edición, actualizar el título y la descripción con el año nuevo.
+**Publicada y con Yoast cargado el 12/11/2026**, verificado en la página publicada. Antes tenía una meta descripción genérica («la convocatoria de cada año…») y la imagen general del sitio (`capitalcultural-redes-1200x630-1.jpg`). Cuando cambie la edición, actualizar el título y la descripción con el año nuevo.
 
 ### Fichas de los espacios: lo que queda a mano
 
