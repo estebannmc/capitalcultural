@@ -173,6 +173,26 @@ Los renderiza Astra, no Elementor. Cambiado el 30/10/2026:
   - Algunos resúmenes salen del texto de la página y quedan rotos: «NCHE DE LS MUSES» en Noche de los Museos, donde las O del título son gráficos.
   - La búsqueda no encuentra lo que está sólo en `agenda.santafeciudad.gov.ar`: «Hábitat» da cero resultados aunque la muestra está en la home.
 
+### SEO de las páginas
+
+Auditoría del 12/11/2026 sobre las 267 URL del sitemap (180 páginas, 85 entradas y 2 plantillas), como visitante. Todas responden 200, con `lang="es-AR"`, canonical propio, al menos un H1 y ninguna en `noindex`. Lo que se cambió:
+
+- **Plantillas de cabecera y pie fuera del índice.** `/elementor-hf/header/` y `/elementor-hf/capital-cultural/` estaban en el sitemap con el título y la descripción de la home. Se apagó *Yoast → Ajustes → Tipos de contenidos → Elementor Header & Footer Builder → Mostrar en los resultados de búsqueda*, y el sitemap ya no las lista. Las dos URL siguen mostrando la home con `index` en el robots de WordPress, pero con canonical a la home, así que Google las toma como la misma página.
+- **Imagen para redes por defecto**: la de la home (id 33364), en *Yoast → Ajustes → Aspectos básicos del sitio → Imagen del sitio*. La usan las 41 páginas que no tenían ninguna.
+- **Meta descripciones en 155 páginas**: 237 de las 267 URL no tenían ninguna, y 6 fichas de Memorias Urbanas Feministas compartían la de «Cautivas del siglo XIX». Verificado como visitante después de purgar LiteSpeed: todas las páginas del sitemap tienen descripción, menos `/masferia/visitanos/` (vacía) y la vieja de José “Pepe” Serra (ver más arriba).
+  - 65 páginas principales (hubs, espacios, ciclos, eventos, elencos, Pantalla Pública, Archivo de la Imagen) con un texto escrito a partir de lo que dice cada página.
+  - 90 fichas de Huellas de mi Ciudad (la de Mujeres afrodescendientes ya tenía una propia y quedó) con `Título, dirección, Santa Fe.` y las primeras oraciones de la ficha (las de Memorias llevan el período en lugar de la dirección), hasta 158 caracteres. Los errores de tipeo del texto de origen pasan a la descripción: «entre 1905 y 1905» en el Colegio de la Inmaculada, «construído».
+  - Títulos SEO distintos donde se repetían o eran genéricos: Teatro en el Mercado 2025 y 2026, Prensa de +Feria, Prensa de la Noche de los Museos, y las subpáginas de +Feria, la Feria del Libro y el Mercado Progreso que se llamaban sólo «Aliados», «Programación», etc.
+  - Se guardaron sin abrir Elementor: el editor trae el formulario de Yoast (`#yoast-form`, acción `wpseo_elementor_save`) con todos los campos de la página; se cambian sólo la descripción y el título y se envía entero, así no se pisa nada más.
+- **Lo que queda:**
+  - **Entradas del blog (85) sin descripción.** Google arma el fragmento con el texto de cada una. Una plantilla `%%excerpt%%` en *Tipos de contenidos → Entradas* daría lo mismo.
+  - **624 de 964 imágenes sin texto alternativo**, en 119 páginas. Se cargan en la biblioteca de medios y piden alguien que vea cada foto.
+  - **94 páginas con menos de 150 palabras**, la mayoría de ciclos viejos. Conviene decidir cuáles se actualizan y cuáles pasan a borrador con redirección.
+  - **15 títulos de más de 65 caracteres**, sobre todo fichas de patrimonio con nombres largos. Google los corta, pero la página se encuentra igual.
+  - El sitio responde también sin `www`: los canonical apuntan a `www`, pero una redirección 301 en el servidor o en Cloudflare evitaría tener las dos versiones.
+  - `/nochedelosmuseos/prensa/` duplica la home de la Noche de los Museos; tiene canonical a ella y conviene pasarla a borrador.
+  - La home lleva como H1 «Capital Cultural» desde la edición del 5/11/2026; el H1 publicado el 29/10 decía «Agenda, espacios y eventos de la cultura de Santa Fe». No se tocó.
+
 Este repositorio contiene **la documentación de diseño y el plan**, no el child theme. El tema arranca en la Fase 3 del plan.
 
 Para ver el sistema visual con los componentes funcionando —vidrio, botones con sus estados, el remate de barras, la lámina del footer— abrí `docs/sistema-visual.html`.
