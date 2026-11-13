@@ -94,6 +94,20 @@
   #sm .sm-visor-ant { left: 12px; }
   #sm .sm-visor-sig { right: 12px; }
 
+  #sm .sm-preguntas { display: grid; gap: 10px; max-width: 860px; }
+  #sm .sm-preguntas details { padding: 0 clamp(16px, 2.4vw, 24px); }
+  #sm .sm-preguntas summary {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 1rem 0; font-size: 1.05rem; font-weight: 600; line-height: 1.35; cursor: pointer; list-style: none;
+  }
+  #sm .sm-preguntas summary::-webkit-details-marker { display: none; }
+  #sm .sm-preguntas summary::after { content: "+"; flex: none; font-size: 1.5rem; font-weight: 400; line-height: 1; color: var(--rojo); transition: transform .3s; }
+  #sm .sm-preguntas details[open] summary::after { transform: rotate(45deg); }
+  #sm .sm-preguntas summary:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); border-radius: 4px; }
+  #sm .sm-preguntas p { padding-bottom: 1.1rem; font-size: 1.02rem; }
+
+  #sm .sm-mas { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
   #sm .sm-acompanan ul { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(24px, 4vw, 48px); }
   #sm .sm-acompanan img { width: 120px; height: 120px; }
 
@@ -101,6 +115,9 @@
     #sm .sm-inscripcion, #sm .sm-sedes { grid-template-columns: minmax(0, 1fr); }
     #sm .sm-foto { order: -1; }
     #sm .sm-galeria { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 700px) {
+    #sm .sm-mas { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 480px) {
     #sm .sm-galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -114,7 +131,7 @@
     #sm .sm-vidrio { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    #sm .sm-galeria img { transition: none; }
+    #sm .sm-galeria img, #sm .sm-preguntas summary::after { transition: none; }
   }
 </style>
 
@@ -122,13 +139,13 @@
   <div class="sm-grilla">
     <div class="sm-texto">
       <p class="sm-lead">Somos Música es el programa de orquestas infantiles y juveniles de la Municipalidad de Santa Fe. Promueve la educación musical colectiva y les da a niñas, niños y jóvenes la oportunidad de aprender y expresarse tocando en grupo.</p>
-      <p>Las orquestas son una herramienta de educación e integración sociocultural: a través de la música se desarrollan habilidades individuales y colectivas y se fortalecen valores como la solidaridad, la convivencia y el trabajo en equipo. Con una fuerte impronta comunitaria, el programa busca acercar la música a todas y todos, y fomentar la inclusión, la creatividad y el desarrollo cultural de la ciudad.</p>
-      <p>Las clases se dan en distintos barrios de Santa Fe y garantizan el acceso a una formación artística pública y gratuita.</p>
+      <p>Las orquestas son una herramienta de educación e integración sociocultural: a través de la música se desarrollan habilidades individuales y colectivas y, al mismo tiempo, se fortalecen valores como la solidaridad, la convivencia y el trabajo en equipo. Además, con una fuerte impronta comunitaria, el programa busca acercar la música a todas y todos, y fomentar la inclusión, la creatividad y el desarrollo cultural de la ciudad.</p>
+      <p>Por eso, las clases se dan en distintos barrios de Santa Fe y garantizan el acceso a una formación artística pública y gratuita.</p>
     </div>
 
     <section class="sm-inscripcion sm-vidrio" aria-labelledby="sm-inscripcion-titulo">
       <div>
-        <h2 class="sm-titulo" id="sm-inscripcion-titulo"><i class="sm-barra"></i>Inscripción abierta</h2>
+        <h2 class="sm-titulo" id="sm-inscripcion-titulo"><i class="sm-barra"></i>Inscripción abierta a Somos Música</h2>
         <dl class="sm-datos">
           <div><dt>Quiénes pueden sumarse</dt><dd>Niñas, niños y adolescentes de 7 a 14 años</dd></div>
           <div><dt>Costo</dt><dd>Gratuito. Los instrumentos se entregan en comodato, para que cada estudiante pueda practicar en su casa</dd></div>
@@ -145,40 +162,66 @@
     </section>
 
     <section aria-labelledby="sm-sedes-titulo">
-      <h2 class="sm-titulo" id="sm-sedes-titulo"><i class="sm-barra"></i>Dónde se dan las clases</h2>
+      <h2 class="sm-titulo" id="sm-sedes-titulo"><i class="sm-barra"></i>Dónde se dan las clases de Somos Música</h2>
       <div class="sm-sedes">
         <div class="sm-grupo sm-vidrio">
           <h3>Instrumentos de cuerda</h3>
           <ul>
-            <li><span class="sm-sede">Escuela N.º 38 «Brigadier General Estanislao López»</span><a href="https://www.openstreetmap.org/?mlat=-31.60563&amp;mlon=-60.67608#map=18/-31.60563/-60.67608" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 38">Ver en el mapa</a></li>
-            <li><span class="sm-sede">Escuela N.º 1317 «Juan Manuel de Rosas»</span><a href="https://www.openstreetmap.org/?mlat=-31.63662&amp;mlon=-60.65692#map=18/-31.63662/-60.65692" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 1317">Ver en el mapa</a></li>
-            <li><span class="sm-sede">Parroquia Jesús Resucitado</span><a href="https://www.openstreetmap.org/?mlat=-31.65918&amp;mlon=-60.70054#map=18/-31.65918/-60.70054" target="_blank" rel="noopener" aria-label="Ver en el mapa: Parroquia Jesús Resucitado">Ver en el mapa</a></li>
-            <li><span class="sm-sede">Escuela N.º 18 «Falucho»</span><a href="https://www.openstreetmap.org/?mlat=-31.62674&amp;mlon=-60.71399#map=18/-31.62674/-60.71399" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 18">Ver en el mapa</a></li>
-            <li><span class="sm-sede">CAF N.º 24, barrio Las Flores</span><a href="https://www.openstreetmap.org/?mlat=-31.59225&amp;mlon=-60.71616#map=18/-31.59225/-60.71616" target="_blank" rel="noopener" aria-label="Ver en el mapa: CAF N.º 24">Ver en el mapa</a></li>
-            <li><span class="sm-sede">Club Social y Deportivo Cabaña Leiva</span><span class="sm-nota">Grandoli 8300</span><a href="https://www.openstreetmap.org/?mlat=-31.56491&amp;mlon=-60.72728#map=17/-31.56491/-60.72728" target="_blank" rel="noopener" aria-label="Ver en el mapa: Club Cabaña Leiva">Ver en el mapa</a></li>
+            <li><span class="sm-sede">Escuela N.º 38 «Brigadier General Estanislao López»</span><a href="https://maps.app.goo.gl/jEa5sD6HUpfLZwgeA" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 38">Ver en el mapa</a></li>
+            <li><span class="sm-sede">Escuela N.º 1317 «Juan Manuel de Rosas»</span><a href="https://maps.app.goo.gl/MiNN7iCdAWeQvK779" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 1317">Ver en el mapa</a></li>
+            <li><span class="sm-sede">Parroquia Jesús Resucitado</span><a href="https://maps.app.goo.gl/WZMgWLwq2n4BTVJv7" target="_blank" rel="noopener" aria-label="Ver en el mapa: Parroquia Jesús Resucitado">Ver en el mapa</a></li>
+            <li><span class="sm-sede">Escuela N.º 18 «Falucho»</span><a href="https://maps.app.goo.gl/q8AyojiLCvyrYKXS9" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 18">Ver en el mapa</a></li>
+            <li><span class="sm-sede">CAF N.º 24, barrio Las Flores</span><a href="https://maps.app.goo.gl/ngAaQz6iAUHutfCeA" target="_blank" rel="noopener" aria-label="Ver en el mapa: CAF N.º 24">Ver en el mapa</a></li>
+            <li><span class="sm-sede">Club Social y Deportivo Cabaña Leiva</span><span class="sm-nota">Grandoli 8300</span><a href="https://maps.app.goo.gl/hHisWwgmhPN1eBkC9" target="_blank" rel="noopener" aria-label="Ver en el mapa: Club Cabaña Leiva">Ver en el mapa</a></li>
           </ul>
         </div>
         <div class="sm-grupo sm-vidrio">
           <h3>Instrumentos de viento y percusión</h3>
           <ul>
-            <li><span class="sm-sede">Estación Municipal Santa Rosa de Lima, Mediateca «La Cumbia»</span><a href="https://www.openstreetmap.org/?mlat=-31.64097&amp;mlon=-60.72904#map=18/-31.64097/-60.72904" target="_blank" rel="noopener" aria-label="Ver en el mapa: Mediateca La Cumbia">Ver en el mapa</a></li>
-            <li><span class="sm-sede">Escuela N.º 1225 «Ceferino Namuncurá»</span><span class="sm-nota">Sólo para alumnos y exalumnos de la escuela</span><a href="https://www.openstreetmap.org/?mlat=-31.57147&amp;mlon=-60.73996#map=18/-31.57147/-60.73996" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 1225">Ver en el mapa</a></li>
+            <li><span class="sm-sede">Estación Municipal Santa Rosa de Lima, Mediateca «La Cumbia»</span><a href="https://maps.app.goo.gl/8ysjjLpdCogm1G9i7" target="_blank" rel="noopener" aria-label="Ver en el mapa: Mediateca La Cumbia">Ver en el mapa</a></li>
+            <li><span class="sm-sede">Escuela N.º 1225 «Ceferino Namuncurá»</span><span class="sm-nota">Sólo para alumnos y exalumnos de la escuela</span><a href="https://maps.app.goo.gl/4xDh2sKh72hEqmRu9" target="_blank" rel="noopener" aria-label="Ver en el mapa: Escuela N.º 1225">Ver en el mapa</a></li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="sm-preguntas-titulo">
+      <h2 class="sm-titulo" id="sm-preguntas-titulo"><i class="sm-barra"></i>Preguntas frecuentes sobre Somos Música</h2>
+      <div class="sm-preguntas">
+        <details class="sm-vidrio">
+          <summary>¿Quiénes pueden participar?</summary>
+          <p>Niñas, niños y adolescentes de 7 a 14 años.</p>
+        </details>
+        <details class="sm-vidrio">
+          <summary>¿Cuánto cuesta?</summary>
+          <p>Nada. Somos Música es una propuesta pública y gratuita de la Municipalidad de Santa Fe.</p>
+        </details>
+        <details class="sm-vidrio">
+          <summary>¿Hace falta tener un instrumento?</summary>
+          <p>No. Los instrumentos se entregan en comodato, es decir, en préstamo, para que cada estudiante pueda practicar en su casa.</p>
+        </details>
+        <details class="sm-vidrio">
+          <summary>¿Qué instrumentos se aprenden y dónde?</summary>
+          <p>Instrumentos de cuerda en seis sedes, y de viento y percusión en la Mediateca «La Cumbia» y en la Escuela N.º 1225, que es sólo para sus alumnos y exalumnos. Están todas en <a href="#sm-sedes-titulo">Dónde se dan las clases</a>.</p>
+        </details>
+        <details class="sm-vidrio">
+          <summary>¿Cómo me inscribo?</summary>
+          <p>Completando el <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAt3H7Mzmx_1ZUQkDbB1xV-yCZhbvUT_aeL24KWRrzUxeVug/viewform" target="_blank" rel="noopener">formulario de inscripción</a>. Para consultas, escribí a <a href="mailto:cultura@santafeciudad.gov.ar">cultura@santafeciudad.gov.ar</a> o llamá al <a href="tel:+543424571609">(0342) 457-1609</a>.</p>
+        </details>
       </div>
     </section>
 
     <section aria-labelledby="sm-galeria-titulo">
       <h2 class="sm-titulo" id="sm-galeria-titulo"><i class="sm-barra"></i>Las orquestas en concierto</h2>
       <div class="sm-galeria" id="sm-galeria">
-        <a href="#sm-foto-1"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
-        <a href="#sm-foto-2"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
-        <a href="#sm-foto-3"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
-        <a href="#sm-foto-4"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
-        <a href="#sm-foto-5"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
-        <a href="#sm-foto-6"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
-        <a href="#sm-foto-7"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
-        <a href="#sm-foto-8"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de Somos Música, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-1"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-2"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-3"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-4"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-5"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-6"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-7"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
+        <a href="#sm-foto-8"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Concierto de las orquestas, 15 de noviembre de 2024"></a>
         <a href="#sm-foto-9"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-1-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Más Música, 25 de octubre de 2024"></a>
         <a href="#sm-foto-10"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-2-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Más Música, 25 de octubre de 2024"></a>
         <a href="#sm-foto-11"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-3-400x400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Más Música, 25 de octubre de 2024"></a>
@@ -193,6 +236,15 @@
       </div>
     </section>
 
+    <section aria-labelledby="sm-mas-titulo">
+      <h2 class="sm-titulo" id="sm-mas-titulo"><i class="sm-barra"></i>Más música municipal</h2>
+      <ul class="sm-mas">
+        <li><a class="cb-btn" href="/capitalcultural/bandasinfonica/"><span>Banda Sinfónica Municipal</span></a></li>
+        <li><a class="cb-btn" href="/capitalcultural/coro/"><span>Coro Municipal</span></a></li>
+        <li><a class="cb-btn" href="/capitalcultural/mercadoprogreso/musicamercado/"><span>Música en el Mercado</span></a></li>
+      </ul>
+    </section>
+
     <section class="sm-acompanan" aria-labelledby="sm-acompanan-titulo">
       <h2 class="sm-titulo" id="sm-acompanan-titulo"><i class="sm-barra"></i>Acompañan</h2>
       <ul>
@@ -202,14 +254,14 @@
     </section>
   </div>
 
-  <div class="sm-visor" id="sm-foto-1"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-19" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 1 de 19</figcaption></figure><a href="#sm-foto-2" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
-  <div class="sm-visor" id="sm-foto-2"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-1" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 2 de 19</figcaption></figure><a href="#sm-foto-3" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
-  <div class="sm-visor" id="sm-foto-3"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-2" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 3 de 19</figcaption></figure><a href="#sm-foto-4" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
-  <div class="sm-visor" id="sm-foto-4"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-3" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 4 de 19</figcaption></figure><a href="#sm-foto-5" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
-  <div class="sm-visor" id="sm-foto-5"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-4" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 5 de 19</figcaption></figure><a href="#sm-foto-6" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
-  <div class="sm-visor" id="sm-foto-6"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-5" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 6 de 19</figcaption></figure><a href="#sm-foto-7" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
-  <div class="sm-visor" id="sm-foto-7"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-6" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 7 de 19</figcaption></figure><a href="#sm-foto-8" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
-  <div class="sm-visor" id="sm-foto-8"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-7" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de Somos Música, 15 de noviembre de 2024 · 8 de 19</figcaption></figure><a href="#sm-foto-9" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-1"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-19" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 1 de 19</figcaption></figure><a href="#sm-foto-2" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-2"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-1" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-2-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 2 de 19</figcaption></figure><a href="#sm-foto-3" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-3"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-2" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-3-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 3 de 19</figcaption></figure><a href="#sm-foto-4" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-4"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-3" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-4-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 4 de 19</figcaption></figure><a href="#sm-foto-5" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-5"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-4" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-5-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 5 de 19</figcaption></figure><a href="#sm-foto-6" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-6"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-5" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-6-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 6 de 19</figcaption></figure><a href="#sm-foto-7" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-7"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-6" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-7-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 7 de 19</figcaption></figure><a href="#sm-foto-8" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
+  <div class="sm-visor" id="sm-foto-8"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-7" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-8-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Concierto de las orquestas, 15 de noviembre de 2024 · 8 de 19</figcaption></figure><a href="#sm-foto-9" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
   <div class="sm-visor" id="sm-foto-9"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-8" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-1-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-1-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-1-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Más Música, 25 de octubre de 2024 · 9 de 19</figcaption></figure><a href="#sm-foto-10" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
   <div class="sm-visor" id="sm-foto-10"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-9" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-2-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-2-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-2-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Más Música, 25 de octubre de 2024 · 10 de 19</figcaption></figure><a href="#sm-foto-11" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
   <div class="sm-visor" id="sm-foto-11"><a href="#sm-galeria" class="sm-visor-fondo" aria-hidden="true" tabindex="-1"></a><a href="#sm-galeria" class="sm-visor-cerrar" aria-label="Cerrar">&times;</a><a href="#sm-foto-10" class="sm-visor-flecha sm-visor-ant" aria-label="Foto anterior">&#10094;</a><figure><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-3-1536x1024.jpg" srcset="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-3-1024x683.jpg 1024w, https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/25-octubre-2024-Mas-Musica-3-1536x1024.jpg 1536w" sizes="92vw" width="1536" height="1024" loading="lazy" decoding="async" alt=""><figcaption>Más Música, 25 de octubre de 2024 · 11 de 19</figcaption></figure><a href="#sm-foto-12" class="sm-visor-flecha sm-visor-sig" aria-label="Foto siguiente">&#10095;</a></div>
@@ -236,20 +288,219 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "EducationalOccupationalProgram",
-  "name": "Somos Música",
-  "url": "https://www.santafeciudad.gov.ar/capitalcultural/somosmusica/",
-  "image": "https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1.jpg",
-  "description": "Programa municipal y gratuito de orquestas infantiles y juveniles en barrios de Santa Fe, para niñas, niños y adolescentes de 7 a 14 años, con instrumentos en comodato.",
-  "educationalProgramMode": "in-person",
-  "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 14 },
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "ARS" },
-  "provider": {
-    "@type": "GovernmentOrganization",
-    "name": "Secretaría de Cultura de la Municipalidad de Santa Fe",
-    "email": "cultura@santafeciudad.gov.ar",
-    "telephone": "+54 342 457-1609",
-    "parentOrganization": { "@type": "GovernmentOrganization", "name": "Municipalidad de Santa Fe", "url": "https://www.santafeciudad.gov.ar/" }
-  }
+  "@graph": [
+    {
+      "@type": "EducationalOccupationalProgram",
+      "@id": "https://www.santafeciudad.gov.ar/capitalcultural/somosmusica/#programa",
+      "name": "Somos Música",
+      "url": "https://www.santafeciudad.gov.ar/capitalcultural/somosmusica/",
+      "image": "https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1.jpg",
+      "description": "Programa municipal y gratuito de orquestas infantiles y juveniles en barrios de Santa Fe, para niñas, niños y adolescentes de 7 a 14 años, con instrumentos en comodato.",
+      "educationalProgramMode": "in-person",
+      "inLanguage": "es",
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 7,
+        "suggestedMaxAge": 14
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "ARS",
+        "url": "https://docs.google.com/forms/d/e/1FAIpQLSfAt3H7Mzmx_1ZUQkDbB1xV-yCZhbvUT_aeL24KWRrzUxeVug/viewform"
+      },
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Escuela N.º 38 «Brigadier General Estanislao López»",
+          "hasMap": "https://maps.app.goo.gl/jEa5sD6HUpfLZwgeA",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.60563,
+            "longitude": -60.67608
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Escuela N.º 1317 «Juan Manuel de Rosas»",
+          "hasMap": "https://maps.app.goo.gl/MiNN7iCdAWeQvK779",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.63662,
+            "longitude": -60.65692
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Parroquia Jesús Resucitado",
+          "hasMap": "https://maps.app.goo.gl/WZMgWLwq2n4BTVJv7",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.65918,
+            "longitude": -60.70054
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Escuela N.º 18 «Falucho»",
+          "hasMap": "https://maps.app.goo.gl/q8AyojiLCvyrYKXS9",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.62674,
+            "longitude": -60.71399
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "CAF N.º 24, barrio Las Flores",
+          "hasMap": "https://maps.app.goo.gl/ngAaQz6iAUHutfCeA",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.59225,
+            "longitude": -60.71616
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Club Social y Deportivo Cabaña Leiva",
+          "hasMap": "https://maps.app.goo.gl/hHisWwgmhPN1eBkC9",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR",
+            "streetAddress": "Grandoli 8300"
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Estación Municipal Santa Rosa de Lima, Mediateca «La Cumbia»",
+          "hasMap": "https://maps.app.goo.gl/8ysjjLpdCogm1G9i7",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.64097,
+            "longitude": -60.72904
+          }
+        },
+        {
+          "@type": "Place",
+          "name": "Escuela N.º 1225 «Ceferino Namuncurá»",
+          "hasMap": "https://maps.app.goo.gl/4xDh2sKh72hEqmRu9",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santa Fe",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.57147,
+            "longitude": -60.73996
+          }
+        }
+      ],
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "Secretaría de Cultura de la Municipalidad de Santa Fe",
+        "email": "cultura@santafeciudad.gov.ar",
+        "telephone": "+54 342 457-1609",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Bv. Gálvez 1150",
+          "addressLocality": "Santa Fe",
+          "addressRegion": "Santa Fe",
+          "postalCode": "3000",
+          "addressCountry": "AR"
+        },
+        "parentOrganization": {
+          "@type": "GovernmentOrganization",
+          "name": "Municipalidad de Santa Fe",
+          "url": "https://www.santafeciudad.gov.ar/"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.santafeciudad.gov.ar/capitalcultural/somosmusica/#preguntas",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Quiénes pueden participar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Niñas, niños y adolescentes de 7 a 14 años."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nada. Somos Música es una propuesta pública y gratuita de la Municipalidad de Santa Fe."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hace falta tener un instrumento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Los instrumentos se entregan en comodato, es decir, en préstamo, para que cada estudiante pueda practicar en su casa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué instrumentos se aprenden y dónde?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instrumentos de cuerda en seis sedes, y de viento y percusión en la Mediateca «La Cumbia» y en la Escuela N.º 1225, que es sólo para sus alumnos y exalumnos. Están todas en Dónde se dan las clases."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo me inscribo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Completando el formulario de inscripción. Para consultas, escribí a cultura@santafeciudad.gov.ar o llamá al (0342) 457-1609."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>

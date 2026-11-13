@@ -53,8 +53,12 @@ Decisiones tomadas:
 | `sitio-nuevo/anfiteatro.html` | **Anfiteatro Municipal Juan de Garay**: texto, los dos accesos (Teatro en el Anfi y Capacitaciones 4x4), datos de visita con la foto aérea, las seis características del espacio y autoridades, con datos estructurados `PerformingArtsTheater`. Widget HTML entero |
 | `sitio-nuevo/mercado-progreso.html` | **Mercado Progreso**: presentación, las nueve propuestas, datos de visita con la foto del patio, historia y autoridades, con datos estructurados `EventVenue`. Widget HTML entero |
 | `sitio-nuevo/museos-y-salas.html` | **Museos y Salas**: presentación, los diez espacios con foto en dos grupos (museos y salas) y las 15 publicaciones digitales en grilla de tapas, con número, año, espacio y peso del PDF. Widget HTML entero |
+<<<<<<< HEAD
 | `sitio-nuevo/somos-musica.html` | **Somos Música**: presentación, inscripción con el formulario y el contacto de la Secretaría, las ocho sedes por tipo de instrumento con enlace a OpenStreetMap, galería de 19 fotos con visor y los logos de quienes acompañan, con datos estructurados `EducationalOccupationalProgram`. Widget HTML entero |
 | `sitio-nuevo/premio-literario.html` | **Premio Literario Municipal**: los ganadores 2026 (novela ganadora y dos menciones, con sus autores) y un botón al fallo, el jurado y los cuatro documentos oficiales en PDF, con datos estructurados de las tres obras y del acta. Widget HTML entero |
+=======
+| `sitio-nuevo/somos-musica.html` | **Somos Música**: presentación, inscripción con el formulario y el contacto de la Secretaría, las ocho sedes por tipo de instrumento con enlace a Google Maps, preguntas frecuentes, galería de 19 fotos con visor, enlaces a más música municipal y los logos de quienes acompañan, con datos estructurados `EducationalOccupationalProgram` y `FAQPage`. Widget HTML entero |
+>>>>>>> claude/rediseno-somos-musica-64118a
 | `sitio-nuevo/espacios/` | **Las 10 fichas de Museos y Salas**: presentación, *Visitá…* con horarios, contacto y mapa de OpenFreeMap, y el título de propuestas. Un widget HTML por página, generado con `generar.py` desde `plantilla.html` |
 | `sitio-nuevo/img/redes/` | Imágenes para redes de 1200 × 630 de seis espacios, ya en Medios |
 | `sitio-nuevo/img/espacios/` | Siete fotos a color de los espacios de Museos y Salas, en 390 × 290 (16–40 KB cada una), ya en Medios |
@@ -126,15 +130,17 @@ Decisiones tomadas:
 - **Publicada el 04/11/2026** (página 24875), como un solo widget HTML con `somos-musica.html` en la primera sección de Elementor. Se borraron las otras cuatro (inscripción, los dos acordeones, la galería y los logos). El CSS anula el margen y el relleno de su sección, como en el Mercado Progreso, y deja 50 px hasta el footer.
 - **Contacto:** `cultura@santafeciudad.gov.ar` y el teléfono de la Secretaría, (0342) 457-1609, el mismo del footer. Están también en el JSON-LD del final.
 - **La galería baja de ~40 MB a menos de 1 MB.** La vieja cargaba los 19 originales (unos 2 MB cada uno, ~40 MB) aunque nadie abriera el visor. Ahora la grilla usa el recorte de 400 × 400 de WordPress y el visor el de 1536, que se baja recién al abrir cada foto. *Concierto en barrio El Pozo* no tiene tamaños intermedios en Medios: el visor usa el original, de 145 KB.
-- **Sedes:** los ocho enlaces de Google Maps pasaron a OpenStreetMap con las coordenadas de cada lugar. El Club Cabaña Leiva no tenía coordenadas en Google y OpenStreetMap no tiene la altura 8300 de Grandoli: el punto es la calle Grandoli en Cabaña Leiva, aproximado. Si se sabe la dirección de las demás sedes, va como `<span class="sm-nota">…</span>`, como en el club.
+- **Sedes:** «Ver en el mapa» abre Google Maps, con los mismos enlaces cortos (`maps.app.goo.gl`) que tenía la página vieja, que llevan a la ficha de cada lugar (cambiado y republicado el 13/11/2026; antes iban a OpenStreetMap). Si se sabe la dirección de las demás sedes, va como `<span class="sm-nota">…</span>`, como en el club.
 - **«Inscripción abierta»** se dejó como decía la página vieja («Continúa abierta la inscripción…»). Cuando cierre, cambiar el título y sacar el botón al formulario de Google.
-- **El JSON-LD `FAQPage` que generaba Elementor** con los acordeones (preguntas que eran nombres de escuelas) desaparece con ellos.
+- **El JSON-LD `FAQPage` que generaba Elementor** con los acordeones (preguntas que eran nombres de escuelas) desapareció con ellos. En su lugar hay *Preguntas frecuentes sobre Somos Música*, cinco preguntas reales en `<details>` con su `FAQPage`; las respuestas del JSON-LD son el mismo texto de la página. Si se cambia una respuesta, hay que cambiarla en los dos lugares.
+- **SEO, mejorado el 13/11/2026:** Yoast da 93 en SEO y 90 en legibilidad. Se sumaron enlaces internos (*Más música municipal*: Banda Sinfónica, Coro y Música en el Mercado) y la frase clave en tres subtítulos y en la meta descripción. La densidad bajó de 21 apariciones a menos de 10: las leyendas de las fotos dicen «Concierto de las orquestas». El JSON-LD suma las ocho sedes como `location`, con coordenadas y enlace a Google Maps.
+- **Lo que Yoast sigue marcando, a propósito:** la frase clave no está en el slug (`somosmusica`), y cambiarlo rompe los enlaces viejos sin un plugin de redirecciones. Dice además que la meta descripción pasa de 156 caracteres, pero tiene 146: el aviso no se corresponde con el texto cargado.
 - **Cambios de texto:** *Igualdad de oportunidades* se sumó a la presentación. Se corrigieron *Continua*, *Gral.Brigadier E. López* (es Brigadier General Estanislao López) y los nombres van con *N.º* y comillas latinas. «SOMOS Música» va como «Somos Música», el título de la página.
 - **Yoast** quedó cargado el 04/11/2026 y verificado en la página publicada. Antes la imagen para redes era el logo de Terranza; ahora es la foto del violín (ID 25795), que Yoast sirve en su tamaño de 1024.
 
 | Frase clave | Título SEO | Meta descripción | Imagen para redes |
 |---|---|---|---|
-| `Somos Música` | `Somos Música, orquestas infantiles y juveniles \| Santa Fe` | `Orquestas infantiles y juveniles gratuitas en barrios de Santa Fe, para niñas, niños y adolescentes de 7 a 14 años. Los instrumentos se prestan.` (144) | `2025/06/15-noviembre-2024-SOMOS-Musica-1.jpg` |
+| `Somos Música` | `Somos Música, orquestas infantiles y juveniles \| Santa Fe` | `Somos Música: orquestas infantiles y juveniles gratuitas en barrios de Santa Fe, para chicas y chicos de 7 a 14 años. Los instrumentos se prestan.` (146) | `2025/06/15-noviembre-2024-SOMOS-Musica-1.jpg` |
 
 ### Premio Literario: cómo se carga y lo que queda a mano
 
