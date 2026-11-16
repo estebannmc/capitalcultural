@@ -56,7 +56,8 @@ Decisiones tomadas:
 | `sitio-nuevo/somos-musica.html` | **Somos Música**: presentación, inscripción con el formulario y el contacto de la Secretaría, las ocho sedes por tipo de instrumento con enlace a Google Maps, preguntas frecuentes, galería de 19 fotos con visor, enlaces a más música municipal y los logos de quienes acompañan, con datos estructurados `EducationalOccupationalProgram` y `FAQPage`. Widget HTML entero |
 | `sitio-nuevo/premio-literario.html` | **Premio Literario Municipal**: los ganadores 2026 (novela ganadora y dos menciones, con sus autores) y un botón al fallo, el jurado y los cuatro documentos oficiales en PDF, con datos estructurados de las tres obras y del acta. Widget HTML entero |
 | `sitio-nuevo/archivo-imagen.html` | **Archivo de la Imagen Documental Santafesina**: presentación con la propuesta en PDF, las seis colecciones con foto (Paredes, Mercados, Ariel Ramírez, Cerámica de La Guardia, Gastón Gori y Zapata Gollán), el convenio con Wikimedia Argentina, las diez capacitaciones grabadas y Pantalla Pública, con datos estructurados `ArchiveOrganization`. Widget HTML entero |
-| `sitio-nuevo/img/archivo-imagen/` | Las seis fotos de las colecciones, en 780 × 585 (29–85 KB cada una), ya en Medios |
+| `sitio-nuevo/archivo-imagen/` | **Las ocho subpáginas del Archivo**: Gastón Gori, Zapata Gollán, Colección Paredes, 100 años – 100 imágenes, Pantalla Pública y sus tres hijas (Coronación de la Virgen de Guadalupe, Entrevista a Fernando Martín Peña y Directoras contemporáneas). Un widget HTML por página; el estilo común sale de `base.css` con `generar.py` |
+| `sitio-nuevo/img/archivo-imagen/` | Las seis fotos de las colecciones y las tres de Pantalla Pública, en 780 × 585 (17–85 KB cada una), ya en Medios |
 | `sitio-nuevo/espacios/` | **Las 10 fichas de Museos y Salas**: presentación, *Visitá…* con horarios, contacto y mapa de OpenFreeMap, y el título de propuestas. Un widget HTML por página, generado con `generar.py` desde `plantilla.html` |
 | `sitio-nuevo/img/redes/` | Imágenes para redes de 1200 × 630 de seis espacios, ya en Medios |
 | `sitio-nuevo/img/espacios/` | Siete fotos a color de los espacios de Museos y Salas, en 390 × 290 (16–40 KB cada una), ya en Medios |
@@ -163,12 +164,36 @@ Decisiones tomadas:
 - **Las seis fotos ya están en Medios** (IDs 33775 a 33780, subidas el 16/11/2026), en `2026/11/` con el mismo nombre que en `sitio-nuevo/img/archivo-imagen/`. El código las usa en su tamaño original, 780 × 585, con la URL completa.
 - **Las fotos salen de Wikimedia Commons** y son todas de dominio público: el Mercado de Abasto de Manuel Garcilaso (ca. 1930), el Taller de La Guardia (ca. 1970, fondo Hugo Ifrán), Gastón Gori en La Forestal (1935), la postal de la Aduana Vieja de la Colección Paredes y Ariel Ramírez en la grabación de la *Misa criolla* (1964). La de Zapata Gollán es un cuadro del video de la entrevista en YouTube, digitalizado por el propio Archivo. La imagen que usaba la subpágina de Zapata Gollán (`2021/04/Sin-titulo-1.jpg`) es la Basílica de Guadalupe y no tiene relación con él.
 - **Se arreglaron dos enlaces rotos.** *Mercados de Santa Fe* y *Taller de Cerámica de La Guardia* llevaban a dos galerías de prueba en la página de un usuario de Commons (`User:Mauricio_V._Genta/gallery/pruebas` y `pruebas2`) que dan 404. Ahora van a las páginas de cada colección dentro del proyecto del Archivo en Commons (`Commons:Archivo_de_la_Imagen_Documental_Santafesina/…`).
-- **Gastón Gori no tiene categoría en Commons**: sus fotos (`Gastón Gori 01.jpg` en adelante) están sueltas, así que la tarjeta sigue llevando a una búsqueda. Lo correcto es pedirle a Wikimedia Argentina que cree la categoría y cambiar el enlace.
+- **Gastón Gori tiene página propia** (`/archivoimagen/gastongori/`, ID 24567), y la tarjeta lleva ahí. En Commons sus fotos (`Gastón Gori 01.jpg` en adelante) no tienen categoría, así que el botón de esa página lleva a una búsqueda. Lo correcto es pedirle a Wikimedia Argentina que cree la categoría y cambiar el enlace.
 - **Las colecciones se juntaron en una sola grilla.** La página vieja repetía tres colecciones en *Acciones y proyectos* y en *Liberaciones documentales*. Pantalla Pública, que es un programa de cine y no una colección, pasó al final como enlace.
 - **El nombre es uno solo**: la página vieja alternaba «Archivo de la Imagen Documental Santafesina» y «Archivo Documental Santafesino». Quedó el primero, que es el de la página y el de Commons.
 - **Confirmar un nombre:** la capacitadora figura como «María José Vanni» en el primer ciclo y «María José Vanni Mire» en el segundo. Se dejó como estaba.
 - **Los diez videos de las capacitaciones** abren en YouTube, como antes. No se insertaron en la página para no cargar YouTube.
 - **Yoast:** la página ya tiene meta descripción propia, pero la imagen para redes es la general del sitio (`capitalcultural-redes-1200x630-1.jpg`). Conviene cambiarla por la del Mercado de Abasto, en una versión de 1200 × 630.
+
+### Las subpáginas del Archivo y Pantalla Pública
+
+El 16/11/2026, Pantalla Pública pasó a ser hija del Archivo de la Imagen Documental (las migas dicen *Inicio › Archivo de la Imagen Documental › Pantalla Pública*) y se sacaron los guiones de las URL. Se hizo desde WordPress, cambiando la página superior y el slug; el contenido de Elementor no se tocó.
+
+| Página | ID | URL vieja | URL nueva |
+|---|---|---|---|
+| Pantalla Pública | 5677 | `/pantalla-publica/` | `/archivoimagen/pantallapublica/` |
+| Directoras contemporáneas | 12009 | `/pantalla-publica/directoras-contemporaneas/` | `/archivoimagen/pantallapublica/directorascontemporaneas/` |
+| Coronación de la Virgen de Guadalupe | 12357 | `/pantalla-publica/coronacion-de-la-virgen-de-guadalupe/` | `/archivoimagen/pantallapublica/coronaciondelavirgendeguadalupe/` |
+| Entrevista a Fernando Martín Peña | 12477 | `/pantalla-publica/entrevista-a-fernando-martin-pena/` | `/archivoimagen/pantallapublica/entrevistaafernandomartinpena/` |
+| Homenaje a Zapata Gollán | 22793 | `/archivoimagen/homenaje-a-zapata-gollan/` | `/archivoimagen/homenajeazapatagollan/` |
+| Colección Clementino Paredes | 22055 | `/archivoimagen/coleccion-paredes/` | `/archivoimagen/coleccionparedes/` |
+| 100 años – 100 imágenes | 15249 | `/archivoimagen/100-anos-100-imagenes/` | `/archivoimagen/100anos100imagenes/` |
+| Gastón Gori | 24567 | — | `/archivoimagen/gastongori/` (ya no tenía guiones) |
+
+- **Las URL viejas dan 404.** WordPress no redirige solo cuando cambia el slug de una página, y el sitio no tiene plugin de redirecciones. Los únicos enlaces internos a ellas estaban en el Archivo y en Pantalla Pública, que se rehicieron con las URL nuevas; ni el menú ni el home las enlazaban. Lo que esté afuera (Google, redes, notas de prensa) llega a un 404 hasta que se instale *Redirection* y se carguen las siete redirecciones de la tabla.
+- **Títulos corregidos:** «Pantalla pública» pasó a «Pantalla Pública» y «Coronación de la virgen de Guadalupe» a «Coronación de la Virgen de Guadalupe». Se ven en las migas y en la pestaña.
+- **Las páginas privadas no se tocaron**: *Cine con vos* (hija de Pantalla Pública) y *Acciones*, *Capacitaciones* e *Inscripciones* (hijas del Archivo) siguen con su URL y sin publicar.
+- **El código** está en `sitio-nuevo/archivo-imagen/`, un `.html` por página con el nombre del slug. Cada uno es un widget HTML entero, que reemplaza todos los widgets de la página. El estilo común está en `base.css` y el script del video en `generar.py`: si se cambia alguno, se corre `python sitio-nuevo/archivo-imagen/generar.py`, que los copia en las ocho páginas, y se vuelven a pegar.
+- **Los videos cargan YouTube recién al tocar play** (`youtube-nocookie.com`), como en Festival Diseña. Antes, Directoras contemporáneas cargaba cuatro reproductores de YouTube al abrir la página.
+- **Tres fotos nuevas en Medios** para las tarjetas de Pantalla Pública (IDs 33783 a 33785): un cuadro de cada video, recortado. La de Peña es de 480 × 360 porque YouTube no tiene una miniatura más grande de ese video.
+- **Día del Cine Santafesino se sacó de Pantalla Pública**: la página (`/dia-del-cine-santafesino/`) está publicada pero vacía, sin ningún widget. Si se completa, se puede sumar como tarjeta.
+- **Se completaron datos que estaban implícitos:** la entrevista a Peña no decía de qué película habla; por el estreno en la Plaza Padre Trucco y la miniatura del video es la de la Coronación, y las dos páginas se enlazan entre sí. *100 años – 100 imágenes* dice cien fotos, pero la categoría de Commons tiene 92: el botón ya no dice un número. «Luis Príamo» va sin tilde, como en el resto del sitio y en Commons.
 
 ### Fichas de los espacios: lo que queda a mano
 
