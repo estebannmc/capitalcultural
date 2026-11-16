@@ -6,6 +6,7 @@ Los textos, horarios y contactos viven en ESPACIOS; la plantilla es la misma par
 import html
 import json
 import os
+import re
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 SITIO = 'https://www.santafeciudad.gov.ar/capitalcultural'
@@ -13,6 +14,7 @@ SITIO = 'https://www.santafeciudad.gov.ar/capitalcultural'
 ESPACIOS = [
     {
         'slug': 'cec', 'pagina': 20428, 'tipo': 'ArtGallery',
+        'imagen': '2026/11/museos-y-salas-redes.jpg', 'dentro': 'belgrano',
         'nombre': 'Centro Experimental del Color', 'corto': 'el CEC',
         'lead': 'El Centro Experimental del Color (CEC) es un espacio de formación, producción y exhibición de artes visuales en el ala oeste de la Estación Belgrano.',
         'cuerpo': ['Fue creado en 2009 y desde 2011 funciona en la estación recuperada como una plataforma para experimentar y explorar prácticas artísticas contemporáneas. Allí se desarrollan proyectos expositivos, actividades formativas y programaciones vinculadas a otras disciplinas.'],
@@ -28,6 +30,7 @@ ESPACIOS = [
     },
     {
         'slug': 'fotogaleria', 'pagina': 24139, 'tipo': 'ArtGallery',
+        'imagen': '2026/11/redes-fotogaleria.jpg', 'dentro': 'ccm', 'abre': [('Mo-Fr', '08:00', '20:00')],
         'nombre': 'Fotogalería Municipal', 'corto': 'la Fotogalería',
         'lead': 'La Fotogalería Municipal es un espacio de exposición, formación e investigación de la fotografía contemporánea, en diálogo con las artes visuales.',
         'cuerpo': ['Nació a principios de los años noventa para dar lugar a la circulación y el encuentro de prácticas fotográficas de búsqueda autoral. Forma parte del <a href="/capitalcultural/centroculturalmunicipal/">Centro Cultural Municipal</a>, junto a la <a href="/capitalcultural/centroculturalmunicipal/bibliotecamuttis/">Biblioteca Profesor Enrique Muttis</a>.'],
@@ -40,6 +43,7 @@ ESPACIOS = [
     },
     {
         'slug': 'manzana-jesuitica', 'pagina': 23414, 'tipo': 'Museum',
+        'imagen': '2021/05/museoinmaculada.jpg',
         'nombre': 'Manzana Jesuítica y Museo Colegio Inmaculada', 'corto': 'la Manzana Jesuítica',
         'lead': 'El Museo del Colegio de la Inmaculada Concepción cuenta la obra evangelizadora y educativa de la Compañía de Jesús en Santa Fe y la región.',
         'cuerpo': ['Se inauguró en 1982 en la Manzana Jesuítica, en el casco fundacional de la ciudad. Quienes recorren el Observatorio y las salas de exposición descubren un patrimonio que sobresale por su riqueza histórica y su diversidad material.'],
@@ -54,6 +58,7 @@ ESPACIOS = [
     },
     {
         'slug': 'museo-de-la-ciudad', 'pagina': 20091, 'tipo': 'Museum',
+        'imagen': '2021/05/museodelaciudad-scaled.jpg',
         'nombre': 'Museo de la Ciudad', 'corto': 'el Museo de la Ciudad',
         'lead': 'El Museo de la Ciudad investiga, colecciona, conserva y exhibe las historias cotidianas de Santa Fe y de quienes la habitan.',
         'cuerpo': ['Creado en 1972, trabaja sobre las prácticas culturales, las identidades y las memorias de la ciudad a través de proyectos colaborativos. Rescata y preserva objetos de la vida cotidiana: instrumentos, mobiliario, utensilios, herramientas, indumentaria, juegos y juguetes, fotografías, libros y documentos.',
@@ -67,6 +72,7 @@ ESPACIOS = [
     },
     {
         'slug': 'museo-de-la-constitucion-nacional', 'pagina': 22929, 'tipo': 'Museum',
+        'imagen': '2026/11/redes-museo-de-la-constitucion-nacional.jpg',
         'nombre': 'Museo de la Constitución Nacional', 'corto': 'el Museo de la Constitución',
         'lead': 'El Museo de la Constitución Nacional difunde los principios y valores de la Carta Magna con un recorrido por la historia constitucional argentina.',
         'cuerpo': ['Se inauguró el 10 de diciembre de 2018 en el Parque-Biblioteca, frente a la costa. Refleja la identidad de Santa Fe como Ciudad de la Constitución y promueve los derechos de todas las personas.'],
@@ -85,6 +91,7 @@ ESPACIOS = [
     },
     {
         'slug': 'cesarlopezclaro', 'pagina': 27565, 'tipo': 'Museum',
+        'imagen': '2026/11/redes-cesarlopezclaro.jpg', 'abre': [('Mo-Fr', '09:00', '12:00')],
         'nombre': 'Museo Municipal César López Claro', 'corto': 'el Museo López Claro',
         'lead': 'La Casa Museo César López Claro funciona en la vivienda del barrio Guadalupe donde vivieron el pintor y su compañera, María Brizzi, y exhibe el patrimonio que donaron a la ciudad.',
         'cuerpo': ['Además de la exhibición permanente, el museo investiga su vasta producción pictórica y desarrolla experiencias de formación en conservación y preservación de obra. Desde 2020, una propuesta educativa permite conocer de cerca ese trabajo: cómo se conserva, se cataloga y se manipula una obra.'],
@@ -99,6 +106,7 @@ ESPACIOS = [
     },
     {
         'slug': 'mmav', 'pagina': 20341, 'tipo': 'Museum',
+        'imagen': '2026/11/redes-mmav.jpg',
         'nombre': 'Museo Municipal de Artes Visuales Sor Josefa Díaz y Clucellas', 'corto': 'el Museo Sor Josefa',
         'lead': 'El Museo Municipal de Artes Visuales Sor Josefa Díaz y Clucellas es una referencia de las artes visuales de la región.',
         'cuerpo': ['Fue creado en 1936 y en 1957 tomó el nombre de Sor Josefa Díaz y Clucellas, la primera pintora con firma del continente. Su patrimonio reúne más de 1100 obras de arte moderno y contemporáneo, y cuenta con salas de exhibición, un patio de esculturas y una biblioteca especializada.',
@@ -115,6 +123,7 @@ ESPACIOS = [
     },
     {
         'slug': 'museo-del-teatro', 'pagina': 23358, 'tipo': 'Museum',
+        'imagen': '2026/11/redes-museo-del-teatro.jpg', 'dentro': 'teatro',
         'nombre': 'Museo del Teatro', 'corto': 'el Museo del Teatro',
         'lead': 'El Museo del Teatro pone en valor el patrimonio del Teatro Municipal 1° de Mayo, el gran coliseo santafesino.',
         'cuerpo': ['Fue creado en 2002 y exhibe sus colecciones en la Sala Franze, donde también funcionan talleres de restauración. En 2017 recibió el fondo documental y artístico del pianista Ariel Ramírez.'],
@@ -128,6 +137,7 @@ ESPACIOS = [
     },
     {
         'slug': 'ariel-ramirez', 'pagina': 15198, 'tipo': 'MusicVenue',
+        'imagen': '2022/12/salaRamirez.jpg', 'dentro': 'belgrano',
         'nombre': 'Sala Ariel Ramírez', 'corto': 'la Sala Ariel Ramírez',
         'lead': 'La Sala Ariel Ramírez es el espacio de la ciudad dedicado a la obra del pianista y compositor santafesino, en la planta alta de la Estación Belgrano.',
         'cuerpo': ['Allí se presentan los conciertos del Ciclo Ariel Ramírez y de la Convocatoria Nacional que lleva su nombre, que invita a recrear, reinterpretar y preservar el patrimonio cultural inmaterial de su obra.'],
@@ -138,6 +148,7 @@ ESPACIOS = [
     },
     {
         'slug': 'sala-mercado-editorial', 'pagina': 20519, 'tipo': 'Library',
+        'imagen': '2026/11/redes-sala-mercado-editorial.jpg', 'dentro': 'mercado',
         'nombre': 'Sala Mercado Editorial', 'corto': 'la Sala Mercado Editorial',
         'lead': 'La Sala Mercado Editorial acompaña y promueve la práctica editorial de la ciudad y la región.',
         'cuerpo': ['Se creó en diciembre de 2021, durante la XXVII Feria del Libro de Santa Fe, como un fondo de archivo literario y editorial: reúne, protege, difunde y da libre acceso a obras contemporáneas e históricas. Su programación incluye presentaciones de libros, exhibiciones, homenajes, celebraciones, formaciones y ferias editoriales.'],
@@ -170,13 +181,30 @@ def datos_visita(e):
     return '\n          '.join(filas)
 
 
+# Edificios que contienen a más de un espacio: van como containedInPlace.
+EDIFICIOS = {
+    'belgrano': {'@type': 'CivicStructure', 'name': 'Estación Belgrano', 'address': 'Bv. Gálvez 1150, Santa Fe'},
+    'ccm': {'@type': 'CivicStructure', 'name': 'Centro Cultural Municipal', 'url': f'{SITIO}/centroculturalmunicipal/'},
+    'teatro': {'@type': 'PerformingArtsTheater', 'name': 'Teatro Municipal 1° de Mayo', 'address': 'San Martín 2020, Santa Fe'},
+    'mercado': {'@type': 'EventVenue', 'name': 'Mercado Progreso', 'url': f'{SITIO}/mercadoprogreso/'},
+}
+
+
 def json_ld(e):
+    url = f'{SITIO}/museos-y-salas/{e["slug"]}/'
     d = {
-        '@context': 'https://schema.org', '@type': e['tipo'], 'name': e['nombre'],
-        'url': f'{SITIO}/museos-y-salas/{e["slug"]}/',
+        '@context': 'https://schema.org', '@type': e['tipo'], '@id': url + '#lugar', 'name': e['nombre'],
+        'url': url,
+        'description': re.sub(r'<[^>]+>', '', e['lead']),
+        'image': f'{SITIO}/wp-content/uploads/{e["imagen"]}',
         'publicAccess': True, 'isAccessibleForFree': True,
         'parentOrganization': {'@type': 'GovernmentOrganization', 'name': 'Municipalidad de Santa Fe', 'url': 'https://www.santafeciudad.gov.ar/'},
     }
+    # Sólo los horarios fijos: los que cambian por temporada quedan en el texto, no en datos que se desactualizan.
+    if e.get('abre'):
+        d['openingHours'] = [f'{dias} {desde}-{hasta}' for dias, desde, hasta in e['abre']]
+    if e.get('dentro'):
+        d['containedInPlace'] = EDIFICIOS[e['dentro']]
     if e.get('direccion'):
         d['address'] = {'@type': 'PostalAddress', 'streetAddress': e['calle'], 'addressLocality': 'Santa Fe',
                         'addressRegion': 'Santa Fe', 'postalCode': '3000', 'addressCountry': 'AR'}
