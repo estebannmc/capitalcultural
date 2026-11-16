@@ -169,7 +169,7 @@ Decisiones tomadas:
 - **El nombre es uno solo**: la página vieja alternaba «Archivo de la Imagen Documental Santafesina» y «Archivo Documental Santafesino». Quedó el primero, que es el de la página y el de Commons.
 - **Confirmar un nombre:** la capacitadora figura como «María José Vanni» en el primer ciclo y «María José Vanni Mire» en el segundo. Se dejó como estaba.
 - **Los diez videos de las capacitaciones** abren en YouTube, como antes. No se insertaron en la página para no cargar YouTube.
-- **Yoast:** la página ya tiene meta descripción propia, pero la imagen para redes es la general del sitio (`capitalcultural-redes-1200x630-1.jpg`). Conviene cambiarla por la del Mercado de Abasto, en una versión de 1200 × 630.
+- **Yoast** quedó cargado el 16/11/2026 en el Archivo y en sus ocho subpáginas: ver la tabla al final de *Las subpáginas del Archivo y Pantalla Pública*.
 
 ### Las subpáginas del Archivo y Pantalla Pública
 
@@ -195,6 +195,27 @@ El 16/11/2026, Pantalla Pública pasó a ser hija del Archivo de la Imagen Docum
 - **Tres fotos nuevas en Medios** para las tarjetas de Pantalla Pública (IDs 33783 a 33785): un cuadro de cada video, recortado. La de Peña es de 480 × 360 porque YouTube no tiene una miniatura más grande de ese video.
 - **Día del Cine Santafesino se sacó de Pantalla Pública**: la página (`/dia-del-cine-santafesino/`) está publicada pero vacía, sin ningún widget. Si se completa, se puede sumar como tarjeta.
 - **Se completaron datos que estaban implícitos:** la entrevista a Peña no decía de qué película habla; por el estreno en la Plaza Padre Trucco y la miniatura del video es la de la Coronación, y las dos páginas se enlazan entre sí. *100 años – 100 imágenes* dice cien fotos, pero la categoría de Commons tiene 92: el botón ya no dice un número. «Luis Príamo» va sin tilde, como en el resto del sitio y en Commons.
+
+**Yoast, cargado el 16/11/2026** en las nueve páginas y verificado en el sitio publicado. Antes tenían el título por defecto («… - Capital Cultural»), ninguna tenía frase clave, y cuatro usaban como imagen para redes una foto de la Basílica de Guadalupe de 350 × 250 (`2021/03` y `2021/04/Sin-titulo-1.jpg`). Se cargó desde el panel de Yoast del editor de WordPress, guardando sólo los datos de Yoast: el contenido de Elementor no se tocó. Las meta descripciones que ya estaban (de 135 a 152 caracteres) se dejaron, salvo las de Peña y Directoras, que se reescribieron.
+
+| Página | Frase clave | Título SEO | Imagen para redes |
+|---|---|---|---|
+| Archivo de la Imagen Documental | `Archivo de la Imagen Documental` | `Archivo de la Imagen Documental Santafesina \| Santa Fe` | Mercado de Abasto (ID 33776) |
+| Gastón Gori | `Gastón Gori` | `Gastón Gori, fotos de su archivo personal \| Santa Fe` | Gori en La Forestal (ID 33779) |
+| Homenaje a Zapata Gollán | `Zapata Gollán` | `Zapata Gollán, la última entrevista (1985) \| Santa Fe` | Cuadro de la entrevista (ID 33780) |
+| Colección Clementino Paredes | `Clementino Paredes` | `Colección Clementino Paredes (1864–1943) \| Santa Fe` | Postal de la Aduana Vieja (ID 33775) |
+| 100 años – 100 imágenes | `Ariel Ramírez` | `Ariel Ramírez: 100 años, 100 imágenes \| Santa Fe` | Grabación de la *Misa criolla* (ID 33777) |
+| Pantalla Pública | `Pantalla Pública` | `Pantalla Pública, cine santafesino recuperado \| Santa Fe` | Cuadro de la Coronación (ID 33784) |
+| Directoras contemporáneas | `Directoras contemporáneas` | `Directoras contemporáneas, entrevistas \| Santa Fe` | Ana Katz (ID 33783) |
+| Coronación de la Virgen de Guadalupe | `Coronación de la Virgen de Guadalupe` | `Coronación de la Virgen de Guadalupe (1928) \| Santa Fe` | Cuadro de la película (ID 33784) |
+| Entrevista a Fernando Martín Peña | `Fernando Martín Peña` | `Entrevista a Fernando Martín Peña \| Santa Fe` | Cuadro restaurado (ID 33785) |
+
+Meta descripciones nuevas:
+
+- **Entrevista a Peña:** `Fernando Martín Peña, historiador de cine, cuenta cómo restauró y digitalizó en 4K la película de la Coronación de la Virgen de Guadalupe, de 1928.` (147)
+- **Directoras contemporáneas:** `Directoras contemporáneas en Pantalla Pública: entrevistas a Ana Katz, Anahí Berneri y Laura Citarella, y una lectura de «Zama», de Lucrecia Martel.` (148)
+
+Las imágenes para redes son las de las tarjetas, de 780 × 585 (la de Peña, 480 × 360): Facebook y WhatsApp las recortan a 1,91:1. Si se quiere la proporción exacta, subir versiones de 1200 × 630 y cambiarlas en Yoast. **Lo que Yoast no resuelve:** la frase clave no está en el slug de 100 años (`100anos100imagenes`), y las siete URL viejas siguen dando 404 sin un plugin de redirecciones.
 
 ### Fichas de los espacios: lo que queda a mano
 
