@@ -1,0 +1,20 @@
+# En el repo, todo el texto con LF. Cada máquina lo convierte al bajarlo según su configuración.
+* text=auto
+
+# Los scripts de shell se rompen con CRLF ("\r: command not found"), incluso dentro de Docker.
+*.sh   text eol=lf
+*.bash text eol=lf
+
+# Binarios: nunca convertir ni intentar mostrar diferencias de texto.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.docx binary
+*.xlsx binary
+*.woff binary
+*.woff2 binary
