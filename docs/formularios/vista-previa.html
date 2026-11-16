@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formularios CC · Vista previa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700;800&family=Geologica:wght@700&display=swap">
+<style>
+  /* Vista previa del plugin de formularios con la imagen actual del sitio.
+     Abrir con #escritorio o #celulares. Los colores y estilos salen del sitio publicado
+     (somos-musica.html, cssAdicionalCCAstra.css, fondo-global.css). */
+  :root {
+    --azul: #002751;
+    --celeste: #57b8e9;
+    --rojo: #e63312;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --borde: #7a7a7a;
+    --fondo: #f4f4f3;
+    --inclinacion: -15deg;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #e9ebee; }
+  body { font: 400 16px/1.6 "Encode Sans", system-ui, sans-serif; color: var(--azul); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p, dl, dd, ul, ol, fieldset, legend { margin: 0; padding: 0; }
+  ul, ol { list-style: none; }
+  ul { list-style: none; }
+
+  .vista { display: none; }
+  .vista:target, .vista.activa { display: block; }
+
+  /* ---------- página ---------- */
+  .pg { container-type: inline-size; position: relative; isolation: isolate; overflow: hidden; background: var(--fondo); }
+  .pg::before {
+    content: ""; position: absolute; inset: 0 0 auto; height: 1400px; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(circle 460px at 64px 12px, rgba(87, 184, 233, .38), transparent),
+      radial-gradient(circle 460px at calc(100% + 12px) 190px, rgba(0, 39, 81, .12), transparent),
+      radial-gradient(circle 460px at 580px 1400px, rgba(230, 51, 18, .14), transparent);
+  }
+
+  /* encabezado del sitio */
+  .sitio-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1120px; margin: 0 auto; padding: 22px 32px; }
+  .logo svg { display: block; width: 214px; height: 42px; }
+  .logo-word { font: 700 21.88px "Geologica", "Arial Narrow", sans-serif; }
+  .nav { display: flex; align-items: center; gap: 26px; font-size: 15px; font-weight: 600; }
+  .nav a { color: var(--azul); text-decoration: none; }
+  .buscar { display: flex; align-items: center; justify-content: space-between; width: 168px; height: 42px; padding: 0 14px; border-radius: 999px; background: rgba(255, 255, 255, .8); box-shadow: inset 0 0 0 1px rgba(0, 39, 81, .1); color: var(--gris-75); font-weight: 400; }
+  .hamb { display: grid; gap: 5px; width: 44px; height: 44px; place-content: center; }
+  .hamb i { display: block; width: 22px; height: 2px; border-radius: 2px; background: var(--azul); }
+
+  .contenido { max-width: 1120px; margin: 0 auto; padding: 8px 32px 72px; display: grid; gap: 36px; }
+
+  /* imagen de encabezado del formulario */
+  .banner { position: relative; overflow: hidden; border-radius: 8px; background: var(--azul); color: #fff; }
+  .banner-4x1 { aspect-ratio: 1602 / 402; }
+  .banner-2x1 { aspect-ratio: 1080 / 540; display: none; }
+  .banner .foto { position: absolute; inset: 0 0 0 46%; background: url("https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/06/15-noviembre-2024-SOMOS-Musica-1-1024x683.jpg") center 35% / cover; clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%); }
+  .banner .corte { position: absolute; top: 0; bottom: 0; left: calc(46% + 2.4%); width: 14px; background: var(--rojo); transform: skewX(var(--inclinacion)); transform-origin: top; }
+  .banner .txt { position: absolute; left: 5.5%; top: 50%; transform: translateY(-50%); display: grid; gap: 10px; }
+  .banner .kicker { font-size: 15px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--celeste); }
+  .banner .marca { font-size: 64px; font-weight: 800; line-height: .95; letter-spacing: -.01em; }
+  .banner .sub { font-size: 22px; font-weight: 500; }
+  .banner-2x1 .foto { inset: 52% 0 0 0; clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%); background-position: center 30%; }
+  .banner-2x1 .corte { display: none; }
+  .banner-2x1 .txt { top: 12%; left: 7%; transform: none; gap: 4px; }
+  .banner-2x1 .kicker { font-size: 11px; }
+  .banner-2x1 .marca { font-size: 34px; }
+  .banner-2x1 .sub { font-size: 15px; }
+
+  .barra { display: inline-block; flex: none; width: .2em; height: .78em; background: var(--rojo); transform: skewX(var(--inclinacion)); }
+  .titulo { display: flex; align-items: baseline; gap: 0 .6rem; font-size: 38px; font-weight: 700; line-height: 1.15; letter-spacing: -.01em; }
+  .titulo .barra { align-self: center; margin-right: .2em; }
+
+  .columna { width: 100%; max-width: 760px; margin: 0 auto; display: grid; gap: 24px; }
+  .lead { font-size: 1.2rem; font-weight: 600; line-height: 1.45; }
+  .datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .datos dt { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  .datos dd { font-size: 1rem; line-height: 1.4; }
+
+  .vidrio {
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .86), rgba(255, 255, 255, .7));
+    box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 14px 30px -16px rgba(0, 39, 81, .3), inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  .tarjeta { padding: 32px; display: grid; gap: 26px; }
+
+  /* progreso */
+  .progreso { display: grid; gap: 12px; }
+  .paso-txt { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 15px; }
+  .paso-txt strong { font-weight: 700; }
+  .paso-txt span { color: var(--gris-75); }
+  .etapas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .etapas li { display: grid; gap: 8px; font-size: 14px; color: var(--gris-75); line-height: 1.3; }
+  .etapas li::before { content: ""; height: 7px; background: var(--gris-20); transform: skewX(var(--inclinacion)); }
+  .etapas .hecha::before { background: var(--azul); }
+  .etapas .actual::before { background: var(--rojo); }
+  .etapas .actual { color: var(--azul); font-weight: 700; }
+
+  .etapa-titulo { font-size: 26px; font-weight: 700; line-height: 1.2; }
+  .campos { display: grid; gap: 22px; }
+  .fila { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .lbl { display: block; margin-bottom: 6px; font-size: 16px; font-weight: 600; }
+  .ob { font-size: 14px; font-weight: 400; color: var(--gris-75); }
+  .inp { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 52px; padding: 0 14px; border: 1.5px solid var(--borde); border-radius: 6px; background: #fff; font-size: 16px; color: var(--azul); }
+  .inp.vacio { color: var(--gris-75); }
+  .inp.foco { border-color: var(--azul); box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+  .inp.error { border-color: #b3260b; border-width: 2px; }
+  .inp .flecha { width: 12px; height: 12px; border-right: 2px solid var(--azul); border-bottom: 2px solid var(--azul); transform: rotate(45deg) translate(-3px, -3px); }
+  .ayuda { margin-top: 6px; font-size: 14px; color: var(--gris-75); }
+  .err { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; font-size: 14px; font-weight: 600; color: #b3260b; }
+  .err svg { flex: none; margin-top: 2px; }
+
+  .opciones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .opciones.col { display: grid; gap: 10px; }
+  .opc { display: flex; align-items: flex-start; gap: 12px; min-height: 52px; padding: 14px 16px; border: 1.5px solid var(--borde); border-radius: 6px; background: #fff; font-size: 16px; line-height: 1.35; }
+  .opc .r { flex: none; width: 22px; height: 22px; margin-top: -1px; border: 2px solid var(--azul); border-radius: 50%; background: #fff; }
+  .opc .c { flex: none; width: 22px; height: 22px; margin-top: 1px; border: 2px solid var(--azul); border-radius: 4px; background: #fff; }
+  .opc.sel { border: 2px solid var(--azul); background: rgba(87, 184, 233, .13); }
+  .opc.sel .r { box-shadow: inset 0 0 0 4px #fff; background: var(--azul); }
+  .opc .det { display: grid; gap: 2px; }
+  .opc .nom { font-weight: 600; }
+  .opc .nota { font-size: 14px; color: var(--gris-75); }
+  .opc .mapa { font-size: 14px; color: var(--azul); text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+  .grupo-nom { font-size: 13px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+
+  .aviso-filtro { padding: 12px 14px; border-radius: 6px; background: rgba(87, 184, 233, .16); font-size: 15px; line-height: 1.45; }
+  .condicional { display: grid; gap: 10px; padding: 16px; border-radius: 6px; background: rgba(0, 39, 81, .05); }
+
+  .legal { display: grid; gap: 12px; padding: 18px; border-radius: 8px; background: #fff; box-shadow: inset 0 0 0 1.5px var(--gris-20); }
+  .legal h3 { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; }
+  .legal p { font-size: 14.5px; line-height: 1.55; }
+  .acepto { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; font-weight: 600; line-height: 1.45; }
+
+  .acciones { display: flex; gap: 12px; justify-content: flex-end; padding-top: 22px; border-top: 1px solid var(--gris-20); }
+  .btn { display: flex; align-items: center; justify-content: center; min-height: 60px; padding: 0 32px; border-radius: 6px; font-size: 17px; font-weight: 600; text-decoration: none; }
+  .btn-p { background: var(--azul); color: #fff; box-shadow: 0 8px 20px -10px rgba(0, 39, 81, .55); }
+  .btn-s { background: #fff; color: var(--azul); box-shadow: inset 0 0 0 1.5px var(--azul); }
+
+  .listo { padding: 32px; display: grid; gap: 16px; justify-items: center; text-align: center; }
+  .tilde { display: grid; place-items: center; width: 68px; height: 68px; border-radius: 50%; background: rgba(87, 184, 233, .22); }
+  .registro { width: 100%; padding: 14px; border-radius: 8px; background: rgba(0, 39, 81, .05); display: grid; gap: 2px; }
+  .registro span { font-size: 14px; color: var(--gris-75); }
+  .registro strong { font-size: 24px; font-weight: 800; letter-spacing: .02em; }
+  .resumen { display: grid; gap: 12px; text-align: left; width: 100%; }
+  .resumen dt { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  .resumen dd { font-weight: 600; line-height: 1.35; }
+
+  /* pie del sitio */
+  .pie { background: #002751; color: #fff; }
+  .pie-in { max-width: 1120px; margin: 0 auto; padding: 56px 32px 40px; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 32px; font-size: 14px; }
+  .pie img { width: 100px; height: auto; display: block; margin-bottom: 14px; }
+  .pie h2, .pie h3 { font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+  .pie p { margin: 0 0 6px; }
+  .pie .bajo { border-top: 1px solid rgba(255, 255, 255, .18); margin: 0 30px; padding: 26px 0 32px; text-align: center; font-size: 14px; }
+
+  /* ---------- celular (por contenedor) ---------- */
+  @container (max-width: 700px) {
+    .sitio-head { padding: 14px 16px; }
+    .logo svg { width: 170px; height: 34px; }
+    .nav { display: none; }
+    .contenido { padding: 4px 16px 40px; gap: 22px; }
+    .banner-4x1 { display: none; }
+    .banner-2x1 { display: block; }
+    .titulo { font-size: 26px; }
+    .tarjeta { padding: 20px 16px; gap: 22px; }
+    .paso-txt { font-size: 14px; }
+    .etapas { gap: 6px; }
+    .etapas li { font-size: 0; gap: 0; }
+    .etapa-titulo { font-size: 22px; }
+    .fila { grid-template-columns: minmax(0, 1fr); }
+    .acciones { padding-top: 18px; }
+    .btn { flex: 1 1 0; padding: 0 12px; min-height: 56px; font-size: 16px; }
+    .btn-p { flex-grow: 2; }
+    .listo { padding: 26px 18px; }
+    .pie-in { grid-template-columns: minmax(0, 1fr); padding: 40px 20px 28px; gap: 22px; }
+    .pie .bajo { margin: 0 20px; }
+  }
+
+  /* ---------- lámina de celulares ---------- */
+  .lamina { padding: 56px 56px 64px; background: #e9ebee; }
+  .lamina-fila { display: grid; grid-template-columns: repeat(3, 390px); gap: 56px; align-items: start; }
+  .tel { display: grid; gap: 18px; }
+  .tel-cap { min-height: 96px; display: grid; align-content: start; gap: 6px; }
+  .tel-cap strong { font-size: 24px; font-weight: 700; line-height: 1.2; }
+  .tel-cap span { font-size: 17px; line-height: 1.4; color: #3d4a5c; }
+  .tel .pg { width: 390px; border-radius: 28px; box-shadow: 0 0 0 10px #14171c, 0 30px 60px -20px rgba(0, 20, 43, .45); }
+</style>
+</head>
+<body>
+
+<template id="cabecera">
+  <header class="sitio-head">
+    <a class="logo" href="#" aria-label="Secretaría de Cultura Santa Fe">
+      <svg viewBox="0 0 163.36 32.07" preserveAspectRatio="xMinYMid slice" aria-hidden="true">
+        <path fill="#002751" d="M12.15,0c-2.05,0-4.160,1.66-4.71,3.72L.04,31.29h37.08c2.05,0,4.16-1.66,4.71-3.72L49.23,0H12.15Z"/>
+        <path fill="#fff" d="M17.86,23.73c-1.24,0-2.44-.19-3.610-.56-1.17-.38-2.16-.92-2.97-1.63l2.07-3.29c.3.35.71.66,1.22.93.51.27,1.05.47,1.64.62.58.15,1.13.22,1.66.22.59,0,1.08-.08,1.46-.25.38-.17.57-.41.57-.72s-.15-.55-.44-.75c-.29-.2-.84-.4-1.64-.6l-1.15-.31c-1.68-.46-2.88-1.09-3.6-1.91-.72-.81-1.08-1.78-1.08-2.89,0-.7.15-1.35.46-1.96.31-.6.73-1.13,1.28-1.59.55-.45,1.2-.81,1.94-1.06.74-.25,1.55-.38,2.42-.38,1.25,0,2.42.18,3.5.55,1.08.36,1.94.87,2.58,1.51l-2.14,3.21c-.26-.3-.59-.57-.99-.8-.41-.23-.85-.41-1.34-.55s-.98-.2-1.47-.2c-.39,0-.73.05-1.02.14-.29.09-.51.22-.67.38-.16.16-.24.34-.24.55,0,.18.07.34.2.45s.35.23.66.34c.31.11.72.24,1.24.4l1.13.33c1.68.49,2.89,1.1,3.63,1.82.74.72,1.11,1.65,1.11,2.8,0,1.02-.27,1.93-.8,2.71-.53.78-1.28,1.390-2.23,1.83-.96.44-2.08.66-3.36.66"/>
+        <polygon fill="#fff" points="30.95 18.24 35.27 18.24 36.32 14.35 30.95 14.35 30.95 11.99 36.95 11.99 38.04 7.92 26.49 7.92 26.49 23.4 30.95 23.4 30.95 18.24"/>
+        <polygon fill="#e63312" points="53.96 .07 45.59 31.36 50.1 31.36 58.46 .07 53.96 .07"/>
+        <text class="logo-word" x="59.13" y="23.41" fill="#002751">CULTURA</text>
+      </svg>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#">Agenda</a><a href="#">Espacios</a><a href="#">Eventos</a><a href="#">Convocatorias ↗</a><a href="#">Noticias</a>
+      <span class="buscar">Buscar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#002751" stroke-width="2.4" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg></span>
+    </nav>
+    <span class="hamb" aria-hidden="true"><i></i><i></i><i></i></span>
+  </header>
+</template>
+
+<template id="banner">
+  <div class="banner banner-4x1" role="img" aria-label="Somos Música. Inscripción abierta para chicas y chicos de 7 a 14 años.">
+    <div class="foto"></div><div class="corte"></div>
+    <div class="txt"><span class="kicker">Orquestas infantiles y juveniles</span><span class="marca">SOMOS MÚSICA</span><span class="sub">Inscripción abierta · de 7 a 14 años</span></div>
+  </div>
+  <div class="banner banner-2x1" role="img" aria-label="Somos Música. Inscripción abierta para chicas y chicos de 7 a 14 años.">
+    <div class="foto"></div>
+    <div class="txt"><span class="kicker">Orquestas infantiles y juveniles</span><span class="marca">SOMOS MÚSICA</span><span class="sub">Inscripción abierta · de 7 a 14 años</span></div>
+  </div>
+</template>
+
+<template id="pie">
+  <footer class="pie">
+    <div class="pie-in">
+      <div>
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/04/logoMuniPNG-8.png" alt="Municipalidad de Santa Fe">
+        <h2>Secretaría de Cultura</h2>
+        <h3 style="margin-top: 22px">Contactanos</h3>
+        <p>4571609</p><p>Boulevard Gálvez 1150, Santa Fe, Argentina</p><p>capitalcultural@santafeciudad.gov.ar</p>
+      </div>
+      <div><h3>Links de interés</h3><p>Agenda</p><p>Convocatorias Vigentes</p><p>Noticias</p></div>
+      <div><h3>Nuestras redes</h3><p>Instagram</p><p>YouTube</p></div>
+    </div>
+    <div class="bajo">© 2026 Capital Cultural — Municipalidad de Santa Fe</div>
+  </footer>
+</template>
+
+<!-- ======================= ESCRITORIO · PASO 1 ======================= -->
+<section class="vista" id="escritorio">
+  <div class="pg" style="width: 1280px">
+    <div data-incluir="cabecera"></div>
+    <main class="contenido">
+      <div data-incluir="banner"></div>
+      <div class="columna">
+        <h1 class="titulo"><i class="barra"></i>Inscripción a Somos Música</h1>
+        <p class="lead">Somos Música es el programa de orquestas infantiles y juveniles de la Municipalidad de Santa Fe. Las clases son gratuitas y se dan en distintos barrios de la ciudad.</p>
+        <dl class="datos">
+          <div><dt>Quiénes pueden sumarse</dt><dd>Niñas, niños y adolescentes de 7 a 14 años</dd></div>
+          <div><dt>Costo</dt><dd>Gratuito, con instrumento en comodato</dd></div>
+          <div><dt>Te lleva</dt><dd>Unos 5 minutos. Tené a mano los dos DNI</dd></div>
+        </dl>
+
+        <form class="tarjeta vidrio" aria-labelledby="e1-titulo">
+          <div class="progreso">
+            <p class="paso-txt"><strong>Paso 1 de 4</strong><span>Los campos obligatorios dicen (obligatorio)</span></p>
+            <ol class="etapas" aria-label="Etapas del formulario">
+              <li class="actual" aria-current="step">1. Alumno o alumna</li>
+              <li>2. Contacto</li>
+              <li>3. Instrumento y sede</li>
+              <li>4. Adulto responsable</li>
+            </ol>
+          </div>
+          <h2 class="etapa-titulo" id="e1-titulo">Datos del alumno o alumna</h2>
+          <div class="campos">
+            <div><span class="lbl">Apellido y nombre <span class="ob">(obligatorio)</span></span><div class="inp">Gómez, Martina</div></div>
+            <div class="fila">
+              <div><span class="lbl">DNI <span class="ob">(obligatorio)</span></span><div class="inp foco">55123456</div><p class="ayuda">Solo números, sin puntos.</p></div>
+              <div><span class="lbl">Edad <span class="ob">(obligatorio)</span></span><div class="inp">9 años <i class="flecha"></i></div><p class="ayuda">El programa es de 7 a 14 años.</p></div>
+            </div>
+            <div>
+              <span class="lbl">¿Ya participó de Somos Música? <span class="ob">(obligatorio)</span></span>
+              <div class="opciones" role="radiogroup">
+                <span class="opc"><i class="r"></i>Sí</span>
+                <span class="opc sel"><i class="r"></i>No, es la primera vez</span>
+              </div>
+            </div>
+          </div>
+          <div class="acciones"><span class="btn btn-p">Siguiente: contacto</span></div>
+        </form>
+      </div>
+    </main>
+    <div data-incluir="pie"></div>
+  </div>
+</section>
+
+<!-- ======================= CELULARES ======================= -->
+<section class="vista" id="celulares">
+  <div class="lamina">
+    <div class="lamina-fila">
+
+      <!-- Paso 3 -->
+      <div class="tel">
+        <p class="tel-cap"><strong>Las sedes se filtran solas</strong><span>Según el tipo de instrumento, y aparecen preguntas nuevas cuando hacen falta.</span></p>
+        <div class="pg">
+          <div data-incluir="cabecera"></div>
+          <main class="contenido">
+            <div data-incluir="banner"></div>
+            <h1 class="titulo"><i class="barra"></i>Inscripción a Somos Música</h1>
+            <form class="tarjeta vidrio">
+              <div class="progreso">
+                <p class="paso-txt"><strong>Paso 3 de 4 · Instrumento y sede</strong></p>
+                <ol class="etapas"><li class="hecha"></li><li class="hecha"></li><li class="actual"></li><li></li></ol>
+              </div>
+              <h2 class="etapa-titulo">Instrumento y sede</h2>
+              <div>
+                <span class="lbl">¿Qué tipo de instrumento? <span class="ob">(obligatorio)</span></span>
+                <div class="opciones col">
+                  <span class="opc"><i class="r"></i>Cuerdas</span>
+                  <span class="opc sel"><i class="r"></i>Viento y percusión</span>
+                </div>
+              </div>
+              <div class="opciones col">
+                <span class="lbl" style="margin: 0">Elegí la sede <span class="ob">(obligatorio)</span></span>
+                <p class="aviso-filtro">Te mostramos las sedes donde se enseñan instrumentos de <strong>viento y percusión</strong>.</p>
+                <span class="opc"><i class="r"></i><span class="det"><span class="nom">Estación Municipal Santa Rosa de Lima, Mediateca «La Cumbia»</span><span class="mapa">Ver en el mapa</span></span></span>
+                <span class="opc sel"><i class="r"></i><span class="det"><span class="nom">Escuela N.º 1225 «Ceferino Namuncurá»</span><span class="nota">Solo para alumnos y exalumnos de la escuela</span><span class="mapa">Ver en el mapa</span></span></span>
+              </div>
+              <div class="condicional">
+                <span class="lbl" style="margin: 0">¿Es alumno o exalumno de la Escuela N.º 1225? <span class="ob">(obligatorio)</span></span>
+                <div class="opciones">
+                  <span class="opc sel"><i class="r"></i>Sí</span>
+                  <span class="opc"><i class="r"></i>No</span>
+                </div>
+              </div>
+              <div class="acciones"><span class="btn btn-s">Anterior</span><span class="btn btn-p">Siguiente</span></div>
+            </form>
+          </main>
+          <div data-incluir="pie"></div>
+        </div>
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="tel">
+        <p class="tel-cap"><strong>Aviso de datos personales</strong><span>Fijo en todos los formularios, según la Ley 25.326. Los errores se explican junto al campo.</span></p>
+        <div class="pg">
+          <div data-incluir="cabecera"></div>
+          <main class="contenido">
+            <div data-incluir="banner"></div>
+            <h1 class="titulo"><i class="barra"></i>Inscripción a Somos Música</h1>
+            <form class="tarjeta vidrio">
+              <div class="progreso">
+                <p class="paso-txt"><strong>Paso 4 de 4 · Adulto responsable</strong></p>
+                <ol class="etapas"><li class="hecha"></li><li class="hecha"></li><li class="hecha"></li><li class="actual"></li></ol>
+              </div>
+              <div style="display: grid; gap: 6px">
+                <h2 class="etapa-titulo">Adulto responsable</h2>
+                <p style="font-size: 15px; line-height: 1.5">Como el alumno o alumna es menor de edad, necesitamos los datos de un adulto a cargo.</p>
+              </div>
+              <div class="campos">
+                <div><span class="lbl">Apellido y nombre <span class="ob">(obligatorio)</span></span><div class="inp">Gómez, Laura</div></div>
+                <div>
+                  <span class="lbl">DNI <span class="ob">(obligatorio)</span></span><div class="inp error">28.456.789</div>
+                  <p class="err"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b3260b" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.5"/></svg>Escribí el DNI solo con números, sin puntos.</p>
+                </div>
+                <div><span class="lbl">Vínculo <span class="ob">(obligatorio)</span></span><div class="inp">Madre <i class="flecha"></i></div></div>
+              </div>
+              <div class="legal">
+                <h3><i class="barra"></i>Protección de datos personales</h3>
+                <p>La Secretaría de Cultura de la Municipalidad de Santa Fe guarda estos datos en sus propios servidores, según la Ley 25.326. Los usa solo para gestionar la inscripción y las clases del programa. Podés pedir que se corrijan o se borren escribiendo a cultura@santafeciudad.gov.ar.</p>
+                <span class="acepto"><i class="c" style="flex: none; width: 22px; height: 22px; margin-top: 1px; border: 2px solid #002751; border-radius: 4px; background: #002751; box-shadow: inset 0 0 0 4px #fff"></i>Leí el aviso y acepto, como adulto responsable, que se guarden estos datos. (obligatorio)</span>
+              </div>
+              <div class="acciones"><span class="btn btn-s">Anterior</span><span class="btn btn-p">Revisar y enviar</span></div>
+            </form>
+          </main>
+          <div data-incluir="pie"></div>
+        </div>
+      </div>
+
+      <!-- Enviado -->
+      <div class="tel">
+        <p class="tel-cap"><strong>Confirmación al instante</strong><span>Con número de registro y un correo con el resumen para la familia.</span></p>
+        <div class="pg">
+          <div data-incluir="cabecera"></div>
+          <main class="contenido">
+            <div data-incluir="banner"></div>
+            <div class="listo vidrio" role="status">
+              <span class="tilde"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#002751" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+              <h1 style="font-size: 24px; font-weight: 800; line-height: 1.25">¡Listo! La inscripción quedó registrada</h1>
+              <p style="font-size: 16px; line-height: 1.55">Te mandamos un correo con el resumen de lo que enviaste.</p>
+              <div class="registro"><span>Número de registro</span><strong>SM-2026-000123</strong></div>
+              <dl class="resumen">
+                <div><dt>Alumno o alumna</dt><dd>Gómez, Martina · 9 años</dd></div>
+                <div><dt>Instrumentos</dt><dd>Viento y percusión</dd></div>
+                <div><dt>Sede</dt><dd>Escuela N.º 1225 «Ceferino Namuncurá»</dd></div>
+                <div><dt>Adulto responsable</dt><dd>Gómez, Laura</dd></div>
+              </dl>
+              <p style="font-size: 15px; line-height: 1.5">El equipo de Somos Música se va a comunicar para confirmar el inicio de las clases.</p>
+              <span class="btn btn-p" style="width: 100%">Volver a Capital Cultural</span>
+            </div>
+          </main>
+          <div data-incluir="pie"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-incluir]').forEach(function (el) {
+    el.replaceWith(document.getElementById(el.dataset.incluir).content.cloneNode(true));
+  });
+  var v = document.getElementById((location.hash || '#escritorio').slice(1));
+  if (v) v.classList.add('activa');
+  window.addEventListener('load', function () {
+    document.body.dataset.alto = Math.ceil(v.getBoundingClientRect().height);
+    document.body.dataset.ancho = Math.ceil(v.scrollWidth);
+  });
+</script>
+</body>
+</html>

@@ -1,2 +1,10 @@
 graphify-out/
 dist/
+
+# Copias del servidor: tienen credenciales, no van a git
+wp-config.php
+wp-cron.php
+backup/
+
+# Tema Astra copiado del backup para el WordPress local
+plugins/dev/temas/

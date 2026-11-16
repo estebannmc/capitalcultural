@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Correo de confirmación · Vista previa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;700&display=swap">
+<style>
+  /* Lámina con el correo en computadora y en celular. Los iframe fijan el ancho real de cada pantalla. */
+  body { margin: 0; padding: 48px; background: #e9ebee; font-family: "Encode Sans", sans-serif; color: #002751; }
+  .fila { display: flex; gap: 56px; align-items: flex-start; }
+  .caja { display: grid; gap: 14px; }
+  .caja strong { font-size: 22px; }
+  .caja span { font-size: 16px; color: #3d4a5c; }
+  iframe { display: block; border: 0; background: #f4f4f3; border-radius: 12px; box-shadow: 0 24px 50px -24px rgba(0, 20, 43, .45); }
+  .tel iframe { border-radius: 28px; box-shadow: 0 0 0 10px #14171c, 0 30px 60px -20px rgba(0, 20, 43, .45); }
+</style>
+</head>
+<body>
+<div class="fila">
+  <div class="caja"><strong>En la computadora</strong><span>Gmail, Outlook o el correo de la Municipalidad</span><iframe src="confirmacion.html" width="680" height="1470" title="Correo en computadora"></iframe></div>
+  <div class="caja tel"><strong>En el celular</strong><span>El pie pasa a una sola columna</span><iframe src="confirmacion.html" width="390" height="1800" title="Correo en celular"></iframe></div>
+</div>
+</body>
+</html>

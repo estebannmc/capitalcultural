@@ -1,0 +1,60 @@
+{
+	"label": "Visita guiada (solicitud)",
+	"title": "Solicitud de visita guiada",
+	"settings": {
+		"description": "Pedí una visita guiada para tu escuela, institución o grupo. Contanos qué día preferís y cuántas personas vienen, y te respondemos para confirmar la fecha.",
+		"prefix": "VG",
+		"notify_mode": "immediate",
+		"confirm_text": "Recibimos tu solicitud de visita guiada. Te vamos a escribir para confirmar el día y el horario.",
+		"closed_text": "Por ahora no estamos recibiendo solicitudes de visitas guiadas.",
+		"purpose": "Los datos se usan para organizar la visita y comunicarnos con quien la coordina."
+	},
+	"schema": {
+		"steps": [
+			{
+				"id": "grupo",
+				"title": "Institución o grupo",
+				"fields": [
+					{ "id": "tipo_grupo", "type": "radio", "label": "¿Quiénes vienen?", "required": true, "options": [
+						{ "value": "escuela", "label": "Una escuela" },
+						{ "value": "institucion", "label": "Una institución u organización" },
+						{ "value": "grupo", "label": "Un grupo de personas" }
+					] },
+					{ "id": "institucion", "type": "text", "label": "Nombre de la escuela, institución o grupo", "required": true },
+					{ "id": "nivel", "type": "select", "label": "Nivel", "required": true, "show_if": { "field": "tipo_grupo", "op": "eq", "value": "escuela" }, "options": [
+						{ "value": "inicial", "label": "Inicial" }, { "value": "primario", "label": "Primario" },
+						{ "value": "secundario", "label": "Secundario" }, { "value": "superior", "label": "Terciario o universitario" },
+						{ "value": "adultos", "label": "Educación de adultos" }
+					] },
+					{ "id": "curso", "type": "text", "label": "Curso o grado", "show_if": { "field": "tipo_grupo", "op": "eq", "value": "escuela" }, "help": "Por ejemplo: 5.º grado o 2.º año." }
+				]
+			},
+			{
+				"id": "visita",
+				"title": "Día y cantidad de personas",
+				"fields": [
+					{ "id": "fecha", "type": "date", "label": "Día que preferís", "required": true, "help": "Es una preferencia: te confirmamos el día por correo." },
+					{ "id": "horario", "type": "radio", "label": "Horario que preferís", "required": true, "options": [
+						{ "value": "manana", "label": "A la mañana" }, { "value": "tarde", "label": "A la tarde" }
+					] },
+					{ "id": "cantidad", "type": "number", "label": "Cantidad de personas", "required": true, "min": 1, "max": 200, "help": "Contando a quienes acompañan." },
+					{ "id": "accesibilidad", "type": "radio", "label": "¿Alguna persona del grupo necesita apoyos de accesibilidad?", "required": true, "options": [
+						{ "value": "no", "label": "No" }, { "value": "si", "label": "Sí" }
+					] },
+					{ "id": "accesibilidad_detalle", "type": "textarea", "label": "Contanos qué necesitan", "required": true, "show_if": { "field": "accesibilidad", "op": "eq", "value": "si" }, "help": "Por ejemplo: silla de ruedas, intérprete de lengua de señas o un recorrido más corto." }
+				]
+			},
+			{
+				"id": "contacto",
+				"title": "Quién coordina la visita",
+				"fields": [
+					{ "id": "responsable", "type": "text", "label": "Apellido y nombre", "required": true, "autocomplete": "name" },
+					{ "id": "email", "type": "email", "label": "Correo electrónico", "required": true, "help": "Te mandamos ahí la confirmación." },
+					{ "id": "telefono", "type": "tel", "label": "Teléfono", "required": true, "help": "Con la característica, por ejemplo 342 4571609." }
+				]
+			}
+		],
+		"summary": [ "institucion", "fecha", "horario", "cantidad" ],
+		"email_field": "email"
+	}
+}

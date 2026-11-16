@@ -1,0 +1,15 @@
+.ccf-admin .ccf-nuevo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0; padding: 12px 16px; background: #fff; border: 1px solid #dcdcde; }
+.ccf-admin .ccf-tabla td, .ccf-admin .ccf-tabla th { vertical-align: top; }
+.ccf-admin .ccf-enlace { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 4px; }
+.ccf-admin .ccf-edit h2 { margin-top: 32px; padding-top: 16px; border-top: 1px solid #dcdcde; }
+.ccf-admin .ccf-edit label { margin-right: 16px; }
+.ccf-admin .ccf-img-prev { display: block; max-width: 400px; height: auto; margin-bottom: 8px; }
+.ccf-admin .ccf-aviso-img { color: #b32d2e; font-weight: 600; }
+.ccf-admin .ccf-legal-base { max-width: 720px; padding: 10px 12px; background: #f6f7f7; border-left: 4px solid #002751; }
+.ccf-admin .ccf-user { display: block; margin: 4px 0; }
+.ccf-admin .ccf-schema { font-size: 13px; line-height: 1.5; tab-size: 2; }
+.ccf-admin .ccf-filtros { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 16px 0 8px; }
+.ccf-admin .ccf-ficha { max-width: 900px; margin-bottom: 16px; }
+.ccf-admin .ccf-ficha th { width: 35%; }
+.ccf-admin .ccf-borrar { margin-top: 32px; }
+.ccf-admin .ccf-paginas { display: flex; gap: 10px; }
