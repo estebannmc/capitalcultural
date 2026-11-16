@@ -55,6 +55,8 @@ Decisiones tomadas:
 | `sitio-nuevo/museos-y-salas.html` | **Museos y Salas**: presentación, los diez espacios con foto en dos grupos (museos y salas) y las 15 publicaciones digitales en grilla de tapas, con número, año, espacio y peso del PDF. Widget HTML entero |
 | `sitio-nuevo/somos-musica.html` | **Somos Música**: presentación, inscripción con el formulario y el contacto de la Secretaría, las ocho sedes por tipo de instrumento con enlace a Google Maps, preguntas frecuentes, galería de 19 fotos con visor, enlaces a más música municipal y los logos de quienes acompañan, con datos estructurados `EducationalOccupationalProgram` y `FAQPage`. Widget HTML entero |
 | `sitio-nuevo/premio-literario.html` | **Premio Literario Municipal**: los ganadores 2026 (novela ganadora y dos menciones, con sus autores) y un botón al fallo, el jurado y los cuatro documentos oficiales en PDF, con datos estructurados de las tres obras y del acta. Widget HTML entero |
+| `sitio-nuevo/archivo-imagen.html` | **Archivo de la Imagen Documental Santafesina**: presentación con la propuesta en PDF, las seis colecciones con foto (Paredes, Mercados, Ariel Ramírez, Cerámica de La Guardia, Gastón Gori y Zapata Gollán), el convenio con Wikimedia Argentina, las diez capacitaciones grabadas y Pantalla Pública, con datos estructurados `ArchiveOrganization`. Widget HTML entero |
+| `sitio-nuevo/img/archivo-imagen/` | Las seis fotos de las colecciones, en 780 × 585 (29–85 KB cada una). Se suben a Medios |
 | `sitio-nuevo/espacios/` | **Las 10 fichas de Museos y Salas**: presentación, *Visitá…* con horarios, contacto y mapa de OpenFreeMap, y el título de propuestas. Un widget HTML por página, generado con `generar.py` desde `plantilla.html` |
 | `sitio-nuevo/img/redes/` | Imágenes para redes de 1200 × 630 de seis espacios, ya en Medios |
 | `sitio-nuevo/img/espacios/` | Siete fotos a color de los espacios de Museos y Salas, en 390 × 290 (16–40 KB cada una), ya en Medios |
@@ -154,6 +156,19 @@ Decisiones tomadas:
 | `Premio Literario Municipal` | `Premio Literario Municipal 2026, novela ganadora \| Santa Fe` | `Premio Literario Municipal 2026: ganó Estrategias para quedarse un tiempo más, de Javier Bonatti. Menciones, jurado y el fallo oficial en PDF.` (142) | La de la Sala Mercado Editorial (ID 33530) |
 
 **Publicada y con Yoast cargado el 12/11/2026**, verificado en la página publicada. Antes tenía una meta descripción genérica («la convocatoria de cada año…») y la imagen general del sitio (`capitalcultural-redes-1200x630-1.jpg`). Cuando cambie la edición, actualizar el título y la descripción con el año nuevo.
+
+### Archivo de la Imagen Documental: cómo se carga y lo que queda a mano
+
+- **Página 17446** (`/archivoimagen/`). Tiene cuatro secciones de Elementor: un texto y tres widgets HTML (acciones y proyectos, capacitaciones y liberaciones). Se pega `archivo-imagen.html` en un widget HTML de la primera sección y se borran las otras tres. El CSS anula el margen y el relleno de su sección y deja 50 px hasta el footer.
+- **Las seis fotos** de `sitio-nuevo/img/archivo-imagen/` se suben a Medios en `2026/11/` con el mismo nombre: el código ya las pide en `/capitalcultural/wp-content/uploads/2026/11/archivo-*.jpg`. Si WordPress las guarda en otra carpeta, cambiar los seis `src`.
+- **Las fotos salen de Wikimedia Commons** y son todas de dominio público: el Mercado de Abasto de Manuel Garcilaso (ca. 1930), el Taller de La Guardia (ca. 1970, fondo Hugo Ifrán), Gastón Gori en La Forestal (1935), la postal de la Aduana Vieja de la Colección Paredes y Ariel Ramírez en la grabación de la *Misa criolla* (1964). La de Zapata Gollán es un cuadro del video de la entrevista en YouTube, digitalizado por el propio Archivo. La imagen que usaba la subpágina de Zapata Gollán (`2021/04/Sin-titulo-1.jpg`) es la Basílica de Guadalupe y no tiene relación con él.
+- **Se arreglaron dos enlaces rotos.** *Mercados de Santa Fe* y *Taller de Cerámica de La Guardia* llevaban a dos galerías de prueba en la página de un usuario de Commons (`User:Mauricio_V._Genta/gallery/pruebas` y `pruebas2`) que dan 404. Ahora van a las páginas de cada colección dentro del proyecto del Archivo en Commons (`Commons:Archivo_de_la_Imagen_Documental_Santafesina/…`).
+- **Gastón Gori no tiene categoría en Commons**: sus fotos (`Gastón Gori 01.jpg` en adelante) están sueltas, así que la tarjeta sigue llevando a una búsqueda. Lo correcto es pedirle a Wikimedia Argentina que cree la categoría y cambiar el enlace.
+- **Las colecciones se juntaron en una sola grilla.** La página vieja repetía tres colecciones en *Acciones y proyectos* y en *Liberaciones documentales*. Pantalla Pública, que es un programa de cine y no una colección, pasó al final como enlace.
+- **El nombre es uno solo**: la página vieja alternaba «Archivo de la Imagen Documental Santafesina» y «Archivo Documental Santafesino». Quedó el primero, que es el de la página y el de Commons.
+- **Confirmar un nombre:** la capacitadora figura como «María José Vanni» en el primer ciclo y «María José Vanni Mire» en el segundo. Se dejó como estaba.
+- **Los diez videos de las capacitaciones** abren en YouTube, como antes. No se insertaron en la página para no cargar YouTube.
+- **Yoast:** la página ya tiene meta descripción propia, pero la imagen para redes es la general del sitio (`capitalcultural-redes-1200x630-1.jpg`). Conviene cambiarla por la del Mercado de Abasto, en una versión de 1200 × 630.
 
 ### Fichas de los espacios: lo que queda a mano
 
