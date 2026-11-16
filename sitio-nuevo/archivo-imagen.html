@@ -1,0 +1,283 @@
+<style>
+  .elementor-section:has(#ai),
+  .elementor-widget-wrap:has(> .elementor-widget-html #ai),
+  .elementor-widget-html:has(#ai) > .elementor-widget-container { padding: 0; margin: 0; }
+  .elementor-column:has(#ai),
+  .elementor-widget-wrap:has(> .elementor-widget-html #ai) > .elementor-element { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#ai) { flex: 1 1 100%; min-width: 0; }
+
+  #ai {
+    --azul: #002751;
+    --celeste: #57b8e9;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(16px, 2vw, 24px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #ai *, #ai *::before, #ai *::after { box-sizing: border-box; }
+  #ai :is(h2, h3, h4, p, ul, ol) { margin: 0; padding: 0; }
+  #ai :is(ul, ol) { list-style: none; }
+  #ai :is(h2, h3, h4) { color: inherit; font-family: inherit; text-transform: none; }
+  #ai img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #ai a { color: var(--azul); text-decoration: none; }
+  #ai a:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+  #ai .ai-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  #ai .ai-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #ai .ai-titulo {
+    display: flex; align-items: baseline; gap: 0 .6rem;
+    margin-bottom: clamp(20px, 3vw, 28px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #ai .ai-titulo .ai-barra { align-self: center; margin-right: .2em; }
+  #ai .ai-intro { max-width: 760px; margin: -.5rem 0 clamp(20px, 3vw, 28px); color: var(--gris-75); }
+  #ai .ai-etiqueta { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+
+  #ai .ai-grilla { display: grid; gap: clamp(64px, 9vw, 112px); }
+
+  #ai .ai-vidrio {
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  #ai .ai-flecha { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 6px; background: var(--azul); color: #fff; }
+  #ai .ai-flecha svg { width: 18px; height: 18px; transition: transform .3s var(--curva); }
+
+  /* Presentación */
+  #ai .ai-cabeza {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+    gap: 20px clamp(24px, 4vw, 56px); align-items: end;
+  }
+  #ai .ai-texto { display: grid; gap: 1rem; max-width: 760px; font-size: 1.05rem; }
+  #ai .ai-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+  #ai .ai-cabeza .cb-btn { width: 100%; min-height: 64px; }
+
+  /* Colecciones */
+  #ai .ai-colecciones { display: grid; gap: clamp(16px, 2vw, 24px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #ai .ai-coleccion {
+    display: grid; grid-template-rows: auto 1fr; height: 100%; padding: .6rem;
+    transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  }
+  #ai .ai-coleccion img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--gris-20); }
+  #ai .ai-coleccion__cuerpo {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto 1fr;
+    gap: .3rem 1rem; padding: .9rem .4rem .35rem .5rem;
+  }
+  #ai .ai-coleccion__cuerpo > :not(.ai-flecha) { grid-column: 1; }
+  #ai .ai-coleccion__nombre { font-size: 1.15rem; font-weight: 700; line-height: 1.25; }
+  #ai .ai-coleccion__texto { font-size: .92rem; line-height: 1.45; color: var(--gris-75); }
+  #ai .ai-coleccion .ai-flecha { grid-column: 2; grid-row: 1 / -1; align-self: end; }
+  @media (hover: hover) {
+    #ai .ai-coleccion:hover { transform: translateY(-4px); box-shadow: 0 1px 1px rgba(0, 39, 81, .04), 0 22px 36px -18px rgba(0, 39, 81, .38), inset 0 1px 0 rgba(255, 255, 255, .9); }
+    #ai .ai-coleccion:hover .ai-coleccion__nombre { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+    #ai .ai-coleccion:hover .ai-flecha svg { transform: translate(2px, -2px); }
+    #ai .ai-coleccion--interna:hover .ai-flecha svg { transform: translateX(3px); }
+  }
+
+  /* Convenio */
+  #ai .ai-convenio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px clamp(24px, 4vw, 56px); align-items: center; }
+  #ai .ai-convenio .ai-titulo { margin-bottom: 1rem; }
+  #ai .ai-docs { display: grid; gap: 14px; }
+  #ai .ai-doc {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem;
+    padding: 1rem 1rem 1rem 1.2rem; transition: transform .3s var(--curva);
+  }
+  #ai .ai-doc__nombre { display: block; font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+  #ai .ai-doc__texto { display: block; margin-top: .15rem; font-size: .92rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #ai .ai-doc:hover { transform: translateX(4px); }
+    #ai .ai-doc:hover .ai-flecha svg { transform: translateY(3px); }
+    #ai .ai-doc:hover .ai-doc__nombre { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+  }
+
+  /* Capacitaciones */
+  #ai .ai-ciclos { display: grid; gap: clamp(20px, 3vw, 32px); }
+  #ai .ai-ciclo { padding: clamp(20px, 3vw, 32px); }
+  #ai .ai-ciclo__titulo { font-size: clamp(1.15rem, 2vw, 1.35rem); font-weight: 700; line-height: 1.25; }
+  #ai .ai-ciclo__texto { margin-top: .35rem; color: var(--gris-75); }
+  #ai .ai-jornadas { display: grid; gap: 24px clamp(16px, 2.4vw, 28px); margin-top: clamp(20px, 3vw, 28px); }
+  #ai .ai-jornadas--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #ai .ai-jornadas--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #ai .ai-jornada h4 { padding-top: .7rem; border-top: 2px solid var(--azul); font-size: 1rem; font-weight: 700; line-height: 1.35; }
+  #ai .ai-charlas { display: grid; gap: 10px; margin-top: .8rem; }
+  #ai .ai-charla {
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .8rem; align-items: start;
+    padding: .75rem .9rem .8rem .75rem; border-radius: 6px;
+    background: rgba(255, 255, 255, .7); box-shadow: inset 0 0 0 1px rgba(0, 39, 81, .1);
+    transition: background .25s ease, box-shadow .25s ease;
+  }
+  #ai .ai-charla__play { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--rojo); color: #fff; }
+  #ai .ai-charla__play svg { width: 13px; height: 13px; margin-left: 2px; }
+  #ai .ai-charla__tema { display: block; margin-top: .2rem; font-weight: 600; line-height: 1.35; }
+  #ai .ai-charla__quien { display: block; font-size: .9rem; line-height: 1.4; color: var(--gris-75); }
+  #ai .ai-charla__tema + .ai-charla__quien { margin-top: .1rem; }
+  #ai .ai-charla__quien + .ai-charla__tema { margin-top: .7rem; }
+  @media (hover: hover) {
+    #ai .ai-charla:hover { background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 39, 81, .22); }
+    #ai .ai-charla:hover .ai-charla__tema { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+  }
+
+  /* Pantalla Pública */
+  #ai .ai-mas {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem;
+    max-width: 760px; padding: 1.1rem 1.1rem 1.1rem 1.3rem; transition: transform .3s var(--curva);
+  }
+  @media (hover: hover) {
+    #ai .ai-mas:hover { transform: translateX(4px); }
+    #ai .ai-mas:hover .ai-flecha svg { transform: translateX(3px); }
+    #ai .ai-mas:hover .ai-doc__nombre { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+  }
+
+  @media (max-width: 960px) {
+    #ai .ai-colecciones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #ai .ai-jornadas--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    #ai .ai-cabeza, #ai .ai-convenio { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 640px) {
+    #ai .ai-colecciones, #ai .ai-jornadas--3, #ai .ai-jornadas--2 { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #ai .ai-vidrio { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #ai .ai-vidrio { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #ai *, #ai *::before, #ai *::after { transition: none !important; }
+  }
+</style>
+
+<div id="ai">
+  <div class="ai-grilla">
+    <div class="ai-cabeza">
+      <div class="ai-texto">
+        <p class="ai-lead">El Archivo de la Imagen Documental Santafesina resguarda la memoria fotográfica y audiovisual de Santa Fe.</p>
+        <p>Recibe, custodia, conserva, organiza y difunde colecciones y fondos fotográficos y audiovisuales, institucionales y privados, de interés histórico y cultural para la ciudad. Desde 2021 trabaja con Wikimedia Argentina para digitalizar esas imágenes y publicarlas en acceso abierto, para que cualquiera pueda verlas, descargarlas y volver a usarlas.</p>
+      </div>
+      <a class="cb-btn" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/04/archivodelaimagensf.pdf" target="_blank" rel="noopener"><span>Conocé la propuesta del Archivo</span></a>
+    </div>
+
+    <section aria-labelledby="ai-colecciones-titulo">
+      <h2 class="ai-titulo" id="ai-colecciones-titulo"><i class="ai-barra"></i>Colecciones del Archivo de la Imagen Documental</h2>
+      <p class="ai-intro">Fotografías y documentos audiovisuales de la ciudad, digitalizados y liberados en acceso abierto. La mayoría está en Wikimedia Commons, el repositorio libre de imágenes de Wikipedia.</p>
+      <ul class="ai-colecciones">
+        <li><a class="ai-coleccion ai-coleccion--interna ai-vidrio" href="/capitalcultural/archivoimagen/coleccionparedes/"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/archivo-clementino-paredes.jpg" alt="Postal de la Aduana Vieja de Santa Fe, vista de 1864, con cintas celestes y blancas" loading="lazy" width="780" height="585"><span class="ai-coleccion__cuerpo"><span class="ai-etiqueta">Fotografía · 1864–1943</span><span class="ai-coleccion__nombre">Colección Clementino Paredes</span><span class="ai-coleccion__texto">Más de 200 fotografías de la ciudad, sus espacios, sus hechos y sus protagonistas.</span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="ai-coleccion ai-vidrio" href="https://commons.wikimedia.org/wiki/Commons:Archivo_de_la_Imagen_Documental_Santafesina/Mercados_de_Santa_Fe" target="_blank" rel="noopener"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/archivo-mercados.jpg" alt="El Mercado de Abasto Proveedor sobre avenida Freyre, hacia 1930" loading="lazy" width="780" height="585"><span class="ai-coleccion__cuerpo"><span class="ai-etiqueta">Wikimedia Commons</span><span class="ai-coleccion__nombre">Mercados de Santa Fe</span><span class="ai-coleccion__texto">La primera liberación del Archivo: el Mercado Central y el de Abasto, de la Fototeca del Museo de la Ciudad, con el especialista Luis Priamo.</span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></span><span class="ai-sr"> (se abre en Wikimedia Commons)</span></a></li>
+        <li><a class="ai-coleccion ai-coleccion--interna ai-vidrio" href="/capitalcultural/archivoimagen/100anos100imagenes/"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/archivo-ariel-ramirez.jpg" alt="Ariel Ramírez al piano en la grabación de la Misa criolla, en 1964" loading="lazy" width="780" height="585"><span class="ai-coleccion__cuerpo"><span class="ai-etiqueta">Fotografía · Museo del Teatro</span><span class="ai-coleccion__nombre">Ariel Ramírez: 100 años, 100 imágenes</span><span class="ai-coleccion__texto">Cien fotografías del Museo del Teatro Municipal 1.º de Mayo, liberadas en el centenario del nacimiento del compositor.</span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="ai-coleccion ai-vidrio" href="https://commons.wikimedia.org/wiki/Commons:Archivo_de_la_Imagen_Documental_Santafesina/Taller_de_cer%C3%A1mica_artesanal_de_La_Guardia" target="_blank" rel="noopener"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/archivo-ceramica-la-guardia.jpg" alt="Chicos modelando piezas de cerámica en el Taller de La Guardia, hacia 1970" loading="lazy" width="780" height="585"><span class="ai-coleccion__cuerpo"><span class="ai-etiqueta">Wikimedia Commons</span><span class="ai-coleccion__nombre">Taller de Cerámica Artesanal de La Guardia</span><span class="ai-coleccion__texto">Fotos del taller municipal, del fondo del profesor Hugo Ifrán, sumadas al Archivo en las jornadas de formación.</span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></span><span class="ai-sr"> (se abre en Wikimedia Commons)</span></a></li>
+        <li><a class="ai-coleccion ai-coleccion--interna ai-vidrio" href="/capitalcultural/archivoimagen/gastongori/"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/archivo-gaston-gori.jpg" alt="Gastón Gori junto a un cactus en los montes de La Forestal, en 1935" loading="lazy" width="780" height="585"><span class="ai-coleccion__cuerpo"><span class="ai-etiqueta">Fotografía · Archivo Gori</span><span class="ai-coleccion__nombre">Gastón Gori</span><span class="ai-coleccion__texto">Los escenarios, los vínculos y las conversaciones del escritor santafesino, desde su archivo personal.</span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="ai-coleccion ai-coleccion--interna ai-vidrio" href="/capitalcultural/archivoimagen/homenajeazapatagollan/"><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/archivo-zapata-gollan.jpg" alt="Agustín Zapata Gollán durante su última entrevista, en 1985" loading="lazy" width="780" height="585"><span class="ai-coleccion__cuerpo"><span class="ai-etiqueta">Video · 49 minutos</span><span class="ai-coleccion__nombre">Homenaje a Zapata Gollán</span><span class="ai-coleccion__texto">La última entrevista a Agustín Zapata Gollán, de 1985, digitalizada y subtitulada por el Archivo.</span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a></li>
+      </ul>
+    </section>
+
+    <section class="ai-convenio" aria-labelledby="ai-convenio-titulo">
+      <div>
+        <h2 class="ai-titulo" id="ai-convenio-titulo"><i class="ai-barra"></i>Convenio con Wikimedia Argentina</h2>
+        <p>En agosto de 2021, la Municipalidad de Santa Fe y Wikimedia Argentina firmaron un convenio de colaboración para desarrollar programas conjuntos y fortalecer el Archivo de la Imagen Documental Santafesina: preservar, digitalizar y difundir el patrimonio fotográfico y audiovisual de la ciudad.</p>
+      </div>
+      <ul class="ai-docs">
+        <li><a class="ai-doc ai-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/04/decreto-dmm-00283.pdf" target="_blank" rel="noopener"><span><span class="ai-doc__nombre">Decreto DMM N.º 00283</span><span class="ai-doc__texto">Aprueba el convenio · PDF · 44 KB</span></span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg></span></a></li>
+        <li><a class="ai-doc ai-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2022/04/decreto-dmm-00283-anexo.pdf" target="_blank" rel="noopener"><span><span class="ai-doc__nombre">Anexo del decreto</span><span class="ai-doc__texto">El texto del convenio · PDF · 111 KB</span></span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg></span></a></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="ai-capacitaciones-titulo">
+      <h2 class="ai-titulo" id="ai-capacitaciones-titulo"><i class="ai-barra"></i>Capacitaciones en archivos de imagen</h2>
+      <p class="ai-intro">Jornadas abiertas sobre preservación, digitalización, conservación y difusión del patrimonio documental, con especialistas de archivos, investigadores y referentes de Wikimedia Argentina. Todas quedaron grabadas en YouTube.</p>
+      <div class="ai-ciclos">
+        <article class="ai-ciclo ai-vidrio" aria-labelledby="ai-ciclo-1">
+          <h3 class="ai-ciclo__titulo" id="ai-ciclo-1">Archivos de imagen: desde la fotografía analógica al archivo digital</h3>
+          <p class="ai-ciclo__texto">Ciclo de tres jornadas sobre archivística, conservación, digitalización y publicación de archivos fotográficos.</p>
+          <div class="ai-jornadas ai-jornadas--3">
+            <div class="ai-jornada">
+              <h4>Jornada 1</h4>
+              <ul class="ai-charlas">
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=5F8sO7Rcmro" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Módulo I</span><span class="ai-charla__tema">Herramientas archivísticas</span><span class="ai-charla__quien">María José Vanni</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=liunyOw2KpE" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Módulo II</span><span class="ai-charla__tema">Conservación preventiva de fotografías</span><span class="ai-charla__quien">Estela Vega</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+              </ul>
+            </div>
+            <div class="ai-jornada">
+              <h4>Jornada 2</h4>
+              <ul class="ai-charlas">
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=PPQWJ3ajw5o" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Módulo III</span><span class="ai-charla__tema">Proyectos Wikimedia y cultura libre</span><span class="ai-charla__quien">Angie Cervellera</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=AObBsLccWBU" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Módulo IV</span><span class="ai-charla__tema">Digitalización de fotografías</span><span class="ai-charla__quien">Mauricio Vidal Genta</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+              </ul>
+            </div>
+            <div class="ai-jornada">
+              <h4>Jornada 3</h4>
+              <ul class="ai-charlas">
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=uQUIz7LNyNI" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Módulo V</span><span class="ai-charla__tema">Jornada de digitalización</span><span class="ai-charla__quien">Mauricio Vidal Genta</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=p9V2MqBdst0" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Módulo VI</span><span class="ai-charla__tema">Taller de tratamientos digitales en fotografía</span><span class="ai-charla__quien">Enzo Mansilla</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=KyzBBK0fZU0" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Módulo VII</span><span class="ai-charla__tema">Taller de liberación de archivos en Wikimedia Commons</span><span class="ai-charla__quien">Bernardo Gaitán Otarán</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="ai-ciclo ai-vidrio" aria-labelledby="ai-ciclo-2">
+          <h3 class="ai-ciclo__titulo" id="ai-ciclo-2">Jornadas con Wikimedia Argentina y el Archivo General de la Nación</h3>
+          <p class="ai-ciclo__texto">Un encuentro sobre la investigación, la preservación y la conservación del patrimonio documental fotográfico.</p>
+          <div class="ai-jornadas ai-jornadas--2">
+            <div class="ai-jornada">
+              <h4>Jornada 1 · Conocer a través de los archivos de imagen</h4>
+              <ul class="ai-charlas">
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=EeyCO_ZgoRU" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Jornada completa</span><span class="ai-charla__tema">Experiencias en torno a la investigación del patrimonio documental fotográfico santafesino</span><span class="ai-charla__quien">Luis Priamo</span><span class="ai-charla__tema">Construcción de la imagen de las comunidades santafesinas</span><span class="ai-charla__quien">María José Vanni Mire</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+              </ul>
+            </div>
+            <div class="ai-jornada">
+              <h4>Jornada 2 · Preservar y conservar los archivos de imagen</h4>
+              <ul class="ai-charlas">
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=xGMQcgcWsFU" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Primera parte</span><span class="ai-charla__tema">Fotoactivismo para documentar el presente</span><span class="ai-charla__quien">Titi Nicola y Bernardo Gaitán Otarán</span><span class="ai-charla__tema">Preservación de formatos audiovisuales</span><span class="ai-charla__quien">Gladys Garay</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+                <li><a class="ai-charla" href="https://www.youtube.com/watch?v=_lx4j2sXH10" target="_blank" rel="noopener"><span class="ai-charla__play" aria-hidden="true"><svg viewBox="0 0 12 14" fill="currentColor"><path d="M0 0v14l12-7z"/></svg></span><span><span class="ai-etiqueta">Segunda parte</span><span class="ai-charla__tema">Preservación y conservación de fotografías</span><span class="ai-charla__quien">Laura Caroni</span><span class="ai-sr"> (video en YouTube)</span></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="ai-mas-titulo">
+      <h2 class="ai-titulo" id="ai-mas-titulo"><i class="ai-barra"></i>Cine santafesino en pantalla grande</h2>
+      <a class="ai-mas ai-vidrio" href="/capitalcultural/archivoimagen/pantallapublica/"><span><span class="ai-doc__nombre">Pantalla Pública</span><span class="ai-doc__texto">Ciclos de proyecciones, retrospectivas y rescates de películas locales y patrimoniales, para acercar el cine y las artes audiovisuales a toda la ciudad.</span></span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </section>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ArchiveOrganization",
+  "name": "Archivo de la Imagen Documental Santafesina",
+  "url": "https://www.santafeciudad.gov.ar/capitalcultural/archivoimagen/",
+  "description": "Archivo municipal que resguarda y difunde la memoria fotográfica y audiovisual de la ciudad de Santa Fe.",
+  "foundingDate": "2021",
+  "areaServed": { "@type": "City", "name": "Santa Fe de la Vera Cruz" },
+  "sameAs": "https://commons.wikimedia.org/wiki/Commons:Archivo_de_la_Imagen_Documental_Santafesina",
+  "parentOrganization": { "@type": "GovernmentOrganization", "name": "Municipalidad de Santa Fe", "url": "https://www.santafeciudad.gov.ar/" },
+  "archiveHeld": [
+    { "@type": "ArchiveComponent", "name": "Colección Clementino Paredes", "url": "https://www.santafeciudad.gov.ar/capitalcultural/archivoimagen/coleccionparedes/" },
+    { "@type": "ArchiveComponent", "name": "Mercados de Santa Fe", "url": "https://commons.wikimedia.org/wiki/Commons:Archivo_de_la_Imagen_Documental_Santafesina/Mercados_de_Santa_Fe" },
+    { "@type": "ArchiveComponent", "name": "Ariel Ramírez: 100 años, 100 imágenes", "url": "https://www.santafeciudad.gov.ar/capitalcultural/archivoimagen/100anos100imagenes/" },
+    { "@type": "ArchiveComponent", "name": "Taller de Cerámica Artesanal de La Guardia", "url": "https://commons.wikimedia.org/wiki/Commons:Archivo_de_la_Imagen_Documental_Santafesina/Taller_de_cer%C3%A1mica_artesanal_de_La_Guardia" },
+    { "@type": "ArchiveComponent", "name": "Gastón Gori", "url": "https://www.santafeciudad.gov.ar/capitalcultural/archivoimagen/gastongori/" },
+    { "@type": "ArchiveComponent", "name": "Homenaje a Zapata Gollán", "url": "https://www.santafeciudad.gov.ar/capitalcultural/archivoimagen/homenajeazapatagollan/" }
+  ]
+}
+</script>

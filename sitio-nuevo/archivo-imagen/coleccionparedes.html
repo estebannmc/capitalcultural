@@ -1,0 +1,175 @@
+<style>
+  /* base */
+  .elementor-section:has(#ai),
+  .elementor-widget-wrap:has(> .elementor-widget-html #ai),
+  .elementor-widget-html:has(#ai) > .elementor-widget-container { padding: 0; margin: 0; }
+  .elementor-column:has(#ai),
+  .elementor-widget-wrap:has(> .elementor-widget-html #ai) > .elementor-element { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#ai) { flex: 1 1 100%; min-width: 0; }
+
+  #ai {
+    --azul: #002751;
+    --celeste: #57b8e9;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    --curva: cubic-bezier(.16, 1, .3, 1);
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(16px, 2vw, 24px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #ai *, #ai *::before, #ai *::after { box-sizing: border-box; }
+  #ai :is(h2, h3, p, ul, ol, dl, dd, figure) { margin: 0; padding: 0; }
+  #ai :is(ul, ol) { list-style: none; }
+  #ai :is(h2, h3) { color: inherit; font-family: inherit; text-transform: none; }
+  #ai img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #ai a { color: var(--azul); text-decoration: none; }
+  #ai a:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+  #ai cite { font-style: italic; }
+  #ai .ai-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  #ai .ai-grilla { display: grid; gap: clamp(64px, 9vw, 112px); }
+  #ai .ai-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #ai .ai-titulo {
+    display: flex; align-items: baseline; gap: 0 .6rem;
+    margin-bottom: clamp(20px, 3vw, 28px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #ai .ai-titulo .ai-barra { align-self: center; margin-right: .2em; }
+  #ai .ai-intro { max-width: 760px; margin: -.5rem 0 clamp(20px, 3vw, 28px); color: var(--gris-75); }
+  #ai .ai-etiqueta { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+
+  #ai .ai-vidrio {
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  #ai .ai-flecha { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 6px; background: var(--azul); color: #fff; }
+  #ai .ai-flecha svg { width: 18px; height: 18px; transition: transform .3s var(--curva); }
+
+  /* Presentación: texto y, al costado, foto o ficha */
+  #ai .ai-cabeza { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 28px clamp(28px, 5vw, 64px); align-items: start; }
+  #ai .ai-texto { display: grid; gap: 1rem; max-width: 760px; font-size: 1.05rem; }
+  #ai .ai-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+  #ai .ai-texto .cb-btn { justify-self: start; min-height: 64px; margin-top: .5rem; }
+  #ai .ai-foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; background: var(--gris-20); box-shadow: 0 14px 30px -16px rgba(0, 39, 81, .4); }
+  #ai .ai-foto figcaption { margin-top: .6rem; font-size: .88rem; line-height: 1.45; color: var(--gris-75); }
+
+  /* Ficha */
+  #ai .ai-ficha { display: grid; gap: .9rem; padding: clamp(20px, 2.6vw, 28px); }
+  #ai .ai-ficha div { display: grid; gap: .15rem; padding-top: .9rem; border-top: 1px solid rgba(0, 39, 81, .12); }
+  #ai .ai-ficha div:first-child { padding-top: 0; border-top: 0; }
+  #ai .ai-ficha dt { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  #ai .ai-ficha dd { font-weight: 600; line-height: 1.45; }
+
+  /* Video que carga YouTube recién al tocar play */
+  #ai .ai-video { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px; background: #000; box-shadow: 0 18px 36px -18px rgba(0, 39, 81, .55); }
+  #ai .ai-video img, #ai .ai-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+  #ai .ai-video__play {
+    position: absolute; left: 50%; top: 50%; z-index: 1; translate: -50% -50%;
+    display: grid; place-items: center; width: 72px; height: 72px; border-radius: 8px;
+    background: var(--rojo); color: #fff; transition: scale .25s var(--curva);
+  }
+  #ai .ai-video__play svg { width: 26px; height: 26px; margin-left: 4px; }
+  #ai .ai-video__titulo { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 48px 20px 16px; color: #fff; font-weight: 600; line-height: 1.35; background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .72)); }
+  @media (hover: hover) { #ai a.ai-video:hover .ai-video__play { scale: 1.08; } }
+
+  /* Datos destacados */
+  #ai .ai-datos { display: grid; gap: clamp(16px, 2vw, 24px); grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  #ai .ai-dato { padding: clamp(20px, 2.6vw, 26px); }
+  #ai .ai-dato h3 { display: flex; align-items: center; gap: .55rem; margin-bottom: .45rem; font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+  #ai .ai-dato h3 .ai-barra { height: .9em; }
+  #ai .ai-dato p { font-size: .95rem; line-height: 1.55; color: var(--gris-75); }
+
+  /* Enlaces en fila */
+  #ai .ai-filas { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #ai .ai-fila {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem;
+    height: 100%; padding: 1rem 1rem 1rem 1.2rem; transition: transform .3s var(--curva);
+  }
+  #ai .ai-fila__nombre { display: block; font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+  #ai .ai-fila__texto { display: block; margin-top: .15rem; font-size: .92rem; line-height: 1.4; color: var(--gris-75); }
+  @media (hover: hover) {
+    #ai .ai-fila:hover { transform: translateX(4px); }
+    #ai .ai-fila:hover .ai-fila__nombre { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+    #ai .ai-fila:hover .ai-flecha svg { transform: translateX(3px); }
+    #ai .ai-fila--externa:hover .ai-flecha svg { transform: translate(2px, -2px); }
+    #ai .ai-fila--pdf:hover .ai-flecha svg { transform: translateY(3px); }
+  }
+
+  /* Tarjetas con foto */
+  #ai .ai-tarjetas { display: grid; gap: clamp(16px, 2vw, 24px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #ai .ai-tarjeta { display: grid; grid-template-rows: auto 1fr; height: 100%; padding: .6rem; transition: transform .3s var(--curva); }
+  #ai .ai-tarjeta img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--gris-20); }
+  #ai .ai-tarjeta__cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto 1fr; gap: .3rem 1rem; padding: .9rem .4rem .35rem .5rem; }
+  #ai .ai-tarjeta__cuerpo > :not(.ai-flecha) { grid-column: 1; }
+  #ai .ai-tarjeta__nombre { font-size: 1.15rem; font-weight: 700; line-height: 1.25; }
+  #ai .ai-tarjeta__texto { font-size: .92rem; line-height: 1.45; color: var(--gris-75); }
+  #ai .ai-tarjeta .ai-flecha { grid-column: 2; grid-row: 1 / -1; align-self: end; }
+  @media (hover: hover) {
+    #ai .ai-tarjeta:hover { transform: translateY(-4px); }
+    #ai .ai-tarjeta:hover .ai-tarjeta__nombre { text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; }
+    #ai .ai-tarjeta:hover .ai-flecha svg { transform: translateX(3px); }
+  }
+
+  @media (max-width: 960px) {
+    #ai .ai-tarjetas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    #ai .ai-cabeza { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 640px) {
+    #ai .ai-tarjetas, #ai .ai-filas { grid-template-columns: minmax(0, 1fr); }
+    #ai .ai-video__play { width: 56px; height: 56px; }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #ai .ai-vidrio { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #ai .ai-vidrio { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #ai *, #ai *::before, #ai *::after { transition: none !important; }
+  }
+  /* fin base */
+  #ai .ai-filas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 960px) { #ai .ai-filas { grid-template-columns: minmax(0, 1fr); max-width: 560px; } }
+</style>
+
+<div id="ai">
+  <div class="ai-grilla">
+    <div class="ai-cabeza">
+      <div class="ai-texto">
+        <p class="ai-lead">Clementino Paredes fue un ciudadano destacado de la Santa Fe de la primera mitad del siglo XX.</p>
+        <p>Interpretó la ciudad y su historia, y ejerció la memoria con una fuerte conciencia patrimonial: preservó el material documental que pasó por sus manos. Uno de sus aportes más valiosos es su colección de fotografías, que presenta el Archivo de la Imagen Documental Santafesina.</p>
+        <p>La colección reúne más de 200 fotografías, muchas de ellas de la ciudad de Santa Fe: sus espacios, sus hechos y sus protagonistas, entre 1864 y 1943.</p>
+      </div>
+      <figure class="ai-foto">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/archivo-clementino-paredes.jpg" alt="Postal con una foto de la Aduana Vieja, cintas celestes y blancas y un texto manuscrito" width="780" height="585">
+        <figcaption>La Aduana Vieja en una vista de 1864, en una postal que Paredes donó al Museo Histórico Provincial.</figcaption>
+      </figure>
+    </div>
+
+    <section aria-labelledby="ai-recorre-titulo">
+      <h2 class="ai-titulo" id="ai-recorre-titulo"><i class="ai-barra"></i>Recorré la Colección Clementino Paredes</h2>
+      <p class="ai-intro">Las fotografías liberadas están en Wikimedia Commons, divididas en dos series.</p>
+      <ul class="ai-filas">
+        <li><a class="ai-fila ai-fila--externa ai-vidrio" href="https://commons.wikimedia.org/wiki/Category:Colecci%C3%B3n_Clementino_Paredes_(Trama_Urbana)" target="_blank" rel="noopener"><span><span class="ai-fila__nombre">Trama Urbana</span><span class="ai-fila__texto">83 fotografías en Wikimedia Commons</span></span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+        <li><a class="ai-fila ai-fila--externa ai-vidrio" href="https://commons.wikimedia.org/wiki/Category:Colecci%C3%B3n_Clementino_Paredes_(Trama_Social)" target="_blank" rel="noopener"><span><span class="ai-fila__nombre">Trama Social</span><span class="ai-fila__texto">32 fotografías en Wikimedia Commons</span></span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+        <li><a class="ai-fila ai-fila--pdf ai-vidrio" href="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2023/10/paredes-pdf.pdf" target="_blank" rel="noopener"><span><span class="ai-fila__nombre">Quién fue Clementino Paredes</span><span class="ai-fila__texto">Su vida y su colección · PDF · 2,2 MB</span></span><span class="ai-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 12l6 6 6-6"/></svg></span></a></li>
+      </ul>
+    </section>
+  </div>
+</div>
