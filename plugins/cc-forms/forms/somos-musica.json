@@ -1,0 +1,86 @@
+{
+	"label": "SOMOS Música (inscripción)",
+	"title": "Inscripción a Somos Música",
+	"settings": {
+		"description": "Somos Música es el programa de orquestas infantiles y juveniles de la Municipalidad de Santa Fe. Las clases son gratuitas, los instrumentos se entregan en comodato y se dan en distintos barrios de la ciudad. Pueden sumarse niñas, niños y adolescentes de 7 a 14 años. Completar el formulario lleva unos 5 minutos: tené a mano el DNI del alumno o alumna y el tuyo.",
+		"prefix": "SM",
+		"dedupe": "dni",
+		"notify_mode": "immediate",
+		"reply_to": "cultura@santafeciudad.gov.ar",
+		"confirm_text": "La inscripción quedó registrada. El equipo de Somos Música se va a comunicar para confirmar la sede y el inicio de las clases.",
+		"closed_text": "La inscripción a Somos Música está cerrada. Seguí las novedades en Capital Cultural.",
+		"purpose": "Los datos se usan para organizar las clases del programa y comunicarnos con la familia.",
+		"summary_link": "https://www.santafeciudad.gov.ar/capitalcultural/somosmusica/"
+	},
+	"schema": {
+		"steps": [
+			{
+				"id": "alumno",
+				"title": "Alumno o alumna",
+				"fields": [
+					{ "id": "nombre", "type": "text", "label": "Apellido y nombre del alumno o alumna", "required": true, "autocomplete": "off" },
+					{ "id": "dni_alumno", "type": "dni", "label": "DNI del alumno o alumna", "required": true, "help": "Solo números, sin puntos." },
+					{ "id": "edad", "type": "select", "label": "Edad", "required": true, "help": "El programa es de 7 a 14 años.", "options": [
+						{ "value": "7", "label": "7 años" }, { "value": "8", "label": "8 años" }, { "value": "9", "label": "9 años" },
+						{ "value": "10", "label": "10 años" }, { "value": "11", "label": "11 años" }, { "value": "12", "label": "12 años" },
+						{ "value": "13", "label": "13 años" }, { "value": "14", "label": "14 años" }
+					] },
+					{ "id": "primera_vez", "type": "radio", "label": "¿Es la primera vez que participa de Somos Música?", "required": true, "options": [
+						{ "value": "si", "label": "Sí, es la primera vez" }, { "value": "no", "label": "No, ya participó" }
+					] }
+				]
+			},
+			{
+				"id": "contacto",
+				"title": "Contacto",
+				"description": "Los datos de la familia, para avisarles el inicio de las clases.",
+				"fields": [
+					{ "id": "email", "type": "email", "label": "Correo electrónico", "required": true, "help": "Te mandamos ahí la confirmación de la inscripción." },
+					{ "id": "telefono", "type": "tel", "label": "Teléfono", "required": true, "help": "Con la característica, por ejemplo 342 4571609." },
+					{ "id": "domicilio", "type": "text", "label": "Domicilio", "required": true, "autocomplete": "street-address" },
+					{ "id": "barrio", "type": "text", "label": "Barrio", "required": true }
+				]
+			},
+			{
+				"id": "sede",
+				"title": "Instrumento y sede",
+				"fields": [
+					{ "id": "tipo", "type": "radio", "label": "¿Qué tipo de instrumento quiere aprender?", "required": true, "options": [
+						{ "value": "cuerdas", "label": "Cuerdas" }, { "value": "viento", "label": "Viento y percusión" }
+					] },
+					{ "id": "instrumento", "type": "text", "label": "¿Qué instrumento le gustaría tocar?", "help": "Si ya sabe cuál. Por ejemplo: violín, flauta o trompeta." },
+					{ "id": "sede", "type": "radio", "label": "Elegí la sede", "required": true, "help": "Te mostramos las sedes donde se enseña el tipo de instrumento que elegiste.", "show_if": { "any": [ { "field": "tipo", "op": "eq", "value": "cuerdas" }, { "field": "tipo", "op": "eq", "value": "viento" } ] }, "options": [
+						{ "value": "e38", "label": "Escuela N.º 38 «Brigadier General Estanislao López»", "link": "https://maps.app.goo.gl/jEa5sD6HUpfLZwgeA", "show_if": { "field": "tipo", "op": "eq", "value": "cuerdas" } },
+						{ "value": "e1317", "label": "Escuela N.º 1317 «Juan Manuel de Rosas»", "link": "https://maps.app.goo.gl/MiNN7iCdAWeQvK779", "show_if": { "field": "tipo", "op": "eq", "value": "cuerdas" } },
+						{ "value": "jesus_resucitado", "label": "Parroquia Jesús Resucitado", "link": "https://maps.app.goo.gl/WZMgWLwq2n4BTVJv7", "show_if": { "field": "tipo", "op": "eq", "value": "cuerdas" } },
+						{ "value": "e18", "label": "Escuela N.º 18 «Falucho»", "link": "https://maps.app.goo.gl/q8AyojiLCvyrYKXS9", "show_if": { "field": "tipo", "op": "eq", "value": "cuerdas" } },
+						{ "value": "caf24", "label": "CAF N.º 24, barrio Las Flores", "link": "https://maps.app.goo.gl/ngAaQz6iAUHutfCeA", "show_if": { "field": "tipo", "op": "eq", "value": "cuerdas" } },
+						{ "value": "cabana_leiva", "label": "Club Social y Deportivo Cabaña Leiva", "note": "Grandoli 8300", "link": "https://maps.app.goo.gl/hHisWwgmhPN1eBkC9", "show_if": { "field": "tipo", "op": "eq", "value": "cuerdas" } },
+						{ "value": "la_cumbia", "label": "Estación Municipal Santa Rosa de Lima, Mediateca «La Cumbia»", "link": "https://maps.app.goo.gl/8ysjjLpdCogm1G9i7", "show_if": { "field": "tipo", "op": "eq", "value": "viento" } },
+						{ "value": "e1225", "label": "Escuela N.º 1225 «Ceferino Namuncurá»", "note": "Solo para alumnos y exalumnos de la escuela", "link": "https://maps.app.goo.gl/4xDh2sKh72hEqmRu9", "show_if": { "field": "tipo", "op": "eq", "value": "viento" } }
+					] },
+					{ "id": "alumno_escuela", "type": "checkbox", "label": "La sede Escuela N.º 1225 es solo para su alumnado", "required": true, "show_if": { "field": "sede", "op": "eq", "value": "e1225" }, "options": [
+						{ "value": "si", "label": "Confirmo que es alumno, alumna o exalumno de la Escuela N.º 1225" }
+					] }
+				]
+			},
+			{
+				"id": "adulto",
+				"title": "Adulto responsable",
+				"description": "Como el alumno o alumna es menor de edad, necesitamos los datos de un adulto a cargo.",
+				"fields": [
+					{ "id": "adulto_nombre", "type": "text", "label": "Apellido y nombre", "required": true, "autocomplete": "name" },
+					{ "id": "adulto_dni", "type": "dni", "label": "DNI", "required": true, "help": "Solo números, sin puntos." },
+					{ "id": "vinculo", "type": "select", "label": "Vínculo con el alumno o alumna", "required": true, "options": [
+						{ "value": "madre", "label": "Madre" }, { "value": "padre", "label": "Padre" },
+						{ "value": "tutor", "label": "Tutor o tutora" }, { "value": "otro", "label": "Otro familiar" }
+					] }
+				]
+			}
+		],
+		"summary": [ "nombre", "edad", "tipo", "sede" ],
+		"notify_fields": [ "edad", "primera_vez", "tipo", "sede" ],
+		"email_field": "email",
+		"dni_field": "dni_alumno"
+	}
+}

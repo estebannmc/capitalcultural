@@ -70,6 +70,46 @@ Decisiones tomadas:
 | `sitio-nuevo/festival-disena-trayectoria.html` | **Festival Diseña, Historia y Trayectoria**: datos clave, línea de hitos, rubros, herramientas de apoyo y Expresiva |
 | `sitio-nuevo/festival-disena-formaciones.html` | **Festival Diseña, Formaciones**: ciclo en curso, archivo de clínicas plegado por año y los 15 disertantes con iniciales y CV en ventana |
 | `sitio-nuevo/festival-disena-docs.html` | **Festival Diseña, Documentación Oficial**: las 220 marcas seleccionadas con buscador y los siete PDF |
+| `plugins/cc-forms/` | **Plugin de formularios** propio, que reemplaza a Google Forms. Ver *Plugin de formularios* más abajo |
+| `plugins/dev/` | WordPress local en Docker para probar el plugin, con Astra y Mailpit |
+| `plugins/empaquetar.ps1` | Arma `dist/cc-forms-<versión>.zip` para subir el plugin desde el panel |
+| `docs/formularios/` | Vistas previas del formulario y del correo de confirmación, con la imagen actual del sitio |
+
+## Plugin de formularios (`plugins/cc-forms/`)
+
+Inscripciones y solicitudes por etapas, guardadas en el servidor de la Municipalidad. Requerimientos completos en el [documento de requerimientos](https://claude.ai/artifact/NCy7bjQNtccvktngpeKPLY).
+
+**Qué hace la versión 0.1.0 (MVP):**
+
+- Página propia en `/formularios/<enlace>`, con el encabezado y el pie del tema, imagen de encabezado 4:1 (y versión de celular opcional) y metadatos para redes.
+- Formulario por etapas: "Paso X de Y", Anterior y Siguiente, revisión final, lo escrito se recupera en el navegador durante un día.
+- Preguntas condicionales: mostrar u ocultar campos y etapas, y filtrar opciones (las sedes de SOMOS Música según el tipo de instrumento). El servidor vuelve a evaluar todo.
+- Aviso de la Ley 25.326 fijo, con casilla obligatoria. El texto base se edita en *Formularios → Ajustes* y cada respuesta guarda el texto que aceptó.
+- Vigencia por fechas o hasta cerrarlo a mano, cupo total seguro ante envíos simultáneos, duplicados por DNI o correo, antispam sin Google (campo trampa, tiempo mínimo y límite por conexión).
+- Correo de confirmación con la imagen del sitio y aviso inmediato al equipo, solo con el resumen y el enlace al panel. Salen por `wp_mail`, es decir, por WP Mail SMTP.
+- Panel: listado con búsqueda y fechas, ficha de cada respuesta, borrado a pedido, exportación CSV (para Excel: punto y coma y tildes bien) y registro de auditoría.
+- Roles: administradores de WordPress y "Administrador de formularios" manejan todo; "Responsable de área (formularios)" ve y exporta solo los formularios donde está asignado.
+- Plantillas: SOMOS Música y visita guiada.
+
+**Tablas:** el prefijo del sitio es `cc_`, así que quedan `cc_ccf_forms`, `cc_ccf_form_versions`, `cc_ccf_entries`, `cc_ccf_quotas`, `cc_ccf_mail_log` y `cc_ccf_audit_log`. Desinstalar el plugin no borra respuestas.
+
+**Probar en local** (Docker Desktop abierto):
+
+```bash
+cd plugins/dev && docker compose up -d && sh instalar.sh
+```
+
+El sitio queda en http://localhost:8080 (usuarios de prueba en `plugins/dev/instalar.sh`) y los correos se ven en http://localhost:8025. Astra se copia del backup a `plugins/dev/temas/`, que no va a git.
+
+**Pruebas del esquema** (validación y condicionales, sin WordPress):
+
+```bash
+cd plugins/cc-forms && docker run --rm -v "$PWD":/app -w /app php:8.1-cli php tests/run.php
+```
+
+**Subir al sitio:** `pwsh plugins/empaquetar.ps1` y después *Plugins → Añadir nuevo → Subir plugin* con el ZIP de `dist/`.
+
+**Falta para las etapas siguientes:** cupo por opción y lista de espera, estados de cada respuesta, resumen al cierre con cron del servidor, carga de archivos, constructor visual, QR, widget de Elementor y base de artistas.
 
 ### Huellas de mi Ciudad: lo que queda a mano
 
