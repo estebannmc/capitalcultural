@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Capital Cultural Agenda
  * Description: Muestra los eventos de la agenda institucional (agenda.santafeciudad.gov.ar) en Capital Cultural. Usar shortcode [capital_agenda].
- * Version: 1.5.0
+ * Version: 1.6.0
  * Author: Esteban
  * Text Domain: capital-cultural-agenda
  */
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class Capital_Cultural_Agenda {
-    const VERSION = '1.5.0';
+    const VERSION = '1.6.0';
     const OPTION = 'cca_settings';
     const STATUS_OPTION = 'cca_status';
     const LAST_GOOD_OPTION = 'cca_last_good';
@@ -21,6 +21,7 @@ final class Capital_Cultural_Agenda {
     const REFRESH_ACTION = 'cca_refresh';
     const CRON_HOOK = 'cca_cron_refresh';
     const HOME_CATEGORY = 'Cultura';
+    const PROPUESTAS_KEY = 'cca_propuestas';
     const RETRY_MINUTES = 10;
     const MAX_EVENTS = 60;
 
@@ -39,6 +40,7 @@ final class Capital_Cultural_Agenda {
         add_filter('cron_schedules', [$this, 'cron_schedules']);
         add_action('init', [$this, 'schedule_refresh']);
         add_action(self::CRON_HOOK, [$this, 'cron_refresh']);
+        add_action('save_post_cc_propuesta', [$this, 'clear_propuestas']);
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), [$this, 'action_links']);
     }
 
@@ -345,6 +347,7 @@ final class Capital_Cultural_Agenda {
      */
     private function visible_events($events) {
         $settings = $this->settings();
+        $propuestas = $this->propuestas();
         $now = time();
         $out = [];
         foreach ($events as $event) {
@@ -352,6 +355,7 @@ final class Capital_Cultural_Agenda {
                 continue;
             }
             $event['inicio'] = $this->on_home($event, $settings);
+            $event['cc_url'] = $propuestas[$this->normalize($event['title'])] ?? '';
             if (!$event['inicio'] && $this->is_home_category($event)) {
                 continue;
             }
@@ -374,6 +378,78 @@ final class Capital_Cultural_Agenda {
             return !array_intersect($keys, $this->key_list($settings['ocultos']));
         }
         return (bool) array_intersect($keys, $this->key_list($settings['mostrar']));
+    }
+
+    /**
+     * Las propuestas del plugin de Programación, por título normalizado: la dirección de
+     * su ficha, que es la página del espacio con #ccp-propuesta-ID (esa ancla abre la
+     * ficha). Si hay dos con el mismo título, gana la más nueva. Se guarda una hora y se
+     * borra cuando se guarda una propuesta.
+     */
+    private function propuestas() {
+        $map = get_transient(self::PROPUESTAS_KEY);
+        if (is_array($map)) {
+            return $map;
+        }
+        $map = [];
+        $shortcodes = 'CapitalCultural\Programacion\CCP_Shortcodes';
+        if (post_type_exists('cc_propuesta') && class_exists($shortcodes)) {
+            $tags = $shortcodes::space_shortcode_tags();
+            $pages = [];
+            $ids = get_posts([
+                'post_type'   => 'cc_propuesta',
+                'post_status' => 'publish',
+                'numberposts' => -1,
+                'orderby'     => 'date',
+                'order'       => 'DESC',
+                'fields'      => 'ids',
+            ]);
+            update_object_term_cache($ids, 'cc_propuesta');
+            foreach ($ids as $id) {
+                $key = $this->normalize(html_entity_decode(get_post_field('post_title', $id), ENT_QUOTES, 'UTF-8'));
+                if ($key === '' || isset($map[$key])) {
+                    continue;
+                }
+                $terms = get_the_terms($id, 'cc_espacio');
+                foreach (is_array($terms) ? $terms : [] as $term) {
+                    if (empty($tags[$term->slug])) {
+                        continue;
+                    }
+                    if (!array_key_exists($term->slug, $pages)) {
+                        $pages[$term->slug] = $this->space_page($tags[$term->slug]);
+                    }
+                    if ($pages[$term->slug] !== '') {
+                        $map[$key] = $pages[$term->slug] . '#ccp-propuesta-' . $id;
+                        break;
+                    }
+                }
+            }
+        }
+        set_transient(self::PROPUESTAS_KEY, $map, HOUR_IN_SECONDS);
+        return $map;
+    }
+
+    /**
+     * La página publicada más vieja que lleva el shortcode del espacio, por ejemplo
+     * [sorjosefa], en su contenido o en los datos de Elementor.
+     */
+    private function space_page($tag) {
+        global $wpdb;
+        $exact = '%' . $wpdb->esc_like('[' . $tag . ']') . '%';
+        $with_atts = '%' . $wpdb->esc_like('[' . $tag . ' ') . '%';
+        $id = $wpdb->get_var($wpdb->prepare(
+            "SELECT p.ID FROM {$wpdb->posts} p
+             LEFT JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_elementor_data'
+             WHERE p.post_type = 'page' AND p.post_status = 'publish'
+               AND (p.post_content LIKE %s OR p.post_content LIKE %s OR m.meta_value LIKE %s OR m.meta_value LIKE %s)
+             ORDER BY p.ID LIMIT 1",
+            $exact, $with_atts, $exact, $with_atts
+        ));
+        return $id ? (string) get_permalink((int) $id) : '';
+    }
+
+    public function clear_propuestas() {
+        delete_transient(self::PROPUESTAS_KEY);
     }
 
     private function event_key($event) {

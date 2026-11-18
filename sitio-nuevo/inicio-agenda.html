@@ -1,13 +1,14 @@
 <style>
   /* Carrusel: con más de 4 tarjetas la fila se desliza de costado, como el bloque del plugin de agenda.
-     El relleno deja ver la sombra y el salto del hover, que el desplazamiento recortaría. */
+     El relleno de arriba y abajo deja ver la sombra y el salto del hover; a los costados no lleva, para
+     que las tarjetas llenen justo el ancho y no asome la de al lado. */
   .cci.cci-carrusel .cci-escenario { position: relative; }
   .cci.cci-carrusel .cci-fila {
     display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-    margin: -8px -8px 0; padding: 8px 8px 22px; scroll-padding-inline: 8px;
+    margin-top: -8px; padding: 8px 0 22px;
   }
   .cci.cci-carrusel .cci-fila::-webkit-scrollbar { display: none; }
-  .cci.cci-carrusel .cci-fila > li { flex: 0 0 calc((100% - 16px - 3 * 14px) / 4); scroll-snap-align: start; }
+  .cci.cci-carrusel .cci-fila > li { flex: 0 0 calc((100% - 3 * 14px) / 4); scroll-snap-align: start; }
   .cci .cci-nav {
     position: absolute; top: var(--cci-nav-top, 30%); z-index: 1; transform: translateY(-50%);
     display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
@@ -28,23 +29,16 @@
     .cci .cci-nav:hover, .cci .cci-pausa:hover { background: var(--azul); color: #fff; }
   }
   @media (max-width: 1024px) {
-    .cci.cci-carrusel .cci-fila > li { flex-basis: calc((100% - 16px - 2 * 14px) / 3); }
+    .cci.cci-carrusel .cci-fila > li { flex-basis: calc((100% - 2 * 14px) / 3); }
   }
-  /* En el celular se desliza con el dedo: sin flechas, y la fila llega a los bordes como antes. */
+  /* En el celular se desliza con el dedo: sin flechas, y la fila llega a los bordes como antes.
+     La separación es igual al margen, así la tarjeta anterior queda justo afuera. */
   @media (max-width: 640px) {
-    .cci.cci-carrusel .cci-fila { margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
+    .cci.cci-carrusel .cci-fila { gap: 16px; margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
     .cci.cci-carrusel .cci-fila > li { flex-basis: 76%; }
     .cci .cci-nav { display: none; }
   }
 </style>
-
-<section class="cci" id="en-exhibicion" aria-labelledby="cci-muestras-t">
-  <div class="cci-cabeza">
-    <h2 class="cci-titulo" id="cci-muestras-t"><span class="cci-barra" aria-hidden="true"></span>En exhibición</h2>
-    <a class="cci-mas" href="/capitalcultural/museos-y-salas/">Museos y salas</a>
-  </div>
-  <ul class="cci-fila" data-cci="muestras" aria-busy="true"><li class="cci-aviso">Cargando las muestras…</li></ul>
-</section>
 
 <section class="cci" id="agenda" aria-labelledby="cci-agenda-t">
   <div class="cci-cabeza">
@@ -58,10 +52,9 @@
 (function () {
   var AGENDA = 'https://agenda.santafeciudad.gov.ar/';
   var TZ = 'America/Argentina/Buenos_Aires';
-  var MAX = 8;
+  var MAX = 12;
   var agenda = document.querySelector('[data-cci="agenda"]');
-  var muestras = document.querySelector('[data-cci="muestras"]');
-  if (!agenda || !muestras) return;
+  if (!agenda) return;
 
   var parte = function (ts, opts) { return new Intl.DateTimeFormat('es-AR', Object.assign({ timeZone: TZ }, opts)).format(ts * 1000).replace('.', ''); };
   var dia = function (ts) { return parte(ts, { year: 'numeric', month: '2-digit', day: '2-digit' }); };
@@ -85,22 +78,24 @@
   var esGratis = function (e) { return /\b(gratis|gratuit[oa]|entrada libre)\b/.test(norm((e.categories || []).join(' ') + ' ' + e.kicker + ' ' + e.title)); };
   var esc = function (s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
 
+  // Las propuestas de Capital Cultural traen «cc_url» (plugin de agenda 1.6.0): la ficha en la página del
+  // espacio, en la misma pestaña. El resto va a la agenda municipal, en otra.
   var tarjeta = function (e, linea, extra) {
-    var marcas = (e.kicker && !esMuestra(e) ? '<span class="cci-marca">' + esc(e.kicker) + '</span>' : '') +
+    var marcas = (e.kicker ? '<span class="cci-marca">' + esc(e.kicker) + '</span>' : '') +
       (esGratis(e) ? '<span class="cci-marca cci-marca--gratis">Gratis</span>' : '');
-    return '<li><a class="cci-card" href="' + esc(e.url) + '" target="_blank" rel="noopener">' +
+    return '<li><a class="cci-card" href="' + esc(e.cc_url || e.url) + '"' + (e.cc_url ? '' : ' target="_blank" rel="noopener"') + '>' +
       '<span class="cci-media">' + (e.image ? '<img src="' + esc(e.image) + '" alt="' + esc(e.title) + '" loading="lazy" decoding="async">' : '') +
       (marcas ? '<span class="cci-marcas">' + marcas + '</span>' : '') + '</span>' +
       '<span class="cci-cuerpo"><h3 class="cci-nombre">' + esc(e.title) + '</h3>' +
       '<span class="cci-cuando">' + esc(linea) + '</span>' +
       (e.venue ? '<span class="cci-donde">' + esc(e.venue) + '</span>' : '') + (extra || '') +
-      '</span><span class="screen-reader-text">(se abre en la agenda)</span></a></li>';
+      '</span>' + (e.cc_url ? '' : '<span class="screen-reader-text">(se abre en la agenda)</span>') + '</a></li>';
   };
   var aviso = function (ul, texto) {
     ul.innerHTML = '<li class="cci-aviso">' + texto + ' <a href="' + AGENDA + '" target="_blank" rel="noopener">Mirá la agenda completa</a>.</li>';
   };
   // Al llegar con un #ancla del menú: salto sin animación (el tema pone scroll-behavior: smooth y el salto
-  // animado de la carga no siempre llega) y otra vez cuando cargan las muestras, que empujan lo de abajo,
+  // animado de la carga no siempre llega) y otra vez cuando carga la agenda, que empuja lo de abajo,
   // salvo que la persona ya haya movido la página.
   var hash = location.hash.slice(1), yAncla = null;
   var irAlAncla = function () {
@@ -113,7 +108,7 @@
     yAncla = window.scrollY;
   };
   window.addEventListener('load', irAlAncla);
-  var listo = function () { agenda.removeAttribute('aria-busy'); muestras.removeAttribute('aria-busy'); irAlAncla(); };
+  var listo = function () { agenda.removeAttribute('aria-busy'); irAlAncla(); };
 
   fetch('/capitalcultural/wp-admin/admin-ajax.php?action=cca_eventos', { credentials: 'same-origin' })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -124,32 +119,25 @@
         .filter(function (e) { return e.end > ahora && ('inicio' in e ? e.inicio : (e.categories || []).indexOf('Cultura') !== -1); })
         .sort(function (a, b) { return a.start - b.start; });
 
+      // Muestras y actividades van juntas, por fecha de inicio: las muestras abiertas quedan primero.
       // Un evento con varias fechas se muestra una vez, con la primera fecha y «Más fechas».
       var grupos = [], porClave = {};
-      eventos.filter(function (e) { return !esMuestra(e); }).forEach(function (e) {
+      eventos.forEach(function (e) {
         var k = norm(e.title) + '|' + norm(e.venue);
         if (porClave[k]) porClave[k].push(e); else grupos.push(porClave[k] = [e]);
       });
       agenda.innerHTML = grupos.slice(0, MAX).map(function (g) {
+        if (esMuestra(g[0])) return tarjeta(g[0], 'Hasta el ' + fecha(fin(g[0])));
         var ultimo = Math.max.apply(null, g.map(fin));
         var mas = g.length > 1 ? '<span class="cci-fechas">Más fechas hasta el ' + esc(fecha(ultimo)) + '</span>' : '';
         return tarjeta(g[0], cuando(g[0]), mas);
       }).join('');
       if (!grupos.length) aviso(agenda, 'No hay actividades cargadas para los próximos días.');
-
-      // Las muestras van sólo en «En exhibición», ordenadas por la que cierra antes.
-      var enMuestra = eventos.filter(esMuestra).sort(function (a, b) { return a.end - b.end; });
-      muestras.innerHTML = enMuestra.slice(0, MAX).map(function (e) {
-        return tarjeta(e, 'Hasta el ' + fecha(fin(e)));
-      }).join('');
-      if (!enMuestra.length) aviso(muestras, 'No hay muestras cargadas en este momento.');
       carrusel(agenda);
-      carrusel(muestras);
       listo();
     })
     .catch(function () {
       aviso(agenda, 'No pudimos cargar la agenda.');
-      muestras.closest('section').hidden = true;
       listo();
     });
 
