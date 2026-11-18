@@ -1,0 +1,439 @@
+/* Lista editorial de noticias, con los tokens del plugin Capital Cultural Agenda (.cca-*).
+   Sistema visual Capital Cultural (docs/sistema-visual.html del repo estilosCC).
+   Toma los tokens del child theme si están cargados; si no, usa los mismos valores.
+   Sin verde: quedó fuera del sistema.
+
+   Los colores de links y botones llevan !important porque el Kit de Elementor
+   (Estilo del tema → Enlaces) pinta de verde todos los a:hover del sitio. */
+.ccn-noticias {
+  --ccn-azul: var(--sf-azul-01, #002751);
+  --ccn-azul-hover: #00325f;
+  --ccn-rojo: var(--sf-rojo, #e63312);
+  --ccn-topico: var(--topico, var(--ccn-rojo));
+  --ccn-blanco: var(--sf-blanco, #ffffff);
+  --ccn-gris-20: var(--sf-gris-20, #dadad9);
+  --ccn-gris-75: var(--sf-gris-75, #606060);
+  --ccn-borde: var(--border, rgba(0, 39, 81, .12));
+  --ccn-degrade: var(--sf-degrade, linear-gradient(105deg, #57b8e9 0%, #2f86c0 38%, #10508a 72%, #002751 100%));
+  --ccn-font: var(--font-texto, "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --ccn-angulo: var(--trama-angulo, 15deg);
+  --ccn-radio: var(--r-md, 18px);
+  --ccn-ease: var(--ease-out, cubic-bezier(.16, 1, .3, 1));
+  --ccn-filete: rgba(0, 39, 81, .18);
+  --ccn-cols: 3;
+  --ccn-foto: 112px;
+  margin: 0 auto;
+  font-family: var(--ccn-font);
+  color: var(--ccn-azul);
+}
+
+/* Título a la izquierda; flechas y botón a la derecha, en la misma línea. */
+.ccn-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  margin-bottom: 24px;
+}
+
+/* La barra del logo, pegada al título y del tamaño del título. */
+.ccn-noticias .ccn-title {
+  margin: 0;
+  font-family: var(--ccn-font);
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--ccn-azul);
+  text-wrap: balance;
+}
+
+.ccn-barra {
+  display: inline-block;
+  width: .24em;
+  height: .78em;
+  margin-right: .48em;
+  background: var(--ccn-topico);
+  transform: skewX(calc(-1 * var(--ccn-angulo)));
+}
+
+.ccn-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* Las páginas van una encima de otra en la misma celda, así el bloque toma el
+   alto de la más alta. La que sale se desvanece y recién después aparece la
+   nueva, con un leve desplazamiento hacia arriba. */
+.ccn-pages {
+  display: grid;
+}
+
+.ccn-page {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+
+.ccn-page.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity .45s ease .25s, transform .45s var(--ccn-ease) .25s, visibility 0s linear .25s;
+}
+
+/* ---------------------------------------------------------------------------
+   Grilla: tres columnas, cada noticia con la foto a la izquierda y el texto
+   a la derecha, separadas por un filete fino como en un diario.
+   ------------------------------------------------------------------------ */
+
+.ccn-list {
+  display: grid;
+  grid-template-columns: repeat(var(--ccn-cols), minmax(0, 1fr));
+  gap: 26px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ccn-item {
+  min-width: 0;
+  margin: 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--ccn-filete);
+}
+
+.ccn-card {
+  display: grid;
+  grid-template-columns: var(--ccn-foto) minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+/* Sin imágenes, el texto ocupa todo el ancho. */
+.ccn-card--text {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ccn-noticias .ccn-card,
+.ccn-noticias .ccn-card:hover,
+.ccn-noticias .ccn-card:focus,
+.ccn-noticias .ccn-card:visited {
+  color: var(--ccn-azul) !important;
+  text-decoration: none !important;
+}
+
+.ccn-noticias a.ccn-card:focus-visible {
+  outline: 3px solid var(--ccn-rojo);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.ccn-media {
+  display: block;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--ccn-gris-20);
+}
+
+/* El tema fuerza img { height: auto }. */
+.ccn-noticias .ccn-media img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  object-fit: cover !important;
+  transition: transform .6s var(--ccn-ease);
+}
+
+/* Sin foto: el degradé de transición hace de fondo. */
+.ccn-media--empty {
+  background: var(--ccn-degrade);
+}
+
+.ccn-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ccn-date {
+  display: block;
+  color: var(--ccn-gris-75);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .02em;
+}
+
+.ccn-noticias .ccn-name {
+  display: -webkit-box;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: var(--ccn-azul) !important;
+  font-family: var(--ccn-font);
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.ccn-excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: var(--ccn-gris-75);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@media (hover: hover) {
+  .ccn-noticias a.ccn-card:hover .ccn-media img {
+    transform: scale(1.04);
+  }
+
+  .ccn-noticias a.ccn-card:hover .ccn-name {
+    text-decoration: underline !important;
+    text-decoration-color: var(--ccn-rojo) !important;
+    text-decoration-thickness: 2px !important;
+    text-underline-offset: 3px;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+
+.ccn-message {
+  margin: 8px 0 0;
+  padding: 22px;
+  border-radius: var(--ccn-radio);
+  background: rgba(255, 255, 255, .6);
+  box-shadow: inset 0 0 0 1px var(--ccn-borde);
+  color: var(--ccn-gris-75);
+  text-align: center;
+}
+
+.ccn-message[hidden] {
+  display: none;
+}
+
+/* Flechas de página: botón línea del sistema, del alto del botón principal. */
+.ccn-pager {
+  display: flex;
+  gap: 8px;
+}
+
+.ccn-pager[hidden] {
+  display: none;
+}
+
+.ccn-noticias .ccn-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent !important;
+  box-shadow: inset 0 0 0 1.5px var(--ccn-azul);
+  color: var(--ccn-azul) !important;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+.ccn-noticias .ccn-arrow svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+@media (hover: hover) {
+  .ccn-noticias .ccn-arrow:hover:not(:disabled) {
+    background: var(--ccn-azul) !important;
+    color: var(--ccn-blanco) !important;
+  }
+}
+
+/* Al principio o al final: Gris 75 sobre Gris 20, sin opacity. */
+.ccn-noticias .ccn-arrow:disabled {
+  background: var(--ccn-gris-20) !important;
+  box-shadow: none;
+  color: var(--ccn-gris-75) !important;
+  cursor: not-allowed;
+}
+
+/* Botón primario del sistema: Azul 01, barra roja, radio 10px, 44px de alto. */
+.ccn-noticias a.ccn-more,
+.ccn-noticias a.ccn-more:visited {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55em;
+  min-height: 44px;
+  padding: 0 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--ccn-azul);
+  box-shadow: 0 8px 20px -10px rgba(0, 39, 81, .55);
+  color: var(--ccn-blanco) !important;
+  -webkit-text-fill-color: var(--ccn-blanco) !important;
+  font: 600 15px/1 var(--ccn-font);
+  letter-spacing: .01em;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background-color .2s ease, transform .12s var(--ccn-ease);
+}
+
+.ccn-noticias a.ccn-more:hover,
+.ccn-noticias a.ccn-more:focus {
+  color: var(--ccn-blanco) !important;
+  -webkit-text-fill-color: var(--ccn-blanco) !important;
+  text-decoration: none !important;
+}
+
+.ccn-more .ccn-barra {
+  width: .26em;
+  height: 1.05em;
+  margin-right: 0;
+  background: var(--ccn-rojo);
+}
+
+.ccn-external {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+}
+
+/* Barrido de luz en el ángulo de marca. */
+.ccn-noticias a.ccn-more::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 38%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .3), transparent);
+  transform: skewX(calc(-1 * var(--ccn-angulo)));
+  transition: left .6s var(--ccn-ease);
+}
+
+@media (hover: hover) {
+  .ccn-noticias a.ccn-more:hover {
+    background: var(--ccn-azul-hover);
+  }
+
+  .ccn-noticias a.ccn-more:hover::after {
+    left: 135%;
+  }
+}
+
+.ccn-noticias a.ccn-more:active {
+  transform: translateY(1px);
+}
+
+/* Foco: anillo rojo con halo blanco, igual que los botones del sistema. */
+.ccn-noticias a.ccn-more:focus-visible,
+.ccn-noticias button:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--ccn-blanco), 0 0 0 5px var(--ccn-rojo);
+}
+
+.ccn-noticias .screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ccn-skeleton .ccn-body span {
+  display: block;
+  height: 11px;
+  border-radius: 3px;
+  background: var(--ccn-gris-20);
+}
+
+.ccn-skeleton .ccn-body span:nth-child(1) { width: 45%; }
+.ccn-skeleton .ccn-body span:nth-child(2) { width: 95%; height: 32px; }
+.ccn-skeleton .ccn-body span:nth-child(3) { width: 80%; height: 30px; }
+
+.ccn-skeleton .ccn-media,
+.ccn-skeleton .ccn-body span {
+  animation: ccnPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes ccnPulse {
+  50% { opacity: .55; }
+}
+
+/* Tablet: dos columnas. */
+@media (max-width: 1024px) {
+  .ccn-noticias {
+    --ccn-cols: 2;
+    --ccn-foto: 112px;
+  }
+}
+
+/* Celular: una columna; flechas y botón pasan abajo del título y, si no
+   entran juntos, el botón baja entero a la línea siguiente. */
+@media (max-width: 640px) {
+  .ccn-noticias {
+    --ccn-cols: 1;
+    --ccn-foto: 96px;
+  }
+
+  .ccn-list {
+    gap: 18px;
+  }
+
+  .ccn-item {
+    padding-top: 18px;
+  }
+
+  .ccn-actions {
+    flex-wrap: wrap;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ccn-page,
+  .ccn-page.is-active,
+  .ccn-noticias .ccn-arrow,
+  .ccn-noticias .ccn-media img,
+  .ccn-noticias a.ccn-more {
+    transition: none;
+  }
+
+  .ccn-noticias a.ccn-card:hover .ccn-media img {
+    transform: none;
+  }
+
+  .ccn-noticias a.ccn-more::after {
+    display: none;
+  }
+
+  .ccn-skeleton .ccn-media,
+  .ccn-skeleton .ccn-body span {
+    animation: none;
+  }
+}
