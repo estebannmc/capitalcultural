@@ -1,0 +1,83 @@
+.cca-admin {
+  max-width: 1180px;
+}
+
+.cca-admin-intro {
+  max-width: 68ch;
+  font-size: 14px;
+}
+
+.cca-admin-panel {
+  margin: 20px 0;
+  padding: 4px 24px 20px;
+  border: 1px solid #dcdcde;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.cca-admin-panel > h2 {
+  margin-top: 18px;
+}
+
+.cca-check {
+  display: block;
+  margin: 0 0 8px;
+}
+
+.cca-count {
+  margin-left: 4px;
+  color: #646970;
+  font-size: 12px;
+}
+
+.cca-output {
+  margin: 8px 0 4px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #f4f4f3;
+}
+
+.cca-output > label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.cca-output-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cca-output-row input {
+  flex: 1 1 320px;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.cca-copy-feedback {
+  min-height: 1.4em;
+  margin: 8px 0 0;
+  color: #002751;
+  font-weight: 600;
+}
+
+/* La vista previa sobre el mismo fondo que usa el sitio. */
+.cca-preview {
+  margin-top: 12px;
+  padding: 28px;
+  border-radius: 8px;
+  background: #f4f4f3;
+}
+
+.cca-status {
+  max-width: 760px;
+}
+
+.cca-status th {
+  width: 180px;
+}
+
+.cca-refresh {
+  margin-top: 12px;
+}
