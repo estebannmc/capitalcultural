@@ -1,6 +1,6 @@
 """Arma docs/inicio-preview.html: la home publicada con los widgets de sitio-nuevo/ en su lugar.
 
-Baja la home, la agenda y las noticias del día y deja todo en un solo archivo que se abre
+Baja la home y la agenda del día y deja todo en un solo archivo que se abre
 en cualquier navegador. Uso, desde la raíz del repo: python docs/build-inicio-preview.py
 """
 import re
@@ -20,7 +20,6 @@ def bajar(ruta):
 nuevo = repo / 'sitio-nuevo'
 html = bajar('')
 cca = bajar('wp-admin/admin-ajax.php?action=cca_eventos')
-ccn = bajar('wp-admin/admin-ajax.php?action=ccn_noticias')
 leer = lambda n: (nuevo / n).read_text(encoding='utf-8')
 
 # Rocket Loader de Cloudflare no corre fuera del sitio: los scripts vuelven a ser normales.
@@ -57,6 +56,9 @@ ids = ['b74bfbd', '5380a0a', '86b3116', '605bd05', '732d9a5', '78fc948', '7beab5
 assert all(i in s for i in ids), [i for i in ids if i not in s]
 trozo = lambda i: html[s[i][0]:s[i][1]]
 noticias = trozo('78fc948')
+# La sección de Noticias se queda con sus márgenes de Elementor; el shortcode del plugin se cambia por el widget.
+noticias = re.sub(r'<section class="ccn-noticias".*?</section>', lambda m: leer('inicio-noticias.html'), noticias, count=1, flags=re.S)
+assert 'data-noticias-directo' in noticias
 if 'id="noticias"' not in noticias[:300]:
     noticias = noticias.replace('<section ', '<section id="noticias" ', 1)
 
@@ -73,14 +75,14 @@ cuerpo = ''.join([
 ini, fin = s['b74bfbd'][0], s['7beab50'][1]
 html = html[:ini] + cuerpo + html[fin:]
 
-# Las llamadas a admin-ajax devuelven la foto de la agenda y las noticias del día en que se armó.
+# La llamada a admin-ajax devuelve la foto de la agenda del día en que se armó. Las noticias se leen en vivo de santafenoticias.gob.ar.
 shim = f'''<base href="https://www.santafeciudad.gov.ar/capitalcultural/">
 <script>
 (function () {{
-  var datos = {{ cca_eventos: {cca}, ccn_noticias: {ccn} }};
+  var datos = {{ cca_eventos: {cca} }};
   var original = window.fetch;
   window.fetch = function (url, opts) {{
-    var m = String(url).match(/action=(cca_eventos|ccn_noticias)/);
+    var m = String(url).match(/action=(cca_eventos)/);
     if (m) return Promise.resolve(new Response(JSON.stringify(datos[m[1]]), {{ headers: {{ 'Content-Type': 'application/json' }} }}));
     return original.apply(this, arguments);
   }};
