@@ -1,3 +1,43 @@
+<style>
+  /* Carrusel: con más de 4 tarjetas la fila se desliza de costado, como el bloque del plugin de agenda.
+     El relleno deja ver la sombra y el salto del hover, que el desplazamiento recortaría. */
+  .cci.cci-carrusel .cci-escenario { position: relative; }
+  .cci.cci-carrusel .cci-fila {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: -8px -8px 0; padding: 8px 8px 22px; scroll-padding-inline: 8px;
+  }
+  .cci.cci-carrusel .cci-fila::-webkit-scrollbar { display: none; }
+  .cci.cci-carrusel .cci-fila > li { flex: 0 0 calc((100% - 16px - 3 * 14px) / 4); scroll-snap-align: start; }
+  .cci .cci-nav {
+    position: absolute; top: var(--cci-nav-top, 30%); z-index: 1; transform: translateY(-50%);
+    display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
+    background: #fff; color: var(--azul); box-shadow: 0 6px 18px -6px rgba(0, 39, 81, .45); cursor: pointer;
+  }
+  .cci .cci-nav svg, .cci .cci-pausa svg { width: 20px; height: 20px; }
+  .cci .cci-ant { left: -10px; }
+  .cci .cci-sig { right: -10px; }
+  .cci .cci-controles { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 4px; }
+  .cci .cci-pausa {
+    display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 8px;
+    background: transparent; box-shadow: inset 0 0 0 1.5px var(--azul); color: var(--azul); cursor: pointer;
+  }
+  .cci .cci-puntos { display: flex; gap: 6px; }
+  .cci .cci-punto { width: 8px; height: 8px; border-radius: 4px; background: var(--gris-20); cursor: pointer; transition: width .3s var(--curva), background-color .3s; }
+  .cci .cci-punto.es-actual { width: 26px; background: var(--rojo); }
+  @media (hover: hover) {
+    .cci .cci-nav:hover, .cci .cci-pausa:hover { background: var(--azul); color: #fff; }
+  }
+  @media (max-width: 1024px) {
+    .cci.cci-carrusel .cci-fila > li { flex-basis: calc((100% - 16px - 2 * 14px) / 3); }
+  }
+  /* En el celular se desliza con el dedo: sin flechas, y la fila llega a los bordes como antes. */
+  @media (max-width: 640px) {
+    .cci.cci-carrusel .cci-fila { margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
+    .cci.cci-carrusel .cci-fila > li { flex-basis: 76%; }
+    .cci .cci-nav { display: none; }
+  }
+</style>
+
 <section class="cci" id="en-exhibicion" aria-labelledby="cci-muestras-t">
   <div class="cci-cabeza">
     <h2 class="cci-titulo" id="cci-muestras-t"><span class="cci-barra" aria-hidden="true"></span>En exhibición</h2>
@@ -103,6 +143,8 @@
         return tarjeta(e, 'Hasta el ' + fecha(fin(e)));
       }).join('');
       if (!enMuestra.length) aviso(muestras, 'No hay muestras cargadas en este momento.');
+      carrusel(agenda);
+      carrusel(muestras);
       listo();
     })
     .catch(function () {
@@ -111,18 +153,95 @@
       listo();
     });
 
-  // shortcut: el plugin de noticias deja las fotos con alt vacío; se completa con el título hasta corregirlo en el plugin.
-  var conAlt = function (root) {
-    root.querySelectorAll('.ccn-card img:not([alt]), .ccn-card img[alt=""]').forEach(function (img) {
-      var t = img.closest('.ccn-card').querySelector('.ccn-name');
-      if (t) img.alt = t.textContent.trim();
+  // Con más de 4 tarjetas la fila pasa a carrusel, como el bloque del plugin: flechas, puntos y pausa,
+  // y avanza sola cada 5 s salvo con el mouse encima, el foco de teclado adentro o el dedo en la fila.
+  // Es la fila con desplazamiento del navegador: también se mueve con el dedo, el trackpad o Tab.
+  function carrusel(ul) {
+    var items = ul.children;
+    if (items.length <= 4) return;
+    var reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var pausado = reducir, frenos = { mouse: false, foco: false, dedo: false };
+    var icono = function (d, relleno) {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' + d + '" ' +
+        (relleno ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"') + '/></svg>';
+    };
+    var boton = function (clase, etiqueta, html) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = clase; b.innerHTML = html;
+      if (etiqueta) b.setAttribute('aria-label', etiqueta);
+      return b;
+    };
+    var escenario = document.createElement('div');
+    escenario.className = 'cci-escenario';
+    ul.parentNode.insertBefore(escenario, ul);
+    escenario.appendChild(ul);
+    var ant = boton('cci-nav cci-ant', 'Anteriores', icono('M15 6l-6 6 6 6'));
+    var sig = boton('cci-nav cci-sig', 'Siguientes', icono('M9 6l6 6-6 6'));
+    escenario.appendChild(ant);
+    escenario.appendChild(sig);
+    var controles = document.createElement('div');
+    controles.className = 'cci-controles';
+    var pausa = boton('cci-pausa');
+    var puntos = document.createElement('span');
+    puntos.className = 'cci-puntos';
+    puntos.setAttribute('aria-hidden', 'true');
+    controles.appendChild(pausa);
+    controles.appendChild(puntos);
+    escenario.parentNode.insertBefore(controles, escenario.nextSibling);
+    ul.closest('.cci').classList.add('cci-carrusel');
+
+    // Con decimales: offsetLeft redondea y el error se acumula tarjeta a tarjeta.
+    var paso = function () { return items[1].getBoundingClientRect().left - items[0].getBoundingClientRect().left; };
+    var ultimo = function () { return Math.max(0, Math.round((ul.scrollWidth - ul.clientWidth) / paso())); };
+    var actual = function () { return Math.round(ul.scrollLeft / paso()); };
+    var ir = function (i) {
+      var u = ultimo();
+      ul.scrollTo({ left: (i > u ? 0 : i < 0 ? u : i) * paso(), behavior: reducir ? 'auto' : 'smooth' });
+    };
+    var marcar = function () {
+      var a = actual();
+      Array.prototype.forEach.call(puntos.children, function (p, i) { p.classList.toggle('es-actual', i === a); });
+    };
+    var medir = function () {
+      var u = ultimo();
+      if (puntos.children.length !== u + 1) {
+        puntos.innerHTML = new Array(u + 2).join('<span class="cci-punto"></span>');
+      }
+      // Las flechas quedan a media altura de la foto.
+      var foto = ul.querySelector('.cci-media');
+      if (foto) escenario.style.setProperty('--cci-nav-top', (foto.getBoundingClientRect().top - escenario.getBoundingClientRect().top + foto.offsetHeight / 2) + 'px');
+      marcar();
+    };
+    var mostrarPausa = function () {
+      pausa.setAttribute('aria-label', pausado ? 'Reanudar el carrusel' : 'Pausar el carrusel');
+      pausa.setAttribute('aria-pressed', pausado ? 'true' : 'false');
+      pausa.innerHTML = pausado ? icono('M8 5.5v13l10.5-6.5z', true) : icono('M7 5h3.5v14H7zM13.5 5H17v14h-3.5z', true);
+    };
+
+    ant.addEventListener('click', function () { ir(actual() - 1); });
+    sig.addEventListener('click', function () { ir(actual() + 1); });
+    pausa.addEventListener('click', function () { pausado = !pausado; mostrarPausa(); });
+    puntos.addEventListener('click', function (e) {
+      var i = Array.prototype.indexOf.call(puntos.children, e.target);
+      if (i >= 0) ir(i);
     });
-  };
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('[data-ccn-noticias]').forEach(function (n) {
-      conAlt(n);
-      new MutationObserver(function () { conAlt(n); }).observe(n, { childList: true, subtree: true });
-    });
-  });
+    var cuadro = 0;
+    ul.addEventListener('scroll', function () { cancelAnimationFrame(cuadro); cuadro = requestAnimationFrame(marcar); }, { passive: true });
+    escenario.addEventListener('mouseenter', function () { frenos.mouse = true; });
+    escenario.addEventListener('mouseleave', function () { frenos.mouse = false; });
+    // Sólo frena el foco de teclado: un clic en las flechas no lo para.
+    escenario.addEventListener('focusin', function (e) { try { frenos.foco = e.target.matches(':focus-visible'); } catch (x) { frenos.foco = true; } });
+    escenario.addEventListener('focusout', function () { frenos.foco = false; });
+    ul.addEventListener('touchstart', function () { frenos.dedo = true; }, { passive: true });
+    ul.addEventListener('touchend', function () { setTimeout(function () { frenos.dedo = false; }, 3000); }, { passive: true });
+    if (window.ResizeObserver) new ResizeObserver(medir).observe(ul); else window.addEventListener('resize', medir);
+    window.addEventListener('load', medir);
+
+    mostrarPausa();
+    medir();
+    setInterval(function () {
+      if (!pausado && !frenos.mouse && !frenos.foco && !frenos.dedo && !document.hidden) ir(actual() + 1);
+    }, 5000);
+  }
 })();
 </script>
