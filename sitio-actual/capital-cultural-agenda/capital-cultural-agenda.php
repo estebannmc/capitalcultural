@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Capital Cultural Agenda
  * Description: Muestra los eventos de la agenda institucional (agenda.santafeciudad.gov.ar) en Capital Cultural. Usar shortcode [capital_agenda].
- * Version: 1.3.1
+ * Version: 1.4.0
  * Author: Esteban
  * Text Domain: capital-cultural-agenda
  */
@@ -12,13 +12,14 @@ if (!defined('ABSPATH')) {
 }
 
 final class Capital_Cultural_Agenda {
-    const VERSION = '1.3.1';
+    const VERSION = '1.4.0';
     const OPTION = 'cca_settings';
     const STATUS_OPTION = 'cca_status';
     const LAST_GOOD_OPTION = 'cca_last_good';
     const TRANSIENT_KEY = 'cca_events';
     const AJAX_ACTION = 'cca_eventos';
     const REFRESH_ACTION = 'cca_refresh';
+    const CRON_HOOK = 'cca_cron_refresh';
     const RETRY_MINUTES = 10;
     const MAX_EVENTS = 60;
 
@@ -34,6 +35,9 @@ final class Capital_Cultural_Agenda {
         add_action('wp_ajax_nopriv_' . self::AJAX_ACTION, [$this, 'ajax_events']);
         add_shortcode('capital_agenda', [$this, 'shortcode']);
         add_action('update_option_' . self::OPTION, [$this, 'clear_cache']);
+        add_filter('cron_schedules', [$this, 'cron_schedules']);
+        add_action('init', [$this, 'schedule_refresh']);
+        add_action(self::CRON_HOOK, [$this, 'cron_refresh']);
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), [$this, 'action_links']);
     }
 
@@ -44,6 +48,7 @@ final class Capital_Cultural_Agenda {
 
     public static function deactivate() {
         delete_transient(self::TRANSIENT_KEY);
+        wp_clear_scheduled_hook(self::CRON_HOOK);
     }
 
     public static function defaults() {
@@ -51,6 +56,7 @@ final class Capital_Cultural_Agenda {
             'feed_url'      => 'https://agenda.santafeciudad.gov.ar/events.ics',
             'agenda_url'    => 'https://agenda.santafeciudad.gov.ar/',
             'cache_minutes' => 60,
+            'ocultos'       => '',
         ];
     }
 
@@ -101,7 +107,8 @@ final class Capital_Cultural_Agenda {
         update_option(self::LAST_GOOD_OPTION, ['time' => time(), 'events' => $result], false);
 
         $minutes = max(5, intval($settings['cache_minutes']));
-        set_transient(self::TRANSIENT_KEY, $result, $minutes * MINUTE_IN_SECONDS);
+        // Dura el doble del intervalo: el cron la renueva antes de que venza.
+        set_transient(self::TRANSIENT_KEY, $result, 2 * $minutes * MINUTE_IN_SECONDS);
         return $result;
     }
 
@@ -297,8 +304,55 @@ final class Capital_Cultural_Agenda {
         return [implode(' | ', $parts), ''];
     }
 
+    /**
+     * Al guardar los ajustes: se borra la caché y se reprograma el cron con el
+     * intervalo nuevo (lo vuelve a programar schedule_refresh en el próximo init).
+     */
     public function clear_cache() {
         delete_transient(self::TRANSIENT_KEY);
+        wp_clear_scheduled_hook(self::CRON_HOOK);
+    }
+
+    /* ---------------------------------------------------------------------
+     * Renovación automática: WP-Cron vuelve a leer la agenda cada «Actualizar
+     * cada» minutos, antes de que venza la caché, y ningún visitante espera
+     * la lectura del iCal.
+     * ------------------------------------------------------------------- */
+
+    public function cron_schedules($schedules) {
+        $schedules['cca_intervalo'] = [
+            'interval' => max(5, intval($this->settings()['cache_minutes'])) * MINUTE_IN_SECONDS,
+            'display'  => 'Agenda cultural',
+        ];
+        return $schedules;
+    }
+
+    public function schedule_refresh() {
+        if (!wp_next_scheduled(self::CRON_HOOK)) {
+            wp_schedule_event(time(), 'cca_intervalo', self::CRON_HOOK);
+        }
+    }
+
+    public function cron_refresh() {
+        $this->get_events(true);
+    }
+
+    /**
+     * Saca los eventos que ya terminaron y los de «Eventos ocultos»: por título
+     * (sin importar mayúsculas, tildes ni signos) o por dirección.
+     */
+    private function visible_events($events) {
+        $hidden = array_filter(array_map([$this, 'normalize'], preg_split('/\R/', (string) $this->settings()['ocultos'])));
+        $now = time();
+        return array_values(array_filter($events, function ($event) use ($hidden, $now) {
+            return $event['end'] > $now
+                && !in_array($this->normalize($event['title']), $hidden, true)
+                && !in_array($this->normalize($event['url']), $hidden, true);
+        }));
+    }
+
+    private function normalize($text) {
+        return trim(preg_replace('/[^a-z0-9]+/', ' ', strtolower(remove_accents((string) $text))));
     }
 
     /* ---------------------------------------------------------------------
@@ -315,7 +369,19 @@ final class Capital_Cultural_Agenda {
      * (LiteSpeed) no deje la agenda desactualizada.
      */
     public function ajax_events() {
-        $events = $this->get_events();
+        $events = get_transient(self::TRANSIENT_KEY);
+        $last_good = get_option(self::LAST_GOOD_OPTION, []);
+        if (!is_array($events) && !empty($last_good['events']) && is_array($last_good['events'])) {
+            // Venció la caché porque el cron no corrió a tiempo: se responde ya con la
+            // última lectura correcta y la agenda se vuelve a leer en segundo plano.
+            $events = $last_good['events'];
+            wp_schedule_single_event(time(), self::CRON_HOOK);
+            spawn_cron();
+        } elseif (!is_array($events)) {
+            // Nunca se leyó la agenda: no hay nada que mostrar mientras tanto.
+            $events = $this->get_events();
+        }
+        $events = $this->visible_events($events);
         $status = get_option(self::STATUS_OPTION, []);
 
         // admin-ajax envía cabeceras sin caché; se permite al navegador reusar la respuesta 5 minutos.
@@ -452,6 +518,7 @@ final class Capital_Cultural_Agenda {
             'feed_url'      => $feed_url ?: $defaults['feed_url'],
             'agenda_url'    => $agenda_url ?: $defaults['agenda_url'],
             'cache_minutes' => min(1440, max(5, $minutes)),
+            'ocultos'       => isset($input['ocultos']) ? sanitize_textarea_field($input['ocultos']) : '',
         ];
     }
 
@@ -613,6 +680,10 @@ final class Capital_Cultural_Agenda {
                                 <?php endif; ?>
                             </td>
                         </tr>
+                        <tr>
+                            <th scope="row">Próxima lectura automática</th>
+                            <td><?php $next = wp_next_scheduled(self::CRON_HOOK); echo $next ? esc_html(wp_date('j/m/Y H:i', $next)) : 'Sin programar: se programa con la próxima visita.'; ?></td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -646,6 +717,14 @@ final class Capital_Cultural_Agenda {
                             <th scope="row"><label for="cca_cache_minutes">Actualizar cada</label></th>
                             <td>
                                 <input type="number" min="5" max="1440" step="5" class="small-text" id="cca_cache_minutes" name="<?php echo esc_attr(self::OPTION); ?>[cache_minutes]" value="<?php echo esc_attr($settings['cache_minutes']); ?>"> minutos
+                                <p class="description">Cada cuánto se vuelve a leer la agenda en segundo plano.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label for="cca_ocultos">Eventos ocultos</label></th>
+                            <td>
+                                <textarea class="large-text" rows="5" id="cca_ocultos" name="<?php echo esc_attr(self::OPTION); ?>[ocultos]"><?php echo esc_textarea($settings['ocultos']); ?></textarea>
+                                <p class="description">Uno por línea: el título del evento como figura en la agenda, o su dirección. No importan mayúsculas, tildes ni signos. Siguen en la agenda; sólo dejan de verse en Capital Cultural.</p>
                             </td>
                         </tr>
                     </table>
