@@ -80,7 +80,8 @@
     .then(function (data) {
       var ahora = data.now || Date.now() / 1000;
       var eventos = (data.events || [])
-        .filter(function (e) { return e.end > ahora && (e.categories || []).indexOf('Cultura') !== -1; })
+        // «inicio» lo pone el plugin 1.5.0 según los eventos elegidos en sus ajustes; sin él, los de Cultura.
+        .filter(function (e) { return e.end > ahora && ('inicio' in e ? e.inicio : (e.categories || []).indexOf('Cultura') !== -1); })
         .sort(function (a, b) { return a.start - b.start; });
 
       // Un evento con varias fechas se muestra una vez, con la primera fecha y «Más fechas».

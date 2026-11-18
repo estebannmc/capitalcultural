@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Capital Cultural Agenda
  * Description: Muestra los eventos de la agenda institucional (agenda.santafeciudad.gov.ar) en Capital Cultural. Usar shortcode [capital_agenda].
- * Version: 1.4.0
+ * Version: 1.5.0
  * Author: Esteban
  * Text Domain: capital-cultural-agenda
  */
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class Capital_Cultural_Agenda {
-    const VERSION = '1.4.0';
+    const VERSION = '1.5.0';
     const OPTION = 'cca_settings';
     const STATUS_OPTION = 'cca_status';
     const LAST_GOOD_OPTION = 'cca_last_good';
@@ -20,6 +20,7 @@ final class Capital_Cultural_Agenda {
     const AJAX_ACTION = 'cca_eventos';
     const REFRESH_ACTION = 'cca_refresh';
     const CRON_HOOK = 'cca_cron_refresh';
+    const HOME_CATEGORY = 'Cultura';
     const RETRY_MINUTES = 10;
     const MAX_EVENTS = 60;
 
@@ -56,7 +57,8 @@ final class Capital_Cultural_Agenda {
             'feed_url'      => 'https://agenda.santafeciudad.gov.ar/events.ics',
             'agenda_url'    => 'https://agenda.santafeciudad.gov.ar/',
             'cache_minutes' => 60,
-            'ocultos'       => '',
+            'ocultos'       => [],
+            'mostrar'       => [],
         ];
     }
 
@@ -338,17 +340,67 @@ final class Capital_Cultural_Agenda {
     }
 
     /**
-     * Saca los eventos que ya terminaron y los de «Eventos ocultos»: por título
-     * (sin importar mayúsculas, tildes ni signos) o por dirección.
+     * Saca los eventos que ya terminaron y marca con «inicio» los que van en la
+     * home (ver on_home). Los de Cultura que se sacaron no van a ningún lado.
      */
     private function visible_events($events) {
-        $hidden = array_filter(array_map([$this, 'normalize'], preg_split('/\R/', (string) $this->settings()['ocultos'])));
+        $settings = $this->settings();
         $now = time();
-        return array_values(array_filter($events, function ($event) use ($hidden, $now) {
-            return $event['end'] > $now
-                && !in_array($this->normalize($event['title']), $hidden, true)
-                && !in_array($this->normalize($event['url']), $hidden, true);
-        }));
+        $out = [];
+        foreach ($events as $event) {
+            if ($event['end'] <= $now) {
+                continue;
+            }
+            $event['inicio'] = $this->on_home($event, $settings);
+            if (!$event['inicio'] && $this->is_home_category($event)) {
+                continue;
+            }
+            $out[] = $event;
+        }
+        return $out;
+    }
+
+    private function is_home_category($event) {
+        return in_array(self::HOME_CATEGORY, $event['categories'], true);
+    }
+
+    /**
+     * Los de Cultura van en el inicio salvo que estén en «ocultos»; los de otras
+     * categorías, sólo si están en «mostrar». Se reconocen por dirección o título.
+     */
+    private function on_home($event, $settings) {
+        $keys = [$this->event_key($event), $this->normalize($event['title'])];
+        if ($this->is_home_category($event)) {
+            return !array_intersect($keys, $this->key_list($settings['ocultos']));
+        }
+        return (bool) array_intersect($keys, $this->key_list($settings['mostrar']));
+    }
+
+    private function event_key($event) {
+        return $this->normalize($event['url'] !== '' ? $event['url'] : $event['title']);
+    }
+
+    /**
+     * Lista de claves normalizadas. Acepta el texto de la versión 1.4.0, uno por línea.
+     */
+    private function key_list($value) {
+        $items = is_array($value) ? $value : explode(chr(10), str_replace(chr(13), '', (string) $value));
+        return array_values(array_unique(array_filter(array_map([$this, 'normalize'], $items))));
+    }
+
+    /**
+     * Los eventos de la última lectura que no terminaron, sin repetir: la lista de los ajustes.
+     */
+    private function upcoming_events() {
+        $last_good = get_option(self::LAST_GOOD_OPTION, []);
+        $events = isset($last_good['events']) && is_array($last_good['events']) ? $last_good['events'] : [];
+        $out = [];
+        foreach ($events as $event) {
+            if ($event['end'] > time() && !isset($out[$this->event_key($event)])) {
+                $out[$this->event_key($event)] = $event;
+            }
+        }
+        return array_values($out);
     }
 
     private function normalize($text) {
@@ -514,11 +566,37 @@ final class Capital_Cultural_Agenda {
         $agenda_url = isset($input['agenda_url']) ? esc_url_raw(trim($input['agenda_url'])) : '';
         $minutes = isset($input['cache_minutes']) ? absint($input['cache_minutes']) : $defaults['cache_minutes'];
 
+        // De la lista de eventos se guarda sólo lo que se aparta de la regla (Cultura
+        // marcado, el resto sin marcar). Lo de eventos que ya no figuran se conserva.
+        $current = $this->settings();
+        $ocultos = $this->key_list($current['ocultos']);
+        $mostrar = $this->key_list($current['mostrar']);
+        if (isset($input['lista']) && is_array($input['lista'])) {
+            $listed = $this->key_list($input['lista']);
+            $chosen = $this->key_list(isset($input['elegidos']) && is_array($input['elegidos']) ? $input['elegidos'] : []);
+            foreach ($this->upcoming_events() as $event) {
+                $key = $this->event_key($event);
+                if (!in_array($key, $listed, true)) {
+                    continue;
+                }
+                $both = [$key, $this->normalize($event['title'])];
+                $ocultos = array_values(array_diff($ocultos, $both));
+                $mostrar = array_values(array_diff($mostrar, $both));
+                $on = in_array($key, $chosen, true);
+                if ($this->is_home_category($event) && !$on) {
+                    $ocultos[] = $key;
+                } elseif (!$this->is_home_category($event) && $on) {
+                    $mostrar[] = $key;
+                }
+            }
+        }
+
         return [
             'feed_url'      => $feed_url ?: $defaults['feed_url'],
             'agenda_url'    => $agenda_url ?: $defaults['agenda_url'],
             'cache_minutes' => min(1440, max(5, $minutes)),
-            'ocultos'       => isset($input['ocultos']) ? sanitize_textarea_field($input['ocultos']) : '',
+            'ocultos'       => $ocultos,
+            'mostrar'       => $mostrar,
         ];
     }
 
@@ -721,10 +799,25 @@ final class Capital_Cultural_Agenda {
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="cca_ocultos">Eventos ocultos</label></th>
+                            <th scope="row">Eventos en el inicio</th>
                             <td>
-                                <textarea class="large-text" rows="5" id="cca_ocultos" name="<?php echo esc_attr(self::OPTION); ?>[ocultos]"><?php echo esc_textarea($settings['ocultos']); ?></textarea>
-                                <p class="description">Uno por línea: el título del evento como figura en la agenda, o su dirección. No importan mayúsculas, tildes ni signos. Siguen en la agenda; sólo dejan de verse en Capital Cultural.</p>
+                                <?php $upcoming = $this->upcoming_events(); ?>
+                                <?php if (!$upcoming) : ?>
+                                    <p>Todavía no se leyó la agenda.</p>
+                                <?php else : ?>
+                                    <fieldset id="cca_eventos">
+                                        <legend class="screen-reader-text">Eventos que se muestran en el inicio</legend>
+                                        <?php foreach ($upcoming as $event) : $key = $this->event_key($event); ?>
+                                            <input type="hidden" name="<?php echo esc_attr(self::OPTION); ?>[lista][]" value="<?php echo esc_attr($key); ?>">
+                                            <label class="cca-check">
+                                                <input type="checkbox" name="<?php echo esc_attr(self::OPTION); ?>[elegidos][]" value="<?php echo esc_attr($key); ?>" <?php checked($this->on_home($event, $settings)); ?>>
+                                                <?php echo esc_html($event['title'] . ($event['kicker'] !== '' ? ' · ' . $event['kicker'] : '')); ?>
+                                                <span class="cca-count"><?php echo esc_html(wp_date('j/m', $event['start']) . ($event['venue'] !== '' ? ' · ' . $event['venue'] : '') . ' · ' . ($event['categories'] ? implode(', ', $event['categories']) : 'sin categoría')); ?></span>
+                                            </label>
+                                        <?php endforeach; ?>
+                                    </fieldset>
+                                <?php endif; ?>
+                                <p class="description">Marcá los que van en el inicio y guardá. Los eventos nuevos de Cultura aparecen marcados y los de otras categorías sin marcar. Sacarlo de acá no lo saca de la agenda municipal.</p>
                             </td>
                         </tr>
                     </table>
