@@ -1,0 +1,259 @@
+<style>
+  .elementor-section:has(#eb),
+  .elementor-widget-wrap:has(> .elementor-widget-html #eb),
+  .elementor-widget-html:has(#eb) > .elementor-widget-container { padding: 0; margin: 0; }
+  .ast-container > .elementor:has(#eb) { flex: 1 1 100%; min-width: 0; }
+
+  #eb {
+    --azul: #002751;
+    --gris-20: #dadad9;
+    --gris-75: #606060;
+    --rojo: #e63312;
+    --inclinacion: -15deg;
+    color: var(--azul);
+    font: 400 16px/1.6 "Encode Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    max-width: 1120px; margin-inline: auto;
+    padding: clamp(16px, 2vw, 24px) clamp(16px, 4vw, 32px) 50px;
+  }
+  #eb *, #eb *::before, #eb *::after { box-sizing: border-box; }
+  #eb :is(h2, h3, p, ul, ol, dl, dd, figure) { margin: 0; padding: 0; }
+  #eb :is(ul, ol) { list-style: none; }
+  #eb img { display: block; max-width: 100%; height: auto; border-radius: 0; }
+  #eb :is(h2, h3) { color: inherit; font-family: inherit; text-transform: none; }
+  #eb a:not(.cb-btn) { color: var(--azul); text-decoration: underline; text-decoration-color: var(--rojo); text-underline-offset: .2em; overflow-wrap: anywhere; }
+  #eb a:focus-visible { outline: 0; box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--rojo); }
+
+  #eb .eb-barra {
+    display: inline-block; flex: none; width: .2em; height: .78em;
+    background: var(--rojo); transform: skewX(var(--inclinacion));
+  }
+  #eb .eb-titulo {
+    display: flex; align-items: baseline; gap: 0 .6rem;
+    margin-bottom: clamp(14px, 2vw, 20px);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+  #eb .eb-titulo .eb-barra { align-self: center; margin-right: .2em; }
+
+  #eb .eb-grilla { display: grid; gap: clamp(40px, 6vw, 72px); }
+  #eb .eb-texto {
+    display: grid; gap: 1rem; max-width: 760px; margin-inline: auto;
+    font-size: 1.05rem; text-align: justify; text-align-last: left;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  #eb .eb-lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); font-weight: 600; line-height: 1.45; }
+
+  #eb .eb-vidrio {
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .56));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      0 1px 1px rgba(0, 39, 81, .04),
+      0 14px 30px -16px rgba(0, 39, 81, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+
+  #eb .eb-datos-caja {
+    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(24px, 4vw, 48px); align-items: center;
+    padding: clamp(18px, 3vw, 32px);
+  }
+  #eb .eb-datos { display: grid; gap: 1rem; }
+  #eb .eb-datos dt { font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--gris-75); }
+  #eb .eb-datos dd { font-size: 1.05rem; }
+  #eb .eb-afiche { overflow: hidden; border-radius: 6px; background: var(--gris-20); }
+
+  #eb .eb-agrupaciones { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  #eb .eb-agrupacion { display: flex; flex-direction: column; gap: .35rem; padding: clamp(18px, 2.4vw, 26px); }
+  #eb .eb-agrupacion h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.25; }
+  #eb .eb-de { font-size: .92rem; line-height: 1.4; color: var(--gris-75); }
+  #eb .eb-direccion { font-size: .95rem; }
+  #eb .eb-obras { display: grid; gap: .55rem; margin-top: .6rem; padding-top: .8rem; border-top: 1px solid var(--gris-20); }
+  #eb .eb-obra { display: block; font-weight: 600; line-height: 1.3; }
+  #eb .eb-autor { display: block; font-size: .92rem; line-height: 1.35; color: var(--gris-75); }
+
+  #eb .eb-final { counter-reset: obra; display: grid; gap: 10px; max-width: 860px; }
+  #eb .eb-final li {
+    counter-increment: obra;
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 1rem; align-items: baseline;
+    padding: .9rem clamp(16px, 2.4vw, 24px);
+  }
+  #eb .eb-final li::before { content: counter(obra); grid-row: span 2; font-size: 1.4rem; font-weight: 700; color: var(--rojo); }
+  #eb .eb-final p { margin-bottom: .2rem; }
+
+  #eb .eb-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px); padding: clamp(18px, 3vw, 28px); background: #fff; }
+  #eb .eb-logos img { width: auto; height: 84px; }
+
+  #eb .eb-autoridades { max-width: 760px; }
+  #eb .eb-autoridades dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .5rem 1.5rem; }
+  #eb .eb-autoridades dt { color: var(--gris-75); }
+  #eb .eb-autoridades dd { font-weight: 600; }
+
+  #eb .eb-volver { display: flex; justify-content: center; }
+
+  @media (max-width: 860px) {
+    #eb .eb-datos-caja { grid-template-columns: minmax(0, 1fr); }
+    #eb .eb-afiche { max-width: 360px; }
+  }
+  @media (max-width: 560px) {
+    #eb .eb-agrupaciones { grid-template-columns: minmax(0, 1fr); }
+    #eb .eb-logos img { height: 64px; }
+    #eb .eb-autoridades dl { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    #eb .eb-autoridades dd + dt { margin-top: .75rem; }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #eb .eb-vidrio { background: rgba(255, 255, 255, .95); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    #eb .eb-vidrio { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+</style>
+
+<div id="eb">
+  <div class="eb-grilla">
+    <div class="eb-texto">
+      <p class="eb-lead">El martes 17 de noviembre de 2026, la Sala Mayor del Teatro Municipal 1.º de Mayo fue sede del Primer Encuentro de Bandas Infanto Juveniles de Santa Fe, organizado por el programa <a href="/capitalcultural/somosmusica/">Somos Música</a> de la Secretaría de Cultura de la Municipalidad.</p>
+      <p>Alumnos de distintos organismos de formación musical de la ciudad compartieron el escenario: los dos ensambles de vientos y percusión de Somos Música, de los barrios Yapeyú y Santa Rosa de Lima, apadrinados por la asociación civil Terranza; el ensamble Bronceados de la Escuela Estrada N.º 1256, de la Red de Coros y Orquestas de la Provincia de Santa Fe; la Banda de Niños de la Escuela Provincial de Música N.º 9901 «Orquestas Sinfónicas de Niños y Juvenil»; los ensambles de vientos del CREI y la banda de la Escuela de Música del Liceo Municipal de Santa Fe.</p>
+      <p>Cada agrupación hizo primero una breve presentación propia y, para el cierre, todos los ensambles tocaron juntos un repertorio común para bandas. Así, este primer Encuentro de Bandas Infanto Juveniles reunió en un mismo escenario a chicas y chicos que se forman en distintas escuelas y programas de la ciudad.</p>
+    </div>
+
+    <section class="eb-datos-caja eb-vidrio" aria-labelledby="eb-datos-titulo">
+      <div>
+        <h2 class="eb-titulo" id="eb-datos-titulo"><i class="eb-barra"></i>El Encuentro de Bandas Infanto Juveniles</h2>
+        <dl class="eb-datos">
+          <div><dt>Fecha</dt><dd>Martes 17 de noviembre de 2026, a las 20.30 horas</dd></div>
+          <div><dt>Lugar</dt><dd>Sala Mayor del <a href="https://teatromunicipal.santafeciudad.gov.ar/" target="_blank" rel="noopener">Teatro Municipal 1.º de Mayo</a>, San Martín 2020 · <a href="https://www.google.com/maps/search/?api=1&amp;query=Teatro%20Municipal%201%C2%BA%20de%20Mayo%2C%20San%20Mart%C3%ADn%202020%2C%20Santa%20Fe" target="_blank" rel="noopener">Ver en el mapa</a></dd></div>
+          <div><dt>Entrada</dt><dd>Gratuita, con retiro previo en la boletería del Teatro</dd></div>
+          <div><dt>Organizó</dt><dd>Programa Somos Música, Secretaría de Cultura de la Municipalidad de Santa Fe</dd></div>
+        </dl>
+      </div>
+      <figure class="eb-afiche">
+        <img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/encuentro-bandas-afiche.jpg" alt="Afiche del 1.er Encuentro de Bandas Infanto Juveniles de Santa Fe: 17 de noviembre, 20.30 horas, Sala Mayor del Teatro Municipal" loading="lazy" width="900" height="1200">
+      </figure>
+    </section>
+
+    <section aria-labelledby="eb-agrupaciones-titulo">
+      <h2 class="eb-titulo" id="eb-agrupaciones-titulo"><i class="eb-barra"></i>Las agrupaciones y su programa</h2>
+      <ul class="eb-agrupaciones">
+        <li class="eb-agrupacion eb-vidrio">
+          <h3>Ensamble Bronceados</h3>
+          <p class="eb-de">Escuela Estrada N.º 1256, de la Red de Coros y Orquestas de la Provincia de Santa Fe</p>
+          <p class="eb-direccion">Dirección: Ariel Rodríguez</p>
+          <ul class="eb-obras">
+            <li><span class="eb-obra">Pompa y circunstancia</span><span class="eb-autor">Edward Elgar</span></li>
+            <li><span class="eb-obra">Finlandia</span><span class="eb-autor">Jean Sibelius</span></li>
+          </ul>
+        </li>
+        <li class="eb-agrupacion eb-vidrio">
+          <h3>Banda de la Escuela de Música del Liceo Municipal</h3>
+          <p class="eb-de">Liceo Municipal de Santa Fe</p>
+          <p class="eb-direccion">Dirección: Julián Marcipar</p>
+          <ul class="eb-obras">
+            <li><span class="eb-obra">Versiones de la banda sonora de <i>Harry Potter</i></span><span class="eb-autor">John Williams · arreglos de Julián Marcipar</span></li>
+            <li><span class="eb-obra">Versiones de la música de <i>Peppa Pig</i></span><span class="eb-autor">Julian Nott · arreglos de Julián Marcipar</span></li>
+          </ul>
+        </li>
+        <li class="eb-agrupacion eb-vidrio">
+          <h3>Ensambles de Vientos del CREI</h3>
+          <p class="eb-de">Escuela Provincial de Música N.º 9902</p>
+          <p class="eb-direccion">Dirección: Pablo Aristein</p>
+          <ul class="eb-obras">
+            <li><span class="eb-obra">Canción y huayno</span><span class="eb-autor">Mauro Núñez y Orlando Rojas</span></li>
+            <li><span class="eb-obra">Regalo</span><span class="eb-autor">Diego Cortez</span></li>
+          </ul>
+        </li>
+        <li class="eb-agrupacion eb-vidrio">
+          <h3>Ensambles Yapeyú y Santa Rosa de Lima</h3>
+          <p class="eb-de">Programa <a href="/capitalcultural/somosmusica/">Somos Música</a>, Secretaría de Cultura de la Municipalidad de Santa Fe</p>
+          <p class="eb-direccion">Dirección: Analía Bernasconi y Flavio Gilli</p>
+          <ul class="eb-obras">
+            <li><span class="eb-obra">Obertura 1812</span><span class="eb-autor">Piotr Ilich Chaikovski</span></li>
+            <li><span class="eb-obra">Que se vengan los chicos</span><span class="eb-autor">Eugenio Inchausti · adaptación de Analía Bernasconi</span></li>
+          </ul>
+        </li>
+        <li class="eb-agrupacion eb-vidrio">
+          <h3>Banda de Niños de la Escuela de Música N.º 9901</h3>
+          <p class="eb-de">Escuela Provincial de Música N.º 9901 «Orquestas Sinfónicas de Niños y Juvenil»</p>
+          <p class="eb-direccion">Dirección: Omar Lacuadra</p>
+          <ul class="eb-obras">
+            <li><span class="eb-obra">Destellos del alba</span><span class="eb-autor">Ferrer Ferrán</span></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="eb-final-titulo">
+      <h2 class="eb-titulo" id="eb-final-titulo"><i class="eb-barra"></i>Todas las bandas juntas</h2>
+      <ol class="eb-final">
+        <li class="eb-vidrio"><p><span class="eb-obra">Mystic Visions</span></p><span class="eb-autor">Ed Huckeby · dirección de Omar Lacuadra</span></li>
+        <li class="eb-vidrio"><p><span class="eb-obra">Barnstormers March</span></p><span class="eb-autor">Len Orcino · dirección de Flavio Gilli</span></li>
+        <li class="eb-vidrio"><p><span class="eb-obra">Danza del mambo</span></p><span class="eb-autor">Robert W. Smith · dirección de Flavio Gilli</span></li>
+        <li class="eb-vidrio"><p><span class="eb-obra">American Folk Dance</span></p><span class="eb-autor">Ed Huckeby · dirección de Analía Bernasconi</span></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="eb-acompanan-titulo">
+      <h2 class="eb-titulo" id="eb-acompanan-titulo"><i class="eb-barra"></i>Participaron y acompañaron</h2>
+      <ul class="eb-logos eb-vidrio">
+        <li><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2025/07/logo_terranza-gris-300x300.png" alt="Terranza" loading="lazy" width="300" height="300"></li>
+        <li><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/logo-bronceados.jpg" alt="Bronceados" loading="lazy" width="360" height="142"></li>
+        <li><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/logo-crei.jpg" alt="CREI, Escuela Provincial de Música N.º 9902" loading="lazy" width="191" height="240"></li>
+        <li><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/logo-red-coros-orquestas.jpg" alt="Red Provincial de Coros y Orquestas" loading="lazy" width="338" height="240"></li>
+        <li><img src="https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/logo-escuela-musica-9901.jpg" alt="Escuela Provincial de Música N.º 9901" loading="lazy" width="240" height="240"></li>
+      </ul>
+    </section>
+
+    <section class="eb-autoridades" aria-labelledby="eb-autoridades-titulo">
+      <h2 class="eb-titulo" id="eb-autoridades-titulo"><i class="eb-barra"></i>Autoridades</h2>
+      <dl>
+        <dt>Intendente</dt><dd>Juan Pablo Poletti</dd>
+        <dt>Secretaria de Cultura</dt><dd>Luciana Ceresola</dd>
+        <dt>Subsecretario de Espacios Socioculturales y Organismos Artísticos</dt><dd>Pablo Villaverde</dd>
+        <dt>Coordinador de Elencos Artísticos</dt><dd>Guillermo González</dd>
+      </dl>
+    </section>
+
+    <div class="eb-volver">
+      <a class="cb-btn" href="/capitalcultural/somosmusica/"><span>Conocé el programa Somos Música</span></a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicEvent",
+  "name": "Primer Encuentro de Bandas Infanto Juveniles de Santa Fe",
+  "url": "https://www.santafeciudad.gov.ar/capitalcultural/somosmusica/encuentro-de-bandas-infanto-juveniles/",
+  "image": "https://www.santafeciudad.gov.ar/capitalcultural/wp-content/uploads/2026/11/encuentro-bandas-afiche.jpg",
+  "description": "Concierto de bandas infantiles y juveniles de la ciudad de Santa Fe, organizado por el programa Somos Música, con un repertorio propio de cada agrupación y un cierre con todas las bandas juntas.",
+  "startDate": "2026-11-17T20:30:00-03:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "ARS" },
+  "location": {
+    "@type": "PerformingArtsTheater",
+    "name": "Teatro Municipal 1.º de Mayo, Sala Mayor",
+    "url": "https://teatromunicipal.santafeciudad.gov.ar/",
+    "address": { "@type": "PostalAddress", "streetAddress": "San Martín 2020", "addressLocality": "Santa Fe", "addressRegion": "Santa Fe", "postalCode": "3000", "addressCountry": "AR" }
+  },
+  "performer": [
+    { "@type": "MusicGroup", "name": "Ensamble Bronceados" },
+    { "@type": "MusicGroup", "name": "Banda de la Escuela de Música del Liceo Municipal de Santa Fe" },
+    { "@type": "MusicGroup", "name": "Ensambles de Vientos del CREI" },
+    { "@type": "MusicGroup", "name": "Ensamble Yapeyú, programa Somos Música" },
+    { "@type": "MusicGroup", "name": "Ensamble Santa Rosa de Lima, programa Somos Música" },
+    { "@type": "MusicGroup", "name": "Banda de Niños de la Escuela Provincial de Música N.º 9901" }
+  ],
+  "organizer": {
+    "@type": "GovernmentOrganization",
+    "name": "Programa Somos Música, Secretaría de Cultura de la Municipalidad de Santa Fe",
+    "url": "https://www.santafeciudad.gov.ar/capitalcultural/somosmusica/",
+    "email": "cultura@santafeciudad.gov.ar",
+    "telephone": "+54 342 457-1609"
+  }
+}
+</script>

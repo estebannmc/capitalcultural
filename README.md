@@ -54,6 +54,8 @@ Decisiones tomadas:
 | `sitio-nuevo/mercado-progreso.html` | **Mercado Progreso**: presentación, las nueve propuestas, datos de visita con la foto del patio, historia y autoridades, con datos estructurados `EventVenue`. Widget HTML entero |
 | `sitio-nuevo/museos-y-salas.html` | **Museos y Salas**: presentación, los diez espacios con foto en dos grupos (museos y salas) y las 15 publicaciones digitales en grilla de tapas, con número, año, espacio y peso del PDF. Widget HTML entero |
 | `sitio-nuevo/somos-musica.html` | **Somos Música**: presentación, inscripción con el formulario y el contacto de la Secretaría, las ocho sedes por tipo de instrumento con enlace a Google Maps, preguntas frecuentes, galería de 19 fotos con visor, enlaces a más música municipal y los logos de quienes acompañan, con datos estructurados `EducationalOccupationalProgram` y `FAQPage`. Widget HTML entero |
+| `sitio-nuevo/encuentro-bandas.html` | **Primer Encuentro de Bandas Infanto Juveniles de Santa Fe**, página hija de Somos Música: presentación, datos con el afiche, las cinco agrupaciones con su director y su programa, el repertorio conjunto, logos y autoridades, con datos estructurados `MusicEvent`. Widget HTML entero |
+| `sitio-nuevo/img/encuentro-bandas/` | Afiche (900 × 1200), imagen para redes (1200 × 630) y cuatro logos en gris del Encuentro de Bandas, ya en Medios (IDs 33928 a 33933) |
 | `sitio-nuevo/premio-literario.html` | **Premio Literario Municipal**: los ganadores 2026 (novela ganadora y dos menciones, con sus autores) y un botón al fallo, el jurado y los cuatro documentos oficiales en PDF, con datos estructurados de las tres obras y del acta. Widget HTML entero |
 | `docs/auditoria-seo-2026-11-15.md` | **Auditoría SEO, AEO y GEO** del sitio publicado (179 páginas rastreadas): hallazgos por prioridad, lo que queda del lado de WordPress y lo que se implementó en los widgets |
 | `sitio-nuevo/listas_jsonld.py` | Escribe el JSON-LD `ItemList` de los listados (Museos y Salas, Huellas, Memorias Feministas, Patrimonio Arquitectónico y Artístico) leyendo sus tarjetas. Correrlo después de sumar o sacar una tarjeta: `python sitio-nuevo/listas_jsonld.py` |
@@ -258,6 +260,24 @@ Meta descripciones nuevas:
 - **Directoras contemporáneas:** `Directoras contemporáneas en Pantalla Pública: entrevistas a Ana Katz, Anahí Berneri y Laura Citarella, y una lectura de «Zama», de Lucrecia Martel.` (148)
 
 Las imágenes para redes son las de las tarjetas, de 780 × 585 (la de Peña, 480 × 360): Facebook y WhatsApp las recortan a 1,91:1. Si se quiere la proporción exacta, subir versiones de 1200 × 630 y cambiarlas en Yoast. **Lo que Yoast no resuelve:** la frase clave no está en el slug de 100 años (`100anos100imagenes`), y las siete URL viejas siguen dando 404 sin un plugin de redirecciones.
+
+### Espacio entre las migas y el texto
+
+Desde el 19/11/2026 todas las páginas nuevas dejan **44 px en escritorio y 36 px en celular** entre las migas y el primer texto, como Museos y Salas y sus fichas. Es el relleno superior del contenedor de cada widget: `padding: clamp(16px, 2vw, 24px) clamp(16px, 4vw, 32px) …`. Antes, diez páginas usaban `clamp(32px, 5vw, 64px)` (84 y 52 px): Somos Música, Centro Cultural, Biblioteca Muttis, Anfiteatro, Mercado Progreso, Huellas, Marcas de la Memoria, Memorias Urbanas Feministas y los dos Patrimonios. Se cambiaron en el repo y en vivo, y se midieron después en las páginas publicadas. Una página nueva copia ese valor.
+
+### Encuentro de Bandas Infanto Juveniles: lo que queda a mano
+
+- **Publicada el 19/11/2026** (página 33927), hija de Somos Música, en `/somosmusica/encuentro-de-bandas-infanto-juveniles/`, con la plantilla y los ajustes de Astra de Somos Música. Somos Música tiene un apartado, debajo de las inscripciones, que lleva acá.
+- **Fuente:** la carpeta de Drive del Encuentro (*Info para gráficas*, *Nota de prensa*, el programa digital en PDF, los logos y las gráficas). Las fotos del concierto no estaban: cuando las haya, se puede sumar una galería como la de Somos Música.
+- **Está escrita en pasado** («fue sede», «compartieron el escenario»), porque se publicó dos días después del concierto. No dice cómo salió ni cuánta gente fue: no hay datos.
+- **Sin los nombres de los chicos.** El programa trae la lista de los alumnos de cada agrupación, todos menores. No se publicó para no dejar sus nombres indexados en un sitio de gobierno; si se decide sumarla, está en el documento *Info para gráficas*.
+- **Diferencias entre las fuentes, resueltas así:**
+  - Flavio **Gilli** (el programa) y no Gili (la nota de prensa).
+  - Escuela N.º 9901 **«Orquestas Sinfónicas de Niños y Juvenil»**, como el programa; el flyer dice «Orquesta Sinfónica».
+  - El CREI tocó **«Canción y huayno»** (Mauro Núñez y Orlando Rojas) y **«Regalo»** (Diego Cortez), como dice el documento. El PDF del programa dice «arreglo: Diego Cortez» en lugar de «Regalo»: confirmar.
+  - El autor de *Peppa Pig* es Julian **Nott**; las fuentes dicen «Not». Tchaikovsky va como **Chaikovski**.
+- **Yoast:** frase clave `Encuentro de Bandas Infanto Juveniles`; título `Encuentro de Bandas Infanto Juveniles de Santa Fe 2026`; meta descripción `El 17 de noviembre de 2026, el Teatro Municipal recibió el Primer Encuentro de Bandas Infanto Juveniles de Santa Fe. Agrupaciones, directores y obras.` (150); imagen para redes, el afiche sobre su bordó en 1200 × 630 (ID 33929). Dio 88 antes de sumar la frase clave a un subtítulo y al texto.
+- **Logos:** Terranza usa el gris que ya estaba en Medios; Bronceados, CREI, la Red Provincial de Coros y Orquestas y la Escuela N.º 9901 se pasaron a gris para que combinen. Faltan los del Liceo Municipal y el Teatro, que no estaban en la carpeta.
 
 ### Fichas de los espacios: lo que queda a mano
 
