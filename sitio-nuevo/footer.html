@@ -102,9 +102,9 @@
 
   .ccg-footer a,
   .ccg-footer a:visited {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
+    display: inline-block;
+    padding: 11px 0;
+    line-height: 22px;
     color: #fff;
     font-size: 15px;
     text-decoration: underline;
@@ -114,7 +114,7 @@
   }
   .ccg-footer a:hover { color: var(--ccg-celeste); text-decoration-color: currentColor; }
   .ccg-footer a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; border-radius: 4px; }
-  .ccg-ext::after { content: " ↗"; }
+  .ccg-externo::after { content: " ↗"; }
   .ccg-sr {
     position: absolute;
     width: 1px;
@@ -134,7 +134,7 @@
     margin-top: 32px;
     padding-left: clamp(22px, 3vw, 32px);
   }
-  .ccg-footer .ccg-marca { display: inline-flex; flex-direction: column; gap: 10px; min-height: 0; text-decoration: none; }
+  .ccg-footer .ccg-marca { display: inline-flex; flex-direction: column; gap: 10px; padding: 0; text-decoration: none; }
   .ccg-marca svg { display: block; width: 136px; height: auto; }
   .ccg-marca span { padding-left: 15px; font: 700 13.6px/1.05 "Geologica", "Arial Narrow", sans-serif; }
   .ccg-marca span span { display: block; padding: 0; font-weight: 400; }
@@ -180,17 +180,17 @@
       <nav aria-label="Links de interés">
         <h3>Links de interés</h3>
         <ul>
-          <li><a class="ccg-ext" href="https://agenda.santafeciudad.gov.ar/">Agenda<span class="ccg-sr"> (sitio externo)</span></a></li>
+          <li><a class="ccg-externo" href="https://agenda.santafeciudad.gov.ar/">Agenda<span class="ccg-sr"> (sitio externo)</span></a></li>
           <li><a href="/secretaria-de-cultura/convocatorias-vigentes/">Convocatorias vigentes</a></li>
-          <li><a class="ccg-ext" href="https://santafenoticias.gob.ar/">Noticias<span class="ccg-sr"> (sitio externo)</span></a></li>
+          <li><a class="ccg-externo" href="https://santafenoticias.gob.ar/">Noticias<span class="ccg-sr"> (sitio externo)</span></a></li>
         </ul>
       </nav>
 
       <nav aria-label="Nuestras redes">
         <h3>Nuestras redes</h3>
         <ul>
-          <li><a class="ccg-ext" href="https://www.instagram.com/cultura.santafecapital/">Instagram<span class="ccg-sr"> (sitio externo)</span></a></li>
-          <li><a class="ccg-ext" href="https://www.youtube.com/@SantaFeCapital">YouTube<span class="ccg-sr"> (sitio externo)</span></a></li>
+          <li><a class="ccg-externo" href="https://www.instagram.com/cultura.santafecapital/">Instagram<span class="ccg-sr"> (sitio externo)</span></a></li>
+          <li><a class="ccg-externo" href="https://www.youtube.com/@SantaFeCapital">YouTube<span class="ccg-sr"> (sitio externo)</span></a></li>
         </ul>
       </nav>
     </div>
