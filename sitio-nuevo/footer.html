@@ -50,7 +50,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 28px;
-    max-width: 720px;
+    max-width: 880px;
     padding: clamp(22px, 3vw, 32px);
     border-radius: 22px;
     background: linear-gradient(160deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .055));
@@ -100,7 +100,7 @@
   .ccg-footer a,
   .ccg-footer a:visited {
     display: inline-block;
-    padding: 11px 0;
+    padding: 3px 0; /* 28px de alto: supera el mínimo de 24px de WCAG 2.2 */
     line-height: 22px;
     color: #fff;
     font-size: 15px;
@@ -111,7 +111,17 @@
   }
   .ccg-footer a:hover { color: var(--ccg-celeste); text-decoration-color: currentColor; }
   .ccg-footer a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; border-radius: 4px; }
-  .ccg-externo::after { content: " ↗"; }
+  /* Flecha dibujada con máscara SVG: un carácter ↗ se vuelve emoji en celulares. */
+  .ccg-externo::after {
+    content: "";
+    display: inline-block;
+    width: .7em;
+    height: .7em;
+    margin-left: .3em;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 8 8 2M3.5 2H8v4.5' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 8 8 2M3.5 2H8v4.5' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
   .ccg-sr {
     position: absolute;
     width: 1px;
