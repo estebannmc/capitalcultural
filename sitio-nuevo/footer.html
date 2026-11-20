@@ -21,7 +21,11 @@
     padding: var(--ccg-pad);
     border-radius: 26px;
     color: #fff;
-    background: linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
+    background:
+      radial-gradient(92% 130% at 74% 118%,
+        rgba(255, 255, 255, .34) 0%, #57b8e9 22%, rgba(87, 184, 233, .5) 42%,
+        rgba(0, 90, 110, .22) 62%, transparent 84%),
+      linear-gradient(130deg, #002751 0%, #001d3a 58%, #001630 100%);
   }
   .ccg-luz::before {
     content: "";
@@ -34,11 +38,12 @@
   .ccg-barras {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: var(--ccg-pad);
     z-index: 0;
-    width: min(62%, 640px);
-    height: 100%;
-    fill: var(--ccg-rojo);
+    width: auto;
+    height: min(calc(100% - var(--ccg-pad)), 440px);
+    overflow: visible;
+    opacity: .4;
     pointer-events: none;
   }
 
@@ -88,7 +93,7 @@
     content: "";
     width: .32em;
     height: 1em;
-    background: #fff;
+    background: var(--ccg-rojo);
     transform: skewX(-15deg);
   }
   .ccg-footer ul { margin: 0; padding: 0; list-style: none; }
@@ -128,7 +133,6 @@
     align-items: flex-end;
     gap: 16px 32px;
     margin-top: 32px;
-    padding-bottom: 120px;
   }
   .ccg-footer .ccg-marca { display: inline-flex; flex-direction: column; gap: 10px; min-height: 0; text-decoration: none; }
   .ccg-marca svg { display: block; width: 168px; height: auto; }
@@ -138,7 +142,6 @@
 
   @media (min-width: 768px) {
     .ccg-footer { padding-inline: 24px; }
-    .ccg-base { padding-right: clamp(140px, 18vw, 200px); padding-bottom: 0; }
   }
   @media (prefers-reduced-transparency: reduce) {
     .ccg-card { background: rgba(0, 29, 58, .92); -webkit-backdrop-filter: none; backdrop-filter: none; }
@@ -151,14 +154,16 @@
 <footer class="ccg-footer">
   <div class="ccg-luz">
     <svg class="ccg-barras" viewBox="0 0 600 400" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false">
-      <polygon points="150,400 160,400 178.8,330 168.8,330"/>
-      <polygon points="205,400 219,400 248.5,290 234.5,290"/>
-      <polygon points="255,400 273,400 326.6,200 308.6,200"/>
-      <polygon points="300,400 324,400 399.0,120 375.0,120"/>
-      <polygon points="345,400 375,400 484.8,-10 454.8,-10"/>
-      <polygon points="395,400 431,400 540.8,-10 504.8,-10"/>
-      <polygon points="450,400 492,400 601.8,-10 559.8,-10"/>
-      <polygon points="510,400 558,400 667.8,-10 619.8,-10"/>
+      <g fill="#57b8e9">
+        <polygon points="150,400 160,400 178.8,330 168.8,330"/>
+        <polygon points="205,400 219,400 248.5,290 234.5,290"/>
+        <polygon points="255,400 273,400 326.6,200 308.6,200"/>
+        <polygon points="300,400 324,400 399.0,120 375.0,120"/>
+        <polygon points="345,400 375,400 484.8,-10 454.8,-10"/>
+        <polygon points="395,400 431,400 540.8,-10 504.8,-10"/>
+        <polygon points="450,400 492,400 601.8,-10 559.8,-10"/>
+      </g>
+      <polygon points="510,400 558,400 667.8,-10 619.8,-10" fill="#e63312"/>
     </svg>
 
     <div class="ccg-card">
