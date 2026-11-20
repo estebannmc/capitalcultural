@@ -156,6 +156,113 @@
   });
 </script>
 
+<style>
+  /* Pista para deslizar (el mismo bloque en la home y en Festival Diseña): en las filas que se
+     deslizan de costado, un degradé en el borde que tiene más y, una sola vez, una mano que desliza
+     mientras los botones se corren y vuelven. Sin librerías: SVG y animaciones de CSS. */
+  .pista-caja { position: relative; }
+  .pista-der { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent); }
+  .pista-izq { -webkit-mask-image: linear-gradient(90deg, transparent, #000 44px); mask-image: linear-gradient(90deg, transparent, #000 44px); }
+  .pista-izq.pista-der {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 44px, #000 calc(100% - 44px), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 44px, #000 calc(100% - 44px), transparent);
+  }
+  .pista-empujon > * { animation: pista-empujon 1.7s cubic-bezier(.45, 0, .25, 1) 2; }
+  .pista-mano {
+    position: absolute; right: 26px; z-index: 3; width: 54px; height: 62px; pointer-events: none;
+    filter: drop-shadow(0 4px 8px rgba(0, 39, 81, .35));
+    animation: pista-mano 1.7s cubic-bezier(.45, 0, .25, 1) 2 both;
+  }
+  .pista-mano svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .pista-toque { transform-origin: 22px 5px; animation: pista-toque 1.7s ease-out 2 both; }
+  /* La estela sale del dedo hacia la derecha mientras la mano va a la izquierda. */
+  .pista-estela { transform-origin: 22px 5px; animation: pista-estela 1.7s cubic-bezier(.45, 0, .25, 1) 2 both; }
+  @keyframes pista-mano {
+    0% { opacity: 0; transform: translateX(8px) rotate(8deg); }
+    14% { opacity: 1; transform: translateX(0) rotate(0); }
+    24% { transform: translateX(0) scale(.92); }
+    68% { opacity: 1; transform: translateX(-76px) rotate(-6deg) scale(.92); }
+    84%, 100% { opacity: 0; transform: translateX(-84px) rotate(-6deg); }
+  }
+  @keyframes pista-toque {
+    0%, 18% { opacity: 0; transform: scale(.3); }
+    26% { opacity: .55; }
+    52%, 100% { opacity: 0; transform: scale(1.7); }
+  }
+  @keyframes pista-estela {
+    0%, 24% { opacity: 0; transform: scaleX(0); }
+    30% { opacity: .9; }
+    68% { opacity: .9; transform: scaleX(1); }
+    84%, 100% { opacity: 0; transform: scaleX(1); }
+  }
+  @keyframes pista-empujon {
+    0%, 24% { transform: none; }
+    62% { transform: translateX(-40px); }
+    90%, 100% { transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pista-mano { display: none; }
+    .pista-empujon > * { animation: none; }
+  }
+</style>
+
+<script>
+  // Marca con degradé el lado de la fila que tiene más. Con «conMano», la primera vez que la fila
+  // entra entera en pantalla y desborda, muestra la mano y corre los botones. No vuelve a aparecer
+  // en este navegador desde que la persona toca o desliza esa fila.
+  window.pistaDeslizar = window.pistaDeslizar || function (fila, clave, conMano) {
+    var guardada = 'pista-' + clave;
+    var mano = null;
+    var bordes = function () {
+      var resto = fila.scrollWidth - fila.clientWidth;
+      fila.classList.toggle('pista-izq', resto > 4 && fila.scrollLeft > 4);
+      fila.classList.toggle('pista-der', resto > 4 && fila.scrollLeft < resto - 4);
+      return resto > 4;
+    };
+    var aprendida = function () { try { return localStorage.getItem(guardada) === '1'; } catch (e) { return false; } };
+    var cortar = function () {
+      fila.classList.remove('pista-empujon');
+      if (mano) { mano.remove(); mano = null; }
+    };
+    var aprender = function () {
+      cortar();
+      try { localStorage.setItem(guardada, '1'); } catch (e) {}
+    };
+    fila.addEventListener('scroll', bordes, { passive: true });
+    fila.addEventListener('touchstart', aprender, { passive: true });
+    fila.addEventListener('wheel', aprender, { passive: true });
+    window.addEventListener('resize', bordes);
+    bordes();
+    if (!conMano || aprendida() || !('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var obs = new IntersectionObserver(function (vistas) {
+      if (!vistas[0].isIntersecting || !bordes() || aprendida()) return;
+      obs.disconnect();
+      var caja = fila.parentNode;
+      caja.classList.add('pista-caja');
+      mano = document.createElement('span');
+      mano.className = 'pista-mano';
+      mano.setAttribute('aria-hidden', 'true');
+      mano.innerHTML = '<svg viewBox="0 0 50 58"><defs><linearGradient id="pista-g"><stop offset="0" stop-color="#57b8e9"/>' +
+        '<stop offset="1" stop-color="#57b8e9" stop-opacity="0"/></linearGradient></defs>' +
+        '<rect class="pista-estela" x="22" y="1.5" width="70" height="7" rx="3.5" fill="url(#pista-g)"/>' +
+        '<circle class="pista-toque" cx="22" cy="5" r="10" fill="#57b8e9"/>' +
+        '<path d="M18 33V9a4 4 0 0 1 8 0v15a3.5 3.5 0 0 1 7 0v2a3.5 3.5 0 0 1 7 0v3a3.5 3.5 0 0 1 7 0v13c0 7-5 12-12 12h-5c-5 0-8-2-11-6l-7.5-10.5a3.6 3.6 0 0 1 5.7-4.4z" ' +
+        'fill="#fff" stroke="#002751" stroke-width="2.5" stroke-linejoin="round"/></svg>';
+      // La punta del dedo queda a la altura del centro de la fila.
+      mano.style.top = (fila.offsetTop + fila.offsetHeight / 2 - 6) + 'px';
+      caja.appendChild(mano);
+      fila.classList.add('pista-empujon');
+      mano.addEventListener('animationend', function (e) { if (e.target === mano) cortar(); });
+    }, { threshold: 0.9 });
+    obs.observe(fila);
+  };
+</script>
+<script>
+  document.querySelectorAll('.fd-menu ul').forEach(function (ul) { pistaDeslizar(ul, 'disena-menu', true); });
+</script>
+
 <svg style="display:none" aria-hidden="true">
   <symbol id="fd-i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></symbol>
   <symbol id="fd-i-graduation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8 L12 3 L22 8 L12 13 Z"/><path d="M6 10.5 V16 C6 17.5 8.7 19 12 19 C15.3 19 18 17.5 18 16 V10.5"/></symbol>
