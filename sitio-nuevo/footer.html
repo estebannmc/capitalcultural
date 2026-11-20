@@ -37,11 +37,12 @@
   }
   .ccg-barras {
     position: absolute;
-    right: var(--ccg-pad);
+    right: 0;
     bottom: 0;
     z-index: 0;
     width: auto;
-    height: min(calc(100% - var(--ccg-pad)), 440px);
+    /* la punta roja (y=20 de 440 en el viewBox) queda a 15px del borde superior */
+    height: calc((100% - 15px) * 22 / 21);
     opacity: .6;
     pointer-events: none;
   }
