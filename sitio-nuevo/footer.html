@@ -37,12 +37,11 @@
   }
   .ccg-barras {
     position: absolute;
-    right: -10%;
+    right: -25%;
     bottom: 0;
     z-index: 0;
     width: auto;
-    /* el tramo grueso de la roja llega cerca del borde superior y el hilo se corta arriba */
-    height: 190%;
+    height: 60%;
     opacity: .6;
     pointer-events: none;
   }
@@ -143,6 +142,7 @@
 
   @media (min-width: 768px) {
     .ccg-footer { padding-inline: 24px; }
+    .ccg-barras { right: -18%; height: 190%; }
   }
   @media (prefers-reduced-transparency: reduce) {
     .ccg-card { background: rgba(0, 29, 58, .92); -webkit-backdrop-filter: none; backdrop-filter: none; }
